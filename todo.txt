@@ -1,0 +1,24 @@
+-reviser la structure globale du projet pour avoir un code plus modulaire. 
+-voir la gestion de la souris pour avoir un rendu interactif. 
+    (doration de la sphere + affichage de possibilite de modification 
+        de la sphere ? couleur, position, taille)
+-faire du polymorphisme pour les formes. (cf t_shape)
+-ajout de threads pour le calcul de forme. (ou autre chose?)
+-revoir les calculs d'intersections pour optimiser la scene. 
+-verifier les allocations necessaire ou non. 
+
+
+/* permis :: Le motif est essentiel pour déterminer le contenu des informations nécessaires à la demande. Êtes-vous certain de valider ce motif ? (il ne sera plus modifiable par la suite)
+
+Pour accomplir la démarche il faudra vous munir des pièces suivantes :
+
+    Un exemplaire photographié ou numérisé d’un justificatif d'identité 
+    Un exemplaire photographié ou numérisé d'un justificatif de domicile 
+    Un code photo/signature issu d’une cabine photo ou photographe « Agréé service en ligne ANTS » ou une photographie d'identité 
+    Un moyen de paiement pour le droit de timbre.
+
+Si mon titre est soumis à avis médical : 
+
+    Un exemplaire photographié ou numérisé de l'avis médical délivré par un médecin de ville agréé 
+
+*/
