@@ -55,18 +55,14 @@ t_world* world_default() {
     t_light* light = light_create(light_color, light_position);
     w->light = light;
     t_sphere* s1 = sphere_create();
-    s1->material.color = (t_color){0.8, 1.0, 0.6};
-    s1->material.diffuse = 0.7;
-    s1->material.specular = 0.2;
-    s1->transform = matrix_init_identity();
     t_object* obj1;
     obj1 = object_create_for_sphere(s1);
     world_add_object(w, obj1);
     t_sphere* s2 = sphere_create();
-    s2->transform = matrix_scaling(0.5, 0.5, 0.5);
     t_object* obj2;
     obj2 = object_create_for_sphere(s2);
+    obj2->shape->transformation = matrix_scaling(0.5, 0.5, 0.5);
     world_add_object(w, obj2);
-
+    w->object_count = 2;
     return w;
 }

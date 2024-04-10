@@ -14,14 +14,15 @@ void render(t_mlx *mlx, t_world *world, t_camera *camera)
     x = 0;
     y = 0;
     t_matrix inverse_transform = matrix_inverse(camera->transform);
-
     while (y < camera->vsize)
     {
         x = 0;
         while(x < camera->hsize) 
         {
             t_ray ray = ray_for_pixel(camera, &inverse_transform, x, y);
-            t_color color = color_at(world, &ray); // Assurez-vous que color_at accepte un pointeur vers t_ray.
+
+            t_color color = color_at(world, &ray);
+
             draw_pixel(mlx, x, y, color);
             x++;
         }

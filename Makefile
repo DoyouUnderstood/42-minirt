@@ -17,12 +17,11 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 CRITERION_FLAGS = -lcriterion
 INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
 
-TEST_SRCS = unit_test/test_intersection_sphere.c unit_test/test_tracking_intersection.c \
-		unit_test/test_hit.c unit_test/test_transorm_ray_and_sphere.c unit_test/test_normat_at.c \
-		unit_test/test_reflect.c unit_test/test_lightning.c unit_test/test_world.c \
-		unit_test/test_computations.c unit_test/test_color_at.c unit_test/camera.c \
-		unit_test/test_view.c unit_test/test_shadow.c
-
+TEST_SRCS =  unit_test/camera.c unit_test/test_color_at.c unit_test/test_computations.c \
+unit_test/test_hit.c unit_test/test_intersection_sphere.c unit_test/test_lightning.c \
+unit_test/test_newshade_it.c unit_test/test_normat_at.c unit_test/test_reflect.c \
+unit_test/test_render.c unit_test/test_shadow.c unit_test/test_shape.c unit_test/test_tracking_intersection.c \
+unit_test/test_transorm_ray_and_sphere.c unit_test/test_view.c unit_test/test_world.c
 
 SRCS = main.c \
       graphics/color.c \
@@ -49,7 +48,9 @@ SRCS = main.c \
 	  world/render.c \
 	  graphics/color_at.c \
 	  world/computation.c \
-	  world/shadow.c 
+	  world/shadow.c \
+	  object/test_shape.c \
+	  object/test_sphere.c
 
 
 OBJ = $(SRCS:.c=.o)
@@ -99,3 +100,5 @@ debug: re
 
 
 .PHONY: all clean fclean re test
+
+# 

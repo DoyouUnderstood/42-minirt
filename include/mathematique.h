@@ -87,8 +87,6 @@ t_tuple     vector_cross(t_tuple a, t_tuple b);
 
 // ============== NORMAL ===============
 
-t_tuple     normal_at(const t_sphere* sphere, t_tuple world_point);
-
 t_tuple reflect(t_tuple incident, t_tuple normal);
 
 #endif

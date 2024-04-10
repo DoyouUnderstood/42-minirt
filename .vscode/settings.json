@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "mathematique.h": "c",
+        "test_shape.h": "c",
+        "shape.h": "c",
+        "options.h": "c",
+        "random": "c",
+        "optional": "c",
+        "algorithm": "c"
+    }
+}

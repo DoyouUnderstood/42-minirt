@@ -33,7 +33,7 @@ typedef struct s_material
 }	t_material;
 
 
-t_color color_at(t_world *world, const t_ray *ray);
+t_color color_at(t_world *world, t_ray *ray);
 t_color color_add(t_color c1, t_color c2);
 t_color color_multiply(t_color c1, t_color c2);
 t_color color_multiply_alternativ(t_color c1, t_color c2);

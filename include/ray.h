@@ -3,11 +3,12 @@
 
 #include "mathematique.h"
 #include "minilibx.h"
-#include "shape.h"
-#include "graphics.h"
+// #include "shape.h"
+// #include "graphics.h"
 
 typedef struct s_mlx t_mlx;
 typedef struct s_sphere t_sphere;
+
 typedef struct s_ray 
 {
     t_tuple origin;

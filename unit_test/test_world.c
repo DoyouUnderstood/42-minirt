@@ -4,10 +4,10 @@
 Test(ray_tracing, intersect_world_with_a_ray) {
     t_world *w = world_default();
     
-    t_ray *r = ray_create(point_create(0, 0, -5), vector_create(0, 0, 1));
+    t_ray r = ray_create(point_create(0, 0, -5), vector_create(0, 0, 1));
     
     int count = 0;
-    t_intersection *xs = intersect_world(w, r, &count);
+    t_intersection *xs = intersect_world(w, &r, &count);
     
     cr_assert_eq(count, 4, "Le nombre d'intersections devrait être %d, mais était %d", 4, count);
     

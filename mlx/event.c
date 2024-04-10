@@ -33,10 +33,10 @@ int mlx_event_close_win(t_mlx *mlx)
     return (0);
 }
 
-void apply_transformation_to_sphere(t_sphere *sphere, t_matrix transformation) 
-{
-    sphere->transform = matrix_multiply(sphere->transform, transformation);
-}
+// void apply_transformation_to_sphere(t_sphere *sphere, t_matrix transformation) 
+// {
+//     sphere->transform = matrix_multiply(sphere->transform, transformation);
+// }
 
 // void redraw_scene(t_mlx *mlx, t_matrix transformation) 
 // {

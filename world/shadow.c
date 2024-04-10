@@ -5,14 +5,15 @@
 #include "../include/shape.h"
 #include <math.h>
 
-bool is_shadowed(const t_world *world, const t_tuple point) {
+bool is_shadowed(t_world *world, const t_tuple point) 
+{
     t_tuple direction = tuple_subtract(world->light->pos, point);
     double distance = tuple_magnitude(&direction);
     direction = vector_normalize(direction);
 
     t_ray shadow_ray = ray_create(point, direction);
     
-    int count = 0; // Initialiser le compteur
+    int count = 0;
     t_intersection *intersections = intersect_world(world, &shadow_ray, &count);
 
     bool in_shadow = false;
@@ -23,7 +24,7 @@ bool is_shadowed(const t_world *world, const t_tuple point) {
         }
     }
 
-    free(intersections); // Supposer une fonction de libération appropriée
+    free(intersections);
     return in_shadow;
 }
 

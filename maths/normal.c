@@ -6,12 +6,19 @@ t_tuple 	matrix_multiply_by_tuple(t_matrix mat, t_tuple tup);
 
 
 // Calcule la normale à un point donné sur la surface de la sphère.
-t_tuple normal_at(const t_sphere* sphere, t_tuple world_point) 
+t_tuple normal_at(t_object *obj, t_tuple world_point) 
 {
-    t_matrix inverse_transform = matrix_inverse(sphere->transform);
-    t_tuple object_point = matrix_multiply_by_tuple(inverse_transform, world_point);
-    t_tuple object_normal = point_sub(object_point, point_create(0, 0, 0));
-    t_tuple world_normal = matrix_multiply_by_tuple(matrix_transpose(inverse_transform), object_normal);
-    world_normal.w = 0.0;
-    return (vector_normalize(world_normal));
+ // Convertit le point du monde à l'espace local de l'objet
+     write(1, "WWWWWW\n", 7);
+
+    t_tuple local_point = matrix_multiply_by_tuple(matrix_inverse(obj->shape->transformation), world_point);
+    // Calcule la normale en espace local
+    write(1, "WWWWWW8\n", 8);
+    t_tuple local_normal = obj->shape->local_normal_at(obj->shape, local_point);
+    // Convertit la normale de l'espace local au monde
+
+    t_matrix trans_inv = matrix_transpose(matrix_inverse(obj->shape->transformation));
+    t_tuple world_normal = matrix_multiply_by_tuple(trans_inv, local_normal);
+    world_normal.w = 0; // Assurez-vous que c'est un vecteur
+    return vector_normalize(world_normal); // Normalise le vecteur
 }

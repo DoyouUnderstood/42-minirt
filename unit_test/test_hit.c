@@ -12,7 +12,7 @@ Test(hit_tests, all_positive_t)
     t_intersection* hit_result = hit(xs, 2);
     cr_assert_not_null(hit_result, "Le hit ne devrait pas être NULL");
     cr_assert(hit_result->t == i1.t, "Le hit devrait avoir la même valeur t que i1");
-    cr_assert(hit_result->object == i1.object, "L'objet du hit devrait être le même que celui de i1");
+    cr_assert(hit_result->obj == i1.obj, "L'objet du hit devrait être le même que celui de i1");
 
     free(s);
     free(obj);
