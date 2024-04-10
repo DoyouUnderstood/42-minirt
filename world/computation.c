@@ -10,22 +10,18 @@ void prepare_computations(t_computations *comps, const t_intersection *intersect
 {
     if (comps == NULL) 
         return;
-
     comps->t = intersection->t;
     comps->object = intersection->obj;
     comps->point = t_point_position(ray, intersection->t);
     comps->eyev = vector_negate(ray->direction);
-    // printf("OBJ : %f\n", intersection->obj->shape->material.color.b);
     comps->normalv = normal_at_shape(intersection->obj, comps->point);
-    if (vector_dot(comps->normalv, comps->eyev) < 0) {
+    if (vector_dot(comps->normalv, comps->eyev) < 0)
+    {
         comps->inside = true;
         comps->normalv = vector_negate(comps->normalv);
-    } else {
+    } else
         comps->inside = false;
-    }
-
     comps->over_point = tuple_add(comps->point, vector_multiply(comps->normalv, EPSILON));
-
 }
 
 int compare_intersections(const void* a, const void* b) 

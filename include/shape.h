@@ -31,7 +31,8 @@ typedef enum e_obj_type
 }					t_obj_type;
 
 
-typedef struct s_object {
+typedef struct s_object 
+{
     t_obj_type type;
     void *obj;
     t_shape *shape;
@@ -67,6 +68,15 @@ typedef struct s_world {
     t_object** objects;
     int object_count;
 } t_world;
+
+
+typedef struct s_plane 
+{
+    t_tuple center;
+    t_tuple normal;
+    t_color color;
+} t_plane;
+
 
 typedef struct s_sphere 
 {

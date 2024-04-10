@@ -20,9 +20,7 @@ void render(t_mlx *mlx, t_world *world, t_camera *camera)
         while(x < camera->hsize) 
         {
             t_ray ray = ray_for_pixel(camera, &inverse_transform, x, y);
-
             t_color color = color_at(world, &ray);
-
             draw_pixel(mlx, x, y, color);
             x++;
         }

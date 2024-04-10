@@ -33,14 +33,11 @@ t_ray ray_for_pixel(const t_camera *camera, const t_matrix *inverse_transform, i
 {
     double xoffset = (px + 0.5) * camera->pixel_size;
     double yoffset = (py + 0.5) * camera->pixel_size;
-
     double world_x = camera->half_width - xoffset;
-    double world_y = camera->half_height - yoffset;
-
-    // Utilisez l'inverse_transform passé en tant que paramètre
+    double world_y = camera->half_height - yoffset; 
     t_tuple pixel = matrix_multiply_by_tuple(*inverse_transform, (t_tuple){world_x, world_y, -1, 1});
     t_tuple origin = matrix_multiply_by_tuple(*inverse_transform, (t_tuple){0, 0, 0, 1});
     t_tuple direction = vector_normalize(tuple_subtract(pixel, origin));
 
-    return (t_ray){origin, direction}; // Construction directe sans appel de fonction
+    return ((t_ray){origin, direction});
 }
