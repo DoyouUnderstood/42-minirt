@@ -5,26 +5,26 @@
 #include "../include/shape.h"
 #include <math.h>
 
-t_camera camera_create(int hsize, int vsize, float fov) 
+t_camera *camera_create(int hsize, int vsize, float fov) 
 {
-    t_camera cam;
-    cam.hsize = hsize;
-    cam.vsize = vsize;
-    cam.fov = fov;
-    cam.transform = matrix_init_identity();
+    t_camera *cam = malloc(sizeof(t_camera));
+    cam->hsize = hsize;
+    cam->vsize = vsize;
+    cam->fov = fov;
+    cam->transform = matrix_init_identity();
 
-    float half_view = tan(cam.fov / 2.0);
-    float aspect = (float)cam.hsize / (float)cam.vsize;
+    float half_view = tan(cam->fov / 2.0);
+    float aspect = (float)cam->hsize / (float)cam->vsize;
 
     if (aspect >= 1) {
-        cam.half_width = half_view;
-        cam.half_height = half_view / aspect;
+        cam->half_width = half_view;
+        cam->half_height = half_view / aspect;
     } else {
-        cam.half_width = half_view * aspect;
-        cam.half_height = half_view;
+        cam->half_width = half_view * aspect;
+        cam->half_height = half_view;
     }
 
-    cam.pixel_size = (cam.half_width * 2) / cam.hsize;
+    cam->pixel_size = (cam->half_width * 2) / cam->hsize;
 
     return cam;
 }

@@ -1,5 +1,6 @@
 #include "../include/shape.h"
 #include "../include/mathematique.h"
+#include "../object/test_shape.h"
 
 typedef struct s_sphere t_sphere;
 t_tuple 	matrix_multiply_by_tuple(t_matrix mat, t_tuple tup);
@@ -9,11 +10,9 @@ t_tuple 	matrix_multiply_by_tuple(t_matrix mat, t_tuple tup);
 t_tuple normal_at(t_object *obj, t_tuple world_point) 
 {
  // Convertit le point du monde à l'espace local de l'objet
-     write(1, "WWWWWW\n", 7);
 
     t_tuple local_point = matrix_multiply_by_tuple(matrix_inverse(obj->shape->transformation), world_point);
     // Calcule la normale en espace local
-    write(1, "WWWWWW8\n", 8);
     t_tuple local_normal = obj->shape->local_normal_at(obj->shape, local_point);
     // Convertit la normale de l'espace local au monde
 

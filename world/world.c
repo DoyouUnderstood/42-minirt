@@ -3,6 +3,8 @@
 #include "../include/graphics.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
+#include "../object/test_shape.h"
+
 
 
 #define MAZ_OBJECTS 10

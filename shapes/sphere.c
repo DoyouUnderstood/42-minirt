@@ -3,9 +3,8 @@
 #include "../object/test_shape.h"
 
 t_intersection* intersect_shape(t_object *object, t_ray *ray, int *count);
-
 t_tuple local_normal_at_sphere(t_shape *shape, t_tuple local_point);
-// fonction qui cree une sphere.
+
 // Crée une forme générique avec des comportements par défaut
 t_shape* create_generic_shape() 
 {
@@ -14,7 +13,6 @@ t_shape* create_generic_shape()
 
     shape->transformation = matrix_init_identity();
     shape->material = material_create_default();
-    // Ces fonctions devraient être remplacées par des implémentations spécifiques lors de la création d'un type de forme spécifique
     shape->local_intersect = NULL;
     shape->local_normal_at = NULL;
     return shape;
@@ -46,24 +44,6 @@ double calculate_discriminant(double a, double b, double c) {
     return b * b - 4 * a * c;
 }
 
-// Crée un nouvel objet t_object pour une sphère
-t_object* object_create_for_sphere(t_sphere* sphere) 
-{
-    t_object* obj = malloc(sizeof(t_object));
-    if (obj == NULL) {
-        error_exit("Failed to allocate memory for t_object");
-    }
-    obj->shape = malloc(sizeof(t_shape));
-    obj->type = SPHERE;
-    obj->obj = sphere;
-    obj->shape->transformation = matrix_init_identity();
-    obj->shape->material = material_create_default();
-    obj->shape->local_intersect = local_intersect_sphere;
-    obj->shape->local_normal_at = local_normal_at_sphere;
-
-    return obj;
-}
-
 
 
 t_intersection* local_intersect_sphere(t_object *obj, t_ray *ray, int* out_count) {
@@ -74,7 +54,7 @@ t_intersection* local_intersect_sphere(t_object *obj, t_ray *ray, int* out_count
 
     if (discriminant < -EPSILON) {
         *out_count = 0;
-        return NULL; // Pas d'intersection
+        return NULL;
     }
 
     double t1, t2;
@@ -82,7 +62,6 @@ t_intersection* local_intersect_sphere(t_object *obj, t_ray *ray, int* out_count
     t1 = (-b - sqrt_discriminant) / (2 * a);
 
     if (discriminant == 0) {
-        // Cas d'une intersection tangentielle, enregistrer deux fois la même valeur de t
         *out_count = 2;
         t_intersection* intersections = malloc(sizeof(t_intersection) * (*out_count));
         if (!intersections) {
@@ -114,7 +93,6 @@ t_intersection* local_intersect_sphere(t_object *obj, t_ray *ray, int* out_count
 // Modification de la fonction d'intersection principale
 t_intersection* intersect(t_ray *ray, t_object *obj, int* out_count) 
 {
-    // Appel de la fonction d'intersection spécifique à la forme
     return obj->shape->local_intersect(obj, ray, out_count);
 }
 

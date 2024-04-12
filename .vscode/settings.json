@@ -6,6 +6,7 @@
         "options.h": "c",
         "random": "c",
         "optional": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "math.h": "c"
     }
 }

@@ -8,11 +8,12 @@
 #include <criterion/criterion.h>
 #include <criterion/options.h>
 // #include "ray.h"
-// #include "shape.h"
+#include "shape.h"
 // #include "mathematique.h"
 // #include "minilibx.h"
 #include "memory.h"
 
+#include "init.h"
 
 void error_exit(char *error_msg);
 

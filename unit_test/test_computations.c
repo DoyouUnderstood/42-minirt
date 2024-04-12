@@ -1,5 +1,6 @@
 #include <criterion/criterion.h>
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 Test(ray_tracing, hit_when_an_intersection_happens_on_the_outside) {
     t_ray r = ray_create(point_create(0, 0, -5), vector_create(0, 0, 1));

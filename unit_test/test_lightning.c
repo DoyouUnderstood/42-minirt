@@ -1,6 +1,7 @@
 #include <criterion/criterion.h>
 #include "../include/graphics.h"
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 #define EPSILON 0.001
 
 Test(suite_name, test_lighting_with_eye_between_light_and_surface) 

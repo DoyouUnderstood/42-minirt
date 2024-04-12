@@ -1,47 +1,40 @@
 #include "test_shape.h"
 #include "../include/shape.h"
-
-typedef struct s_plane {
-    // Aucune propriété spécifique requise pour le moment, mais vous pouvez en ajouter ici si nécessaire.
-} t_plane;
-
-
-t_tuple local_normal_at_plane(void *object, t_tuple local_point) {
-    (void)object; // Non utilisé car la normal est constante pour un plan
-    (void)local_point; // Non utilisé pour la même raison
-    return (t_tuple){.x = 0.0, .y = 1.0, .z = 0.0, .w = 0.0};
-}
-
-t_intersection* local_intersect_plane(void *object, t_ray ray) {
-    t_plane *plane = (t_plane*)object;
-    if (fabs(ray.direction.y) < EPSILON) {
-        return NULL; // Rayon parallèle au plan ou coplanaire, donc pas d'intersection
-    }
-
-    double t = -ray.origin.y / ray.direction.y;
-    if (t < 0) return NULL; // Intersection derrière le rayon
-
-    t_intersection *intersections = malloc(sizeof(t_intersection));
-    if (intersections == NULL) return NULL; // Gestion d'erreur d'allocation
-
-    intersections->t = t;
-    intersections->object = plane;
-    return intersections;
-}
-
-t_shape *plane(void) {
-    t_shape *shape = malloc(sizeof(t_shape));
-    if (shape == NULL) return NULL; // Gestion d'erreur d'allocation
-
+#include "../object/test_shape.h"
+t_plane *plane_create(void)
+{
     t_plane *plane = malloc(sizeof(t_plane));
-    if (plane == NULL) { // Gestion d'erreur d'allocation
-        free(shape);
-        return NULL;
+    plane->center = point_create(0, 0, 0);
+    plane->color = (t_color){0.3, 0.3, 0.3};
+    return (plane);
+}
+
+    t_tuple plane_local_normal_at(t_shape *shape, t_tuple local_point) 
+    {
+        (void)local_point;
+        (void)shape;
+        return vector_create(0, 1, 0);
     }
 
-    shape->object = plane;
-    shape->local_normal_at = local_normal_at_plane;
-    shape->local_intersect = local_intersect_plane;
+    t_intersection* plane_local_intersect(t_object *obj, t_ray *ray, int *count) 
+    {
+        t_shape *shape = obj->shape;
+        t_ray transformed_ray = ray_transform(matrix_inverse(shape->transformation), *ray);
+        
+        if (fabs(transformed_ray.direction.y) < TUPLE_EPSILON) {
+            *count = 0;
+            return NULL;
+        }
 
-    return shape;
-}
+        double t = -transformed_ray.origin.y / transformed_ray.direction.y;
+        
+        *count = 1;
+        t_intersection *intersections = (t_intersection *)malloc(sizeof(t_intersection));
+        if (!intersections) {
+            *count = 0;
+            return NULL;
+        }
+        intersections[0] = (t_intersection){t, obj};
+
+        return intersections;
+    }

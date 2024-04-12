@@ -45,7 +45,7 @@ void    mlx_cleanup(t_mlx *mlx);
 int     mlx_event_close_win(t_mlx *mlx);
 int     mlx_event_handle_key(int keycode, void *param);
 void    draw_pixel(t_mlx *mlx, int x, int y, t_color color);
-
+int     mouse_press(int button, int x, int y, void *param);
 
 #endif
 

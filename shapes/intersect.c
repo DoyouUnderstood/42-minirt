@@ -1,5 +1,5 @@
 #include "../include/shape.h"
-
+#include "../object/test_shape.h"
 t_intersection intersection_create(double t, t_object *obj) 
 {
     t_intersection i;

@@ -1,5 +1,6 @@
 #include <criterion/criterion.h>
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 // Test pour "Le hit, lorsque toutes les intersections ont un t positif"
 Test(hit_tests, all_positive_t) 

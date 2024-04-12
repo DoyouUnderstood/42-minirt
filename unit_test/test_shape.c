@@ -1,6 +1,7 @@
 #include <criterion/criterion.h>
 #include "../include/graphics.h"
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 /*​ 	​Scenario​: The default transformation
 ​ 	  ​Given​ s ← test_shape()

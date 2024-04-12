@@ -16,7 +16,7 @@
 
 typedef struct s_shape t_shape;
 typedef struct s_tuple t_tuple;
-typedef struct s_ray t_ray;
+// typedef struct s_ray t_ray;
 typedef struct s_matrix t_matrix;
 typedef struct s_mlx t_mlx;
 
@@ -39,14 +39,7 @@ typedef struct s_object
 } t_object;
 
 
-typedef struct s_shape 
-{
-    t_matrix        transformation;
-    t_material      material;
-    t_ray           saved_ray;
-    t_tuple (*local_normal_at)(t_shape *shape, t_tuple local_point); 
-    t_intersection* (*local_intersect)(t_object *obj, t_ray *ray, int *count);
-} t_shape;
+
 
 
 t_sphere* create_sphere();
@@ -70,10 +63,10 @@ typedef struct s_world {
 } t_world;
 
 
+
 typedef struct s_plane 
 {
     t_tuple center;
-    t_tuple normal;
     t_color color;
 } t_plane;
 
@@ -102,6 +95,7 @@ typedef struct s_computations {
 } t_computations;
 
 
+t_material material_create_default_plane();
 t_intersection* local_intersect_sphere( t_object *obj, t_ray *ray, int* out_count);
 
 t_shape *test_shape(void);
@@ -118,12 +112,17 @@ t_matrix view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 //camera.c 
 t_ray ray_for_pixel(const t_camera *camera, const t_matrix *inverse_transform, int px, int py);
-t_camera camera_create(int hsize, int vsize, float fov);
+t_camera *camera_create(int hsize, int vsize, float fov);
 
 
 t_color color_at(t_world *world, t_ray *ray);
 t_color shade_hit(t_world *world, t_computations *comps);
 void prepare_computations(t_computations *comps, const t_intersection *intersection, const t_ray *ray);
+
+// object
+t_object* object_create_for_plane(t_plane *plane);
+t_object* object_create_for_sphere(t_sphere* sphere);
+
 // =========== SPHERE =============
 
 t_intersection* sphere_intersect(t_object *obj, t_ray *ray, int* out_count);

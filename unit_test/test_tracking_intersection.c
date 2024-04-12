@@ -1,5 +1,6 @@
 #include <criterion/criterion.h>
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 Test(intersection_tests, intersect_sets_object_on_the_intersection) 
 {

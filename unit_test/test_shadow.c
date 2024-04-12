@@ -1,6 +1,7 @@
 #include <criterion/criterion.h>
 #include "../include/graphics.h"
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 Test(shadow_tests, no_shadow_when_nothing_collinear_with_point_and_light) {
     t_world *world = world_default();

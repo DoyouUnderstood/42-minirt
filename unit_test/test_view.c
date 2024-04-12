@@ -1,5 +1,6 @@
 #include <criterion/criterion.h>
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 Test(view_transform_tests, default_orientation) 
 {

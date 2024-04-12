@@ -2,7 +2,7 @@
 #include <math.h>
 #include "../include/mathematique.h"
 #include "../include/shape.h"
-
+#include "../object/test_shape.h"
 
 Test(reflection_tests, vector_approaching_at_45_degrees) 
 {

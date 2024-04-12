@@ -1,5 +1,6 @@
 #include <criterion/criterion.h>
 #include "../include/shape.h"
+#include "../object/test_shape.h"
 
 Test(ray_tracing, intersect_world_with_a_ray) {
     t_world *w = world_default();

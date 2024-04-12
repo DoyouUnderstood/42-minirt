@@ -9,8 +9,6 @@ t_ray ray_create(t_tuple origin, t_tuple direction)
     ray.direction = direction;
     return ray;
 }
-
-
 // Fonction pour afficher un rayon
 void print_ray(t_ray ray) {
     printf("Ray Origin: (%.2f, %.2f, %.2f)\n", ray.origin.x, ray.origin.y, ray.origin.z);
