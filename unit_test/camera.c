@@ -3,8 +3,6 @@
 #include <math.h>
 #include "../object/test_shape.h"
 
-#define M_PI       3.14159265358979323846
-
 Test(camera_tests, pixel_size_for_horizontal_canvas) {
     t_camera *c = camera_create(200, 125, M_PI / 2);
     cr_expect_float_eq(c->pixel_size, 0.01, 1e-5, "Pixel size should be 0.01 for horizontal canvas.");

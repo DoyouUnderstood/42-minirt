@@ -33,12 +33,9 @@ t_color color_at(t_world *world,t_ray *ray)
 }
 
 
-t_color shade_hit(t_world *world, t_computations *comps)
+t_color shade_hit(t_world *world, t_computations *comps) 
 {
-    t_color color;
     bool in_shadow = is_shadowed(world, comps->over_point);
-    color = lighting(&comps->object->shape->material, world->light, &comps->over_point, &comps->eyev, &comps->normalv, in_shadow);
-    return color;
+    return lighting(&comps->object->shape->material, comps->object, world->light, &comps->over_point, &comps->eyev, &comps->normalv, in_shadow);
 }
-
 

@@ -131,7 +131,7 @@ t_object* object_create_for_sphere(t_sphere* sphere);
 
 // ========== TRANSFORMATION ===========
 
-void 			set_transform(t_sphere *sphere, t_matrix new_transform);
+void set_transform(t_object *object, t_matrix transform);
 void 			set_material(t_sphere *s, t_material m);
 
 // ============ INTERSECT ==============

@@ -69,3 +69,24 @@ uint32_t color_to_rgb(float red, float green, float blue)
 
     return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
 }
+
+#include <math.h>
+
+#define COLOR_EPSILON 0.0001
+
+// Fonction pour comparer deux couleurs avec une certaine tolérance
+bool color_eq(t_color c1, t_color c2) {
+    return fabs(c1.r - c2.r) < COLOR_EPSILON &&
+           fabs(c1.g - c2.g) < COLOR_EPSILON &&
+           fabs(c1.b - c2.b) < COLOR_EPSILON;
+}
+
+
+// Fonction pour créer une couleur
+t_color color_create(double r, double g, double b) {
+    t_color new_color;
+    new_color.r = r;
+    new_color.g = g;
+    new_color.b = b;
+    return new_color;
+}

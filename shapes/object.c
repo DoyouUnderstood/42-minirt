@@ -36,6 +36,8 @@ t_material material_create_default_plane()
 }
 
 
+
+
 // Cree un nouvel object t_object pour un plane. 
 t_object* object_create_for_plane(t_plane *plane) {
     t_object *obj = (t_object *)malloc(sizeof(t_object));
@@ -51,7 +53,7 @@ t_object* object_create_for_plane(t_plane *plane) {
         return NULL;
     }
     obj->shape->transformation = matrix_init_identity();
-    obj->shape->material = material_create_default_plane();
+    obj->shape->material = material_create_default();
     obj->shape->local_normal_at = plane_local_normal_at;
     obj->shape->local_intersect = plane_local_intersect;
 

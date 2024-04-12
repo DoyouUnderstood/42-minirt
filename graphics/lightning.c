@@ -2,21 +2,24 @@
 #include <stdio.h>
 #include <math.h>
 
+t_color lighting(const t_material *material, const t_object *object, const t_light *light, const t_tuple *position, const t_tuple *eyev, const t_tuple *normalv, bool in_shadow) {
+    t_color effective_color;
 
-t_color lighting(const t_material *material, const t_light *light, const t_tuple *position, const t_tuple *eyev, const t_tuple *normalv, bool in_shadow) 
-{
-    t_color effective_color = color_multiply(material->color, light->intensity);
+    // Utilisez le motif si présent, sinon utilisez la couleur du matériau
+    if (material->pattern.pattern_at) {
+        effective_color = stripe_at_object(material->pattern, object, *position);
+    } else {
+        effective_color = color_multiply(material->color, light->intensity);
+    }
+
     t_color ambient = color_multiply_scalar(effective_color, material->ambient);
-
     if (in_shadow) {
         return ambient;
     }
 
     t_tuple lightv = vector_normalize(tuple_subtract(light->pos, *position));
     double light_dot_normal = vector_dot(lightv, *normalv);
-
-    t_color diffuse;
-    t_color specular;
+    t_color diffuse, specular;
 
     if (light_dot_normal < 0) {
         diffuse = (t_color){0, 0, 0};
@@ -36,3 +39,4 @@ t_color lighting(const t_material *material, const t_light *light, const t_tuple
 
     return color_add(color_add(ambient, diffuse), specular);
 }
+

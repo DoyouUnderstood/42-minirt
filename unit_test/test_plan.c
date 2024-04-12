@@ -7,7 +7,6 @@ Test(plane_tests, normal_of_plane_is_constant_everywhere) {
     t_tuple n1 = obj->shape->local_normal_at(obj->shape, point_create(0, 0, 0));
     t_tuple n2 = obj->shape->local_normal_at(obj->shape, point_create(10, 0, -10));
     t_tuple n3 = obj->shape->local_normal_at(obj->shape, point_create(-5, 0, 150));
-
     t_tuple expected_normal = vector_create(0, 1, 0);
 
     cr_expect(tuple_eq(n1, expected_normal), "Normal at (0, 0, 0) is incorrect");
@@ -15,7 +14,7 @@ Test(plane_tests, normal_of_plane_is_constant_everywhere) {
     cr_expect(tuple_eq(n3, expected_normal), "Normal at (-5, 0, 150) is incorrect");
 }
 
-Test(plane_tests, intersect_with_ray_parallel_to_plane) 
+Test(plane_tests, intersect_with_ray_parallel_to_plane2) 
 {
     t_plane *p = plane_create();
     t_object *obj = object_create_for_plane(p);

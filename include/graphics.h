@@ -4,6 +4,7 @@
 #include "mathematique.h"
 #include <stdint.h>
 
+typedef struct s_object t_object;
 typedef struct s_intersection t_intersection;
 typedef enum e_obj_type t_obj_type;
 typedef struct s_ray t_ray;
@@ -15,6 +16,15 @@ typedef struct s_color
 	double g;
 	double b;
 }					t_color;
+
+typedef struct s_pattern 
+{
+    t_color color_a;
+    t_color color_b;
+	t_matrix transform;
+	t_color (*pattern_at)(const struct s_pattern pattern, const t_tuple point);
+} t_pattern;
+
 
 typedef struct s_light
 { 
@@ -30,9 +40,20 @@ typedef struct s_material
 	double diffuse;
 	double specular;
 	double shininess;
+	t_pattern pattern;
 }	t_material;
 
+// ===== PATTERN ===== 
 
+void set_pattern_transform(t_pattern *pattern, t_matrix transform);
+t_pattern stripe_pattern_create(t_color color1, t_color color2);
+t_pattern stripe_pattern(t_color a, t_color b); 
+t_color stripe_at(t_pattern pattern, t_tuple point);
+t_color stripe_at_object(const t_pattern pattern, const t_object *object, t_tuple point);
+
+
+t_color color_create(double r, double g, double b);
+bool color_eq(t_color c1, t_color c2);
 t_color color_at(t_world *world, t_ray *ray);
 t_color color_add(t_color c1, t_color c2);
 t_color color_multiply(t_color c1, t_color c2);
@@ -43,6 +64,6 @@ t_light *light_create(t_color color, t_tuple position);
 t_color calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light);
 t_material material_create_default();
 
-t_color lighting(const t_material *material, const t_light *light, const t_tuple *position, const t_tuple *eyev, const t_tuple *normalv, bool in_shadow);
+t_color lighting(const t_material *material, const t_object *object, const t_light *light, const t_tuple *position, const t_tuple *eyev, const t_tuple *normalv, bool in_shadow);
 
 #endif

@@ -107,3 +107,11 @@ t_matrix matrix_translation(double dx, double dy, double dz) {
                        {0, 0, 0, 1}}};
     return mat;
 }
+
+#include "../object/test_shape.h"
+
+void set_transform(t_object *object, t_matrix transform) {
+    if (object && object->shape) {
+        object->shape->transformation = transform;
+    }
+}

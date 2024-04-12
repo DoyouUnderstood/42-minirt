@@ -4,16 +4,16 @@ NAME = miniRT
 LIBFT_DIR = lib/libft
 FT_PRINTF_DIR = lib/ft_printf
 GNL_DIR = lib/GNL
-MLX_DIR = lib/mlx_linux
+MLX_DIR = lib/mlx
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 DEBUG_FLAGS = -g -fsanitize=address
 
-# / pour compiler sous Mac, rajouter ceci a mlx_flags ==> -framework OpenGL -framework AppKit
+# / pour compiler sous Mac, rajouter ceci a mlx_flags ==> 
 
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 CRITERION_FLAGS = -lcriterion
 INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
 
@@ -21,7 +21,8 @@ TEST_SRCS =  unit_test/camera.c unit_test/test_color_at.c unit_test/test_computa
 unit_test/test_hit.c unit_test/test_intersection_sphere.c unit_test/test_lightning.c \
 unit_test/test_newshade_it.c unit_test/test_normat_at.c unit_test/test_reflect.c \
 unit_test/test_render.c unit_test/test_shadow.c unit_test/test_shape.c unit_test/test_tracking_intersection.c \
-unit_test/test_transorm_ray_and_sphere.c unit_test/test_view.c unit_test/test_world.c unit_test/test_plan.c
+unit_test/test_transorm_ray_and_sphere.c unit_test/test_view.c unit_test/test_world.c unit_test/test_plan.c \
+unit_test/test_pattern.c
 
 SRCS = main.c \
       graphics/color.c \
@@ -53,7 +54,8 @@ SRCS = main.c \
 	  object/test_sphere.c \
 	  shapes/object.c \
 	  utils/init.c \
-	  object/plane.c
+	  object/plane.c \
+	  graphics/pattern.c \
 
 
 OBJ = $(SRCS:.c=.o)
