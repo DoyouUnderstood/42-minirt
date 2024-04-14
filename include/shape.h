@@ -56,7 +56,10 @@ typedef struct s_camera
 }                   t_camera;
 
 
-typedef struct s_world {
+typedef struct s_world 
+{
+    t_camera *camera;
+    t_mlx *mlx;
     t_light* light;
     t_object** objects;
     int object_count;
@@ -104,7 +107,7 @@ t_tuple normal_at(t_object *obj, t_tuple world_point);
 
 
 bool is_shadowed(t_world *world, const t_tuple point);
-void render(t_mlx *mlx, t_world *world, t_camera *camera);
+void render(t_world *world);
 
 void draw_pixel(t_mlx *mlx, int x, int y, t_color color);
 // view.c 
@@ -118,7 +121,7 @@ t_camera *camera_create(int hsize, int vsize, float fov);
 t_color color_at(t_world *world, t_ray *ray);
 t_color shade_hit(t_world *world, t_computations *comps);
 void prepare_computations(t_computations *comps, const t_intersection *intersection, const t_ray *ray);
-
+int compare_intersections(const void* a, const void* b);
 // object
 t_object* object_create_for_plane(t_plane *plane);
 t_object* object_create_for_sphere(t_sphere* sphere);

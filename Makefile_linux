@@ -8,8 +8,8 @@ MLX_DIR = lib/mlx
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-MLX_FLAGS = -L$(MLX_DIR) -lmlx
-INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lXext -lX11 -lm -lbsd
+	MLX_FLAGS = -L$(MLX_DIR) -lmlx
+	INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lXext -lX11 -lm -lbsd
 CRITERION_FLAGS = -lcriterion
 
 # Séparez les fichiers de test des fichiers sources principaux si possible

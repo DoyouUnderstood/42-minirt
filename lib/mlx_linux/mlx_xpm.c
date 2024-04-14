@@ -71,7 +71,7 @@ char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
 	{
 			if (copy)
 					free(copy);
-			if (!(copy = allocate_and_report(len2+1)))
+			if (!(copy = malloc(len2+1)))
 					return ((char *)0);
 			len = len2;
 	}
@@ -174,11 +174,11 @@ void	*mlx_int_parse_xpm(t_xvar *xvar,void *info,int info_size,char *(*f)())
 		if (cpp<=2)
 		{
 				method = 1;
-				if (!(colors_direct = allocate_and_report((cpp==2?65536:256)*sizeof(int))))
+				if (!(colors_direct = malloc((cpp==2?65536:256)*sizeof(int))))
 						RETURN;
 		}
 		else
-				if (!(colors = allocate_and_report(nc*sizeof(*colors))))
+				if (!(colors = malloc(nc*sizeof(*colors))))
 						RETURN;
 
 		clip_data = 0;

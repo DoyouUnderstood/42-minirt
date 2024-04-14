@@ -6,7 +6,8 @@
 
 extern int allocation_counter;
 
-typedef struct MemoryAllocationInfo {
+typedef struct MemoryAllocationInfo 
+{
     void* ptr;
     size_t size;
     char* description;

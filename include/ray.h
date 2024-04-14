@@ -16,6 +16,7 @@ typedef struct s_ray
 } t_ray;
 
 // =========== RAY ============
+
 t_ray ray_create(t_tuple origin, t_tuple direction);
 t_ray   ray_transform(t_matrix mat, t_ray ray);
 // void    ray_throw(t_mlx *mlx, t_sphere *sphere, t_light *light);

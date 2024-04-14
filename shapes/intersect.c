@@ -39,7 +39,7 @@ t_color calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)
         t_tuple hit_point = t_point_position(ray, closest_hit->t);
         t_tuple normal = closest_hit->obj->shape->local_normal_at(closest_hit->obj->shape, hit_point);
         t_tuple eye = vector_negate(ray->direction);
-        return lighting(&closest_hit->obj->shape->material, light, &hit_point, &eye, &normal, false);
+        return lighting(&closest_hit->obj->shape->material, closest_hit->obj, light, &hit_point, &eye, &normal, false);
     } else {
         return (t_color){0, 0, 0}; // Retourne du noir s'il n'y a pas d'intersection.
     }

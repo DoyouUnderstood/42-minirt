@@ -17,13 +17,13 @@ typedef struct s_color
 	double b;
 }					t_color;
 
-typedef struct s_pattern 
-{
+typedef struct s_pattern {
     t_color color_a;
     t_color color_b;
-	t_matrix transform;
-	t_color (*pattern_at)(const struct s_pattern pattern, const t_tuple point);
+    t_matrix transform;
+    t_color (*pattern_at)(const struct s_pattern *pattern, t_tuple point);
 } t_pattern;
+
 
 
 typedef struct s_light
@@ -43,13 +43,24 @@ typedef struct s_material
 	t_pattern pattern;
 }	t_material;
 
+
+
 // ===== PATTERN ===== 
+
+t_pattern checker_pattern_create(t_color color1, t_color color2);
+
+t_pattern ring_pattern_create(t_color color1, t_color color2);
+t_color ring_at(const t_pattern *pattern, t_tuple point);
+
+t_pattern gradient_pattern_create(t_color color1, t_color color2);
+t_color gradient_at(const t_pattern *pattern, t_tuple point);
 
 void set_pattern_transform(t_pattern *pattern, t_matrix transform);
 t_pattern stripe_pattern_create(t_color color1, t_color color2);
 t_pattern stripe_pattern(t_color a, t_color b); 
-t_color stripe_at(t_pattern pattern, t_tuple point);
-t_color stripe_at_object(const t_pattern pattern, const t_object *object, t_tuple point);
+t_color stripe_at(const t_pattern *pattern, t_tuple point);
+t_color stripe_at_object(const t_pattern *pattern, const t_object *object, t_tuple point);
+
 
 
 t_color color_create(double r, double g, double b);

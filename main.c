@@ -17,12 +17,15 @@ void unit_test()
     error_exit("TEST FONCTION");
 }
 
+int key_press(int key, void *param);
 
 void draw_render_to_img(t_world *world, t_mlx *mlx)
 {
     mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
     mlx_hook(mlx->win, 17, 0L, mlx_event_close_win, mlx);
     mlx_mouse_hook(mlx->win, mouse_press, world);
+    mlx_key_hook(mlx->win, key_press, world);
+
     mlx_loop(mlx->ptr);
     mlx_destroy_window(mlx->ptr, mlx->win);
 }
@@ -42,7 +45,9 @@ int main(int argc, char *argv[])
     } else {
         world_init(&world, &camera);
         mlx_initialisation(&mlx);
-        render(mlx, world, camera);
+        world->camera = camera;
+        world->mlx = mlx;
+        render(world);
         draw_render_to_img(world, mlx);
        
     }

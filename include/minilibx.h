@@ -3,7 +3,7 @@
 
 
 #include "main.h"
-#include "../lib/mlx/mlx.h"
+#include "../lib/mlx_linux/mlx.h"
 #include "graphics.h"
 // #define KEY_ESC 0xff1b
 // #define KEY_RIGHT 0xff53

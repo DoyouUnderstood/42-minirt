@@ -9,6 +9,8 @@ typedef struct s_ray t_ray;
 typedef struct s_shape t_shape;
 typedef struct s_object t_object;
 
+
+
 typedef struct s_shape 
 {
     t_matrix        transformation;

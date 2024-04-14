@@ -14,6 +14,8 @@ t_object* object_create_for_sphere(t_sphere* sphere)
     obj->obj = sphere;
     obj->shape->transformation = matrix_init_identity();
     obj->shape->material = material_create_default();
+    // t_pattern pattern = stripe_pattern_create(color_create(0.55, 1, 1), color_create(1, 1, 1));
+    // obj->shape->material.pattern = pattern;
     obj->shape->local_intersect = local_intersect_sphere;
     obj->shape->local_normal_at = local_normal_at_sphere;
 

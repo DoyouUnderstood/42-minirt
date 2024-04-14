@@ -5,7 +5,7 @@ t_mlx   *mlx_init_and_create_window(int width, int height, char *title)
 {
     t_mlx   *mlx;
 
-    mlx = (t_mlx *)allocate_and_report(sizeof(t_mlx), "allocation t_mlx");
+    mlx = (t_mlx *)malloc(sizeof(t_mlx));
     mlx->ptr = mlx_init();
     if (!mlx->ptr)
     {
