@@ -5,17 +5,35 @@
 void world_init(t_world **world, t_camera **camera) 
 {
     *world = world_create();
-    *camera = camera_create(820, 620, M_PI / 6);
+    *camera = camera_create(1200, 920, M_PI / 6);
     (*camera)->transform = view_transform(point_create(-3, 1.5, -7), point_create(0, 1, 0), vector_create(0, 1, 0));
     world_fill(*world);
 }
 
 // Initialisation de MLX.
 void mlx_initialisation(t_mlx **mlx) {
-    *mlx = mlx_init_and_create_window(820, 620, "minirt");
+    // Assumant que mlx_init_and_create_window crée et retourne une structure déjà allouée
+    *mlx = mlx_init_and_create_window(1200, 920, "minirt");
     if (!(*mlx))
         error_exit("Erreur initialisation mlx\n");
+
+    // Supposition : mlx_create_image initialise une image qui sera utilisée comme buffer
     mlx_create_image(*mlx);
+
+    // Préparez les variables pour stocker les dimensions
+    int width, height;
+
+    // Utilisez les adresses de ces variables pour stocker les dimensions retournées par mlx_xpm_file_to_image
+    (*mlx)->menu = mlx_xpm_file_to_image((*mlx)->ptr, "menu.xpm", &width, &height);
+
+    // Vérifiez si l'image a été chargée correctement
+    if (!(*mlx)->menu) {
+        error_exit("Erreur de chargement de menu.xpm\n");
+    }
+
+    // Stockez les dimensions de l'image dans la structure, si vous avez besoin de les utiliser plus tard
+    (*mlx)->width = width;
+    (*mlx)->height = height;
 }
 
 

@@ -97,7 +97,7 @@ typedef struct s_computations {
     bool inside;
 } t_computations;
 
-
+void draw_render_to_img(t_world *world, t_mlx *mlx);
 t_material material_create_default_plane();
 t_intersection* local_intersect_sphere( t_object *obj, t_ray *ray, int* out_count);
 

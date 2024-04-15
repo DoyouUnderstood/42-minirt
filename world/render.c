@@ -54,5 +54,6 @@ void render(t_world *world) {
         pthread_join(threads[i], NULL);
     }
 
-    mlx_put_image_to_window(world->mlx->ptr, world->mlx->win, world->mlx->img, 0, 0);
+    draw_render_to_img(world, world->mlx);
+
 }

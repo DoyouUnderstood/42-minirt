@@ -19,16 +19,26 @@ void unit_test()
 
 int key_press(int key, void *param);
 
+int refresh_display(t_world *world) 
+{
+    mlx_put_image_to_window(world->mlx->ptr, world->mlx->win, world->mlx->img, 0, 0);
+    int win_width = 1200;
+    int pos_x = win_width - world->mlx->width;
+    mlx_put_image_to_window(world->mlx->ptr, world->mlx->win, world->mlx->menu, pos_x, 0);
+    return 0;
+}
+
 void draw_render_to_img(t_world *world, t_mlx *mlx)
 {
-    mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
     mlx_hook(mlx->win, 17, 0L, mlx_event_close_win, mlx);
     mlx_mouse_hook(mlx->win, mouse_press, world);
     mlx_key_hook(mlx->win, key_press, world);
 
+    mlx_loop_hook(mlx->ptr, refresh_display, world);
     mlx_loop(mlx->ptr);
-    mlx_destroy_window(mlx->ptr, mlx->win);
 }
+
+
 
 #define UNIT_TEST 0
 
@@ -36,20 +46,28 @@ int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
-    t_mlx *mlx = NULL; 
-    t_world *world = NULL;
-    t_camera *camera = NULL;
 
     if (UNIT_TEST == 1) {
         unit_test();
-    } else {
-        world_init(&world, &camera);
-        mlx_initialisation(&mlx);
-        world->camera = camera;
-        world->mlx = mlx;
-        render(world);
-        draw_render_to_img(world, mlx);
-       
+        return 0;
     }
-    return (0);
+
+    t_world *world = NULL;
+    t_mlx *mlx = NULL;
+    t_camera *camera = NULL;
+
+    world_init(&world, &camera);
+    mlx_initialisation(&mlx);   
+
+    if (!mlx) {
+        fprintf(stderr, "Failed to initialize MLX\n");
+        return 1;
+    }
+
+    world->camera = camera;
+    world->mlx = mlx;
+
+    render(world);
+
+    return 0;
 }
