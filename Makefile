@@ -3,12 +3,12 @@ NAME = miniRT
 LIBFT_DIR = lib/libft
 FT_PRINTF_DIR = lib/ft_printf
 GNL_DIR = lib/GNL
-MLX_DIR = lib/mlx
+MLX_DIR = lib/mlx_linux
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror 
 DEBUG_FLAGS = -g -fsanitize=address
 # / pour compiler sous Mac, rajouter ceci a mlx_flags ==> -framework OpenGL -framework AppKit
-MLX_FLAGS = -L$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 CRITERION_FLAGS = -lcriterion
 INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
 

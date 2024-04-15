@@ -119,6 +119,21 @@ void handle_color_change(t_shape *shape)
         write(1, "RED IS AT MAX CHILL OUT\n", 24);
 }
 
+
+void handle_finish_red_increase(t_shape *shape) {
+    if (shape->material.pattern.color_b.r < 1)
+        shape->material.pattern.color_b.r += 0.1;
+    else
+        write(1, "FINISH RED IS AT MAX\n", 21);
+}
+
+void handle_finish_red_decrease(t_shape *shape) {
+    if (shape->material.pattern.color_b.r > 0)
+        shape->material.pattern.color_b.r -= 0.1;
+    else
+        write(1, "FINISH RED IS AT MIN\n", 21);
+}
+
 void handle_green_increase(t_shape *shape) {
     if (shape->material.pattern.color_a.g < 1)
         shape->material.pattern.color_a.g += 0.1;
@@ -133,22 +148,93 @@ void handle_green_decrease(t_shape *shape) {
         write(1, "GREEN IS AT MIN\n", 17);
 }
 
+void handle_finish_green_increase(t_shape *shape) {
+    if (shape->material.pattern.color_b.g < 1)
+        shape->material.pattern.color_b.g += 0.1;
+    else
+        write(1, "FINISH GREEN IS AT MAX\n", 23);
+}
+
+void handle_finish_green_decrease(t_shape *shape) {
+    if (shape->material.pattern.color_b.g > 0)
+        shape->material.pattern.color_b.g -= 0.1;
+    else
+        write(1, "FINISH GREEN IS AT MIN\n", 23);
+}
+
+void handle_finish_blue_increase(t_shape *shape) {
+    if (shape->material.pattern.color_b.b < 1)
+        shape->material.pattern.color_b.b += 0.1;
+    else
+        write(1, "FINISH BLUE IS AT MAX\n", 22);
+}
+
+void handle_finish_blue_decrease(t_shape *shape) {
+    if (shape->material.pattern.color_b.b > 0)
+        shape->material.pattern.color_b.b -= 0.1;
+    else
+        write(1, "FINISH BLUE IS AT MIN\n", 22);
+}
+
+void handle_red_increase(t_shape *shape) {
+    if (shape->material.pattern.color_a.r < 1)
+        shape->material.pattern.color_a.r += 0.1;
+    else
+        write(1, "RED IS AT MAX\n", 15);
+}
+
+void handle_red_decrease(t_shape *shape) {
+    if (shape->material.pattern.color_a.r > 0)
+        shape->material.pattern.color_a.r -= 0.1;
+    else
+        write(1, "RED IS AT MIN\n", 15);
+}
+
+void handle_blue_increase(t_shape *shape) {
+    if (shape->material.pattern.color_a.b < 1)
+        shape->material.pattern.color_a.b += 0.1;
+    else
+        write(1, "BLUE IS AT MAX\n", 16);
+}
+
+void handle_blue_decrease(t_shape *shape) {
+    if (shape->material.pattern.color_a.b > 0)
+        shape->material.pattern.color_a.b -= 0.1;
+    else
+        write(1, "BLUE IS AT MIN\n", 16);
+}
+
 int mouse_press(int button, int x, int y, void *param) {
     t_world *world = (t_world*)param;
-    printf("voici les coord : x : %d et y : %d\n", x , y);
     if (button == 1) {
         if (x > 950 && x < 1030 && y > 206 && y < 224 && selected_shape)
-                handle_pattern_change(selected_shape);
-        else if (x > 1018 && x < 1061 && y > 234 && y < 251 && selected_shape)
-                handle_color_change(selected_shape);
-        else if (x > 1071 && x < 1090 && y > 233 && y < 250 && selected_shape) {
+            handle_pattern_change(selected_shape);
+        else if (x > 1018 && x < 1037 && y > 234 && y < 251 && selected_shape)
+            handle_red_increase(selected_shape);
+        else if (x > 1046 && x < 1061 && y > 233 && y < 247 && selected_shape)
+            handle_red_decrease(selected_shape);
+        else if (x > 1071 && x < 1090 && y > 233 && y < 250 && selected_shape)
             handle_green_increase(selected_shape);
-        } else if (x > 1099 && x < 1112 && y > 235 && y < 248 && selected_shape) {
+        else if (x > 1099 && x < 1112 && y > 235 && y < 248 && selected_shape)
             handle_green_decrease(selected_shape);
-        } 
-        else {
+        else if (x > 1133 && x < 1149 && y > 234 && y < 250 && selected_shape)
+            handle_blue_increase(selected_shape);
+        else if (x > 1157 && x < 1170 && y > 237 && y < 247 && selected_shape)
+            handle_blue_decrease(selected_shape);
+        else if (x > 1019 && x < 1035 && y > 278 && y < 294 && selected_shape)
+            handle_finish_red_increase(selected_shape);
+        else if (x > 1046 && x < 1058 && y > 279 && y < 290 && selected_shape)
+            handle_finish_red_decrease(selected_shape);
+        else if (x > 1073 && x < 1089 && y > 276 && y < 293 && selected_shape)
+            handle_finish_green_increase(selected_shape);
+        else if (x > 1101 && x < 1110 && y > 279 && y < 287 && selected_shape)
+            handle_finish_green_decrease(selected_shape);
+        else if (x > 1132 && x < 1148 && y > 274 && y < 288 && selected_shape)
+            handle_finish_blue_increase(selected_shape);
+        else if (x > 1156 && x < 1168 && y > 278 && y < 285 && selected_shape)
+            handle_finish_blue_decrease(selected_shape);
+        else
             handle_shape_selection(world, x, y);
-        }
         render(world);
     }
     return 1;

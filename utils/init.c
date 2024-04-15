@@ -12,26 +12,20 @@ void world_init(t_world **world, t_camera **camera)
 
 // Initialisation de MLX.
 void mlx_initialisation(t_mlx **mlx) {
-    // Assumant que mlx_init_and_create_window crée et retourne une structure déjà allouée
     *mlx = mlx_init_and_create_window(1200, 920, "minirt");
     if (!(*mlx))
         error_exit("Erreur initialisation mlx\n");
 
-    // Supposition : mlx_create_image initialise une image qui sera utilisée comme buffer
     mlx_create_image(*mlx);
 
-    // Préparez les variables pour stocker les dimensions
     int width, height;
 
-    // Utilisez les adresses de ces variables pour stocker les dimensions retournées par mlx_xpm_file_to_image
     (*mlx)->menu = mlx_xpm_file_to_image((*mlx)->ptr, "menu.xpm", &width, &height);
 
-    // Vérifiez si l'image a été chargée correctement
     if (!(*mlx)->menu) {
         error_exit("Erreur de chargement de menu.xpm\n");
     }
 
-    // Stockez les dimensions de l'image dans la structure, si vous avez besoin de les utiliser plus tard
     (*mlx)->width = width;
     (*mlx)->height = height;
 }
@@ -53,12 +47,12 @@ void add_spheres(t_world *world)
     obj_right->shape->material.color = (t_color){1, 1, 1};
     world_add_object(world, obj_right);
 
-    // 2ème sphère à droite
-    t_sphere *right2 = create_sphere();
-    t_object *obj_right2 = object_create_for_sphere(right2);
-    obj_right2->shape->transformation = matrix_multiply(matrix_translation(10.5, 3.25, 35.5), matrix_scaling(3.25, 3.25, 3.25));
-    obj_right2->shape->material.color = (t_color){1, 1, 1};
-    world_add_object(world, obj_right2);
+    // // 2ème sphère à droite
+    // t_sphere *right2 = create_sphere();
+    // t_object *obj_right2 = object_create_for_sphere(right2);
+    // obj_right2->shape->transformation = matrix_multiply(matrix_translation(10.5, 3.25, 35.5), matrix_scaling(3.25, 3.25, 3.25));
+    // obj_right2->shape->material.color = (t_color){1, 1, 1};
+    // world_add_object(world, obj_right2);
 
     // 3ème sphère à gauche
     t_sphere *left = create_sphere();
@@ -75,11 +69,10 @@ void world_fill(t_world *world) {
     t_object *obj_floor = object_create_for_plane(floor);
     world_add_object(world, obj_floor);
 
-    // Création du mur de fond
-    // t_plane *back_wall = plane_create();
-    // t_object *obj_back_wall = object_create_for_plane(back_wall);
-    // obj_back_wall->shape->transformation = matrix_multiply(matrix_translation(0, 0, 5), matrix_rotation_x(M_PI / 2));
-    // world_add_object(world, obj_back_wall);
+    t_plane *back_wall = plane_create();
+    t_object *obj_back_wall = object_create_for_plane(back_wall);
+    obj_back_wall->shape->transformation = matrix_multiply(matrix_translation(0, 0, 5), matrix_rotation_x(M_PI / 2));
+    world_add_object(world, obj_back_wall);
 
     // Ajout des sphères partiellement encastrées dans le sol
     add_spheres(world);
