@@ -8,12 +8,14 @@ t_color color_subtract(t_color c1, t_color c2) {
 
 t_color gradient_at(const t_pattern *pattern, t_tuple point);
 
-t_pattern gradient_pattern_create(t_color color1, t_color color2) {
-    t_pattern pattern;
-    pattern.color_a = color1;
-    pattern.color_b = color2;
-    pattern.transform = matrix_init_identity();
-    pattern.pattern_at = gradient_at;
+t_pattern *gradient_pattern_create(t_color color1, t_color color2) {
+    t_pattern *pattern;
+
+    pattern = malloc(sizeof(t_pattern));
+    pattern->color_a = color1;
+    pattern->color_b = color2;
+    pattern->transform = matrix_init_identity();
+    pattern->pattern_at = gradient_at;
     return pattern;
 }
 

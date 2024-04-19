@@ -21,7 +21,8 @@ void* render_section(void* arg) {
     for (y = data->start_y; y < data->end_y; y++) {
         for (x = 0; x < data->camera->hsize; x++) {
             t_ray ray = ray_for_pixel(data->camera, &data->inverse_transform, x, y);
-            t_color color = color_at(data->world, &ray);
+            int remaining = 2;
+            t_color color = color_at(data->world, &ray, remaining);
             draw_pixel(data->mlx, x, y, color);
         }
     }
@@ -29,10 +30,11 @@ void* render_section(void* arg) {
     return NULL;
 }
 
+
 #include <pthread.h>
 
 void render(t_world *world) {
-    const int num_threads = 10;
+    const int num_threads = 50;
     pthread_t threads[num_threads];
     RenderThreadData thread_data[num_threads];
     t_matrix inverse_transform = matrix_inverse(world->camera->transform);

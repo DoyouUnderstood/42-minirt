@@ -94,8 +94,11 @@ typedef struct s_computations {
     t_tuple over_point; 
     t_tuple eyev;    
     t_tuple normalv;
+    t_tuple reflectv;
     bool inside;
 } t_computations;
+
+t_color reflected_color(t_world *world, const t_computations *comps, int remaining);
 
 void draw_render_to_img(t_world *world, t_mlx *mlx);
 t_material material_create_default_plane();
@@ -118,8 +121,8 @@ t_ray ray_for_pixel(const t_camera *camera, const t_matrix *inverse_transform, i
 t_camera *camera_create(int hsize, int vsize, float fov);
 
 
-t_color color_at(t_world *world, t_ray *ray);
-t_color shade_hit(t_world *world, t_computations *comps);
+t_color color_at(t_world *world,t_ray *ray, int remaining);
+t_color shade_hit(t_world *world, t_computations *comps, int remaining);
 void prepare_computations(t_computations *comps, const t_intersection *intersection, const t_ray *ray);
 int compare_intersections(const void* a, const void* b);
 // object

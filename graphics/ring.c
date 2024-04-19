@@ -2,12 +2,13 @@
 #include "../include/graphics.h"
 #include "../object/test_shape.h"
 
-t_pattern ring_pattern_create(t_color color1, t_color color2) {
-    t_pattern pattern;
-    pattern.color_a = color1;
-    pattern.color_b = color2;
-    pattern.pattern_at = ring_at;
-    pattern.transform = matrix_init_identity();
+t_pattern *ring_pattern_create(t_color color1, t_color color2) {
+    t_pattern *pattern;
+    pattern = malloc(sizeof(t_pattern));
+    pattern->color_a = color1;
+    pattern->color_b = color2;
+    pattern->pattern_at = ring_at;
+    pattern->transform = matrix_init_identity();
     return pattern;
 }
 

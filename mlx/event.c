@@ -45,7 +45,7 @@ int mlx_event_close_win(t_mlx *mlx)
 
 #include "../object/test_shape.h"
 
-t_pattern change_pattern(int pattern_type, t_color color1, t_color color2) {
+t_pattern *change_pattern(int pattern_type, t_color color1, t_color color2) {
     switch (pattern_type) {
         case 1:
             return ring_pattern_create(color1, color2);
@@ -82,7 +82,7 @@ void make_it_normal(t_shape *shape) {
 static int current_pattern = 0; // Déplacé en variable globale ou statique si ce n'est pas déjà le cas
 
 void handle_pattern_change(t_shape *selected_shape) {
-    selected_shape->material.pattern = change_pattern(current_pattern, (t_color){0.4, 0.4, 0.5}, (t_color){0.6, 0.4, 0.5});
+    selected_shape->material.pattern= change_pattern(current_pattern, (t_color){0.4, 0.4, 0.5}, (t_color){0.6, 0.4, 0.5});
     current_pattern = (current_pattern + 1) % 5;
 }
 
@@ -113,93 +113,93 @@ void handle_shape_selection(t_world *world, int x, int y) {
 
 void handle_color_change(t_shape *shape)
 {
-    if (shape->material.pattern.color_a.r < 1)
-        shape->material.pattern.color_a.r += 0.1;
+    if (shape->material.pattern->color_a.r < 1)
+        shape->material.pattern->color_a.r += 0.1;
     else
         write(1, "RED IS AT MAX CHILL OUT\n", 24);
 }
 
 
 void handle_finish_red_increase(t_shape *shape) {
-    if (shape->material.pattern.color_b.r < 1)
-        shape->material.pattern.color_b.r += 0.1;
+    if (shape->material.pattern->color_b.r < 1)
+        shape->material.pattern->color_b.r += 0.1;
     else
         write(1, "FINISH RED IS AT MAX\n", 21);
 }
 
 void handle_finish_red_decrease(t_shape *shape) {
-    if (shape->material.pattern.color_b.r > 0)
-        shape->material.pattern.color_b.r -= 0.1;
+    if (shape->material.pattern->color_b.r > 0)
+        shape->material.pattern->color_b.r -= 0.1;
     else
         write(1, "FINISH RED IS AT MIN\n", 21);
 }
 
 void handle_green_increase(t_shape *shape) {
-    if (shape->material.pattern.color_a.g < 1)
-        shape->material.pattern.color_a.g += 0.1;
+    if (shape->material.pattern->color_a.g < 1)
+        shape->material.pattern->color_a.g += 0.1;
     else
         write(1, "GREEN IS AT MAX\n", 17);
 }
 
 void handle_green_decrease(t_shape *shape) {
-    if (shape->material.pattern.color_a.g > 0)
-        shape->material.pattern.color_a.g -= 0.1;
+    if (shape->material.pattern->color_a.g > 0)
+        shape->material.pattern->color_a.g -= 0.1;
     else
         write(1, "GREEN IS AT MIN\n", 17);
 }
 
 void handle_finish_green_increase(t_shape *shape) {
-    if (shape->material.pattern.color_b.g < 1)
-        shape->material.pattern.color_b.g += 0.1;
+    if (shape->material.pattern->color_b.g < 1)
+        shape->material.pattern->color_b.g += 0.1;
     else
         write(1, "FINISH GREEN IS AT MAX\n", 23);
 }
 
 void handle_finish_green_decrease(t_shape *shape) {
-    if (shape->material.pattern.color_b.g > 0)
-        shape->material.pattern.color_b.g -= 0.1;
+    if (shape->material.pattern->color_b.g > 0)
+        shape->material.pattern->color_b.g -= 0.1;
     else
         write(1, "FINISH GREEN IS AT MIN\n", 23);
 }
 
 void handle_finish_blue_increase(t_shape *shape) {
-    if (shape->material.pattern.color_b.b < 1)
-        shape->material.pattern.color_b.b += 0.1;
+    if (shape->material.pattern->color_b.b < 1)
+        shape->material.pattern->color_b.b += 0.1;
     else
         write(1, "FINISH BLUE IS AT MAX\n", 22);
 }
 
 void handle_finish_blue_decrease(t_shape *shape) {
-    if (shape->material.pattern.color_b.b > 0)
-        shape->material.pattern.color_b.b -= 0.1;
+    if (shape->material.pattern->color_b.b > 0)
+        shape->material.pattern->color_b.b -= 0.1;
     else
         write(1, "FINISH BLUE IS AT MIN\n", 22);
 }
 
 void handle_red_increase(t_shape *shape) {
-    if (shape->material.pattern.color_a.r < 1)
-        shape->material.pattern.color_a.r += 0.1;
+    if (shape->material.pattern->color_a.r < 1)
+        shape->material.pattern->color_a.r += 0.1;
     else
         write(1, "RED IS AT MAX\n", 15);
 }
 
 void handle_red_decrease(t_shape *shape) {
-    if (shape->material.pattern.color_a.r > 0)
-        shape->material.pattern.color_a.r -= 0.1;
+    if (shape->material.pattern->color_a.r > 0)
+        shape->material.pattern->color_a.r -= 0.1;
     else
         write(1, "RED IS AT MIN\n", 15);
 }
 
 void handle_blue_increase(t_shape *shape) {
-    if (shape->material.pattern.color_a.b < 1)
-        shape->material.pattern.color_a.b += 0.1;
+    if (shape->material.pattern->color_a.b < 1)
+        shape->material.pattern->color_a.b += 0.1;
     else
         write(1, "BLUE IS AT MAX\n", 16);
 }
 
 void handle_blue_decrease(t_shape *shape) {
-    if (shape->material.pattern.color_a.b > 0)
-        shape->material.pattern.color_a.b -= 0.1;
+    if (shape->material.pattern->color_a.b > 0)
+        shape->material.pattern->color_a.b -= 0.1;
     else
         write(1, "BLUE IS AT MIN\n", 16);
 }
@@ -258,13 +258,13 @@ int key_press(int key, void *param) {
 
     switch (key) {
         case KEY_R:
-            world->objects[selected_object_index]->shape->material.pattern.color_b.r = fmod(color->r + 0.1, 1.0);
+            world->objects[selected_object_index]->shape->material.pattern->color_b.r = fmod(color->r + 0.1, 1.0);
             break;
         case KEY_G:
-            world->objects[selected_object_index]->shape->material.pattern.color_b.g = fmod(color->g + 0.1, 1.0);
+            world->objects[selected_object_index]->shape->material.pattern->color_b.g = fmod(color->g + 0.1, 1.0);
             break;
         case KEY_B:
-            world->objects[selected_object_index]->shape->material.pattern.color_b.b = fmod(color->b + 0.1, 1.0);
+            world->objects[selected_object_index]->shape->material.pattern->color_b.b = fmod(color->b + 0.1, 1.0);
             break;
     }
 

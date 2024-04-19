@@ -13,11 +13,12 @@ t_color checker_at(const t_pattern *pattern, t_tuple point) {
     }
 }
 
-t_pattern checker_pattern_create(t_color color1, t_color color2) {
-    t_pattern pattern;
-    pattern.color_a = color1;
-    pattern.color_b = color2;
-    pattern.pattern_at = checker_at;
-    return pattern;
+t_pattern *checker_pattern_create(t_color color1, t_color color2) {
+    t_pattern *pattern;
+    pattern = malloc(sizeof(t_pattern));
+    pattern->color_a = color1;
+    pattern->color_b = color2;
+    pattern->pattern_at = checker_at;
+    return (pattern);
 }
 

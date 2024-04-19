@@ -6,10 +6,9 @@
 t_color lighting(const t_material *material, const t_object *object, const t_light *light, const t_tuple *position, const t_tuple *eyev, const t_tuple *normalv, bool in_shadow) {
     t_color effective_color;
 
-    if (material->pattern.pattern_at) {
-        // Transformer le point de l'espace monde à l'espace de l'objet
+    if (material->pattern && material->pattern->pattern_at) {
         t_tuple point_in_object_space = matrix_multiply_by_tuple(matrix_inverse(object->shape->transformation), *position);
-        effective_color = stripe_at_object(&material->pattern, object, point_in_object_space);
+        effective_color = stripe_at_object(material->pattern, object, point_in_object_space);
     } else {
         // Utiliser la couleur du matériau si aucun motif n'est défini
         effective_color = color_multiply(material->color, light->intensity);

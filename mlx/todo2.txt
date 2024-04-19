@@ -6,7 +6,7 @@ POUR cliquer sur une forme et ensuite le menu pour changer les modifs sur la for
 - appliquer les modifs. 
 
 
-DIMENSION PATTERN  :
+DIMENSION PATTERN :
 
 x : 952 et y : 206
 x : 1030 et y : 204

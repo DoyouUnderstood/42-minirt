@@ -53,7 +53,9 @@ SRCS = main.c \
 	  graphics/pattern.c \
 	  graphics/gradient.c \
 	  graphics/ring.c \
-	  graphics/checker.c
+	  graphics/checker.c \
+	  maths/reflect.c
+
 
 
 OBJ = $(SRCS:.c=.o)

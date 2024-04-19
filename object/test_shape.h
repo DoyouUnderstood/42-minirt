@@ -22,7 +22,7 @@ typedef struct s_shape
 
 t_plane *plane_create(void);
 t_intersection* plane_local_intersect(t_object *obj, t_ray *ray, int *count);
-t_tuple plane_local_normal_at();
+t_tuple plane_local_normal_at(t_shape *shape, t_tuple local_point);
 t_sphere* create_sphere();
 void    transformation_default(t_shape *shape);
 void set_shape_transform(t_shape *shape, t_matrix transformation);

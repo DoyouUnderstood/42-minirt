@@ -15,6 +15,8 @@ void prepare_computations(t_computations *comps, const t_intersection *intersect
     comps->point = t_point_position(ray, intersection->t);
     comps->eyev = vector_negate(ray->direction);
     comps->normalv = normal_at_shape(intersection->obj, comps->point);
+    comps->reflectv = reflect(ray->direction, comps->normalv);
+    
     if (vector_dot(comps->normalv, comps->eyev) < 0)
     {
         comps->inside = true;

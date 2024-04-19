@@ -23,20 +23,6 @@ t_object* object_create_for_sphere(t_sphere* sphere)
 }
 
 
-// fonction for create material struct with default values
-t_material material_create_default_plane() 
-{
-    t_material m;
-    
-    m.color = (t_color){0.4, 0.4, 0.4};
-    m.ambient = 0.1;
-    m.diffuse = 0.9;
-    m.specular = 0.9;
-    m.shininess = 0.0;
-
-    return m;
-}
-
 
 
 
@@ -55,7 +41,7 @@ t_object* object_create_for_plane(t_plane *plane) {
         return NULL;
     }
     obj->shape->transformation = matrix_init_identity();
-    obj->shape->material = material_create_default();
+    obj->shape->material = material_create_default_plane();
     obj->shape->local_normal_at = plane_local_normal_at;
     obj->shape->local_intersect = plane_local_intersect;
 

@@ -40,23 +40,24 @@ typedef struct s_material
 	double diffuse;
 	double specular;
 	double shininess;
-	t_pattern pattern;
+	t_pattern *pattern;
+	double reflectiv;
 }	t_material;
 
 
 
 // ===== PATTERN ===== 
 
-t_pattern checker_pattern_create(t_color color1, t_color color2);
+t_pattern *checker_pattern_create(t_color color1, t_color color2);
 
-t_pattern ring_pattern_create(t_color color1, t_color color2);
+t_pattern *ring_pattern_create(t_color color1, t_color color2);
 t_color ring_at(const t_pattern *pattern, t_tuple point);
 
-t_pattern gradient_pattern_create(t_color color1, t_color color2);
+t_pattern *gradient_pattern_create(t_color color1, t_color color2);
 t_color gradient_at(const t_pattern *pattern, t_tuple point);
 
 void set_pattern_transform(t_pattern *pattern, t_matrix transform);
-t_pattern stripe_pattern_create(t_color color1, t_color color2);
+t_pattern *stripe_pattern_create(t_color color1, t_color color2);
 t_pattern stripe_pattern(t_color a, t_color b); 
 t_color stripe_at(const t_pattern *pattern, t_tuple point);
 t_color stripe_at_object(const t_pattern *pattern, const t_object *object, t_tuple point);
@@ -65,7 +66,7 @@ t_color stripe_at_object(const t_pattern *pattern, const t_object *object, t_tup
 
 t_color color_create(double r, double g, double b);
 bool color_eq(t_color c1, t_color c2);
-t_color color_at(t_world *world, t_ray *ray);
+t_color color_at(t_world *world,t_ray *ray, int remaining);
 t_color color_add(t_color c1, t_color c2);
 t_color color_multiply(t_color c1, t_color c2);
 t_color color_multiply_alternativ(t_color c1, t_color c2);
