@@ -1,4 +1,5 @@
 #include "../include/mathematique.h"
+#include "maths.h"
 
 t_tuple tuple_subtract(t_tuple a, t_tuple b) 
 {

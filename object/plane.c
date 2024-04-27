@@ -1,16 +1,39 @@
 #include "test_shape.h"
 #include "../include/shape.h"
 #include "../object/test_shape.h"
+#include "../graphics/graphics.h"
 
-void set_pattern_transform(t_pattern *pattern, t_matrix transform) {
-    pattern->transform = transform;
+t_material *material_create_default_plane(t_color *color);
+
+// Cree un nouvel object t_object pour un plane. 
+t_object* object_create_for_plane(t_color color, t_tuple center)
+{
+    t_plane *plane = plane_create(center);
+    t_object *obj = (t_object *)malloc(sizeof(t_object));
+    if (!obj) 
+        return NULL;
+    obj->type = PLANE;
+    obj->obj = plane;
+    obj->shape = (t_shape *)malloc(sizeof(t_shape));
+    if (!obj->shape) {
+        free(obj);
+        return NULL;
+    }
+    obj->shape->transformation = matrix_init_identity();
+    obj->shape->material = material_create_default_plane(&color);
+    obj->shape->local_normal_at = plane_local_normal_at;
+    obj->shape->local_intersect = plane_local_intersect;
+    t_matrix translation = matrix_translation(center.x, center.y, center.z);
+    t_matrix scaling = matrix_scaling(1, 1, 1);
+    obj->shape->transformation = matrix_multiply(translation, scaling);
+    plane->center = (t_tuple){0,0,0,0};
+    return obj;
 }
 
-t_plane *plane_create(void)
+t_plane *plane_create(t_tuple center)
 {
     t_plane *plane = malloc(sizeof(t_plane));
-    plane->center = point_create(0, 0, 0);
-    plane->color = (t_color){0.3, 0.3, 0.3};
+    plane->center = center;
     return (plane);
 }
 

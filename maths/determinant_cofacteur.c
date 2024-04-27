@@ -1,4 +1,5 @@
 #include "../include/mathematique.h"
+#include "maths.h"
 
 // fonction pour determiner le determinant d'un matrice 4x4
 double determinant4x4(t_matrix mat) 

@@ -1,6 +1,5 @@
 #include "../include/main.h"
 
-#include "../include/graphics.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
 
@@ -19,5 +18,5 @@ t_matrix view_transform(t_tuple from, t_tuple to, t_tuple up) {
         {0.0f,       0.0f,       0.0f,      1.0f}
     });
 
-    return matrix_multiply(orientation, trans);
+    return (matrix_multiply(orientation, trans));
 }

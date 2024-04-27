@@ -1,4 +1,4 @@
-#include "../include/graphics.h"
+#include "graphics.h"
 #include <stdint.h>
 
 // fonction pour ajouter des couleurs.
@@ -34,11 +34,12 @@ t_color color_multiply_alternativ(t_color c1, t_color c2)
     return (result);
 }
 
-t_light *light_create(t_color color, t_tuple position)
+t_light *light_create(t_color color, t_tuple position, double diffuse)
 {
     t_light *light; 
 
     light = malloc(sizeof(t_light));
+    light->diffuse = diffuse;
     light->intensity = color;
     light->pos = position;
     return (light);
@@ -83,10 +84,19 @@ bool color_eq(t_color c1, t_color c2) {
 
 
 // Fonction pour créer une couleur
-t_color color_create(double r, double g, double b) {
+t_color color_create(double r, double g, double b) 
+{
     t_color new_color;
     new_color.r = r;
     new_color.g = g;
     new_color.b = b;
+    return new_color;
+}
+
+t_color convert_color_255_to_1(int r, int g, int b) {
+    t_color new_color;
+    new_color.r = r / 255.0;
+    new_color.g = g / 255.0;
+    new_color.b = b / 255.0;
     return new_color;
 }

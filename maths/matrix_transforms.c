@@ -1,4 +1,5 @@
 #include "../include/mathematique.h"
+#include "maths.h"
 
 t_matrix matrix(float values[4][4]) 
 {

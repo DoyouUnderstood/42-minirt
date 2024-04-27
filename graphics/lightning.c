@@ -1,4 +1,4 @@
-#include "../include/graphics.h"
+#include "graphics.h"
 #include <stdio.h>
 #include <math.h>
 #include "../object/test_shape.h"
@@ -9,17 +9,13 @@ t_color lighting(const t_material *material, const t_object *object, const t_lig
     if (material->pattern && material->pattern->pattern_at) {
         t_tuple point_in_object_space = matrix_multiply_by_tuple(matrix_inverse(object->shape->transformation), *position);
         effective_color = stripe_at_object(material->pattern, object, point_in_object_space);
-    } else {
-        // Utiliser la couleur du matériau si aucun motif n'est défini
+    } else 
         effective_color = color_multiply(material->color, light->intensity);
-    }
 
-    t_color ambient = color_multiply_scalar(effective_color, material->ambient);
-
-    if (in_shadow) {
+    t_color ambient = color_multiply_scalar(effective_color, material->amb.ambient);
+    if (in_shadow)
         return ambient;
-    }
-
+    
     t_tuple lightv = vector_normalize(tuple_subtract(light->pos, *position));
     double light_dot_normal = vector_dot(lightv, *normalv);
 
@@ -27,7 +23,7 @@ t_color lighting(const t_material *material, const t_object *object, const t_lig
     t_color specular = {0, 0, 0};
 
     if (light_dot_normal > 0) {
-        diffuse = color_multiply_scalar(effective_color, material->diffuse * light_dot_normal);
+        diffuse = color_multiply_scalar(effective_color, light->diffuse * light_dot_normal);
         t_tuple reflectv = reflect(vector_negate(lightv), *normalv);
         double reflect_dot_eye = vector_dot(reflectv, *eyev);
         if (reflect_dot_eye > 0) {
@@ -36,6 +32,6 @@ t_color lighting(const t_material *material, const t_object *object, const t_lig
         }
     }
 
-    return color_add(color_add(ambient, diffuse), specular);
+    return (color_add(color_add(ambient, diffuse), specular));
 }
 

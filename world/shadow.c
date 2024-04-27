@@ -1,12 +1,14 @@
 #include "../include/main.h"
 
-#include "../include/graphics.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
 #include <math.h>
 
 bool is_shadowed(t_world *world, const t_tuple point) 
 {
+    if (world->light->intensity.r == 0 && world->light->intensity.g == 0 && world->light->intensity.b == 0)
+        return false;
+
     t_tuple direction = tuple_subtract(world->light->pos, point);
     double distance = tuple_magnitude(&direction);
     direction = vector_normalize(direction);

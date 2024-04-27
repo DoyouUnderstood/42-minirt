@@ -9,6 +9,9 @@
         "algorithm": "c",
         "math.h": "c",
         "mlx.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "init.h": "c",
+        "libft.h": "c",
+        "stdint.h": "c"
     }
 }

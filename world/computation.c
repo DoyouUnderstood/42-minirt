@@ -1,15 +1,17 @@
 #include "../include/main.h"
 
-#include "../include/graphics.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
 #include "../object/test_shape.h"
+#include "../lib/libft/libft.h"
 #define EPSILON 0.00001
 
 void prepare_computations(t_computations *comps, const t_intersection *intersection, const t_ray *ray) 
 {
     if (comps == NULL) 
         return;
+
+    // comps->color = intersection->obj->shape->material->color;
     comps->t = intersection->t;
     comps->object = intersection->obj;
     comps->point = t_point_position(ray, intersection->t);
@@ -37,6 +39,11 @@ int compare_intersections(const void* a, const void* b)
     else return 0;
 }
 
+/**
+ * Computes all intersections of a given ray with every object in the world.
+ * Allocates and returns a list of sort intersections,
+ */
+
 t_intersection* intersect_world(t_world* world, t_ray* ray, int* count) {
     *count = 0;
     int capacity = 10;
@@ -44,32 +51,33 @@ t_intersection* intersect_world(t_world* world, t_ray* ray, int* count) {
     if (!intersections) {
         return NULL;
     }
-    for (int i = 0; i < world->object_count; i++) 
-    {
+    for (int i = 0; i < world->object_count; i++) {
         int local_count = 0;
         t_intersection* local_intersections = intersect_shape(world->objects[i], ray, &local_count);
         if (local_count > 0) {
-            while (*count + local_count > capacity) {
-                capacity *= 2;
-                intersections = realloc(intersections, capacity * sizeof(t_intersection));
-                if (!intersections) {
+            if (*count + local_count > capacity) {
+                while (*count + local_count > capacity) {
+                    capacity *= 2;
+                }
+                t_intersection* temp = realloc(intersections, capacity * sizeof(t_intersection));
+                if (!temp) {
+                    free(intersections);
                     free(local_intersections);
                     return NULL;
                 }
+                intersections = temp;
             }
+            ft_memcpy(intersections + *count, local_intersections, local_count * sizeof(t_intersection));
             for (int j = 0; j < local_count; j++) {
-                intersections[*count + j] = local_intersections[j];
                 intersections[*count + j].obj = world->objects[i];
             }
             *count += local_count;
         }
-        if (local_intersections != NULL) {
-            free(local_intersections);
-        }
+        free(local_intersections);
     }
 
     qsort(intersections, *count, sizeof(t_intersection), compare_intersections);
-
     return intersections;
 }
+
 

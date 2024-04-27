@@ -12,12 +12,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 CRITERION_FLAGS = -lcriterion
 INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
 
-TEST_SRCS =  unit_test/camera.c unit_test/test_color_at.c unit_test/test_computations.c \
-unit_test/test_hit.c unit_test/test_intersection_sphere.c unit_test/test_lightning.c \
-unit_test/test_newshade_it.c unit_test/test_normat_at.c unit_test/test_reflect.c \
-unit_test/test_render.c unit_test/test_shadow.c unit_test/test_shape.c unit_test/test_tracking_intersection.c \
-unit_test/test_transorm_ray_and_sphere.c unit_test/test_view.c unit_test/test_world.c unit_test/test_plan.c \
-unit_test/test_pattern.c
+TEST_SRCS =  unit_test/cube.c
 
 SRCS = main.c \
       graphics/color.c \
@@ -26,16 +21,12 @@ SRCS = main.c \
       maths/matrix_transforms.c \
       maths/point.c \
       maths/vect.c \
+	  maths/ray.c \
       mlx/event.c \
       mlx/mlx.c \
       ray/ray.c \
-      shapes/sphere.c \
-	  shapes/intersect.c \
-	  maths/sphere_operation.c \
-	  maths/normal.c \
 	  graphics/material.c \
 	  graphics/lightning.c \
-	  maths/utils.c \
 	  maths/tuple.c \
 	  memory/memory.c \
 	  world/world.c \
@@ -45,16 +36,21 @@ SRCS = main.c \
 	  graphics/color_at.c \
 	  world/computation.c \
 	  world/shadow.c \
-	  object/test_shape.c \
-	  object/test_sphere.c \
-	  shapes/object.c \
+	  object/shape.c \
 	  utils/init.c \
 	  object/plane.c \
-	  graphics/pattern.c \
-	  graphics/gradient.c \
-	  graphics/ring.c \
-	  graphics/checker.c \
-	  maths/reflect.c
+	  graphics/pattern/pattern.c \
+	  graphics/pattern/gradient.c \
+	  graphics/pattern/ring.c \
+	  graphics/pattern/checker.c \
+	  maths/reflect.c \
+	  object/cube.c \
+	  object/cylinder.c \
+	  object/sphere.c \
+	  parser/parser.c \
+	  parser/parse_obj.c \
+	  parser/utils.c \
+	  parser/utils2.c
 
 
 

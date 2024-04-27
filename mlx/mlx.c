@@ -1,4 +1,14 @@
 #include "../include/minilibx.h"
+#include <stdint.h>
+#include "../graphics/graphics.h"
+
+// Initialisation de MLX.
+void mlx_initialisation(t_mlx **mlx) {
+    *mlx = mlx_init_and_create_window(900, 920, "minirt");
+    if (!(*mlx))
+        error_exit("Erreur initialisation mlx\n");
+    mlx_create_image(*mlx);
+}
 
 // fonction pour initialiser un windows.
 t_mlx   *mlx_init_and_create_window(int width, int height, char *title)
@@ -59,4 +69,17 @@ void mlx_cleanup(t_mlx *mlx)
     if (mlx->ptr)
         free(mlx->ptr);
     free(mlx);
+}
+
+void draw_render_to_img(t_world *world, t_mlx *mlx)
+{
+    mlx_hook(mlx->win, 17, 0L, mlx_event_close_win, mlx);
+    mlx_loop_hook(mlx->ptr, refresh_display, world);
+    mlx_loop(mlx->ptr);
+}
+
+int refresh_display(t_world *world) 
+{
+    mlx_put_image_to_window(world->mlx->ptr, world->mlx->win, world->mlx->img, 0, 0);
+    return 0;
 }
