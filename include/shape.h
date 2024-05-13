@@ -90,7 +90,7 @@ void prepare_computations(t_computations *comps, const t_intersection *intersect
 int compare_intersections(const void* a, const void* b);
 // object
 t_object* object_create_for_plane(t_color color, t_tuple center); 
-t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color);
+t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color, double relfectiv);
 t_tuple cylinder_local_normal_at(t_shape *shape, t_tuple local_point);
 t_intersection* cylinder_intersect(t_object *obj, t_ray *ray, int *count);
 

@@ -44,7 +44,7 @@ t_cylinder* create_cylinder(t_tuple center, double diameter, double height, t_tu
 
 
 
-t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color) 
+t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color, double reflectiv) 
 {
     t_cylinder *cylinder = create_cylinder(center, diameter, height, axis);
     if (cylinder == NULL) {
@@ -67,7 +67,7 @@ t_object* object_create_for_cylinder(t_tuple center, double diameter, double hei
     }
 
     obj->shape->transformation = matrix_translation(center.x, center.y, center.z);
-    obj->shape->material = material_create_default(&color);
+    obj->shape->material = material_create_default(&color, reflectiv);
     // obj->shape->material->reflectiv = 0;
     cylinder->center = (t_tuple){0, 0, 0, 0};
     obj->shape->local_intersect = cylinder_intersect;

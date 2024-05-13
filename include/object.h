@@ -69,7 +69,7 @@ typedef struct s_camera
 
 t_object* create_cube();
 
-t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color);
+t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color, double reflectiv);
 
 t_tuple cube_local_normal_at(t_shape *cube, t_tuple point);
 

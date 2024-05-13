@@ -87,7 +87,7 @@ t_world *parse(char **str, t_world *world)
         if (!ft_strncmp(ptr[0], "A", ft_strlen(ptr[0])))
             world->amb = parse_amb(ptr);
         if (!ft_strncmp(ptr[0], "C", ft_strlen(ptr[0]))) 
-            world->camera = parse_camera(ptr, world->vsize, world->hsize);
+            world->camera = parse_camera(ptr, world->hsize, world->vsize);
         else if (!strncmp(ptr[0], "L", ft_strlen(ptr[0])))
             world->light = parse_light(ptr);
         else

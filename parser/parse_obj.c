@@ -5,6 +5,7 @@ int parse_vec3(char *str, t_tuple *vec);
 
 t_object *parse_cylinder(char **parts, t_object *obj) 
 {
+    double reflectiv;
     t_cylinder *cyl = malloc(sizeof(t_cylinder));
     t_color color;
     if (!parse_vec3(parts[1], &cyl->center))
@@ -16,8 +17,10 @@ t_object *parse_cylinder(char **parts, t_object *obj)
     if (!ft_atod(parts[4], &cyl->height))
         error_exit("Error with parsing height\n");
     rgb(parts[5], &color);
+    if (parts[6])
+        reflectiv = atof(parts[6]);
     color = convert_color_255_to_1(color.r, color.g, color.b);
-    obj = object_create_for_cylinder(cyl->center, cyl->radius, cyl->height, cyl->axis, color);
+    obj = object_create_for_cylinder(cyl->center, cyl->radius, cyl->height, cyl->axis, color, reflectiv);
 
     free(cyl);
     return (obj);
@@ -161,14 +164,18 @@ t_object *parse_sphere(char **parts, t_object *object)
 {
     t_tuple center;
     double diameter;
-    t_color color; 
+    t_color color;
+    double reflectiv = 0;
     if (!parse_vec3(parts[1], &center))
         error_exit("error with parsing\n");
     if (!ft_atod(parts[2], &diameter))
         error_exit("error with parsing\n");
     rgb(parts[3], &color);
+    if (parts[4])
+        reflectiv = atof(parts[4]);
+    printf("reflectiv  :%f\n", reflectiv);
     color = convert_color_255_to_1(color.r, color.g,color.b);
-    object = object_create_for_sphere(center, diameter, color);
+    object = object_create_for_sphere(center, diameter, color, reflectiv);
     return (object);
 }
 

@@ -41,7 +41,7 @@ t_color color_multiply_scalar(t_color c, double scalar);
 uint32_t color_to_rgb(float red, float green, float blue);
 t_light *light_create(t_color color, t_tuple position, double diffuse);
 t_color calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light);
-t_material *material_create_default(t_color *color);
+t_material *material_create_default(t_color *color, double reflectiv);
 
 t_color lighting(const t_material *material, const t_object *object, const t_light *light, const t_tuple *position, const t_tuple *eyev, const t_tuple *normalv, bool in_shadow);
 

@@ -34,7 +34,7 @@ void* render_section(void* arg)
 
 void render(t_world *world) 
 {
-    const int num_threads = 40;
+    const int num_threads = 15;
     pthread_t threads[num_threads];
     RenderThread thread_data[num_threads];
     t_matrix inverse_transform = matrix_inverse(world->camera->transform);

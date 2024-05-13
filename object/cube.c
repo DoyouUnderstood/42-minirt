@@ -28,7 +28,7 @@ t_object* create_cube(t_tuple center, double edge_length, t_color color, double 
     t_object* obj = malloc(sizeof(t_object));
     shape->transformation = matrix_translation(center.x, center.y, center.z);
     shape->transformation = matrix_multiply(shape->transformation, matrix_scaling(edge_length, edge_length, edge_length));
-    shape->material = material_create_default(&color);
+    shape->material = material_create_default(&color, reflectivity);
     shape->material->reflectiv = reflectivity;
 
     shape->local_intersect = cube_intersect;

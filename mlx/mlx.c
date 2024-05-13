@@ -30,6 +30,7 @@ void mlx_initialisation(t_world *world) {
     if (!world->mlx->ptr)
         error_exit("Erreur initialisation mlx\n");
 
+    printf("Resolution : %d\n%d", world->hsize, world->vsize);
     world->mlx->win = mlx_new_window(world->mlx->ptr, world->hsize, world->vsize, "minirt");
     if (!world->mlx->win)
         error_exit("Erreur lors de la création de la fenêtre\n");
@@ -74,8 +75,8 @@ void mlx_put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
     if (!mlx || !mlx->addr)
         error_exit("Mlx or mlx->addr is null\n");
 
-    if (x < 0 || x >= mlx->width || y < 0 || y >= mlx->height)
-        error_exit("Pixel coordinates out of bounds\n");
+    // if (x < 0 || x >= mlx->width || y < 0 || y >= mlx->height)
+    //     error_exit("Pixel coordinates out of bounds\n");
 
     int bytes_per_pixel = mlx->bits_per_pixel / 8;
     

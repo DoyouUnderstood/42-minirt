@@ -17,7 +17,7 @@ t_sphere* create_sphere(t_tuple center, double diameter) {
     return sphere;
 }
 
-t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color) 
+t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color, double relfectiv) 
 {
     t_sphere *sphere = create_sphere(center, diameter);
     if (sphere == NULL) {
@@ -39,7 +39,7 @@ t_object* object_create_for_sphere(t_tuple center, double diameter, t_color colo
     }
 
     obj->shape->transformation = matrix_init_identity();
-    obj->shape->material = material_create_default(&color);
+    obj->shape->material = material_create_default(&color, relfectiv);
     obj->shape->local_intersect = local_intersect_sphere;
     obj->shape->local_normal_at = local_normal_at_sphere;
 
