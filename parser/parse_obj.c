@@ -18,6 +18,7 @@ t_object *parse_cylinder(char **parts, t_object *obj)
     rgb(parts[5], &color);
     color = convert_color_255_to_1(color.r, color.g, color.b);
     obj = object_create_for_cylinder(cyl->center, cyl->radius, cyl->height, cyl->axis, color);
+
     free(cyl);
     return (obj);
 }
@@ -98,6 +99,8 @@ t_obj_type get_object_type(char *identifier)
 
 t_object* parse_cube(char **parts);
 
+t_object* create_cylinder_cap(t_cylinder *cylinder, t_color color);
+
 void parse_object(char **parts, t_world *world)
 {
     t_object *object = NULL;
@@ -107,7 +110,11 @@ void parse_object(char **parts, t_world *world)
     if (type == PLANE)
         object = parse_plane(parts, object);
     if (type == CYLINDER)
+    {
         object = parse_cylinder(parts, object);
+        // t_object *obj = create_cylinder_cap((t_cylinder*)object, object->shape->material->color);
+        // world_add_object(world, obj);
+    }
     if (type == CUBE)
         object =  parse_cube(parts);
     world_add_object(world, object);

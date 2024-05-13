@@ -52,6 +52,24 @@ char *file_to_str(const char *filename)
     return (file_content);
 }
 
+
+void verify_world(t_world *world) {
+    if (!world->camera)
+        fprintf(stderr, "Erreur : Aucune caméra définie dans le fichier.\n");
+    if (!world->amb)
+        fprintf(stderr, "Erreur : Aucune lumière ambiante définie dans le fichier.\n");
+    if (!world->light)
+        fprintf(stderr, "Erreur : Aucune lumière principale définie dans le fichier.\n");
+    if (!world->objects)
+        fprintf(stderr, "Erreur : Aucune forme géométrique définie dans le fichier.\n");
+
+    if (!world->camera || !world->amb || !world->light || !world->objects) {
+        fprintf(stderr, "Échec de chargement du monde : des composants essentiels sont manquants.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+
 // parse the whole .rt
 t_world *parse(char **str, t_world *world) 
 {
@@ -61,10 +79,15 @@ t_world *parse(char **str, t_world *world)
     while (str[i]) 
     {
         ptr = ft_split(str[i], ' ');
+        if (!ft_strncmp(ptr[0], "R", ft_strlen(ptr[0]))) 
+        {
+            world->vsize = atoi(ptr[1]);
+            world->hsize = atoi(ptr[2]);
+        }
         if (!ft_strncmp(ptr[0], "A", ft_strlen(ptr[0])))
             world->amb = parse_amb(ptr);
         if (!ft_strncmp(ptr[0], "C", ft_strlen(ptr[0]))) 
-            world->camera = parse_camera(ptr, 900, 920);
+            world->camera = parse_camera(ptr, world->vsize, world->hsize);
         else if (!strncmp(ptr[0], "L", ft_strlen(ptr[0])))
             world->light = parse_light(ptr);
         else
@@ -72,6 +95,7 @@ t_world *parse(char **str, t_world *world)
         free_split(ptr);
         i++;
     }
+    verify_world(world);
     return (world);
 }
 

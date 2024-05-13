@@ -1,6 +1,10 @@
-faire les triangles. 
-keybind pour les patterns ? 
-Permettre le changement de forme. 
+Ajouter un indice dans le .rt pour les patterns, la transparance (effet miroir), la resolutions.
+Verifier la configurations du chaque elements de la scene.
+Ajouter couleurs pattern manipulation keybind random ? 
+regarder comment les indices des elements apparaisse dans la scene. 
+preparer quelques .rt sympa
+plan sur le toit de la sphere..
+norminette. 
 
 Ambient lightning:
         A 0.2 255,255,255

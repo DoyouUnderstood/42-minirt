@@ -41,7 +41,7 @@ typedef struct s_mlx
 // ============= FONCTION MLX ================
 
 void    mlx_put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
-int     mlx_create_image(t_mlx *mlx);
+int mlx_create_image(t_mlx *mlx, int width, int height);
 t_mlx   *mlx_init_and_create_window(int width, int height, char *title);
 void    mlx_cleanup(t_mlx *mlx);
 int     mlx_event_close_win(t_mlx *mlx);

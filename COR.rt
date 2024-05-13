@@ -1,0 +1,6 @@
+R 1200 1200
+A 0.2 255,255,255        # Lumière ambiante avec une faible intensité
+C 0,3,1 0,-1,0 70         # Caméra au-dessus du plan, pointant vers le bas
+L 0,10,1 1.0 255,255,255  # Lumière ponctuelle au-dessus du plan pour un bon éclairage
+pl 0,0,0 0,1,0 0,255,0    # Plan vert perpendiculaire à l'axe y
+cy 2,1,0 0,1,0 23 11 1,255,1   # Plan vert perpendiculaire à l'axe y

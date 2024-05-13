@@ -5,6 +5,8 @@
 #include "../include/shape.h"
 #include <fcntl.h>
 #include "../include/parser.h"
+#include "../include/parser.h"
+#include "../graphics/graphics.h"
 
 // check if its in range rover 
 bool in_range(double start, double end, double value)
@@ -87,6 +89,8 @@ t_amb_light *parse_amb(char **str)
     t_amb_light *amb = malloc(sizeof(t_amb_light));
     ambient_check(&str[1], &(amb->ambient));
     rgb(str[2], &(amb->color));
+    amb->color = convert_color_255_to_1(amb->color.r, amb->color.g,amb->color.b);
+
 
     return (amb);
 }

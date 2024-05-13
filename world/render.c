@@ -19,7 +19,7 @@ typedef struct
 void* render_section(void* arg) 
 {
     RenderThread* data = (RenderThread*) arg;
-    int remaining = 3;
+    int remaining = 2;
     int x;
     int y;
     for (y = data->start_y; y < data->end_y; y++) {

@@ -16,12 +16,12 @@ t_color color_at(t_world *world, t_ray *ray, int remaining)
     if (!intersections || count == 0) 
     {
         free(intersections);
-        return (world->amb->color);
+        return (color_multiply_scalar(world->amb->color, world->amb->ambient));
     }
     t_intersection *hit_inter = hit(intersections, count);
     if (!hit_inter) {
         free(intersections);
-        return (world->amb->color);
+        return (color_multiply_scalar(world->amb->color, world->amb->ambient));
     }
     t_computations comput;
     prepare_computations(&comput, hit_inter, ray);

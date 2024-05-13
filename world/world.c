@@ -5,7 +5,7 @@
 
 
 
-#define MAX_OBJECTS 10
+#define MAX_OBJECTS 30
 
 // add object into world.
 void world_add_object(t_world* world, t_object* object) 

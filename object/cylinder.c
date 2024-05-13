@@ -20,6 +20,30 @@ t_cylinder* create_cylinder(t_tuple center, double diameter, double height, t_tu
     return cylinder;
 }
 
+// t_object* create_cylinder_cap(t_cylinder *cylinder, t_color color) 
+// {
+//     t_tuple cap_center = vector_add(cylinder->center, vector_scale(cylinder->axis, cylinder->height / 2.0));
+
+//     t_object* cap = malloc(sizeof(t_object));
+//     if (!cap) error_exit("Failed to allocate memory for cap");
+
+//     cap->type = PLANE;
+//     cap->shape = malloc(sizeof(t_shape));
+//     if (!cap->shape) {
+//         free(cap);
+//         error_exit("Failed to allocate memory for t_shape of cap");
+//     }
+
+//     cap->shape->transformation = matrix_translation(cap_center.x, cap_center.y, cap_center.z);
+//     cap->shape->material = material_create_default(&color);
+//     cap->shape->local_normal_at = plane_local_normal_at;
+//     cap->shape->local_intersect = plane_local_intersect;
+
+//     return cap;
+// }
+
+
+
 t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color) 
 {
     t_cylinder *cylinder = create_cylinder(center, diameter, height, axis);
@@ -67,7 +91,7 @@ t_intersection* cylinder_intersect(t_object *obj, t_ray *ray, int *count)
     t_cylinder *cylinder = (t_cylinder *)obj->obj;
     double a = pow(ray->direction.x, 2) + pow(ray->direction.z, 2);
     double b = 2 * ray->origin.x * ray->direction.x + 2 * ray->origin.z * ray->direction.z;
-    double radiusSquared = pow(cylinder->radius /2, 2);
+    double radiusSquared = pow(cylinder->radius, 2);
     double c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - radiusSquared;
     double discriminant = pow(b, 2) - 4 * a * c;
 
@@ -78,6 +102,15 @@ t_intersection* cylinder_intersect(t_object *obj, t_ray *ray, int *count)
 
     double t0 = (-b - sqrt(discriminant)) / (2 * a);
     double t1 = (-b + sqrt(discriminant)) / (2 * a);
+
+    // Après avoir calculé t0 et t1
+    double y0 = ray->origin.y + t0 * ray->direction.y;
+    double y1 = ray->origin.y + t1 * ray->direction.y;
+    double half_height = cylinder->height / 2.0;
+
+    if (y0 < -half_height || y0 > half_height) t0 = -1;
+    if (y1 < -half_height || y1 > half_height) t1 = -1;
+
 
     t_intersection* intersections = malloc(2 * sizeof(t_intersection));
     if (!intersections) {

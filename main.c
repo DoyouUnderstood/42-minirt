@@ -14,8 +14,11 @@ int main(int argc, char *argv[])
     (void)argc;
     (void)argv;
     t_world *world = NULL;
+
+    if (argc != 2)
+        return 0;
     world = read_and_parse(argv);
-    mlx_initialisation(&world->mlx);  
+    mlx_initialisation(world);  
     render(world);
 
     return 0;

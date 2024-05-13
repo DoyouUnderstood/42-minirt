@@ -7,7 +7,6 @@ typedef struct s_mlx t_mlx;
 
 void world_init(t_world **world, t_camera **camera);
 void world_fill(t_world *world);
-void mlx_initialisation(t_mlx **mlx);
-
+void mlx_initialisation(t_world *world);
 
 #endif // INIT_H

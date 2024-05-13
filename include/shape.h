@@ -20,7 +20,7 @@ typedef struct s_matrix t_matrix;
 typedef struct s_mlx t_mlx;
 typedef struct s_color t_color;
 
-#define MAX_OBJECTS 10
+#define MAX_OBJECTS 30
 
 
 
@@ -33,6 +33,8 @@ t_sphere* create_sphere();
 
 typedef struct s_world 
 {
+    int vsize;
+    int hsize;
     t_camera *camera;
     t_mlx *mlx;
     t_light* light;
