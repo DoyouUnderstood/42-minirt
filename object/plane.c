@@ -3,10 +3,10 @@
 #include "../object/test_shape.h"
 #include "../graphics/graphics.h"
 
-t_material *material_create_default_plane(t_color *color);
+t_material *material_create_default_plane(t_color *color, t_pattern *pattern);
 
 // Cree un nouvel object t_object pour un plane. 
-t_object* object_create_for_plane(t_color color, t_tuple center)
+t_object* object_create_for_plane(t_color color, t_tuple center, t_pattern *pattern)
 {
     t_plane *plane = plane_create(center);
     t_object *obj = (t_object *)malloc(sizeof(t_object));
@@ -20,7 +20,7 @@ t_object* object_create_for_plane(t_color color, t_tuple center)
         return NULL;
     }
     obj->shape->transformation = matrix_init_identity();
-    obj->shape->material = material_create_default_plane(&color);
+    obj->shape->material = material_create_default_plane(&color, pattern);
     obj->shape->local_normal_at = plane_local_normal_at;
     obj->shape->local_intersect = plane_local_intersect;
     t_matrix translation = matrix_translation(center.x, center.y, center.z);

@@ -11,7 +11,7 @@ static t_intersection* cube_intersect(t_object *obj, t_ray *ray, int *count);
 
 // Fonction pour créer un cube encapsulé dans un t_object
 
-t_object* create_cube(t_tuple center, double edge_length, t_color color, double reflectivity) {
+t_object* create_cube(t_tuple center, double edge_length, t_color color, double reflectivity, t_pattern *pattern) {
     t_cube* cube = malloc(sizeof(t_cube));
     if (!cube) {
         fprintf(stderr, "Memory allocation failed for cube\n");
@@ -28,7 +28,7 @@ t_object* create_cube(t_tuple center, double edge_length, t_color color, double 
     t_object* obj = malloc(sizeof(t_object));
     shape->transformation = matrix_translation(center.x, center.y, center.z);
     shape->transformation = matrix_multiply(shape->transformation, matrix_scaling(edge_length, edge_length, edge_length));
-    shape->material = material_create_default(&color, reflectivity);
+    shape->material = material_create_default(&color, reflectivity, pattern);
     shape->material->reflectiv = reflectivity;
 
     shape->local_intersect = cube_intersect;

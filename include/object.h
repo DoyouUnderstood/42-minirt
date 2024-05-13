@@ -10,7 +10,7 @@
 typedef struct s_shape t_shape;
 typedef struct s_ray   t_ray;
 typedef struct s_color t_color;
-
+typedef struct s_pattern t_pattern;
 
 typedef struct s_cube 
 {
@@ -69,8 +69,7 @@ typedef struct s_camera
 
 t_object* create_cube();
 
-t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color, double reflectiv);
-
+t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color, double reflectiv, t_pattern *pattern); 
 t_tuple cube_local_normal_at(t_shape *cube, t_tuple point);
 
 #endif

@@ -64,7 +64,7 @@ typedef struct s_computations {
 t_color reflected_color(t_world *world, const t_computations *comps, int remaining);
 
 void draw_render_to_img(t_world *world, t_mlx *mlx);
-t_material *material_create_default_plane();
+t_material *material_create_default_plane(t_color *color, t_pattern *pattern);
 t_intersection* local_intersect_sphere( t_object *obj, t_ray *ray, int* out_count);
 
 t_shape *test_shape(void);
@@ -89,8 +89,8 @@ t_color shade_hit(t_world *world, t_computations *comps, int remaining);
 void prepare_computations(t_computations *comps, const t_intersection *intersection, const t_ray *ray);
 int compare_intersections(const void* a, const void* b);
 // object
-t_object* object_create_for_plane(t_color color, t_tuple center); 
-t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color, double relfectiv);
+t_object* object_create_for_plane(t_color color, t_tuple center, t_pattern *pattern); 
+t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color, double relfectiv, t_pattern *pattern);
 t_tuple cylinder_local_normal_at(t_shape *shape, t_tuple local_point);
 t_intersection* cylinder_intersect(t_object *obj, t_ray *ray, int *count);
 

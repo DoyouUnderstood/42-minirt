@@ -2,7 +2,7 @@
 #include "../include/shape.h"
 #include "graphics.h"
 // fonction for create material struct with default values
-t_material *material_create_default(t_color *color, double reflectiv) 
+t_material *material_create_default(t_color *color, double reflectiv, t_pattern *pattern) 
 {
     t_material *m = malloc(sizeof(t_material));
 
@@ -12,9 +12,8 @@ t_material *material_create_default(t_color *color, double reflectiv)
     m->diffuse = 0;
     m->specular = 0.9;
     m->shininess = 200.0;
-    // printf("RELFECTIV : %f\n", reflectiv);
     m->reflectiv = reflectiv;
-    m->pattern = NULL;
+    m->pattern = pattern;
     m->refractive_index = 1.0;
     m->transparency = 0.0;
 
@@ -22,10 +21,9 @@ t_material *material_create_default(t_color *color, double reflectiv)
 }
 
 
-t_material *material_create_default_plane(t_color *color) 
+t_material *material_create_default_plane(t_color *color, t_pattern *pattern) 
 {
     t_material *m = malloc(sizeof(t_material));
-    t_pattern *pattern = checker_pattern_create(color_create(0, 0, 0), color_create(1, 1, 1));
 
     m->color = *color;
     m->amb.color = (t_color){1, 1, 1};

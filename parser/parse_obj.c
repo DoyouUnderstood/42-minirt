@@ -3,11 +3,38 @@
 
 int parse_vec3(char *str, t_tuple *vec);
 
+
+t_pattern *set_pattern(char *part1, char *part2, char *part3)
+{
+    t_pattern *pattern = NULL;
+    t_color start; 
+    t_color end; 
+    rgb(part2, &start);
+    rgb(part3, &end);
+    start = convert_color_255_to_1(start.r, start.g, start.b);
+    end = convert_color_255_to_1(end.r, end.g, end.b);
+
+    if (!strcmp(part1, "gradient"))
+        pattern = gradient_pattern_create(start, end);
+    else if (!strcmp(part1, "checker"))
+        pattern = checker_pattern_create(start, end);
+    else if (!strcmp(part1, "ring"))
+    {
+        printf("Creating ring pattern\n");
+        pattern = ring_pattern_create(start, end);
+    }
+    else if (!strcmp(part1, "stripe"))
+        pattern = stripe_pattern_create(start, end);
+
+    return (pattern);
+}
+
 t_object *parse_cylinder(char **parts, t_object *obj) 
 {
-    double reflectiv;
+    double reflectiv = 0;
     t_cylinder *cyl = malloc(sizeof(t_cylinder));
     t_color color;
+    t_pattern *pattern = NULL;
     if (!parse_vec3(parts[1], &cyl->center))
         error_exit("Error with parsing center\n");
     if (!parse_vec3(parts[2], &cyl->axis))
@@ -20,13 +47,18 @@ t_object *parse_cylinder(char **parts, t_object *obj)
     if (parts[6])
         reflectiv = atof(parts[6]);
     color = convert_color_255_to_1(color.r, color.g, color.b);
-    obj = object_create_for_cylinder(cyl->center, cyl->radius, cyl->height, cyl->axis, color, reflectiv);
-
+    int total_parts = 0;
+    while (parts[total_parts]) 
+        total_parts++;
+    if (total_parts >= 6 && parts[7] && parts[8] && parts[9]) 
+    {
+        printf("cylinder pattern\n");
+        pattern = set_pattern(parts[7], parts[8], parts[9]);
+    }
+    obj = object_create_for_cylinder(cyl->center, cyl->radius, cyl->height, cyl->axis, color, reflectiv, pattern);
     free(cyl);
     return (obj);
 }
-
-
 
 // pe inverser pos et direction 
 t_camera* parse_camera(char **parts, int hsize, int vsize)
@@ -75,15 +107,22 @@ t_object *parse_plane(char **parts, t_object *obj)
 {
     t_tuple center;;
     t_color color; 
-
+    t_pattern *pattern = NULL;
     if (!parse_vec3(parts[1], &center)) {
         error_exit("error with parsing\n");
     } else {
         rgb(parts[3], &color);
     }
     color = convert_color_255_to_1(color.r, color.g,color.b);
-
-   obj = object_create_for_plane(color, center);
+    int total_parts = 0;
+    while (parts[total_parts]) 
+        total_parts++;
+    if (total_parts >= 6 && parts[5] && parts[6] && parts[7]) 
+    {
+        printf("PLANE pattern\n");
+        pattern = set_pattern(parts[5], parts[6], parts[7]);
+    }
+   obj = object_create_for_plane(color, center, pattern);
    return (obj);
 }
 
@@ -163,6 +202,7 @@ t_object* parse_cube(char **parts) {
 t_object *parse_sphere(char **parts, t_object *object)
 {
     t_tuple center;
+    t_pattern *pattern = NULL;
     double diameter;
     t_color color;
     double reflectiv = 0;
@@ -173,9 +213,17 @@ t_object *parse_sphere(char **parts, t_object *object)
     rgb(parts[3], &color);
     if (parts[4])
         reflectiv = atof(parts[4]);
-    printf("reflectiv  :%f\n", reflectiv);
     color = convert_color_255_to_1(color.r, color.g,color.b);
-    object = object_create_for_sphere(center, diameter, color, reflectiv);
+    int total_parts = 0;
+    while (parts[total_parts]) 
+        total_parts++;
+    if (total_parts >= 6 && parts[5] && parts[6] && parts[7]) 
+    {
+        printf("SPHERE : part1: %s, part2: %s, part3: %s\n", parts[5], parts[6], parts[7]);
+        printf("sphere pattern \n");
+        pattern = set_pattern(parts[5], parts[6], parts[7]);
+    }
+    object = object_create_for_sphere(center, diameter, color, reflectiv, pattern);
     return (object);
 }
 

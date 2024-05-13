@@ -12,7 +12,7 @@ typedef struct s_plane t_plane;
 
 
 
-t_object* object_create_for_plane(t_color color, t_tuple center);
+t_object* object_create_for_plane(t_color color, t_tuple center, t_pattern *pattern);
 t_plane *plane_create(t_tuple center);
 t_intersection* plane_local_intersect(t_object *obj, t_ray *ray, int *count);
 t_tuple plane_local_normal_at(t_shape *shape, t_tuple local_point);
