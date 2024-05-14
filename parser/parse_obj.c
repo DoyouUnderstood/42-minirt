@@ -3,6 +3,7 @@
 
 int parse_vec3(char *str, t_tuple *vec);
 
+t_object* create_cube(t_tuple center, double edge_length, t_color color, double reflectivity, t_pattern *pattern);
 
 t_pattern *set_pattern(char *part1, char *part2, char *part3)
 {
@@ -23,7 +24,7 @@ t_pattern *set_pattern(char *part1, char *part2, char *part3)
         printf("Creating ring pattern\n");
         pattern = ring_pattern_create(start, end);
     }
-    else if (!strcmp(part1, "stripe"))
+    else if (!ft_strncmp(part1, "stripe", 6))
         pattern = stripe_pattern_create(start, end);
 
     return (pattern);
@@ -117,10 +118,11 @@ t_object *parse_plane(char **parts, t_object *obj)
     int total_parts = 0;
     while (parts[total_parts]) 
         total_parts++;
-    if (total_parts >= 6 && parts[5] && parts[6] && parts[7]) 
+    // printf("%s\n%s\n%s\n", parts[4], parts[5], parts[6]);
+    if (total_parts >= 6 && parts[4] && parts[5] && parts[6]) 
     {
         printf("PLANE pattern\n");
-        pattern = set_pattern(parts[5], parts[6], parts[7]);
+        pattern = set_pattern(parts[4], parts[5], parts[6]);
     }
    obj = object_create_for_plane(color, center, pattern);
    return (obj);
@@ -162,7 +164,9 @@ void parse_object(char **parts, t_world *world)
     world_add_object(world, object);
 }
 
-t_object* parse_cube(char **parts) {
+t_object* parse_cube(char **parts) 
+{
+    t_pattern *pattern = NULL;
     if (parts == NULL) {
         fprintf(stderr, "Input parts is null\n");
         return NULL;
@@ -189,7 +193,14 @@ t_object* parse_cube(char **parts) {
         return NULL;
     }
     color = convert_color_255_to_1(color.r, color.g, color.b);
-    t_object* object = create_cube(center, edge_length, color, reflectivity);
+    int total_parts = 0;
+     while (parts[total_parts]) 
+        total_parts++;
+    if (total_parts > 6 && parts[5] && parts[6] && parts[7]) 
+    {
+        pattern = set_pattern(parts[5], parts[6], parts[7]);
+    }
+    t_object* object = create_cube(center, edge_length, color, reflectivity, pattern);
     if (object == NULL) {
         fprintf(stderr, "Failed to create cube\n");
         return NULL;

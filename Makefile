@@ -3,15 +3,14 @@ NAME = miniRT
 LIBFT_DIR = lib/libft
 FT_PRINTF_DIR = lib/ft_printf
 GNL_DIR = lib/GNL
-MLX_DIR = lib/mlx
+MLX_DIR = lib/mlx_linux
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror 
 DEBUG_FLAGS = -g -fsanitize=address
 # / pour compiler sous Mac, rajouter ceci a mlx_flags ==> -framework OpenGL -framework AppKit
-MLX_FLAGS = -L$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx
+MLX_FLAGS = -L$(MLX_DIR) -lXext -lX11 -lm -lbsd -lmlx
 CRITERION_FLAGS = -lcriterion
-INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm
-
+INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lXext -lX11 -lm -lbsd -lmlx
 TEST_SRCS =  unit_test/cube.c
 
 SRCS = main.c \
@@ -39,7 +38,7 @@ SRCS = main.c \
 	  object/shape.c \
 	  utils/init.c \
 	  object/plane.c \
-	  graphics/pattern/pattern.c \
+	  graphics/pattern/stripe.c \
 	  graphics/pattern/gradient.c \
 	  graphics/pattern/ring.c \
 	  graphics/pattern/checker.c \
