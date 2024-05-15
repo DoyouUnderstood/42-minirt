@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:37:33 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:19:50 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minilibx.h"
 
 // fonction evenement pour quitter avec echap
-int	mlx_event_handle_keypress(int keysym, t_mlx *mlx)
+int	mlx_event_handle_keypress(int key, t_mlx *mlx)
 {
-	if (keysym == KEY_ESC)
+	if (key == 53)
 	{
 		mlx_cleanup(mlx);
 		exit(0);

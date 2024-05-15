@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:26 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 17:44:30 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:33:27 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 bool	in_range(double start, double end, double value)
 {
 	return (value >= start && value <= end);
+}
+
+double	validate_reflectivity(double value)
+{
+	if (value < 0.0 || value > 1.0)
+		error_exit("Invalid reflectivity value");
+	return (value);
 }
 
 int	ft_atoi_rgb(char **str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:57 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:38:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:40:37 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../include/minilibx.h"
 #include <stdint.h>
 #include <stdlib.h>
+
+int	mlx_event_handle_keypress(t_mlx *mlx);
 
 // fonction pour clean la mlx.
 void	mlx_cleanup(t_mlx *mlx)
@@ -31,6 +33,7 @@ void	draw_render_to_img(t_world *world, t_mlx *mlx)
 {
 	mlx_hook(mlx->win, 17, 0L, mlx_event_close_win, mlx);
 	mlx_loop_hook(mlx->ptr, refresh_display, world);
+	mlx_key_hook(mlx->win, mlx_event_handle_keypress, mlx);
 	mlx_loop(mlx->ptr);
 }
 

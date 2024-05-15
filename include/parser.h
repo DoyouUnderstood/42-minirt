@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:08:06 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:40:12 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ bool		valid_bright(double bright);
 t_world		*read_and_parse(char **argv);
 void		free_split(char **parts);
 void		rgb(char *str, t_color *color);
+double		validate_reflectivity(double value);
 
 #endif

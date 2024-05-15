@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:46:43 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:30:47 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 		return (NULL);
 	rgb(parts[5], &specs.color);
 	if (parts[6])
-		specs.reflectivity = atof(parts[6]);
+		specs.reflectivity = validate_reflectivity(atof(parts[6]));
 	specs.color = convert_color_255_to_1(specs.color.r, specs.color.g,
 			specs.color.b);
 	specs.pattern = NULL;

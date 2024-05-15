@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 17:43:57 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:37:00 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ t_object	*parse_cube(char **parts)
 	edge_length = atof(parts[2]);
 	rgb(parts[3], &specs.color);
 	if (parts[4])
-		specs.reflectivity = atof(parts[4]);
-	if (specs.reflectivity < 0 || specs.reflectivity > 1)
-		error_exit("error cube kurva \n");
+		specs.reflectivity = validate_reflectivity(atof(parts[4]));
 	specs.color = convert_color_255_to_1(specs.color.r, specs.color.g,
 			specs.color.b);
 	specs.pattern = NULL;
@@ -94,7 +92,7 @@ t_object	*parse_sphere(char **parts, t_object *object)
 		error_exit("Error with parsing diameter\n");
 	rgb(parts[3], &specs.color);
 	if (parts[4])
-		specs.reflectivity = atof(parts[4]);
+		specs.reflectivity = validate_reflectivity(atof(parts[4]));
 	specs.color = convert_color_255_to_1(specs.color.r, specs.color.g,
 			specs.color.b);
 	total_parts = 0;
