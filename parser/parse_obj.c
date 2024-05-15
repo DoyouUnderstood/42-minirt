@@ -2,9 +2,7 @@
 #include "../include/parser.h"
 
 int			parse_vec3(char *str, t_tuple *vec);
-
-t_object	*create_cube(t_tuple center, double edge_length, t_color color,
-				double reflectivity, t_pattern *pattern);
+t_object *create_cube(t_tuple center, double edge_length, t_material_specs specs);
 
 t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 {
@@ -31,42 +29,48 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 	return (pattern);
 }
 
-t_object	*parse_cylinder(char **parts, t_object *obj)
-{
-	double		reflectiv;
-	t_cylinder	*cyl;
-	t_color		color;
-	t_pattern	*pattern;
-	int			total_parts;
+t_object *parse_cylinder(char **parts, t_object *obj) {
+    t_material_specs specs;
+    t_cylinder *cyl = malloc(sizeof(t_cylinder));
+    if (!cyl) {
+        fprintf(stderr, "Failed to allocate memory for cylinder\n");
+        return NULL;
+    }
 
-	reflectiv = 0;
-	cyl = malloc(sizeof(t_cylinder));
-	pattern = NULL;
-	if (!parse_vec3(parts[1], &cyl->center))
-		error_exit("Error with parsing center\n");
-	if (!parse_vec3(parts[2], &cyl->axis))
-		error_exit("Error with parsing orientation\n");
-	if (!ft_atod(parts[3], &cyl->radius))
-		error_exit("Error with parsing diameter\n");
-	if (!ft_atod(parts[4], &cyl->height))
-		error_exit("Error with parsing height\n");
-	rgb(parts[5], &color);
-	if (parts[6])
-		reflectiv = atof(parts[6]);
-	color = convert_color_255_to_1(color.r, color.g, color.b);
-	total_parts = 0;
-	while (parts[total_parts])
-		total_parts++;
-	if (total_parts >= 6 && parts[7] && parts[8] && parts[9])
-	{
-		printf("cylinder pattern\n");
-		pattern = set_pattern(parts[7], parts[8], parts[9]);
-	}
-	obj = object_create_for_cylinder(cyl->center, cyl->radius, cyl->height,
-			cyl->axis, color, reflectiv, pattern);
-	free(cyl);
-	return (obj);
+    if (!parse_vec3(parts[1], &cyl->center)) {
+        free(cyl);
+        fprintf(stderr, "Error with parsing center\n");
+        return NULL;
+    }
+    if (!parse_vec3(parts[2], &cyl->axis)) {
+        free(cyl);
+        fprintf(stderr, "Error with parsing orientation\n");
+        return NULL;
+    }
+    if (!ft_atod(parts[3], &specs.diameter)) {
+        free(cyl);
+        fprintf(stderr, "Error with parsing diameter\n");
+        return NULL;
+    }
+    if (!ft_atod(parts[4], &specs.height)) {
+        free(cyl);
+        fprintf(stderr, "Error with parsing height\n");
+        return NULL;
+    }
+    rgb(parts[5], &specs.color);
+    specs.reflectivity = atof(parts[6]);
+    specs.color = convert_color_255_to_1(specs.color.r, specs.color.g, specs.color.b);
+
+    specs.pattern = NULL;
+    if (parts[7] && parts[8] && parts[9]) {
+        specs.pattern = set_pattern(parts[7], parts[8], parts[9]);
+    }
+
+    obj = object_create_for_cylinder(cyl->center, cyl->axis, specs);
+    free(cyl);
+    return obj;
 }
+
 
 // pe inverser pos et direction
 t_camera	*parse_camera(char **parts, int hsize, int vsize)
@@ -178,90 +182,81 @@ void	parse_object(char **parts, t_world *world)
 	world_add_object(world, object);
 }
 
-t_object	*parse_cube(char **parts)
-{
-	t_pattern	*pattern;
-	t_tuple		center;
-	double		edge_length;
-	t_color		color;
-	double		reflectivity;
-	int			total_parts;
-	t_object	*object;
+t_object *parse_cube(char **parts) {
+    t_tuple center;
+    double edge_length;
+    t_material_specs specs;
+    int total_parts;
+    t_object *object;
 
-	pattern = NULL;
-	if (parts == NULL)
-	{
-		fprintf(stderr, "Input parts is null\n");
-		return (NULL);
-	}
-	if (!parse_vec3(parts[1], &center))
-	{
-		fprintf(stderr, "Failed to parse center coordinates\n");
-		return (NULL);
-	}
-	edge_length = atof(parts[2]);
-	if (edge_length <= 0)
-	{
-		fprintf(stderr, "Invalid edge length\n");
-		return (NULL);
-	}
-	rgb(parts[3], &color);
-	reflectivity = atof(parts[4]);
-	if (reflectivity < 0 || reflectivity > 1)
-	{
-		fprintf(stderr, "Invalid reflectivity value\n");
-		return (NULL);
-	}
-	color = convert_color_255_to_1(color.r, color.g, color.b);
-	total_parts = 0;
-	while (parts[total_parts])
-		total_parts++;
-	if (total_parts > 6 && parts[5] && parts[6] && parts[7])
-	{
-		pattern = set_pattern(parts[5], parts[6], parts[7]);
-	}
-	object = create_cube(center, edge_length, color, reflectivity, pattern);
-	if (object == NULL)
-	{
-		fprintf(stderr, "Failed to create cube\n");
-		return (NULL);
-	}
-	return (object);
+    if (parts == NULL) {
+        fprintf(stderr, "Input parts is null\n");
+        return NULL;
+    }
+    if (!parse_vec3(parts[1], &center)) {
+        fprintf(stderr, "Failed to parse center coordinates\n");
+        return NULL;
+    }
+    edge_length = atof(parts[2]);
+    if (edge_length <= 0) {
+        fprintf(stderr, "Invalid edge length\n");
+        return NULL;
+    }
+    rgb(parts[3], &specs.color);
+    specs.reflectivity = atof(parts[4]);
+    if (specs.reflectivity < 0 || specs.reflectivity > 1) {
+        fprintf(stderr, "Invalid reflectivity value\n");
+        return NULL;
+    }
+    specs.color = convert_color_255_to_1(specs.color.r, specs.color.g, specs.color.b);
+    specs.pattern = NULL;  // Initialize to NULL in case no pattern is specified
+    total_parts = 0;
+    while (parts[total_parts]) {
+        total_parts++;
+    }
+    if (total_parts > 6 && parts[5] && parts[6] && parts[7]) {
+        specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
+    }
+    object = create_cube(center, edge_length, specs);
+    if (object == NULL) {
+        fprintf(stderr, "Failed to create cube\n");
+        return NULL;
+    }
+    return object;
 }
 
-t_object	*parse_sphere(char **parts, t_object *object)
-{
-	t_tuple		center;
-	t_pattern	*pattern;
-	double		diameter;
-	t_color		color;
-	double		reflectiv;
-	int			total_parts;
 
-	pattern = NULL;
-	reflectiv = 0;
-	if (!parse_vec3(parts[1], &center))
-		error_exit("error with parsing\n");
-	if (!ft_atod(parts[2], &diameter))
-		error_exit("error with parsing\n");
-	rgb(parts[3], &color);
-	if (parts[4])
-		reflectiv = atof(parts[4]);
-	color = convert_color_255_to_1(color.r, color.g, color.b);
-	total_parts = 0;
-	while (parts[total_parts])
-		total_parts++;
-	if (total_parts >= 6 && parts[5] && parts[6] && parts[7])
-	{
-		printf("SPHERE : part1: %s, part2: %s, part3: %s\n", parts[5], parts[6],
-			parts[7]);
-		printf("sphere pattern \n");
-		pattern = set_pattern(parts[5], parts[6], parts[7]);
-	}
-	object = object_create_for_sphere(center, diameter, color, reflectiv,
-			pattern);
-	return (object);
+t_object *parse_sphere(char **parts, t_object *object) {
+    t_tuple center;
+    t_material_specs specs;
+    double diameter;
+    int total_parts;
+
+    specs.pattern = NULL;
+    specs.reflectivity = 0;
+
+    if (!parse_vec3(parts[1], &center))
+        error_exit("Error with parsing center\n");
+    if (!ft_atod(parts[2], &diameter))
+        error_exit("Error with parsing diameter\n");
+    rgb(parts[3], &specs.color);
+    if (parts[4])
+        specs.reflectivity = atof(parts[4]);
+    specs.color = convert_color_255_to_1(specs.color.r, specs.color.g, specs.color.b);
+
+    total_parts = 0;
+    while (parts[total_parts])
+        total_parts++;
+    if (total_parts >= 6 && parts[5] && parts[6] && parts[7]) {
+        printf("SPHERE : part1: %s, part2: %s, part3: %s\n", parts[5], parts[6], parts[7]);
+        printf("Sphere pattern \n");
+        specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
+    }
+
+    object = object_create_for_sphere(center, diameter, specs);
+    return object;
 }
+
 
 t_light	*parse_light(char **parts)
 {

@@ -33,14 +33,18 @@ t_color	color_at(t_world *world, t_ray *ray, int remaining)
 
 t_color	shade_hit(t_world *world, t_computations *comps, int remaining)
 {
-	bool	in_shadow;
-	t_color	surface;
-	t_color	reflected;
+	t_lighting	lighting_params;
+	t_color		surface;
+	t_color		reflected;
 
-	in_shadow = is_shadowed(world, comps->over_point);
-	surface = lighting(comps->object->shape->material, comps->object,
-			world->light, &comps->over_point, &comps->eyev, &comps->normalv,
-			in_shadow);
+	lighting_params.material = comps->object->shape->material;
+	lighting_params.object = comps->object;
+	lighting_params.light = world->light;
+	lighting_params.position = &comps->over_point;
+	lighting_params.eyev = &comps->eyev;
+	lighting_params.normalv = &comps->normalv;
+	lighting_params.in_shadow = is_shadowed(world, comps->over_point);
+	surface = lighting(&lighting_params);
 	reflected = reflected_color(world, comps, remaining);
 	return (color_add(surface, reflected));
 }

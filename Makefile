@@ -27,7 +27,6 @@ SRCS = main.c \
 	  graphics/material.c \
 	  graphics/lightning.c \
 	  maths/tuple.c \
-	  memory/memory.c \
 	  world/world.c \
 	  world/camera.c \
 	  world/view.c \

@@ -1,17 +1,15 @@
 #ifndef MAIN_H
-#define MAIN_H
+# define MAIN_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <criterion/criterion.h>
-#include <criterion/logging.h>
-#include <criterion/criterion.h>
-#include <criterion/options.h>
-#include "shape.h"
-#include "memory.h"
+# include "init.h"
+# include "memory.h"
+# include "shape.h"
+# include <criterion/criterion.h>
+# include <criterion/logging.h>
+# include <criterion/options.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-#include "init.h"
+void	error_exit(char *error_msg);
 
-void error_exit(char *error_msg);
-
-#endif 
+#endif
