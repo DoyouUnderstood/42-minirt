@@ -13,6 +13,7 @@
         "init.h": "c",
         "libft.h": "c",
         "stdint.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "iterator": "c"
     }
 }

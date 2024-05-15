@@ -15,6 +15,40 @@ typedef struct s_renderthread
 	int			end_y;
 }				t_renderthread;
 
+typedef struct {
+    pthread_t *threads;
+    t_renderthread *thread_data;
+    t_matrix inverse_transform;
+    int segment_height;
+    int num_threads;
+} RenderSetup;
+
+
+void setup_thread_data(t_renderthread *thread_data, t_world *world, t_matrix inverse_transform, int i, int num_threads, int segment_height) {
+    thread_data->mlx = world->mlx;
+    thread_data->world = world;
+    thread_data->camera = world->camera;
+    thread_data->inverse_transform = inverse_transform;
+    thread_data->start_y = i * segment_height;
+    thread_data->end_y = (i == num_threads - 1) ? world->camera->vsize : (i + 1) * segment_height;
+}
+
+void initialize_and_launch_threads(RenderSetup *setup, t_world *world) 
+{
+    setup->inverse_transform = matrix_inverse(world->camera->transform);
+    setup->segment_height = world->camera->vsize / setup->num_threads;
+
+    for (int i = 0; i < setup->num_threads; i++) {
+        setup_thread_data(&setup->thread_data[i], world, setup->inverse_transform, i, setup->num_threads, setup->segment_height);
+        pthread_create(&setup->threads[i], NULL, render_section, &setup->thread_data[i]);
+    }
+
+    for (int i = 0; i < setup->num_threads; i++) {
+        pthread_join(setup->threads[i], NULL);
+    }
+}
+
+
 // render fonction avec remaining pour nombre de reflect a calculer
 void	*render_section(void *arg)
 {
@@ -40,29 +74,22 @@ void	*render_section(void *arg)
 	return (NULL);
 }
 
-void	render(t_world *world)
-{
-	const int		num_threads = 15;
-	pthread_t		threads[num_threads];
-	t_renderthread	thread_data[num_threads];
-	t_matrix		inverse_transform;
-	int				segment_height;
-	int				i;
+void render(t_world *world) {
+    RenderSetup setup;
+    setup.num_threads = 15; // Number of threads can be fixed or determined based on hardware capabilities
+    setup.threads = malloc(setup.num_threads * sizeof(pthread_t));
+    setup.thread_data = malloc(setup.num_threads * sizeof(t_renderthread));
 
-	inverse_transform = matrix_inverse(world->camera->transform);
-	segment_height = world->camera->vsize / num_threads;
-	for (i = 0; i < num_threads; i++)
-	{
-		thread_data[i].mlx = world->mlx;
-		thread_data[i].world = world;
-		thread_data[i].camera = world->camera;
-		thread_data[i].inverse_transform = inverse_transform;
-		thread_data[i].start_y = i * segment_height;
-		thread_data[i].end_y = (i == num_threads
-				- 1) ? world->camera->vsize : (i + 1) * segment_height;
-		pthread_create(&threads[i], NULL, render_section, &thread_data[i]);
-	}
-	for (i = 0; i < num_threads; i++)
-		pthread_join(threads[i], NULL);
-	draw_render_to_img(world, world->mlx);
+    if (!setup.threads || !setup.thread_data) {
+        free(setup.threads);   // Ensure proper resource management
+        free(setup.thread_data);
+        return; // Error handling
+    }
+
+    initialize_and_launch_threads(&setup, world);
+
+    free(setup.threads);
+    free(setup.thread_data);
+    draw_render_to_img(world, world->mlx);
 }
+

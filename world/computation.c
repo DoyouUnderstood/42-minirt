@@ -42,68 +42,106 @@ int	compare_intersections(const void *a, const void *b)
 		return (0);
 }
 
+typedef struct s_intersectionAddParams
+{
+	t_intersection	**intersections;
+	t_intersection	*local_intersections;
+	int				local_count;
+	t_object		*object;
+	int				*count;
+}					t_intersectionAddParams;
 
-typedef struct {
-    t_intersection **intersections;
-    t_intersection *local_intersections;
-    int local_count;
-    t_object *object;
-    int *count;
-} IntersectionAddParams;
+void	add_local_inter(t_intersectionAddParams *params)
+{
+	int	j;
 
-
-void add_local_inter(IntersectionAddParams *params) {
-    for (int j = 0; j < params->local_count; j++) {
-        (*(params->intersections))[*(params->count) + j] = params->local_intersections[j];
-        (*(params->intersections))[*(params->count) + j].obj = params->object;
-    }
-    *(params->count) += params->local_count;
+	j = 0;
+	while (j < params->local_count)
+	{
+		(*(params->intersections))[*(params->count)
+			+ j] = params->local_intersections[j];
+		(*(params->intersections))[*(params->count) + j].obj = params->object;
+		j++;
+	}
+	*(params->count) += params->local_count;
 }
 
+bool	realloc_intersections(t_intersection **intersections,
+		int required_capacity, int *capacity)
+{
+	t_intersection	*temp;
 
-/**
- * Computes all intersections of a given ray with every object in the world.
- * Allocates and returns a list of sort intersections,
- */
-
-bool realloc_intersections(t_intersection **intersections, int required_capacity, int *capacity) {
-    while (required_capacity > *capacity) {
-        *capacity *= 2;
-    }
-    t_intersection *temp = realloc(*intersections, (*capacity) * sizeof(t_intersection));
-    if (!temp) {
-        return false;
-    }
-    *intersections = temp;
-    return true;
+	while (required_capacity > *capacity)
+	{
+		*capacity *= 2;
+	}
+	temp = realloc(*intersections, (*capacity) * sizeof(t_intersection));
+	if (!temp)
+	{
+		return (false);
+	}
+	*intersections = temp;
+	return (true);
 }
 
-void process_object(t_world *world, t_ray *ray, t_intersection **intersections, int *capacity, int *count, int i) {
-    int local_count = 0;
-    t_intersection *local_inter = intersect_shape(world->objects[i], ray, &local_count);
-    if (local_count > 0) {
-        if (*count + local_count > *capacity) {
-            if (!realloc_intersections(intersections, *count + local_count, capacity)) {
-                free(local_inter);
-                return;
-            }
-        }
-        IntersectionAddParams params = {intersections, local_inter, local_count, world->objects[i], count};
-        add_local_inter(&params);
-    }
-    free(local_inter);
+typedef struct s_processObjectParams
+{
+	t_world			*world;
+	t_ray			*ray;
+	t_intersection	**intersections;
+	int				*capacity;
+	int				*count;
+	int				index;
+}					t_processObjectParams;
+
+void	process_object(t_processObjectParams *params)
+{
+	int						local_count;
+	t_intersection			*local_inter;
+	t_intersectionAddParams	add_params;
+
+	local_count = 0;
+	local_inter = intersect_shape(params->world->objects[params->index],
+			params->ray, &local_count);
+	if (local_count > 0)
+	{
+		if (*(params->count) + local_count > *(params->capacity))
+		{
+			if (!realloc_intersections(params->intersections, *(params->count)
+					+ local_count, params->capacity))
+			{
+				free(local_inter);
+				return ;
+			}
+		}
+		add_params = (t_intersectionAddParams){params->intersections,
+			local_inter, local_count, params->world->objects[params->index],
+			params->count};
+		add_local_inter(&add_params);
+	}
+	free(local_inter);
 }
 
+t_intersection	*intersect_world(t_world *world, t_ray *ray, int *count)
+{
+	int						capacity;
+	t_intersection			*intersections;
+	t_processObjectParams	params;
+	int						i;
 
-t_intersection *intersect_world(t_world *world, t_ray *ray, int *count) {
-    int capacity = 10;
-    t_intersection *intersections = malloc(capacity * sizeof(t_intersection));
-    if (!intersections) return NULL;
-    
-    *count = 0;
-    for (int i = 0; i < world->object_count; i++) {
-        process_object(world, ray, &intersections, &capacity, count, i);
-    }
-    qsort(intersections, *count, sizeof(t_intersection), compare_intersections);
-    return intersections;
+	i = 0;
+	capacity = 10;
+	intersections = malloc(capacity * sizeof(t_intersection));
+	if (!intersections)
+		return (NULL);
+	*count = 0;
+	while (i < world->object_count)
+	{
+		params = (t_processObjectParams){world, ray, &intersections, &capacity,
+			count, i};
+		process_object(&params);
+		i++;
+	}
+	qsort(intersections, *count, sizeof(t_intersection), compare_intersections);
+	return (intersections);
 }

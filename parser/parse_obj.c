@@ -193,7 +193,8 @@ t_object	*parse_cube(char **parts)
 		return (NULL);
 	}
 	rgb(parts[3], &specs.color);
-	specs.reflectivity = atof(parts[4]);
+	if (parts[4])
+		specs.reflectivity = atof(parts[4]);
 	if (specs.reflectivity < 0 || specs.reflectivity > 1)
 	{
 		fprintf(stderr, "Invalid reflectivity value\n");
