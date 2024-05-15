@@ -15,8 +15,6 @@
 #include <math.h>
 #include <stdio.h>
 
-
-
 t_color	calculate_lighting_components(t_lighting *params,
 		double light_dot_normal, t_color ef_c)
 {

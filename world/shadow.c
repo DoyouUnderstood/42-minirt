@@ -12,13 +12,24 @@ typedef struct s_shadow
 	t_intersection	*intersections;
 }					t_shadow;
 
+bool	check_for_shadows(t_shadow *shadow)
+{
+	for (int i = 0; i < shadow->count; i++)
+	{
+		if (shadow->intersections[i].t > 0
+			&& shadow->intersections[i].t < shadow->distance)
+		{
+			return (true);
+		}
+	}
+	return (false);
+}
+
 bool	is_shadowed(t_world *world, const t_tuple point)
 {
 	t_shadow	shadow;
 	bool		in_shadow;
-	int			i;
 
-	i = 0;
 	if (world->light->intensity.r == 0 && world->light->intensity.g == 0
 		&& world->light->intensity.b == 0)
 		return (false);
@@ -29,17 +40,7 @@ bool	is_shadowed(t_world *world, const t_tuple point)
 	shadow.count = 0;
 	shadow.intersections = intersect_world(world, &shadow.shadow_ray,
 			&shadow.count);
-	in_shadow = false;
-	while (i < shadow.count)
-	{
-		if (shadow.intersections[i].t > 0
-			&& shadow.intersections[i].t < shadow.distance)
-		{
-			in_shadow = true;
-			break ;
-		}
-		i++;
-	}
+	in_shadow = check_for_shadows(&shadow);
 	free(shadow.intersections);
 	return (in_shadow);
 }

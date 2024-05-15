@@ -42,7 +42,6 @@ SRCS = main.c \
 	  world/computation.c \
 	  world/shadow.c \
 	  object/shape.c \
-	  utils/init.c \
 	  object/plane1.c \
 	  object/plane2.c \
 	  graphics/pattern/stripe.c \

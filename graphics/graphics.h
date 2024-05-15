@@ -26,12 +26,12 @@ typedef struct s_world			t_world;
 
 typedef struct s_specular_params
 {
-	t_tuple				lightv;
-	t_tuple				normalv;
-	t_tuple				eyev;
-	const t_material	*material;
-	const t_light		*light;
-}						t_specular_params;
+	t_tuple						lightv;
+	t_tuple						normalv;
+	t_tuple						eyev;
+	const t_material			*material;
+	const t_light				*light;
+}								t_specular_params;
 
 // ===== PATTERN =====
 
@@ -88,13 +88,14 @@ typedef struct s_lighting
 	bool						in_shadow;
 }								t_lighting;
 
-t_color				calculate_ef_c(const t_lighting *params);
-t_color				calculate_ambient(t_color ef_c, double ambient_intensity);
-t_color				calculate_diffuse(t_color ef_c, double light_dot_normal,
-						double intensity);
-t_color				calculate_specular(t_specular_params *params);
-t_specular_params	prepare_specular_params(t_lighting *params,
-						t_tuple lightv);
-t_color	lighting(t_lighting *params);
+t_color							calculate_ef_c(const t_lighting *params);
+t_color							calculate_ambient(t_color ef_c,
+									double ambient_intensity);
+t_color							calculate_diffuse(t_color ef_c,
+									double light_dot_normal, double intensity);
+t_color							calculate_specular(t_specular_params *params);
+t_specular_params				prepare_specular_params(t_lighting *params,
+									t_tuple lightv);
+t_color							lighting(t_lighting *params);
 
 #endif
