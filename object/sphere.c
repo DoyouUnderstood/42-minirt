@@ -39,68 +39,85 @@ t_object	*object_create_for_sphere(t_tuple center, double diameter,
 	return (obj);
 }
 
-typedef struct {
-    double a;
-    double b;
-    double c;
-} ABCParams;
+typedef struct s_abcparams
+{
+	double		a;
+	double		b;
+	double		c;
+}				t_abcparams;
 
-typedef struct {
-    double t1;
-    double t2;
-    double discriminant;
-    t_object *obj;
-} IntersectionCreationParams;
+typedef struct s_intersectionCreationParams
+{
+	double		t1;
+	double		t2;
+	double		discriminant;
+	t_object	*obj;
+}				t_interparams;
 
-t_intersection *create_intersections(const IntersectionCreationParams *params, int *out_count) {
-    *out_count = (params->discriminant == 0) ? 1 : 2;
-    t_intersection *intersections = malloc(sizeof(t_intersection) * (*out_count));
-    if (!intersections) {
-        *out_count = 0;
-        return NULL;
-    }
-    intersections[0] = intersection_create(params->t1, params->obj);
-    if (*out_count == 2) {
-        intersections[1] = intersection_create(params->t2, params->obj);
-    }
-    return intersections;
+t_intersection	*create_intersections(const t_interparams *params,
+		int *out_count)
+{
+	t_intersection	*intersections;
+
+	if (params->discriminant == 0)
+	{
+		*out_count = 1;
+	}
+	else
+	{
+		*out_count = 2;
+	}
+	intersections = malloc(sizeof(t_intersection) * (*out_count));
+	if (!intersections)
+	{
+		*out_count = 0;
+		return (NULL);
+	}
+	intersections[0] = intersection_create(params->t1, params->obj);
+	if (*out_count == 2)
+		intersections[1] = intersection_create(params->t2, params->obj);
+	return (intersections);
 }
 
+void	calculate_abc(const t_ray *ray, const t_sphere *sphere,
+		t_abcparams *params)
+{
+	t_tuple	sphere_to_ray;
 
-void calculate_abc(const t_ray *ray, const t_sphere *sphere, ABCParams *params) {
-    t_tuple sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
-    params->a = vector_dot(ray->direction, ray->direction);
-    params->b = 2 * vector_dot(ray->direction, sphere_to_ray);
-    params->c = vector_dot(sphere_to_ray, sphere_to_ray) - pow(sphere->diameter, 2);
+	sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
+	params->a = vector_dot(ray->direction, ray->direction);
+	params->b = 2 * vector_dot(ray->direction, sphere_to_ray);
+	params->c = vector_dot(sphere_to_ray, sphere_to_ray) - pow(sphere->diameter,
+			2);
 }
 
-
-double calculate_discriminant(const ABCParams *params) {
-    return (params->b * params->b - 4 * params->a * params->c);
+double	calculate_discriminant(const t_abcparams *params)
+{
+	return (params->b * params->b - 4 * params->a * params->c);
 }
 
+t_intersection	*local_intersect_sphere(t_object *obj, t_ray *ray,
+		int *out_count)
+{
+	t_abcparams						abc_params;
+	t_interparams	                creation_params;
+	double							discriminant;
+	double							sqrt_discriminant;
 
-t_intersection *local_intersect_sphere(t_object *obj, t_ray *ray, int *out_count) {
-    ABCParams abc_params;
-    calculate_abc(ray, (t_sphere *)obj->obj, &abc_params);
-    double discriminant = calculate_discriminant(&abc_params);
-
-    if (discriminant < -EPSILON) {
-        *out_count = 0;
-        return NULL;
-    }
-
-    double sqrt_discriminant = sqrt(discriminant);
-    IntersectionCreationParams creation_params = {
-        .t1 = (-abc_params.b - sqrt_discriminant) / (2 * abc_params.a),
-        .t2 = (-abc_params.b + sqrt_discriminant) / (2 * abc_params.a),
-        .discriminant = discriminant,
-        .obj = obj
-    };
-
-    return create_intersections(&creation_params, out_count);
+	calculate_abc(ray, (t_sphere *)obj->obj, &abc_params);
+	discriminant = calculate_discriminant(&abc_params);
+	if (discriminant < -EPSILON)
+	{
+		*out_count = 0;
+		return (NULL);
+	}
+	sqrt_discriminant = sqrt(discriminant);
+	creation_params = (t_interparams){.t1 = (-abc_params.b
+			- sqrt_discriminant) / (2 * abc_params.a), .t2 = (-abc_params.b
+			+ sqrt_discriminant) / (2 * abc_params.a),
+		.discriminant = discriminant, .obj = obj};
+	return (create_intersections(&creation_params, out_count));
 }
-
 
 t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple local_point)
 {

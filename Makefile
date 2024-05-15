@@ -23,7 +23,6 @@ SRCS = main.c \
 	  maths/ray.c \
       mlx/event.c \
       mlx/mlx.c \
-      ray/ray.c \
 	  graphics/material.c \
 	  graphics/lightning.c \
 	  maths/tuple.c \

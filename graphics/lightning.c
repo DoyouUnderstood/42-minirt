@@ -5,27 +5,34 @@
 
 t_color					lighting(t_lighting *params);
 
-t_color calculate_ef_c(const t_lighting *params) 
+t_color	calculate_ef_c(const t_lighting *params)
 {
-    t_color ef_c;
+	t_color		ef_c;
+	t_matrix	t_inv;
+	t_tuple		point_in_object_space;
 
-    // Check if params and its nested structures are not null
-    if (params && params->material && params->object && params->object->shape) {
-        if (params->material->pattern && params->material->pattern->pattern_at) {
-            t_matrix t_inv = matrix_inverse(params->object->shape->transformation);
-            t_tuple point_in_object_space = matrix_mult(t_inv, *params->position);
-            ef_c = params->material->pattern->pattern_at(params->material->pattern, point_in_object_space);
-        } else {
-            ef_c = color_multiply(params->material->color, params->light->intensity);
-        }
-    } else {
-       ef_c = color_multiply(params->material->color,
+	if (params && params->material && params->object && params->object->shape)
+	{
+		if (params->material->pattern && params->material->pattern->pattern_at)
+		{
+			t_inv = matrix_inverse(params->object->shape->transformation);
+			point_in_object_space = matrix_mult(t_inv, *params->position);
+			ef_c = params->material->pattern->pattern_at(params->material->pattern,
+					point_in_object_space);
+		}
+		else
+		{
+			ef_c = color_multiply(params->material->color,
+					params->light->intensity);
+		}
+	}
+	else
+	{
+		ef_c = color_multiply(params->material->color,
 				params->light->intensity);
 	}
-
-    return ef_c;
+	return (ef_c);
 }
-
 
 t_color	calculate_ambient(t_color ef_c, double ambient_intensity)
 {
