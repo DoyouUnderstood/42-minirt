@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 18:26:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:44:43 by ltd              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "types.h"
 # include <float.h>
 # include <limits.h>
+# include <pthread.h>
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -60,6 +61,36 @@ typedef struct s_world
 	int						object_count;
 	t_amb_light				*amb;
 }							t_world;
+
+typedef struct s_renderthread
+{
+	t_mlx					*mlx;
+	t_world					*world;
+	t_camera				*camera;
+	t_matrix				inverse_transform;
+	int						start_y;
+	int						end_y;
+}							t_renderthread;
+
+typedef struct s_RenderSetup
+{
+	pthread_t				*threads;
+	t_renderthread			*thread_data;
+	t_matrix				inverse_transform;
+	int						segment_height;
+	int						num_threads;
+	int						current_index;
+}							t_RenderSetup;
+
+typedef struct s_threadSetupParams
+{
+	t_renderthread			*thread_data;
+	t_world					*world;
+	t_matrix				inverse_transform;
+	int						index;
+	int						num_threads;
+	int						segment_height;
+}							t_threadSetupParams;
 
 typedef struct s_intersection
 {
@@ -102,18 +133,21 @@ typedef struct s_interesctionData
 
 typedef struct s_abcparams
 {
-	double		a;
-	double		b;
-	double		c;
-}				t_abcparams;
+	double					a;
+	double					b;
+	double					c;
+}							t_abcparams;
 
 typedef struct s_intersectionCreationParams
 {
-	double		t1;
-	double		t2;
-	double		discriminant;
-	t_object	*obj;
-}				t_interparams;
+	double					t1;
+	double					t2;
+	double					discriminant;
+	t_object				*obj;
+}							t_interparams;
+
+bool						realoc_inter(t_intersection **intersections,
+								int required_capacity, int *capacity);
 
 t_matrix					matrix_rotation_axis(t_tuple axis, double angle);
 

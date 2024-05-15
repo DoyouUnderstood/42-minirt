@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 18:40:06 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:33:07 by ltd              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,7 @@
 #include "../lib/libft/libft.h"
 #include <fcntl.h>
 
-// check if its in range rover
-bool	in_range(double start, double end, double value)
-{
-	return (value >= start && value <= end);
-}
-
-int	ft_atoi_rgb(char **str)
-{
-	int	res;
-
-	res = 0;
-	while (**str >= '0' && **str <= '9')
-	{
-		res = res * 10 + (**str - '0');
-		(*str)++;
-	}
-	return (res);
-}
-
-bool	parse_rgb(char **str, int *value)
-{
-	if (**str == '\0' || (**str == ',' && *(*str + 1) == '\0'))
-		return (false);
-	*value = ft_atoi_rgb(str);
-	if (**str == ',')
-		(*str)++;
-	return (true);
-}
+bool	parse_rgb(char **str, int *value);
 
 // verifie et remplie les tuples.
 int	parse_vec3(char *str, t_tuple *vec)

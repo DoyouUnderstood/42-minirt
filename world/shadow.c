@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shadow.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:17:18 by ltd               #+#    #+#             */
+/*   Updated: 2024/05/15 17:26:16 by ltd              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/main.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
@@ -14,13 +26,17 @@ typedef struct s_shadow
 
 bool	check_for_shadows(t_shadow *shadow)
 {
-	for (int i = 0; i < shadow->count; i++)
+	int	i;
+
+	i = 0;
+	while (i < shadow->count)
 	{
 		if (shadow->intersections[i].t > 0
 			&& shadow->intersections[i].t < shadow->distance)
 		{
 			return (true);
 		}
+		i++;
 	}
 	return (false);
 }

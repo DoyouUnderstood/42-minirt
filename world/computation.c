@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   computation.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
+/*   Updated: 2024/05/15 17:29:16 by ltd              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/main.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
@@ -66,24 +78,6 @@ void	add_local_inter(t_intersectionAddParams *params)
 	*(params->count) += params->local_count;
 }
 
-bool	realloc_intersections(t_intersection **intersections,
-		int required_capacity, int *capacity)
-{
-	t_intersection	*temp;
-
-	while (required_capacity > *capacity)
-	{
-		*capacity *= 2;
-	}
-	temp = realloc(*intersections, (*capacity) * sizeof(t_intersection));
-	if (!temp)
-	{
-		return (false);
-	}
-	*intersections = temp;
-	return (true);
-}
-
 typedef struct s_processObjectParams
 {
 	t_world			*world;
@@ -107,7 +101,7 @@ void	process_object(t_processObjectParams *params)
 	{
 		if (*(params->count) + local_count > *(params->capacity))
 		{
-			if (!realloc_intersections(params->intersections, *(params->count)
+			if (!realoc_inter(params->intersections, *(params->count)
 					+ local_count, params->capacity))
 			{
 				free(local_inter);

@@ -57,7 +57,11 @@ SRCS = main.c \
 	  parser/parser.c \
 	  parser/parse_obj.c \
 	  parser/utils.c \
-	  parser/utils2.c
+	  parser/utils2.c \
+	  world/computation1.c \
+	  parser/utils1.c \
+	  world/render1.c \
+	  parser/parse_obj2.c
 
 
 

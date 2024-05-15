@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:57 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:38:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:48:00 by ltd              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	mlx_initialisation(t_world *world)
 	world->mlx->ptr = mlx_init();
 	if (!world->mlx->ptr)
 		error_exit("Erreur initialisation mlx\n");
-	printf("Resolution : %d\n%d", world->hsize, world->vsize);
 	world->mlx->win = mlx_new_window(world->mlx->ptr, world->hsize,
 			world->vsize, "minirt");
 	if (!world->mlx->win)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:03 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:33:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:45:01 by ltd              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,8 @@ t_color							calculate_specular(t_specular_params *params);
 t_specular_params				prepare_specular_params(t_lighting *params,
 									t_tuple lightv);
 t_color							lighting(t_lighting *params);
-
+t_object						*parse_cylinder(char **parts, t_object *obj);
+t_pattern						*set_pattern(char *part1, char *part2,
+									char *part3);
+t_object						*parse_cube(char **parts);
 #endif

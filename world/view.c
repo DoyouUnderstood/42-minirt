@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   view.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:17:43 by ltd               #+#    #+#             */
+/*   Updated: 2024/05/15 17:23:04 by ltd              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/main.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
@@ -13,8 +25,8 @@ t_matrix	compute_orientation(t_tuple forward, t_tuple upn, t_tuple from)
 	left = vector_cross(forward, upn);
 	true_up = vector_cross(left, forward);
 	trans = matrix_translation(-from.x, -from.y, -from.z);
-	orientation = matrix((float[4][4]){{left.x, left.y, left.z, 0.0f},
-			{true_up.x, true_up.y, true_up.z, 0.0f}, {-forward.x, -forward.y,
+	orientation = matrix((float [4][4]){{left.x, left.y, left.z, 0.0f},
+		{true_up.x, true_up.y, true_up.z, 0.0f}, {-forward.x, -forward.y,
 			-forward.z, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}});
 	return (matrix_multiply(orientation, trans));
 }

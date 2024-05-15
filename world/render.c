@@ -1,55 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:17:34 by ltd               #+#    #+#             */
+/*   Updated: 2024/05/15 17:27:59 by ltd              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/main.h"
 #include "../include/mathematique.h"
 #include "../include/shape.h"
 #include <math.h>
-#include <pthread.h>
 #include <stdio.h>
 
-typedef struct s_renderthread
-{
-	t_mlx			*mlx;
-	t_world			*world;
-	t_camera		*camera;
-	t_matrix		inverse_transform;
-	int				start_y;
-	int				end_y;
-}					t_renderthread;
-
-typedef struct s_RenderSetup
-{
-	pthread_t		*threads;
-	t_renderthread	*thread_data;
-	t_matrix		inverse_transform;
-	int				segment_height;
-	int				num_threads;
-	int				current_index;
-}					t_RenderSetup;
-
-typedef struct s_threadSetupParams
-{
-	t_renderthread	*thread_data;
-	t_world			*world;
-	t_matrix		inverse_transform;
-	int				index;
-	int				num_threads;
-	int				segment_height;
-}					t_threadSetupParams;
-
-void	setup_thread_data(t_threadSetupParams *params)
-{
-	params->thread_data->mlx = params->world->mlx;
-	params->thread_data->world = params->world;
-	params->thread_data->camera = params->world->camera;
-	params->thread_data->inverse_transform = params->inverse_transform;
-	params->thread_data->start_y = params->index * params->segment_height;
-	if (params->index == params->num_threads - 1)
-		params->thread_data->end_y = params->world->camera->vsize;
-	else
-	{
-		params->thread_data->end_y = (params->index + 1)
-			* params->segment_height;
-	}
-}
+void	setup_thread_data(t_threadSetupParams *params);
 
 void	process_x(t_renderthread *data, int x, int y, int remaining)
 {

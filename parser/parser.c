@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 18:40:03 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:31:55 by ltd              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,10 @@ char	*file_to_str(const char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error opening file");
-		return (NULL);
-	}
+		error_exit("error open\n");
 	if (fstat(fd, &st) == -1)
-	{
-		perror("Error getting file size");
-		close(fd);
-		return (NULL);
-	}
+		error_exit("error fstat\n");
 	file_content = malloc(st.st_size + 1);
-	if (file_content == NULL)
-	{
-		perror("Memory allocation failed");
-		close(fd);
-		return (NULL);
-	}
 	bytes_read = read(fd, file_content, st.st_size);
 	if (bytes_read == -1)
 	{
