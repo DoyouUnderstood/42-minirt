@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:37:19 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 17:37:33 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minilibx.h"
 
-# define KEY_ESC 'e'
 // fonction evenement pour quitter avec echap
 int	mlx_event_handle_keypress(int keysym, t_mlx *mlx)
 {

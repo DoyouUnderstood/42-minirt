@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shape.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 18:26:18 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHAPE_H
 # define SHAPE_H
 
@@ -68,6 +80,41 @@ typedef struct s_computations
 	bool					inside;
 }							t_computations;
 
+typedef struct s_intersectionParams
+{
+	double					a;
+	double					b;
+	double					c;
+	double					discriminant;
+	double					t0;
+	double					t1;
+	double					half_height;
+}							t_intersectionParams;
+
+typedef struct s_interesctionData
+{
+	double					y0;
+	double					y1;
+	double					half_height;
+	t_intersectionParams	*p;
+	t_object				*obj;
+}							t_interesctionData;
+
+typedef struct s_abcparams
+{
+	double		a;
+	double		b;
+	double		c;
+}				t_abcparams;
+
+typedef struct s_intersectionCreationParams
+{
+	double		t1;
+	double		t2;
+	double		discriminant;
+	t_object	*obj;
+}				t_interparams;
+
 t_matrix					matrix_rotation_axis(t_tuple axis, double angle);
 
 t_color						reflected_color(t_world *world,
@@ -95,8 +142,8 @@ t_matrix					view_transform(t_tuple from, t_tuple to,
 t_ray						ray_for_pixel(const t_camera *camera,
 								const t_matrix *inverse_transform, int px,
 								int py);
-void    camera_create(float fov_degrees,
-		t_tuple position, t_tuple direction, t_camera **camera);
+void						camera_create(float fov_degrees, t_tuple position,
+								t_tuple direction, t_camera **camera);
 
 t_color						color_at(t_world *world, t_ray *ray, int remaining);
 t_color						shade_hit(t_world *world, t_computations *comps,
@@ -119,6 +166,14 @@ t_intersection				*cylinder_intersect(t_object *obj, t_ray *ray,
 
 // =========== SPHERE =============
 
+t_sphere					*create_sphere(t_tuple center, double diameter);
+t_object					*object_create_for_sphere(t_tuple center,
+								double diameter, t_material_specs specs);
+t_intersection				*create_intersections(const t_interparams *params,
+								int *out_count);
+void						calculate_abc(const t_ray *ray,
+								const t_sphere *sphere, t_abcparams *params);
+double						calculate_discriminant(const t_abcparams *params);
 t_intersection				*sphere_intersect(t_object *obj, t_ray *ray,
 								int *out_count);
 t_sphere					*sphere_create(void);

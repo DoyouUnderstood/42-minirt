@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minilibx.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 16:07:41 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 17:37:45 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINILIBX_H
 # define MINILIBX_H
 
 # include "../lib/mlx/mlx.h"
 # include "main.h"
+
+# define KEY_ESC 'e'
 
 typedef struct s_color	t_color;
 typedef struct s_world	t_world;

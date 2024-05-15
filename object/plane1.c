@@ -1,7 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 18:38:59 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../graphics/graphics.h"
 #include "../include/shape.h"
 #include "../object/test_shape.h"
 #include "test_shape.h"
+
+void	matrix_rotation_axis2(t_matrix *rot)
+{
+	rot->m[2][3] = 0;
+	rot->m[3][0] = 0;
+	rot->m[3][1] = 0;
+	rot->m[3][2] = 0;
+	rot->m[3][3] = 1;
+}
 
 // Création d'une matrice de rotation autour d'un axe par un angle
 t_matrix	matrix_rotation_axis(t_tuple axis, double angle)
@@ -26,16 +47,9 @@ t_matrix	matrix_rotation_axis(t_tuple axis, double angle)
 	rot.m[2][0] = axis.z * axis.x * one_minus_cos - axis.y * sin_theta;
 	rot.m[2][1] = axis.z * axis.y * one_minus_cos + axis.x * sin_theta;
 	rot.m[2][2] = cos_theta + axis.z * axis.z * one_minus_cos;
-	rot.m[2][3] = 0;
-	rot.m[3][0] = 0;
-	rot.m[3][1] = 0;
-	rot.m[3][2] = 0;
-	rot.m[3][3] = 1;
+	matrix_rotation_axis2(&rot);
 	return (rot);
 }
-
-t_material		*material_create_default_plane(t_color *color,
-				t_pattern *pattern);
 
 // Utilitaire pour calculer la matrice de rotation d'un vecteur à un autre
 t_matrix	rotate_from_to(t_tuple from, t_tuple to)
@@ -82,33 +96,4 @@ t_plane	*plane_create(t_tuple center)
 	plane = malloc(sizeof(t_plane));
 	plane->center = center;
 	return (plane);
-}
-
-t_tuple	plane_local_normal_at(t_shape *shape, t_tuple local_point)
-{
-	(void)local_point;
-	(void)shape;
-	return (vector_create(0, 1, 0));
-}
-
-t_intersection	*plane_local_intersect(t_object *obj, t_ray *ray, int *count)
-{
-	double			t;
-	t_intersection	*intersections;
-
-	if (fabs(ray->direction.y) < TUPLE_EPSILON)
-	{
-		*count = 0;
-		return (NULL);
-	}
-	t = -ray->origin.y / ray->direction.y;
-	*count = 1;
-	intersections = (t_intersection *)malloc(sizeof(t_intersection));
-	if (!intersections)
-	{
-		*count = 0;
-		return (NULL);
-	}
-	intersections[0] = (t_intersection){t, obj};
-	return (intersections);
 }

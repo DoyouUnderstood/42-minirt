@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shape.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 17:55:55 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../graphics/graphics.h"
 #include "../include/shape.h"
 #include "test_shape.h"
@@ -76,8 +88,8 @@ t_color	calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)
 		lighting_params.normalv = malloc(sizeof(t_tuple));
 		if (lighting_params.normalv)
 		{
-			*lighting_params.normalv = closest_hit->obj->shape->local_normal_at(closest_hit->obj->shape,
-					*lighting_params.position);
+			*lighting_params.normalv = closest_hit->obj->shape->local_normal_at(
+					closest_hit->obj->shape, *lighting_params.position);
 		}
 		lighting_params.eyev = malloc(sizeof(t_tuple));
 		if (lighting_params.eyev)

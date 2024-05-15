@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 18:27:20 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../graphics/graphics.h"
 #include "../include/shape.h"
 #include "../object/test_shape.h"
@@ -39,21 +51,6 @@ t_object	*object_create_for_sphere(t_tuple center, double diameter,
 	return (obj);
 }
 
-typedef struct s_abcparams
-{
-	double		a;
-	double		b;
-	double		c;
-}				t_abcparams;
-
-typedef struct s_intersectionCreationParams
-{
-	double		t1;
-	double		t2;
-	double		discriminant;
-	t_object	*obj;
-}				t_interparams;
-
 t_intersection	*create_intersections(const t_interparams *params,
 		int *out_count)
 {
@@ -94,36 +91,4 @@ void	calculate_abc(const t_ray *ray, const t_sphere *sphere,
 double	calculate_discriminant(const t_abcparams *params)
 {
 	return (params->b * params->b - 4 * params->a * params->c);
-}
-
-t_intersection	*local_intersect_sphere(t_object *obj, t_ray *ray,
-		int *out_count)
-{
-	t_abcparams						abc_params;
-	t_interparams	                creation_params;
-	double							discriminant;
-	double							sqrt_discriminant;
-
-	calculate_abc(ray, (t_sphere *)obj->obj, &abc_params);
-	discriminant = calculate_discriminant(&abc_params);
-	if (discriminant < -EPSILON)
-	{
-		*out_count = 0;
-		return (NULL);
-	}
-	sqrt_discriminant = sqrt(discriminant);
-	creation_params = (t_interparams){.t1 = (-abc_params.b
-			- sqrt_discriminant) / (2 * abc_params.a), .t2 = (-abc_params.b
-			+ sqrt_discriminant) / (2 * abc_params.a),
-		.discriminant = discriminant, .obj = obj};
-	return (create_intersections(&creation_params, out_count));
-}
-
-t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple local_point)
-{
-	t_tuple	tupl;
-
-	(void)shape;
-	tupl = tuple_subtract(local_point, point_create(0, 0, 0));
-	return (tupl);
 }

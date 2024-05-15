@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
+/*   point2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 16:08:29 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:08:30 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/15 17:25:26 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 17:35:05 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "../include/mathematique.h"
+#include "maths.h"
 
-typedef struct s_tuple
+// fonction pour soustraire un vecteur d'un point.
+t_tuple	point_sub_vector(t_tuple point, t_tuple vect)
 {
-	double	x;
-	double	y;
-	double	z;
-	double	w;
-}			t_tuple;
-typedef struct s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}			t_color;
-
-typedef struct s_matrix
-{
-	float	m[4][4];
-}			t_matrix;
-
-#endif
+	return ((t_tuple){point.x - vect.x, point.y - vect.y, point.z - vect.z,
+		1.0});
+}

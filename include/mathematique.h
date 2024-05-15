@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mathematique.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 16:01:48 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/15 16:43:21 by erabbath         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MATHEMATIQUE_H
 # define MATHEMATIQUE_H
 
@@ -21,17 +33,20 @@ typedef struct s_ray
 {
 	t_tuple						origin;
 	t_tuple						direction;
-}								t_ray;
+}	t_ray;
+
+typedef t_tuple					(*t_local_normal_at)(t_shape *shape,
+									t_tuple local_point);
+typedef t_intersection			*(*t_local_intersect)(t_object *obj, t_ray *ray,
+									int *count);
 
 typedef struct s_shape
 {
-	t_matrix					transformation;
-	t_material					*material;
-	t_ray						saved_ray;
-	t_tuple						(*local_normal_at)(t_shape *shape,
-								t_tuple local_point);
-	t_intersection				*(*local_intersect)(t_object *obj, t_ray *ray,
-						int *count);
-}								t_shape;
+	t_matrix			transformation;
+	t_material			*material;
+	t_ray				saved_ray;
+	t_local_normal_at	local_normal_at;
+	t_local_intersect	local_intersect;
+}	t_shape;
 
 #endif
