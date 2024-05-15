@@ -43,6 +43,15 @@ t_cylinder* create_cylinder(t_tuple center, double diameter, double height, t_tu
 // }
 
 
+#include <math.h>  // Assurez-vous d'inclure la librairie mathématique
+
+t_matrix align_axis(t_tuple default_axis, t_tuple new_axis) {
+    t_tuple axis = vector_cross(default_axis, new_axis);
+    double dot_product = vector_dot(vector_normalize(default_axis), vector_normalize(new_axis));
+    double angle = acos(dot_product);
+    return matrix_rotation_axis(axis, angle);
+}
+
 
 t_object* object_create_for_cylinder(t_tuple center, double diameter, double height, t_tuple axis, t_color color, double reflectiv, t_pattern *pattern) 
 {
@@ -66,7 +75,10 @@ t_object* object_create_for_cylinder(t_tuple center, double diameter, double hei
         error_exit("Failed to allocate memory for t_shape");
     }
 
-    obj->shape->transformation = matrix_translation(center.x, center.y, center.z);
+
+    t_tuple default_axis = {0, 1, 0, 0}; 
+    t_matrix rotation = align_axis(default_axis, axis); 
+    obj->shape->transformation = matrix_multiply(matrix_translation(center.x, center.y, center.z), rotation);
     obj->shape->material = material_create_default(&color, reflectiv, pattern);
     cylinder->center = (t_tuple){0, 0, 0, 0};
     obj->shape->local_intersect = cylinder_intersect;

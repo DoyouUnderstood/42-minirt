@@ -61,6 +61,9 @@ typedef struct s_computations {
     bool inside;
 } t_computations;
 
+
+t_matrix matrix_rotation_axis(t_tuple axis, double angle);
+
 t_color reflected_color(t_world *world, const t_computations *comps, int remaining);
 
 void draw_render_to_img(t_world *world, t_mlx *mlx);
