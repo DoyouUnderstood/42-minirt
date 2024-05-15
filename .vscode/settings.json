@@ -12,6 +12,7 @@
         "stdlib.h": "c",
         "init.h": "c",
         "libft.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "main.h": "c"
     }
 }

@@ -89,7 +89,7 @@ t_color shade_hit(t_world *world, t_computations *comps, int remaining);
 void prepare_computations(t_computations *comps, const t_intersection *intersection, const t_ray *ray);
 int compare_intersections(const void* a, const void* b);
 // object
-t_object* object_create_for_plane(t_color color, t_tuple center, t_pattern *pattern); 
+t_object* object_create_for_plane(t_color color, t_tuple center, t_pattern *pattern, t_tuple dir);
 t_object* object_create_for_sphere(t_tuple center, double diameter, t_color color, double relfectiv, t_pattern *pattern);
 t_tuple cylinder_local_normal_at(t_shape *shape, t_tuple local_point);
 t_intersection* cylinder_intersect(t_object *obj, t_ray *ray, int *count);
