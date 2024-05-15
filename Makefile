@@ -3,28 +3,36 @@ NAME = miniRT
 LIBFT_DIR = lib/libft
 FT_PRINTF_DIR = lib/ft_printf
 GNL_DIR = lib/GNL
-MLX_DIR = lib/mlx
+MLX_DIR = lib/mlx_linux
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror 
 DEBUG_FLAGS = -g -fsanitize=address
 # / pour compiler sous Mac, rajouter ceci a mlx_flags ==> -framework OpenGL -framework AppKit
-MLX_FLAGS = -L$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx -lm
-CRITERION_FLAGS = -lcriterion
-INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lm -lmlx
+MLX_FLAGS = -L$(MLX_DIR) -lXext -lX11 -lm -lbsd -lmlx -lm
+# CRITERION_FLAGS = -lcriterion
+INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -lXext -lX11 -lm -lbsd -lmlx -lm
 TEST_SRCS =  unit_test/cube.c
 
 SRCS = main.c \
-      graphics/color.c \
-      maths/determinant_cofacteur.c \
-      maths/matrix_operation.c \
-      maths/matrix_transforms.c \
-      maths/point.c \
-      maths/vect.c \
+      graphics/color1.c \
+      graphics/color2.c \
+      maths/determinant_cofacteur1.c \
+      maths/determinant_cofacteur2.c \
+      maths/matrix_operation1.c \
+      maths/matrix_operation2.c \
+      maths/matrix_transforms1.c \
+      maths/matrix_transforms2.c \
+      maths/point1.c \
+      maths/point2.c \
+      maths/vect1.c \
+      maths/vect2.c \
 	  maths/ray.c \
       mlx/event.c \
-      mlx/mlx.c \
+      mlx/mlx1.c \
+      mlx/mlx2.c \
 	  graphics/material.c \
-	  graphics/lightning.c \
+	  graphics/lighting1.c \
+	  graphics/lighting2.c \
 	  maths/tuple.c \
 	  world/world.c \
 	  world/camera.c \
@@ -35,15 +43,18 @@ SRCS = main.c \
 	  world/shadow.c \
 	  object/shape.c \
 	  utils/init.c \
-	  object/plane.c \
+	  object/plane1.c \
+	  object/plane2.c \
 	  graphics/pattern/stripe.c \
 	  graphics/pattern/gradient.c \
 	  graphics/pattern/ring.c \
 	  graphics/pattern/checker.c \
 	  maths/reflect.c \
 	  object/cube.c \
-	  object/cylinder.c \
-	  object/sphere.c \
+	  object/cylinder1.c \
+	  object/cylinder2.c \
+	  object/sphere1.c \
+	  object/sphere2.c \
 	  parser/parser.c \
 	  parser/parse_obj.c \
 	  parser/utils.c \
