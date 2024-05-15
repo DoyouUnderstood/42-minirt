@@ -6,7 +6,7 @@
 /*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 20:30:47 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:59:39 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 	t_cylinder			*cyl;
 
 	cyl = malloc(sizeof(t_cylinder));
-	if (!parse_vec3(parts[1], &cyl->center))
+	if (!parse_vec3(require_str(parts[1]), &cyl->center))
 		error_exit("error cylinder parts1\n");
-	if (!parse_vec3(parts[2], &cyl->axis))
+	if (!parse_vec3(require_str(parts[2]), &cyl->axis))
 		return (NULL);
-	if (!ft_atod(parts[3], &specs.diameter))
+	if (!ft_atod(require_str(parts[3]), &specs.diameter))
 		return (NULL);
-	if (!ft_atod(parts[4], &specs.height))
+	if (!ft_atod(require_str(parts[4]), &specs.height))
 		return (NULL);
-	rgb(parts[5], &specs.color);
+	rgb(require_str(parts[5]), &specs.color);
 	if (parts[6])
 		specs.reflectivity = validate_reflectivity(atof(parts[6]));
 	specs.color = convert_color_255_to_1(specs.color.r, specs.color.g,
@@ -120,11 +120,11 @@ t_object	*parse_plane(char **parts, t_object *obj)
 	int			total_parts;
 
 	pattern = NULL;
-	if (!parse_vec3(parts[1], &center))
+	if (!parse_vec3(require_str(parts[1]), &center))
 		error_exit("error with parsing\n");
 	else
-		rgb(parts[3], &color);
-	if (!parse_vec3(parts[2], &direction))
+		rgb(require_str(parts[3]), &color);
+	if (!parse_vec3(require_str(parts[2]), &direction))
 		error_exit("error with parsing\n");
 	color = convert_color_255_to_1(color.r, color.g, color.b);
 	total_parts = 0;

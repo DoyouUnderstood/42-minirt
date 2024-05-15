@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:34 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 17:27:59 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:47:18 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*render_section(void *arg)
 	int				remaining;
 
 	data = (t_renderthread *)arg;
-	remaining = 2;
+	remaining = 5;
 	process_y(data, data->start_y, remaining);
 	return (NULL);
 }

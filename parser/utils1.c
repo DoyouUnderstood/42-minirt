@@ -6,7 +6,7 @@
 /*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:26 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 20:33:27 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:56:42 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,15 @@ bool	in_range(double start, double end, double value)
 double	validate_reflectivity(double value)
 {
 	if (value < 0.0 || value > 1.0)
-		error_exit("Invalid reflectivity value");
+		error_exit("Invalid reflectivity value\n");
 	return (value);
+}
+
+char	*require_str(char *s)
+{
+	if (!s)
+		error_exit("Invalid file\n");
+	return (s);
 }
 
 int	ft_atoi_rgb(char **str)

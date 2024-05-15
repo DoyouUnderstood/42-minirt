@@ -6,7 +6,7 @@
 /*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 20:37:00 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:01:43 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ t_object	*parse_cube(char **parts)
 	int					total_parts;
 	t_object			*object;
 
-	if (!parse_vec3(parts[1], &center))
+	if (!parse_vec3(require_str(parts[1]), &center))
 		error_exit("no good coordinate\n");
-	edge_length = atof(parts[2]);
-	rgb(parts[3], &specs.color);
+	edge_length = atof(require_str(parts[2]));
+	rgb(require_str(parts[3]), &specs.color);
 	if (parts[4])
 		specs.reflectivity = validate_reflectivity(atof(parts[4]));
 	specs.color = convert_color_255_to_1(specs.color.r, specs.color.g,
@@ -86,11 +86,11 @@ t_object	*parse_sphere(char **parts, t_object *object)
 
 	specs.pattern = NULL;
 	specs.reflectivity = 0;
-	if (!parse_vec3(parts[1], &center))
+	if (!parse_vec3(require_str(parts[1]), &center))
 		error_exit("Error with parsing center\n");
-	if (!ft_atod(parts[2], &diameter))
+	if (!ft_atod(require_str(parts[2]), &diameter))
 		error_exit("Error with parsing diameter\n");
-	rgb(parts[3], &specs.color);
+	rgb(require_str(parts[3]), &specs.color);
 	if (parts[4])
 		specs.reflectivity = validate_reflectivity(atof(parts[4]));
 	specs.color = convert_color_255_to_1(specs.color.r, specs.color.g,
