@@ -95,8 +95,8 @@ t_matrix					view_transform(t_tuple from, t_tuple to,
 t_ray						ray_for_pixel(const t_camera *camera,
 								const t_matrix *inverse_transform, int px,
 								int py);
-t_camera					*camera_create(float fov_degrees, t_tuple position,
-								t_tuple direction);
+void    camera_create(float fov_degrees,
+		t_tuple position, t_tuple direction, t_camera **camera);
 
 t_color						color_at(t_world *world, t_ray *ray, int remaining);
 t_color						shade_hit(t_world *world, t_computations *comps,
