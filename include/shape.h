@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 12:00:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:25:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 
+# include "intersection.h"
 # include "color.h"
 # include "light.h"
 # include "material.h"
@@ -92,12 +93,6 @@ typedef struct s_threadSetupParams
 	int						num_threads;
 	int						segment_height;
 }							t_threadSetupParams;
-
-typedef struct s_intersection
-{
-	double					t;
-	t_object				*obj;
-}							t_intersection;
 
 typedef struct s_computations
 {
