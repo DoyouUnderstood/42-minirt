@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:53 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:58:12 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-t_sphere	*create_sphere(t_tuple center, double diameter)
+static t_sphere	*sphere_create(t_tuple center, double diameter)
 {
 	t_sphere	*sphere;
 
@@ -36,7 +36,7 @@ t_object	*object_create_for_sphere(t_tuple center, double diameter,
 	t_sphere	*sphere;
 	t_object	*obj;
 
-	sphere = create_sphere(center, diameter);
+	sphere = sphere_create(center, diameter);
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
 	obj->obj = sphere;

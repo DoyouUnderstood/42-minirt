@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 11:06:54 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:00:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,9 +161,6 @@ t_material					*material_create_default_plane(t_color *color,
 t_intersection				*local_intersect_sphere(t_object *obj, t_ray *ray,
 								int *out_count);
 
-t_shape						*test_shape(void);
-
-t_tuple						normal_at(t_object *obj, t_tuple world_point);
 
 bool						is_shadowed(t_world *world, const t_tuple point);
 void						render(t_world *world);
@@ -201,7 +198,6 @@ t_intersection				*cylinder_intersect(t_object *obj, t_ray *ray,
 
 // =========== SPHERE =============
 
-t_sphere					*create_sphere(t_tuple center, double diameter);
 t_object					*object_create_for_sphere(t_tuple center,
 								double diameter, t_material_specs specs);
 t_intersection				*create_intersections(const t_interparams *params,
@@ -209,13 +205,9 @@ t_intersection				*create_intersections(const t_interparams *params,
 void						calculate_abc(const t_ray *ray,
 								const t_sphere *sphere, t_abcparams *params);
 double						calculate_discriminant(const t_abcparams *params);
-t_intersection				*sphere_intersect(t_object *obj, t_ray *ray,
-								int *out_count);
-t_sphere					*sphere_create(void);
 
 // ========== TRANSFORMATION ===========
 
-void						set_material(t_sphere *s, t_material m);
 
 // ============ INTERSECT ==============
 
@@ -228,7 +220,6 @@ t_intersection				*hit(t_intersection *intersections, int count);
 
 // ============= world =================
 
-t_world						*world_default(void);
 t_world						*world_create(void);
 void						world_add_object(t_world *world, t_object *object);
 t_intersection				*intersect_world(t_world *world, t_ray *ray,

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:03 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:31:04 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:00:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ t_pattern						*gradient_pattern_create(t_color color1,
 t_color							gradient_at(const t_pattern *pattern,
 									t_tuple point);
 
-void							set_pattern_transform(t_pattern *pattern,
-									t_matrix transform);
 t_pattern						*stripe_pattern_create(t_color color1,
 									t_color color2);
 t_pattern						stripe_pattern(t_color a, t_color b);
