@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 13:25:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:44:34 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_object		t_object;
 typedef struct s_ray		t_ray;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_sphere		t_sphere;
+typedef struct s_intersection t_intersection;
 
 # define MAX_OBJECTS 30
 
@@ -208,9 +209,6 @@ double						calculate_discriminant(const t_abcparams *params);
 
 t_intersection				*intersect_shape(t_object *object, t_ray *ray,
 								int *count);
-t_intersection				intersection_create(double t, t_object *obj);
-t_intersection				*intersect(t_ray *ray, t_object *obj,
-								int *out_count);
 t_intersection				*hit(t_intersection *intersections, int count);
 
 // ============= world =================

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:42:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,6 @@ t_tuple	normal_at_shape(t_object *obj, t_tuple world_point)
 	world_normal = matrix_mult_tuple(trans_inv, local_normal);
 	world_normal.w = 0;
 	return (vector_normalize(world_normal));
-}
-
-// fonction pour cree une intersection
-t_intersection	intersection_create(double t, t_object *obj)
-{
-	t_intersection	i;
-
-	i.t = t;
-	i.obj = obj;
-	return (i);
 }
 
 // Fonction pour identifier le hit parmi une collection d'intersections

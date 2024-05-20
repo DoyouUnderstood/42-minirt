@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 11:58:12 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:43:55 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,18 @@ t_intersection	*create_intersections(const t_interparams *params,
 	if (params->discriminant == 0)
 	{
 		*out_count = 1;
+		intersections = intersection_create(params->obj, params->t1);
 	}
 	else
 	{
 		*out_count = 2;
+		intersections = intersection_create_pair(params->obj, params->t1, params->t2);
 	}
-	intersections = malloc(sizeof(t_intersection) * (*out_count));
 	if (!intersections)
 	{
 		*out_count = 0;
 		return (NULL);
 	}
-	intersections[0] = intersection_create(params->t1, params->obj);
-	if (*out_count == 2)
-		intersections[1] = intersection_create(params->t2, params->obj);
 	return (intersections);
 }
 
