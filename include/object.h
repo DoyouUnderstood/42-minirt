@@ -6,17 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:12:16 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:30:38 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
+# include "color.h"
 # include "mathematique.h"
 # include "ray.h"
 # include "shape.h"
-# include "types.h"
 # define EPSILON 0.00001
 
 typedef struct s_shape			t_shape;

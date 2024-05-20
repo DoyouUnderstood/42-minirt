@@ -6,21 +6,20 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:48 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:43:21 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:40:03 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATHEMATIQUE_H
 # define MATHEMATIQUE_H
 
-# include "../maths/maths.h"
+# include "../src/maths/maths.h"
 # include "minilibx.h"
 # include "object.h"
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# define TUPLE_EPSILON 1e-6
 
 typedef struct s_sphere			t_sphere;
 typedef struct s_intersection	t_intersection;

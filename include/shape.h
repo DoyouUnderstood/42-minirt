@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:44:43 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/16 16:30:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 
+# include "color.h"
 # include "light.h"
 # include "material.h"
 # include "minilibx.h"
 # include "object.h"
 # include "ray.h"
-# include "types.h"
 # include <float.h>
 # include <limits.h>
 # include <pthread.h>
@@ -214,7 +214,6 @@ t_sphere					*sphere_create(void);
 
 // ========== TRANSFORMATION ===========
 
-void						set_transform(t_object *object, t_matrix transform);
 void						set_material(t_sphere *s, t_material m);
 
 // ============ INTERSECT ==============

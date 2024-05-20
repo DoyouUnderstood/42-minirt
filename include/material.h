@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:01:44 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:30:18 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #ifndef MATERIAL_H
 # define MATERIAL_H
 
+# include "color.h"
 # include "light.h"
 # include "pattern.h"
-# include "types.h"
 
 typedef struct s_material
 {

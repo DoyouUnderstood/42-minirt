@@ -6,14 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:13 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:37:24 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:30:06 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PATTERN_H
 # define PATTERN_H
 
-# include "types.h"
+# include "color.h"
+# include "matrix.h"
 
 struct			s_pattern;
 

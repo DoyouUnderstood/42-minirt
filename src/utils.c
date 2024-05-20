@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 16:01:36 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:29:34 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/16 15:33:27 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/16 16:35:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_H
-# define LIGHT_H
+#include "utils.h"
 
-# include "color.h"
-# include "tuple.h"
+#include <stdbool.h>
 
-typedef struct s_light
+bool	double_eq(double x, double y)
 {
-	t_color	intensity;
-	t_tuple	pos;
-	double	diffuse;
-}			t_light;
+	if (x > y)
+		return (x - y < TUPLE_EPSILON);
+	return (y - x < TUPLE_EPSILON);
+}
 
-typedef struct s_amb_light
+double	dclamp(double x, double min, double max)
 {
-	t_color	color;
-	double	ambient;
-}			t_amb_light;
-
-#endif
+	if (x < min)
+		return (min);
+	if (x > max)
+		return (max);
+	return (x);
+}
