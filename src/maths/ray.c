@@ -6,23 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:29 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:07:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ray.h"
 #include "maths.h"
 #include <stdint.h>
-
-// Fonction pour initialiser un rayon
-t_ray	ray_create(t_tuple origin, t_tuple direction)
-{
-	t_ray	ray;
-
-	ray.origin = origin;
-	ray.direction = direction;
-	return (ray);
-}
 
 // fonction pour initialiser un rayon
 t_ray	ray_init(t_mlx *mlx, int x, int y, double projection_plane_z)
@@ -42,25 +32,6 @@ t_ray	ray_init(t_mlx *mlx, int x, int y, double projection_plane_z)
 	ray.direction = vector_normalize(tuple_subtract(pixel_target,
 				camera_position));
 	return (ray);
-}
-
-// Fonction pour calculer le point à la distance t le long du rayon
-t_tuple	t_point_position(const t_ray *ray, double t)
-{
-	t_tuple	displacement;
-
-	displacement = tuple_scale(ray->direction, t, t, t);
-	return (tuple_add(ray->origin, displacement));
-}
-
-// fonction pour transformer un rayon suivant une matrix
-t_ray	ray_transform(t_matrix mat, t_ray ray)
-{
-	t_ray	transformed_ray;
-
-	transformed_ray.origin = matrix_mult_tuple(mat, ray.origin);
-	transformed_ray.direction = matrix_mult_tuple(mat, ray.direction);
-	return (transformed_ray);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:30:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:06:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_color		t_color;
 typedef struct s_object		t_object;
 typedef struct s_ray		t_ray;
 typedef struct s_cylinder	t_cylinder;
+typedef struct s_sphere		t_sphere;
 
 # define MAX_OBJECTS 30
 

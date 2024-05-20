@@ -6,18 +6,24 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 16:08:20 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:04:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
 
-# include "mathematique.h"
-# include "minilibx.h"
-# include "object.h"
+# include "tuple.h"
+# include "matrix.h"
 
-typedef struct s_mlx	t_mlx;
-typedef struct s_sphere	t_sphere;
+typedef struct s_ray
+{
+	t_tuple						origin;
+	t_tuple						direction;
+}	t_ray;
+
+t_ray	ray_create(t_tuple origin, t_tuple direction);
+t_tuple	t_point_position(const t_ray *ray, double t);
+t_ray	ray_transform(t_matrix mat, t_ray ray);
 
 #endif

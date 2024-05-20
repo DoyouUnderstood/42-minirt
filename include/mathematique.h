@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:48 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 15:40:03 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:05:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../src/maths/maths.h"
 # include "minilibx.h"
 # include "object.h"
+# include "ray.h"
+
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -27,12 +29,6 @@ typedef struct s_shape			t_shape;
 typedef struct s_mlx			t_mlx;
 typedef struct s_material		t_material;
 typedef struct s_object			t_object;
-
-typedef struct s_ray
-{
-	t_tuple						origin;
-	t_tuple						direction;
-}	t_ray;
 
 typedef t_tuple					(*t_local_normal_at)(t_shape *shape,
 									t_tuple local_point);
