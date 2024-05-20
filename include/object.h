@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 11:06:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:47:12 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ typedef struct s_cube
 {
 }	t_cube;
 
-typedef struct s_sphere
-{
-	t_tuple	center;
-	double	diameter;
-}	t_sphere;
 
 typedef enum e_obj_type
 {

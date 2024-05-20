@@ -6,9 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 13:43:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:47:44 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "sphere.h"
 
 #include "../graphics/graphics.h"
 #include "../include/shape.h"
