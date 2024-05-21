@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 13:44:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:24:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,21 +128,6 @@ typedef struct s_interesctionData
 	t_object				*obj;
 }							t_interesctionData;
 
-typedef struct s_abcparams
-{
-	double					a;
-	double					b;
-	double					c;
-}							t_abcparams;
-
-typedef struct s_intersectionCreationParams
-{
-	double					t1;
-	double					t2;
-	double					discriminant;
-	t_object				*obj;
-}							t_interparams;
-
 bool						realoc_inter(t_intersection **intersections,
 								int required_capacity, int *capacity);
 
@@ -154,8 +139,6 @@ t_color						reflected_color(t_world *world,
 void						draw_render_to_img(t_world *world, t_mlx *mlx);
 t_material					*material_create_default_plane(t_color *color,
 								t_pattern *pattern);
-t_intersection				*local_intersect_sphere(t_object *obj, t_ray *ray,
-								int *out_count);
 
 
 bool						is_shadowed(t_world *world, const t_tuple point);
@@ -184,26 +167,11 @@ int							compare_intersections(const void *a, const void *b);
 t_object					*object_create_for_plane(t_color color,
 								t_tuple center, t_pattern *pattern,
 								t_tuple dir);
-t_object					*object_create_for_sphere(t_tuple center,
-								double diameter, t_material_specs specs);
 
 t_tuple						cylinder_local_normal_at(t_shape *shape,
 								t_tuple local_point);
 t_intersection				*cylinder_intersect(t_object *obj, t_ray *ray,
 								int *count);
-
-// =========== SPHERE =============
-
-t_object					*object_create_for_sphere(t_tuple center,
-								double diameter, t_material_specs specs);
-t_intersection				*create_intersections(const t_interparams *params,
-								int *out_count);
-void						calculate_abc(const t_ray *ray,
-								const t_sphere *sphere, t_abcparams *params);
-double						calculate_discriminant(const t_abcparams *params);
-
-// ========== TRANSFORMATION ===========
-
 
 // ============ INTERSECT ==============
 

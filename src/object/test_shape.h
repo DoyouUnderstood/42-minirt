@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:25 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 12:02:17 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:25:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ t_tuple					plane_local_normal_at(t_shape *shape,
 t_intersection			*intersect_shape(t_object *object, t_ray *ray,
 							int *count);
 t_tuple					normal_at_shape(t_object *obj, t_tuple world_point);
-t_tuple					local_normal_at_sphere(t_shape *shape,
-							t_tuple local_point);
 
 #endif

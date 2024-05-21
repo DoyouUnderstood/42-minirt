@@ -14,11 +14,26 @@
 # define SPHERE_H
 
 # include "tuple.h"
+# include "intersection.h"
+# include "object.h"
 
 typedef struct s_sphere
 {
 	t_tuple	center;
 	double	diameter;
 }	t_sphere;
+
+typedef struct s_sphere_intersect_data
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	discriminant_sqrt;
+	t_tuple	sphere_to_ray;
+}	t_sphere_intersect_data;
+
+t_object	*object_create_for_sphere(t_tuple center,
+				double diameter, t_material_specs specs);
 
 #endif
