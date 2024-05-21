@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 13:47:12 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:47:55 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ typedef struct s_plane
 {
 	t_tuple	center;
 }	t_plane;
-
-typedef struct s_cylinder
-{
-	t_tuple	center;
-	t_tuple	axis;
-	double	radius;
-	double	height;
-}	t_cylinder;
 
 typedef struct s_camera
 {

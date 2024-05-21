@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:36:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:48:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "minilibx.h"
 # include "object.h"
 # include "ray.h"
+# include "cylinder.h"
+
 # include <float.h>
 # include <limits.h>
 # include <pthread.h>
@@ -35,7 +37,6 @@ typedef struct s_mlx		t_mlx;
 typedef struct s_color		t_color;
 typedef struct s_object		t_object;
 typedef struct s_ray		t_ray;
-typedef struct s_cylinder	t_cylinder;
 typedef struct s_intersection t_intersection;
 
 # define MAX_OBJECTS 30
