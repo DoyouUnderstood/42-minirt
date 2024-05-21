@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 06:07:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:55:56 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_plane		t_plane;
 typedef struct s_shape		t_shape;
 typedef struct s_tuple		t_tuple;
 typedef struct s_matrix		t_matrix;
@@ -111,8 +110,6 @@ typedef struct s_computations
 bool						realoc_inter(t_intersection **intersections,
 								int required_capacity, int *capacity);
 
-t_matrix					matrix_rotation_axis(t_tuple axis, double angle);
-
 t_color						reflected_color(t_world *world,
 								const t_computations *comps, int remaining);
 
@@ -144,10 +141,6 @@ void						prepare_computations(t_computations *comps,
 								const t_ray *ray);
 int							compare_intersections(const void *a, const void *b);
 // object
-t_object					*object_create_for_plane(t_color color,
-								t_tuple center, t_pattern *pattern,
-								t_tuple dir);
-
 t_tuple						cylinder_local_normal_at(t_shape *shape,
 								t_tuple local_point);
 t_intersection				*cylinder_intersect(t_object *obj, t_ray *ray,

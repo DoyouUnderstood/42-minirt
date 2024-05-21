@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:25 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:25:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:40:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@
 typedef struct s_ray	t_ray;
 typedef struct s_shape	t_shape;
 typedef struct s_object	t_object;
-typedef struct s_plane	t_plane;
 
-t_object				*object_create_for_plane(t_color color, t_tuple center,
-							t_pattern *pattern, t_tuple dir);
-t_plane					*plane_create(t_tuple center);
 t_intersection			*plane_local_intersect(t_object *obj, t_ray *ray,
 							int *count);
 t_tuple					plane_local_normal_at(t_shape *shape,

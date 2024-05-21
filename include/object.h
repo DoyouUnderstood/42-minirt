@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 09:40:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:08:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ typedef struct s_object
 	void		*obj;
 	t_shape		*shape;
 }	t_object;
-
-typedef struct s_plane
-{
-	t_tuple	center;
-}	t_plane;
 
 typedef struct s_camera
 {

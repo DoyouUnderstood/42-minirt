@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane1.c                                           :+:      :+:    :+:   */
+/*   matrix_rotate_from_to.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 06:10:56 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/15 17:25:21 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/21 10:56:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
-#include "shape.h"
-#include "../object/test_shape.h"
-#include "test_shape.h"
+#include "matrix.h"
+#include "tuple.h"
 
-void	matrix_rotation_axis2(t_matrix *rot)
+#include <math.h>
+
+static void	matrix_rotation_axis2(t_matrix *rot)
 {
 	rot->m[2][3] = 0;
 	rot->m[3][0] = 0;
@@ -52,7 +52,7 @@ t_matrix	matrix_rotation_axis(t_tuple axis, double angle)
 }
 
 // Utilitaire pour calculer la matrice de rotation d'un vecteur à un autre
-t_matrix	rotate_from_to(t_tuple from, t_tuple to)
+t_matrix	matrix_rotate_from_to(t_tuple from, t_tuple to)
 {
 	t_tuple	axis;
 	double	angle;
@@ -60,40 +60,4 @@ t_matrix	rotate_from_to(t_tuple from, t_tuple to)
 	axis = vector_cross(from, to);
 	angle = acos(vector_dot(vector_normalize(from), vector_normalize(to)));
 	return (matrix_rotation_axis(axis, angle));
-}
-
-// Intégration dans la création de l'objet Plane
-t_object	*object_create_for_plane(t_color color, t_tuple center,
-		t_pattern *pattern, t_tuple direction)
-{
-	t_plane		*plane;
-	t_object	*obj;
-	t_tuple		default_normal;
-	t_matrix	rotation;
-	t_matrix	translation;
-
-	plane = plane_create(center);
-	obj = (t_object *)malloc(sizeof(t_object));
-	if (!obj)
-		return (NULL);
-	obj->type = PLANE;
-	obj->obj = plane;
-	obj->shape = (t_shape *)malloc(sizeof(t_shape));
-	default_normal = (t_tuple){0, 1, 0, 0};
-	rotation = rotate_from_to(default_normal, direction);
-	translation = matrix_translation(center.x, center.y, center.z);
-	obj->shape->transformation = matrix_mult(translation, rotation);
-	obj->shape->material = material_create_default_plane(&color, pattern);
-	obj->shape->local_normal_at = plane_local_normal_at;
-	obj->shape->local_intersect = plane_local_intersect;
-	return (obj);
-}
-
-t_plane	*plane_create(t_tuple center)
-{
-	t_plane	*plane;
-
-	plane = malloc(sizeof(t_plane));
-	plane->center = center;
-	return (plane);
 }

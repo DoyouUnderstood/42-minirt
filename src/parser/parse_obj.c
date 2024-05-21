@@ -6,12 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 09:40:54 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:43:36 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cylinder.h"
 #include "cube.h"
+#include "plane.h"
 
 #include "graphics.h"
 #include "../include/parser.h"
@@ -133,6 +134,6 @@ t_object	*parse_plane(char **parts, t_object *obj)
 		total_parts++;
 	if (total_parts >= 6 && parts[4] && parts[5] && parts[6])
 		pattern = set_pattern(parts[4], parts[5], parts[6]);
-	obj = object_create_for_plane(color, center, pattern, direction);
+	obj = plane_create(color, center, pattern, direction);
 	return (obj);
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:55:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:53 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:56:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ t_matrix	matrix_rotation_x(double angle);
 t_matrix	matrix_shearing(t_shearing_params params);
 t_matrix	matrix_scaling(double sx, double sy, double sz);
 t_matrix	matrix_translation(double dx, double dy, double dz);
+t_matrix	matrix_rotation_axis(t_tuple axis, double angle);
+t_matrix	matrix_rotate_from_to(t_tuple from, t_tuple to);
 
 #endif
