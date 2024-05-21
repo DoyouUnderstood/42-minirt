@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/21 11:44:36 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/21 11:34:39 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "parser.h"
+#ifndef CAMERA_H
+# define CAMERA_H
 
-#include <math.h>
+# include "matrix.h"
+# include "tuple.h"
 
-void	error_exit(char *error_msg)
+typedef struct s_camera
 {
-	printf("%s\n", error_msg);
-	exit(1);
-}
+	double		hsize;
+	double		vsize;
+	double		fov;
+	float		pixel_size;
+	float		half_width;
+	float		half_height;
+	t_matrix	transform;
+	t_tuple		position;
+	t_tuple		direction;
+}	t_camera;
 
-int	main(int argc, char *argv[])
-{
-	t_world	*world;
-
-	(void)argc;
-	(void)argv;
-	world = NULL;
-	if (argc != 2)
-		return (0);
-	world = read_and_parse(argv);
-	mlx_initialisation(world);
-	render(world);
-	return (0);
-}
+#endif

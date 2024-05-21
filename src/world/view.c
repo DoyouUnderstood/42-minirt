@@ -6,12 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:43 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 11:14:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:16:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include "mathematique.h"
 #include "shape_old.h"
 
 // Fonction view_transform

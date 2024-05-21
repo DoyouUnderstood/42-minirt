@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:27 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 11:13:52 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:16:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "camera.h"
 #include "main.h"
-#include "mathematique.h"
 #include "shape_old.h"
+
 #include <math.h>
 
 void	camera_create(float fov_degrees, t_tuple position, t_tuple direction,

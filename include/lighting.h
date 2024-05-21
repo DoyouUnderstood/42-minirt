@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersection.h                                     :+:      :+:    :+:   */
+/*   lighting.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:39:48 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:12:42 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERSECTION_H
-# define INTERSECTION_H
+#ifndef LIGHTING_H
+# define LIGHTING_H
 
+# include "material.h"
 # include "object.h"
+# include "tuple.h"
 
-typedef struct s_object t_object;
-
-typedef struct s_intersection
+typedef struct s_lighting
 {
-	double					t;
-	t_object				*obj;
-}							t_intersection;
+	t_material					*material;
+	t_object					*object;
+	t_light						*light;
+	t_tuple						*position;
+	t_tuple						*eyev;
+	t_tuple						*normalv;
+	bool						in_shadow;
+}								t_lighting;
 
-t_intersection	*intersection_create(t_object *obj, double t);
-t_intersection	*intersection_create_pair(t_object *obj, double t0, double t1);
-bool			intersection_realloc(t_intersection **intersections,
-					int required_capacity, int *capacity);
+typedef struct s_specular_params
+{
+	t_tuple						lightv;
+	t_tuple						normalv;
+	t_tuple						eyev;
+	const t_material			*material;
+	const t_light				*light;
+}								t_specular_params;
 
 #endif

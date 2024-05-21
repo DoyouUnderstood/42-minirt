@@ -6,15 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:12:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:19:05 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include "shape.h"
 
 #include "shape_old.h"
 #include "graphics.h"
 
+#include <math.h>
 #include <stdlib.h>
 
 static void	check_axis(double origin, double direction, double *tmin,

@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:12:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:19:21 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shape.h"
+
 #include "graphics.h"
 #include "shape_old.h"
-#include "test_shape.h"
 #include <stdlib.h>
 
 // fonction intersect generalise

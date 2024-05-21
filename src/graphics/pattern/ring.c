@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:09:00 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:06:03 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shape_old.h"
-#include "../../object/test_shape.h"
 #include "graphics.h"
+
+#include <math.h>
 
 t_pattern	*ring_pattern_create(t_color color1, t_color color2)
 {

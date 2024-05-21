@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:00:05 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:18:17 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "intersection.h"
 #include "matrix.h"
 #include "plane.h"
-#include "intersection.h"
+#include "shape.h"
 #include "utils.h"
 
 static t_plane_data	*plane_create_data(t_tuple center)

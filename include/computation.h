@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   computation.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/21 11:44:36 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/21 11:27:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "parser.h"
+#ifndef COMPUTATION_H
+# define COMPUTATION_H
 
-#include <math.h>
+# include "color.h"
+# include "object.h"
+# include "tuple.h"
 
-void	error_exit(char *error_msg)
+typedef struct s_computations
 {
-	printf("%s\n", error_msg);
-	exit(1);
-}
+	double					t;
+	t_object				*object;
+	t_tuple					point;
+	t_tuple					over_point;
+	t_tuple					eyev;
+	t_tuple					normalv;
+	t_tuple					reflectv;
+	t_color					*color;
+	bool					inside;
+}							t_computations;
 
-int	main(int argc, char *argv[])
-{
-	t_world	*world;
 
-	(void)argc;
-	(void)argv;
-	world = NULL;
-	if (argc != 2)
-		return (0);
-	world = read_and_parse(argv);
-	mlx_initialisation(world);
-	render(world);
-	return (0);
-}
+#endif

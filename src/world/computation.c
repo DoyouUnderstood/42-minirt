@@ -6,15 +6,19 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 11:13:14 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:16:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shape.h"
+#include "computation.h"
+#include "intersection.h"
+#include "world.h"
+
 #include "main.h"
-#include "mathematique.h"
-#include "shape_old.h"
+#include "maths.h"
+
 #include "libft.h"
-#include "../object/test_shape.h"
 #define EPSILON 0.00001
 
 void	prepare_computations(t_computations *comps,
@@ -101,7 +105,7 @@ void	process_object(t_processObjectParams *params)
 	{
 		if (*(params->count) + local_count > *(params->capacity))
 		{
-			if (!realoc_inter(params->intersections, *(params->count)
+			if (!intersection_realloc(params->intersections, *(params->count)
 					+ local_count, params->capacity))
 			{
 				free(local_inter);

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape.h                                            :+:      :+:    :+:   */
+/*   shape_old.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 10:55:56 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:11:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHAPE_H
-# define SHAPE_H
+#ifndef SHAPE_OLD_H
+# define SHAPE_OLD_H
 
 # include "intersection.h"
 # include "color.h"
@@ -21,6 +21,7 @@
 # include "object.h"
 # include "ray.h"
 # include "cylinder.h"
+# include "computation.h"
 
 # include <float.h>
 # include <limits.h>
@@ -50,17 +51,6 @@ typedef struct s_material_specs
 }							t_material_specs;
 
 
-typedef struct s_world
-{
-	int						vsize;
-	int						hsize;
-	t_camera				*camera;
-	t_mlx					*mlx;
-	t_light					*light;
-	t_object				**objects;
-	int						object_count;
-	t_amb_light				*amb;
-}							t_world;
 
 typedef struct s_renderthread
 {
@@ -92,23 +82,6 @@ typedef struct s_threadSetupParams
 	int						segment_height;
 }							t_threadSetupParams;
 
-typedef struct s_computations
-{
-	double					t;
-	t_object				*object;
-	t_tuple					point;
-	t_tuple					over_point;
-	t_tuple					eyev;
-	t_tuple					normalv;
-	t_tuple					reflectv;
-	t_color					*color;
-	bool					inside;
-}							t_computations;
-
-
-
-bool						realoc_inter(t_intersection **intersections,
-								int required_capacity, int *capacity);
 
 t_color						reflected_color(t_world *world,
 								const t_computations *comps, int remaining);
@@ -140,11 +113,6 @@ void						prepare_computations(t_computations *comps,
 								const t_intersection *intersection,
 								const t_ray *ray);
 int							compare_intersections(const void *a, const void *b);
-// object
-t_tuple						cylinder_local_normal_at(t_shape *shape,
-								t_tuple local_point);
-t_intersection				*cylinder_intersect(t_object *obj, t_ray *ray,
-								int *count);
 
 // ============ INTERSECT ==============
 

@@ -6,11 +6,10 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:27 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:10:39 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:15:31 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mathematique.h"
 #include "shape_old.h"
 #include "graphics.h"
 

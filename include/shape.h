@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathematique.h                                     :+:      :+:    :+:   */
+/*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 16:01:48 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:43:20 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/15 17:53:25 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/21 14:07:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHEMATIQUE_H
-# define MATHEMATIQUE_H
+#ifndef SHAPE_H
+# define SHAPE_H
 
-# include "../src/maths/maths.h"
-# include "minilibx.h"
+# include "intersection.h"
+# include "material.h"
 # include "object.h"
 # include "ray.h"
+# include "tuple.h"
 
-# include <math.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-
-typedef struct s_intersection	t_intersection;
-typedef struct s_shape			t_shape;
-typedef struct s_mlx			t_mlx;
-typedef struct s_material		t_material;
-typedef struct s_object			t_object;
-
-typedef t_tuple					(*t_local_normal_at)(t_shape *shape,
-									t_tuple local_point);
-typedef t_intersection			*(*t_local_intersect)(t_object *obj, t_ray *ray,
-									int *count);
+typedef t_tuple			(*t_local_normal_at)(t_shape *shape,
+							t_tuple local_point);
+typedef t_intersection	*(*t_local_intersect)(t_object *obj, t_ray *ray,
+							int *count);
 
 typedef struct s_shape
 {
@@ -42,5 +32,9 @@ typedef struct s_shape
 	t_local_normal_at	local_normal_at;
 	t_local_intersect	local_intersect;
 }	t_shape;
+
+t_intersection			*intersect_shape(t_object *object, t_ray *ray,
+							int *count);
+t_tuple					normal_at_shape(t_object *obj, t_tuple world_point);
 
 #endif

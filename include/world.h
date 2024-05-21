@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/21 11:44:36 by erabbath         ###   ########.fr       */
+/*   Created: 2024/05/16 15:33:47 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/21 11:36:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "parser.h"
+#ifndef WORLD_H
+# define WORLD_H
 
-#include <math.h>
+# include "camera.h"
+# include "light.h"
+# include "minilibx.h"
+# include "object.h"
 
-void	error_exit(char *error_msg)
+typedef struct s_world
 {
-	printf("%s\n", error_msg);
-	exit(1);
-}
+	int						vsize;
+	int						hsize;
+	t_camera				*camera;
+	t_mlx					*mlx;
+	t_light					*light;
+	t_object				**objects;
+	int						object_count;
+	t_amb_light				*amb;
+}							t_world;
 
-int	main(int argc, char *argv[])
-{
-	t_world	*world;
-
-	(void)argc;
-	(void)argv;
-	world = NULL;
-	if (argc != 2)
-		return (0);
-	world = read_and_parse(argv);
-	mlx_initialisation(world);
-	render(world);
-	return (0);
-}
+#endif

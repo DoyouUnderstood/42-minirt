@@ -6,14 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 11:14:04 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:16:36 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include "mathematique.h"
 #include "shape_old.h"
-#include "../object/test_shape.h"
+#include "world.h"
 
 #define MAX_OBJECTS 30
 

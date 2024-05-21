@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:03 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 12:00:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:12:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,12 @@
 # define GRAPHICS_H
 
 # include "color.h"
-# include "../include/light.h"
-# include "../include/mathematique.h"
-# include "../include/pattern.h"
+# include "light.h"
+# include "lighting.h"
+# include "material.h"
+# include "pattern.h"
+
 # include <stdint.h>
-
-typedef struct s_object			t_object;
-typedef struct s_intersection	t_intersection;
-typedef struct s_ray			t_ray;
-typedef struct s_world			t_world;
-
-typedef struct s_specular_params
-{
-	t_tuple						lightv;
-	t_tuple						normalv;
-	t_tuple						eyev;
-	const t_material			*material;
-	const t_light				*light;
-}								t_specular_params;
 
 // ===== PATTERN =====
 
@@ -65,16 +53,6 @@ t_color							calculate_color(t_intersection *closest_hit,
 t_material						*material_create_default(t_color *color,
 									double reflectiv, t_pattern *pattern);
 
-typedef struct s_lighting
-{
-	t_material					*material;
-	t_object					*object;
-	t_light						*light;
-	t_tuple						*position;
-	t_tuple						*eyev;
-	t_tuple						*normalv;
-	bool						in_shadow;
-}								t_lighting;
 
 t_color							calculate_ef_c(const t_lighting *params);
 t_color							calculate_ambient(t_color ef_c,
