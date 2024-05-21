@@ -6,43 +6,16 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 06:10:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:57:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "cube.h"
+
 #include "shape.h"
-#include "../object/test_shape.h"
-#include "test_shape.h"
-#include <float.h>
-#include <math.h>
+#include "graphics.h"
+
 #include <stdlib.h>
-
-static t_intersection	*cube_intersect(t_object *obj, t_ray *ray, int *count);
-
-t_object	*create_cube(t_tuple center, double edge_length,
-		t_material_specs specs)
-{
-	t_cube		*cube;
-	t_shape		*shape;
-	t_object	*obj;
-
-	cube = malloc(sizeof(t_cube));
-	shape = malloc(sizeof(t_shape));
-	obj = malloc(sizeof(t_object));
-	shape->transformation = matrix_translation(center.x, center.y, center.z);
-	shape->transformation = matrix_mult(shape->transformation,
-			matrix_scaling(edge_length, edge_length, edge_length));
-	shape->material = material_create_default(&specs.color, specs.reflectivity,
-			specs.pattern);
-	shape->material->reflectiv = specs.reflectivity;
-	shape->local_intersect = cube_intersect;
-	shape->local_normal_at = cube_local_normal_at;
-	obj->type = CUBE;
-	obj->obj = cube;
-	obj->shape = shape;
-	return (obj);
-}
 
 static void	check_axis(double origin, double direction, double *tmin,
 		double *tmax)
@@ -89,15 +62,13 @@ static t_intersection	*cube_intersect(t_object *obj, t_ray *ray, int *count)
 		return (NULL);
 	}
 	*count = 2;
-	intersections = malloc(sizeof(t_intersection) * 2);
+	intersections = intersection_create_pair(obj, tmin, tmax);
 	if (!intersections)
-		return (NULL);
-	intersections[0] = (t_intersection){tmin, obj};
-	intersections[1] = (t_intersection){tmax, obj};
+		*count = 0;
 	return (intersections);
 }
 
-t_tuple	cube_local_normal_at(t_shape *cube, t_tuple point)
+static t_tuple	cube_normal_at(t_shape *cube, t_tuple point)
 {
 	double	abs_x;
 	double	abs_y;
@@ -115,4 +86,28 @@ t_tuple	cube_local_normal_at(t_shape *cube, t_tuple point)
 		return ((t_tuple){0, copysign(1.0, point.y), 0, 0});
 	else
 		return ((t_tuple){0, 0, copysign(1.0, point.z), 0});
+}
+
+t_object	*cube_create(t_tuple center, double edge_length,
+		t_material_specs specs)
+{
+	t_cube_data	*cube;
+	t_shape		*shape;
+	t_object	*obj;
+
+	cube = malloc(sizeof(t_cube_data));
+	shape = malloc(sizeof(t_shape));
+	obj = malloc(sizeof(t_object));
+	shape->transformation = matrix_translation(center.x, center.y, center.z);
+	shape->transformation = matrix_mult(shape->transformation,
+			matrix_scaling(edge_length, edge_length, edge_length));
+	shape->material = material_create_default(&specs.color, specs.reflectivity,
+			specs.pattern);
+	shape->material->reflectiv = specs.reflectivity;
+	shape->local_intersect = cube_intersect;
+	shape->local_normal_at = cube_normal_at;
+	obj->type = CUBE;
+	obj->obj = cube;
+	obj->shape = shape;
+	return (obj);
 }

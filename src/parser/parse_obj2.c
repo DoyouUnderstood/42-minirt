@@ -6,16 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 09:17:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:42:41 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
+#include "cube.h"
+
 #include "graphics.h"
 #include "../include/parser.h"
-
-t_object	*create_cube(t_tuple center, double edge_length,
-				t_material_specs specs);
 
 t_obj_type	get_object_type(char *identifier)
 {
@@ -72,7 +71,7 @@ t_object	*parse_cube(char **parts)
 		total_parts++;
 	if (total_parts > 6 && parts[5] && parts[6] && parts[7])
 		specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
-	object = create_cube(center, edge_length, specs);
+	object = cube_create(center, edge_length, specs);
 	return (object);
 }
 

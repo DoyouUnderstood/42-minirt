@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 09:20:59 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:40:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 typedef struct s_pattern		t_pattern;
 typedef struct s_material_specs	t_material_specs;
-typedef struct s_cube
-{
-}	t_cube;
-
 
 typedef enum e_obj_type
 {
@@ -62,8 +58,5 @@ typedef struct s_camera
 	t_tuple		position;
 	t_tuple		direction;
 }	t_camera;
-
-
-t_tuple		cube_local_normal_at(t_shape *cube, t_tuple point);
 
 #endif

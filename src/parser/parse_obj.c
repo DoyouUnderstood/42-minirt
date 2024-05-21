@@ -6,18 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 09:20:57 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:40:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cylinder.h"
+#include "cube.h"
 
 #include "graphics.h"
 #include "../include/parser.h"
 
 int			parse_vec3(char *str, t_tuple *vec);
-t_object	*create_cube(t_tuple center, double edge_length,
-				t_material_specs specs);
 
 t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 {
