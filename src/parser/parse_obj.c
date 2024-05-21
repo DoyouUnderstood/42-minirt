@@ -6,17 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:36:51 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:21:34 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_error.h"
 #include "cylinder.h"
 #include "cube.h"
 #include "plane.h"
 #include "camera.h"
 
-#include "graphics.h"
-#include "../include/parser.h"
+#include "parser.h"
 
 int			parse_vec3(char *str, t_tuple *vec);
 

@@ -6,12 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:27 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:15:31 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:53:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape_old.h"
-#include "graphics.h"
+#include "color.h"
+#include "material.h"
+#include "pattern.h"
+
+#include <stdlib.h>
 
 // fonction for create material struct with default values
 t_material	*material_create_default(t_color *color, double reflectiv,

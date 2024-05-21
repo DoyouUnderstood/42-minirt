@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:36 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:29:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:52 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ typedef struct s_amb_light
 	t_color	color;
 	double	ambient;
 }			t_amb_light;
+
+t_light	*light_create(t_color color, t_tuple position,
+			double diffuse);
 
 #endif

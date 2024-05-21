@@ -6,14 +6,12 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:26 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 11:11:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:19:11 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
-#include "init.h"
+#include "ft_error.h"
 #include "parser.h"
-#include "shape_old.h"
 #include "get_next_line.h"
 #include "ft_printf.h"
 #include "libft.h"

@@ -6,15 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:26:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:30:44 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cylinder.h"
-#include "shape.h"
-
+#include "object.h"
 #include "material.h"
-#include "graphics.h"
 #include "utils.h"
 
 #include <math.h>

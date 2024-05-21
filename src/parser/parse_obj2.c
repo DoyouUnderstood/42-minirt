@@ -6,15 +6,16 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 09:42:41 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:19:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
 #include "cube.h"
+#include "ft_error.h"
+#include "functions.h"
 
-#include "graphics.h"
-#include "../include/parser.h"
+#include "parser.h"
 
 t_obj_type	get_object_type(char *identifier)
 {

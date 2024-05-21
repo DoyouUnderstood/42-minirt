@@ -6,14 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:07:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:43:33 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-
-#include "shape_old.h"
-#include "graphics.h"
+#include "color.h"
+#include "object.h"
+#include "pattern.h"
 
 #include <math.h>
 #include <stdlib.h>

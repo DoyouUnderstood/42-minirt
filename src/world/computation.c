@@ -6,17 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 14:16:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:25:02 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
 #include "computation.h"
 #include "intersection.h"
 #include "world.h"
-
-#include "main.h"
-#include "maths.h"
+#include "functions.h"
 
 #include "libft.h"
 #define EPSILON 0.00001

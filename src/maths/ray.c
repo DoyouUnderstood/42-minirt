@@ -6,13 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:29 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:44:59 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:29:36 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 #include "ray.h"
-#include "maths.h"
+#include "minilibx.h"
 
 #include <stdint.h>
 

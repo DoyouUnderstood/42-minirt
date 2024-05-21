@@ -6,20 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:41 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:37:45 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:51:20 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINILIBX_H
 # define MINILIBX_H
 
-# include "../lib/mlx/mlx.h"
-# include "main.h"
+# include "mlx.h"
+# include "world.h"
 
 # define KEY_ESC 'e'
-
-typedef struct s_color	t_color;
-typedef struct s_world	t_world;
 
 typedef struct s_mlx
 {
@@ -45,7 +42,5 @@ t_mlx					*mlx_init_and_create_window(int width, int height,
 void					mlx_cleanup(t_mlx *mlx);
 int						mlx_event_close_win(t_mlx *mlx);
 void					draw_pixel(t_mlx *mlx, int x, int y, t_color color);
-void					draw_render_to_img(t_world *world, t_mlx *mlx);
-int						refresh_display(t_world *world);
 
 #endif

@@ -6,11 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:20:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:55:24 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "color.h"
+#include "lighting.h"
+#include "functions.h"
+
 #include <math.h>
 #include <stdio.h>
 

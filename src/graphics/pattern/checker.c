@@ -6,13 +6,16 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:34 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:10:05 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:42:51 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape_old.h"
-#include "graphics.h"
+#include "color.h"
+#include "tuple.h"
+#include "pattern.h"
+
 #include <math.h>
+#include <stdlib.h>
 
 t_color	checker_at(const t_pattern *pattern, t_tuple point)
 {

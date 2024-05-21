@@ -6,13 +6,12 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:27 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 14:16:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:26:41 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
-#include "main.h"
-#include "shape_old.h"
+#include "functions.h"
 
 #include <math.h>
 

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:34:39 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:22:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ typedef struct s_camera
 	t_tuple		position;
 	t_tuple		direction;
 }	t_camera;
+
+void	camera_create(float fov_degrees, t_tuple position,
+			t_tuple direction, t_camera **camera);
 
 #endif

@@ -6,18 +6,22 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:10:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:56:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../lib/GNL/get_next_line.h"
-# include "../lib/ft_printf/ft_printf.h"
-# include "../lib/libft/libft.h"
-# include "init.h"
-# include "shape_old.h"
+# include "light.h"
+# include "tuple.h"
+# include "camera.h"
+# include "object.h"
+# include "world.h"
+
+# include "get_next_line.h"
+# include "ft_printf.h"
+# include "libft.h"
 # include <stdbool.h>
 
 t_amb_light	*parse_amb(char **str);

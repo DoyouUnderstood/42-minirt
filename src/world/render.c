@@ -6,16 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:34 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 14:16:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:26:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "shape_old.h"
 #include "world.h"
+#include "render.h"
+#include "functions.h"
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void	setup_thread_data(t_threadSetupParams *params);
 

@@ -6,14 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:13:42 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:45:16 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lighting.h"
-#include "shape.h"
-
-#include "maths.h"
+#include "object.h"
+#include "functions.h"
 
 #include <math.h>
 #include <stdio.h>

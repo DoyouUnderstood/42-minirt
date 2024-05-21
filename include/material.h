@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:30:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:32:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,19 @@ typedef struct s_material
 	double		transparency;
 	double		refractive_index;
 }				t_material;
+
+typedef struct s_material_specs
+{
+	t_color					color;
+	double					reflectivity;
+	t_pattern				*pattern;
+	double					diameter;
+	double					height;
+}							t_material_specs;
+
+t_material	*material_create_default(t_color *color,
+				double reflectiv, t_pattern *pattern);
+t_material	*material_create_default_plane(t_color *color,
+				t_pattern *pattern);
 
 #endif

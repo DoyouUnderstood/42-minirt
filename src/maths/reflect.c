@@ -6,15 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:32 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:17:14 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:30:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-
-#include "graphics.h"
-#include "shape_old.h"
-#include "maths.h"
+#include "tuple.h"
+#include "color.h"
+#include "computation.h"
+#include "world.h"
+#include "functions.h"
 
 t_tuple	reflect(t_tuple incident, t_tuple normal)
 {

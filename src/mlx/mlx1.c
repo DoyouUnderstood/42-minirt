@@ -6,11 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:57 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:42:03 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:23:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphics.h"
+#include "ft_error.h"
 #include "minilibx.h"
 #include "world.h"
 

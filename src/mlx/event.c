@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 20:19:50 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:24:28 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minilibx.h"
+#include "minilibx.h"
+
+#include <stdlib.h>
 
 // fonction evenement pour quitter avec echap
 int	mlx_event_handle_keypress(int key, t_mlx *mlx)

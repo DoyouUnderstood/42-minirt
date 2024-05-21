@@ -6,17 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:41:20 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:20:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
+#include "ft_error.h"
 #include "parser.h"
-#include "shape_old.h"
 #include "get_next_line.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include "world.h"
+#include "functions.h"
 
 #include <fcntl.h>
 #include <stdio.h>

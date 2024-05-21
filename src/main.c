@@ -6,12 +6,12 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/21 11:44:36 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:29:18 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
 #include "parser.h"
+#include "functions.h"
 
 #include <math.h>
 

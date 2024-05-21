@@ -6,16 +6,16 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:15:26 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:52:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-
-#include "main.h"
-#include "shape_old.h"
-#include "graphics.h"
+#include "computation.h"
+#include "lighting.h"
 #include "world.h"
+#include "functions.h"
+
+#include <stdlib.h>
 
 t_color	color_at(t_world *world, t_ray *ray, int remaining)
 {
