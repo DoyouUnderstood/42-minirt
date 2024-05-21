@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere1.c                                          :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:29:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:40:10 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 #include <math.h>
 #include <stdlib.h>
 
-static t_sphere	*sphere_create(t_tuple center, double diameter)
+static t_sphere_data	*sphere_data_create(t_tuple center, double diameter)
 {
-	t_sphere	*sphere;
+	t_sphere_data	*sphere_data;
 
-	sphere = malloc(sizeof(t_sphere));
-	if (!sphere)
+	sphere_data = malloc(sizeof(t_sphere_data));
+	if (!sphere_data)
 		return (NULL);
-	sphere->center = center;
-	sphere->diameter = diameter;
-	return (sphere);
+	sphere_data->center = center;
+	sphere_data->diameter = diameter;
+	return (sphere_data);
 }
 
 static t_intersection	*create_intersections(t_object *obj, double t1, double t2, double discriminant,
@@ -58,10 +58,10 @@ static t_intersection	*create_intersections(t_object *obj, double t1, double t2,
 static t_intersection	*sphere_intersect(t_object *obj, t_ray *ray,
 		int *out_count)
 {
-	t_sphere		*sphere;
+	t_sphere_data			*sphere;
 	t_sphere_intersect_data	data;
 
-	sphere = (t_sphere *) obj->obj;
+	sphere = (t_sphere_data *) obj->obj;
 	data.sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
 	data.a = vector_dot(ray->direction, ray->direction);
 	data.b = 2 * vector_dot(ray->direction, data.sphere_to_ray);
@@ -90,16 +90,16 @@ static t_tuple	sphere_normal_at(t_shape *shape, t_tuple local_point)
 	return (tupl);
 }
 
-t_object	*object_create_for_sphere(t_tuple center, double diameter,
+t_object	*sphere_create(t_tuple center, double diameter,
 		t_material_specs specs)
 {
-	t_sphere	*sphere;
-	t_object	*obj;
+	t_sphere_data	*sphere_data;
+	t_object		*obj;
 
-	sphere = sphere_create(center, diameter);
+	sphere_data = sphere_data_create(center, diameter);
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
-	obj->obj = sphere;
+	obj->obj = sphere_data;
 	obj->shape = malloc(sizeof(t_shape));
 	obj->shape->transformation = matrix_mult(matrix_translation(center.x,
 				center.y, center.z), matrix_scaling(1, 1, 1));
@@ -107,6 +107,6 @@ t_object	*object_create_for_sphere(t_tuple center, double diameter,
 			specs.reflectivity, specs.pattern);
 	obj->shape->local_intersect = sphere_intersect;
 	obj->shape->local_normal_at = sphere_normal_at;
-	sphere->center = (t_tuple){0, 0, 0, 0};
+	sphere_data->center = (t_tuple){0, 0, 0, 0};
 	return (obj);
 }

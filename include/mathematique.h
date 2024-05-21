@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:48 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/20 11:05:26 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 05:43:20 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef struct s_sphere			t_sphere;
 typedef struct s_intersection	t_intersection;
 typedef struct s_shape			t_shape;
 typedef struct s_mlx			t_mlx;
