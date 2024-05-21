@@ -6,13 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:09:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shape.h"
 #include "../../object/test_shape.h"
-#include "../graphics.h"
+#include "graphics.h"
 
 t_pattern	*stripe_pattern_create(t_color color1, t_color color2)
 {

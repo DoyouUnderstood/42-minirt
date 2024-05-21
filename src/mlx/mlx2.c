@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:57 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 20:40:37 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:09:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
+#include "graphics.h"
 #include "../include/minilibx.h"
 #include <stdint.h>
 #include <stdlib.h>

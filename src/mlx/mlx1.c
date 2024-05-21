@@ -6,11 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:37:57 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:55:00 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:10:04 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
+#include "graphics.h"
 #include "../include/minilibx.h"
 #include <stdint.h>
 #include <stdlib.h>

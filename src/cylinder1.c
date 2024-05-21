@@ -6,24 +6,22 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:53 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:21:11 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
-#include "../include/shape.h"
-#include "../object/test_shape.h"
-#include "test_shape.h"
-#include <float.h>
-#include <math.h>
+#include "cylinder.h"
+#include "material.h"
+#include "graphics.h"
+
 #include <stdlib.h>
 
-t_cylinder	*create_cylinder(t_tuple center, double diameter, double height,
+static t_cylinder_data	*create_cylinder_data(t_tuple center, double diameter, double height,
 		t_tuple axis)
 {
-	t_cylinder	*cylinder;
+	t_cylinder_data	*cylinder;
 
-	cylinder = malloc(sizeof(t_cylinder));
+	cylinder = malloc(sizeof(t_cylinder_data));
 	if (!cylinder)
 		return (NULL);
 	cylinder->center = center;
@@ -46,15 +44,15 @@ t_matrix	align_axis(t_tuple default_axis, t_tuple new_axis)
 	return (matrix_rotation_axis(axis, angle));
 }
 
-t_object	*object_create_for_cylinder(t_tuple center, t_tuple axis,
+t_object	*cylinder_create(t_tuple center, t_tuple axis,
 		t_material_specs specs)
 {
-	t_cylinder	*cylinder;
+	t_cylinder_data	*cylinder;
 	t_object	*obj;
 	t_tuple		default_axis;
 	t_matrix	rotation;
 
-	cylinder = create_cylinder(center, specs.diameter, specs.height, axis);
+	cylinder = create_cylinder_data(center, specs.diameter, specs.height, axis);
 	obj = malloc(sizeof(t_object));
 	obj->type = CYLINDER;
 	obj->obj = cylinder;

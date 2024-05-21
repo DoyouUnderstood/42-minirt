@@ -6,16 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:40:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:25:16 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
 
-#include "../graphics/graphics.h"
+#include "graphics.h"
 #include "../include/shape.h"
-#include "../object/test_shape.h"
-#include "test_shape.h"
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>

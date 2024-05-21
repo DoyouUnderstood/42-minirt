@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:32:26 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 20:56:42 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:09:24 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
+#include "graphics.h"
 #include "../include/init.h"
 #include "../include/parser.h"
 #include "../include/shape.h"

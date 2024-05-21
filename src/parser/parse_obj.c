@@ -6,11 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:53:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:20:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
+#include "cylinder.h"
+
+#include "graphics.h"
 #include "../include/parser.h"
 
 int			parse_vec3(char *str, t_tuple *vec);
@@ -42,9 +44,9 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 t_object	*parse_cylinder(char **parts, t_object *obj)
 {
 	t_material_specs	specs;
-	t_cylinder			*cyl;
+	t_cylinder_data		*cyl;
 
-	cyl = malloc(sizeof(t_cylinder));
+	cyl = malloc(sizeof(t_cylinder_data));
 	if (!parse_vec3(require_str(parts[1]), &cyl->center))
 		error_exit("error cylinder parts1\n");
 	if (!parse_vec3(require_str(parts[2]), &cyl->axis))
@@ -61,7 +63,7 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 	specs.pattern = NULL;
 	if (parts[7] && parts[8] && parts[9])
 		specs.pattern = set_pattern(parts[7], parts[8], parts[9]);
-	obj = object_create_for_cylinder(cyl->center, cyl->axis, specs);
+	obj = cylinder_create(cyl->center, cyl->axis, specs);
 	free(cyl);
 	return (obj);
 }

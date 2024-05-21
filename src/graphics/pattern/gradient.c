@@ -6,13 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:40 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:21:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:08:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shape.h"
 #include "../../object/test_shape.h"
-#include "../graphics.h"
+#include "graphics.h"
 
 t_color	color_subtract(t_color c1, t_color c2)
 {

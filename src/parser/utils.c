@@ -6,11 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:53:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:09:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
+#include "graphics.h"
 #include "../include/init.h"
 #include "../include/parser.h"
 #include "../include/shape.h"

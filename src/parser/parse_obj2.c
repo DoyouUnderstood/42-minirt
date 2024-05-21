@@ -6,12 +6,12 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 05:37:28 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:17:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
-#include "../graphics/graphics.h"
+#include "graphics.h"
 #include "../include/parser.h"
 
 t_object	*create_cube(t_tuple center, double edge_length,
@@ -31,8 +31,6 @@ t_obj_type	get_object_type(char *identifier)
 }
 
 t_object	*parse_cube(char **parts);
-
-t_object	*create_cylinder_cap(t_cylinder *cylinder, t_color color);
 
 void	parse_object(char **parts, t_world *world)
 {

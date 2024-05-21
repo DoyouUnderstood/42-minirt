@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:47:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:20:59 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ typedef struct s_camera
 	t_tuple		direction;
 }	t_camera;
 
-t_object	*object_create_for_cylinder(t_tuple center,
-				t_tuple axis, t_material_specs specs);
 
 t_tuple		cube_local_normal_at(t_shape *cube, t_tuple point);
 

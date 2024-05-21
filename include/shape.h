@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:45:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 05:48:54 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:07:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ typedef struct s_material_specs
 	double					height;
 }							t_material_specs;
 
-t_cylinder					*create_cylinder(t_tuple center, double diameter,
-								double height, t_tuple axis);
 
 typedef struct s_world
 {
@@ -108,25 +106,7 @@ typedef struct s_computations
 	bool					inside;
 }							t_computations;
 
-typedef struct s_intersectionParams
-{
-	double					a;
-	double					b;
-	double					c;
-	double					discriminant;
-	double					t0;
-	double					t1;
-	double					half_height;
-}							t_intersectionParams;
 
-typedef struct s_interesctionData
-{
-	double					y0;
-	double					y1;
-	double					half_height;
-	t_intersectionParams	*p;
-	t_object				*obj;
-}							t_interesctionData;
 
 bool						realoc_inter(t_intersection **intersections,
 								int required_capacity, int *capacity);

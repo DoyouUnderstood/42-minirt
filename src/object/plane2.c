@@ -6,12 +6,12 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 15:40:52 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 06:10:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../graphics/graphics.h"
-#include "../include/shape.h"
+#include "graphics.h"
+#include "shape.h"
 #include "../object/test_shape.h"
 #include "test_shape.h"
 #include "utils.h"
