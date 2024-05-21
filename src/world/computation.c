@@ -6,14 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/16 15:50:24 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
-#include "../include/mathematique.h"
-#include "../include/shape.h"
-#include "../lib/libft/libft.h"
+#include "main.h"
+#include "mathematique.h"
+#include "shape_old.h"
+#include "libft.h"
 #include "../object/test_shape.h"
 #define EPSILON 0.00001
 

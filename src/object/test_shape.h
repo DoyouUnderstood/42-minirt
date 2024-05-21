@@ -6,15 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:25 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 10:40:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:09:44 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_SHAPE_H
 # define TEST_SHAPE_H
 
-# include "../include/object.h"
-# include "../include/shape.h"
+# include "object.h"
+# include "shape_old.h"
 
 typedef struct s_ray	t_ray;
 typedef struct s_shape	t_shape;

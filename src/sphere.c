@@ -6,19 +6,19 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 09:25:16 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:12:38 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
 
 #include "graphics.h"
-#include "../include/shape.h"
+#include "shape_old.h"
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
 
-static t_sphere_data	*sphere_data_create(t_tuple center, double diameter)
+static t_sphere_data	*sphere_create_data(t_tuple center, double diameter)
 {
 	t_sphere_data	*sphere_data;
 
@@ -94,7 +94,7 @@ t_object	*sphere_create(t_tuple center, double diameter,
 	t_sphere_data	*sphere_data;
 	t_object		*obj;
 
-	sphere_data = sphere_data_create(center, diameter);
+	sphere_data = sphere_create_data(center, diameter);
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
 	obj->obj = sphere_data;

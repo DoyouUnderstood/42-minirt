@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:27 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 17:17:37 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:52 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
-#include "../include/mathematique.h"
-#include "../include/shape.h"
+#include "main.h"
+#include "mathematique.h"
+#include "shape_old.h"
 #include <math.h>
 
 void	camera_create(float fov_degrees, t_tuple position, t_tuple direction,

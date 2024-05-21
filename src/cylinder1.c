@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 09:21:11 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:05:00 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include <stdlib.h>
 
-static t_cylinder_data	*create_cylinder_data(t_tuple center, double diameter, double height,
+static t_cylinder_data	*cylinder_create_data(t_tuple center, double diameter, double height,
 		t_tuple axis)
 {
 	t_cylinder_data	*cylinder;
@@ -52,7 +52,7 @@ t_object	*cylinder_create(t_tuple center, t_tuple axis,
 	t_tuple		default_axis;
 	t_matrix	rotation;
 
-	cylinder = create_cylinder_data(center, specs.diameter, specs.height, axis);
+	cylinder = cylinder_create_data(center, specs.diameter, specs.height, axis);
 	obj = malloc(sizeof(t_object));
 	obj->type = CYLINDER;
 	obj->obj = cylinder;

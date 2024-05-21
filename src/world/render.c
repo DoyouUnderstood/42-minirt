@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:34 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/15 20:47:18 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:41 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
-#include "../include/mathematique.h"
-#include "../include/shape.h"
+#include "main.h"
+#include "mathematique.h"
+#include "shape_old.h"
 #include <math.h>
 #include <stdio.h>
 

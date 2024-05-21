@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltd <ltd@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/15 17:31:55 by ltd              ###   ########.fr       */
+/*   Updated: 2024/05/21 11:12:01 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/init.h"
-#include "../include/parser.h"
-#include "../include/shape.h"
-#include "../lib/GNL/get_next_line.h"
-#include "../lib/ft_printf/ft_printf.h"
-#include "../lib/libft/libft.h"
+#include "init.h"
+#include "parser.h"
+#include "shape_old.h"
+#include "get_next_line.h"
+#include "ft_printf.h"
+#include "libft.h"
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>

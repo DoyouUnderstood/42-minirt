@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 10:08:14 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:09:20 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "color.h"
 # include "mathematique.h"
 # include "ray.h"
-# include "shape.h"
+# include "shape_old.h"
 # define EPSILON 0.00001
 
 typedef struct s_shape			t_shape;

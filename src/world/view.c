@@ -6,13 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:43 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:53 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:14:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
-#include "../include/mathematique.h"
-#include "../include/shape.h"
+#include "main.h"
+#include "mathematique.h"
+#include "shape_old.h"
 
 // Fonction view_transform
 t_matrix	compute_orientation(t_tuple forward, t_tuple upn, t_tuple from)
