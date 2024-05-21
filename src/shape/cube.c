@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:19:05 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:26:34 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ t_object	*cube_create(t_tuple center, double edge_length,
 	shape->transformation = matrix_translation(center.x, center.y, center.z);
 	shape->transformation = matrix_mult(shape->transformation,
 			matrix_scaling(edge_length, edge_length, edge_length));
+	shape->inv_transformation = matrix_inverse(shape->transformation);
+	shape->tinv_transformation = matrix_transpose(shape->inv_transformation);
 	shape->material = material_create_default(&specs.color, specs.reflectivity,
 			specs.pattern);
 	shape->material->reflectiv = specs.reflectivity;

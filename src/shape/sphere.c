@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:18:31 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:28:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ t_object	*sphere_create(t_tuple center, double diameter,
 	obj->shape = malloc(sizeof(t_shape));
 	obj->shape->transformation = matrix_mult(matrix_translation(center.x,
 				center.y, center.z), matrix_scaling(1, 1, 1));
+	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
+	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
 	obj->shape->material = material_create_default(&specs.color,
 			specs.reflectivity, specs.pattern);
 	obj->shape->local_intersect = sphere_intersect;

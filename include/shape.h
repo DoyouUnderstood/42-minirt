@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:25 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:07:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:24:35 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef t_intersection	*(*t_local_intersect)(t_object *obj, t_ray *ray,
 typedef struct s_shape
 {
 	t_matrix			transformation;
+	t_matrix			inv_transformation;
+	t_matrix			tinv_transformation;
 	t_material			*material;
 	t_ray				saved_ray;
 	t_local_normal_at	local_normal_at;

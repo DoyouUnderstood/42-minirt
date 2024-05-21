@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:19:21 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:38:08 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@
 // fonction intersect generalise
 t_intersection	*intersect_shape(t_object *object, t_ray *ray, int *count)
 {
-	t_matrix	inverse_transform;
 	t_ray		local_ray;
 
 	*count = 0;
-	inverse_transform = matrix_inverse(object->shape->transformation);
-	local_ray = ray_transform(inverse_transform, *ray);
+	local_ray = ray_transform(object->shape->inv_transformation, *ray);
 	return (object->shape->local_intersect(object, &local_ray, count));
 }
 
@@ -33,14 +31,12 @@ t_tuple	normal_at_shape(t_object *obj, t_tuple world_point)
 {
 	t_tuple		local_point;
 	t_tuple		local_normal;
-	t_matrix	trans_inv;
 	t_tuple		world_normal;
 
 	local_point = matrix_mult_tuple(matrix_inverse(obj->shape->transformation),
 			world_point);
 	local_normal = obj->shape->local_normal_at(obj->shape, local_point);
-	trans_inv = matrix_transpose(matrix_inverse(obj->shape->transformation));
-	world_normal = matrix_mult_tuple(trans_inv, local_normal);
+	world_normal = matrix_mult_tuple(obj->shape->tinv_transformation, local_normal);
 	world_normal.w = 0;
 	return (vector_normalize(world_normal));
 }

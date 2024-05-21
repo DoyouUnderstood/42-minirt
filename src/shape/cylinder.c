@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 14:17:51 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:26:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ t_object	*cylinder_create(t_tuple center, t_tuple axis,
 	rotation = align_axis(default_axis, axis);
 	obj->shape->transformation = matrix_mult(matrix_translation(center.x,
 				center.y, center.z), rotation);
+	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
+	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
 	obj->shape->material = material_create_default(&specs.color,
 			specs.reflectivity, specs.pattern);
 	obj->shape->local_intersect = cylinder_intersect;
