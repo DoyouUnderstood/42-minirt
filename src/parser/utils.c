@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:22:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:16:33 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,6 @@ void	rgb(char *str, t_color *color)
 	color->b = b;
 }
 
-void	ambient_check(char **str, double *intensity)
-{
-	ft_atod(*str, intensity);
-	if (!in_range(0.0, 1.0, *intensity))
-		error_exit("error with ambient value");
-}
-
-t_amb_light	*parse_amb(char **str)
-{
-	t_amb_light	*amb;
-
-	amb = malloc(sizeof(t_amb_light));
-	ambient_check(&str[1], &(amb->ambient));
-	rgb(str[2], &(amb->color));
-	amb->color = color_from_rgb(amb->color.r, amb->color.g,
-			amb->color.b);
-	return (amb);
-}
 
 void	free_split(char **parts)
 {
