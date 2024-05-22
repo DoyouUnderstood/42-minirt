@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 11:05:44 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:02:36 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	parser_match_char(t_parser *parser, char c)
 	return (true);
 }
 
-bool	parser_match_alpha(t_parser *parser, char *s)
+bool	parser_match_string(t_parser *parser, char *s)
 {
 	int	i;
 
@@ -131,8 +131,16 @@ bool	parser_consume_double(t_parser *parser, double *d)
 	return (true);
 }
 
-void	parser_skip_spaces(t_parser *parser)
+bool	parser_skip_spaces(t_parser *parser)
 {
+	if (!parser_match_char(parser, ' ') && !parser_match_char(parser, '\t'))
+		return (false);
 	while (parser_match_char(parser, ' ' || parser_match_char(parser, '\t')))
-		;
+	{}
+	return (true);
+}
+
+bool	parser_at_end(t_parser *parser)
+{
+	return (parser_peek(parser) == '\0');
 }

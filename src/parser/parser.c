@@ -6,10 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 11:43:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:05:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_parser.h"
 #include "ft_error.h"
 #include "parser.h"
 #include "get_next_line.h"
@@ -71,17 +72,33 @@ void	verify_world(t_world *world)
 	}
 }
 
-// parse the whole .rt
-void	parse_line(char *line, t_world *world)
+char	*parse_resolution(t_parser *parser, t_world *world)
 {
-	char	**ptr;
+	if (!parser_skip_spaces(parser))
+		return ("Resolution: Missing space");
+	if (!parser_consume_int(parser, &world->vsize))
+		return ("Resolution: Invalid height");
+	parser_skip_spaces(parser);
+	if (!parser_consume_int(parser, &world->hsize))
+		return ("Resolution: Invalid width");
+	parser_skip_spaces(parser);
+	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
+		return ("Resolution: Invalid data");
+	return (NULL);
+}
 
+// parse the whole .rt
+char	*parse_line(char *line, t_world *world)
+{
+	t_parser	parser;
+	char		**ptr;
+
+	parser_init(&parser, line);
+	parser_skip_spaces(&parser);
 	ptr = ft_split(line, ' ');
-	if (!ft_strncmp(ptr[0], "R", ft_strlen(ptr[0])))
-	{
-		world->vsize = atoi(ptr[1]);
-		world->hsize = atoi(ptr[2]);
-	}
+	
+	if (parser_match_string(&parser, "R"))
+		return (parse_resolution(&parser, world));
 	if (!ft_strncmp(ptr[0], "A", ft_strlen(ptr[0])))
 		world->amb = parse_amb(ptr);
 	if (!ft_strncmp(ptr[0], "C", ft_strlen(ptr[0])))
@@ -91,6 +108,7 @@ void	parse_line(char *line, t_world *world)
 	else
 		parse_object(ptr, world);
 	free_split(ptr);
+	return (NULL);
 }
 
 bool	is_empty_line(char *line)
@@ -110,6 +128,7 @@ t_world	*read_and_parse(char *filename)
 	t_world	*world;
 	int		fd;
 	char	*line;
+	char	*error;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -121,7 +140,12 @@ t_world	*read_and_parse(char *filename)
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (!is_empty_line(line))
-			parse_line(line, world);
+			error = parse_line(line, world);
+		if (error)
+		{
+			close(fd);
+			error_exit(error);
+		}
 		line = get_next_line(fd);
 	}
 	close(fd);
