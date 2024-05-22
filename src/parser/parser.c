@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 11:24:46 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:43:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,54 +72,59 @@ void	verify_world(t_world *world)
 }
 
 // parse the whole .rt
-t_world	*parse(char **str, t_world *world)
+void	parse_line(char *line, t_world *world)
 {
 	char	**ptr;
-	int		i;
 
-	i = 0;
-	while (str[i])
+	ptr = ft_split(line, ' ');
+	if (!ft_strncmp(ptr[0], "R", ft_strlen(ptr[0])))
 	{
-		ptr = ft_split(str[i], ' ');
-		if (!ft_strncmp(ptr[0], "R", ft_strlen(ptr[0])))
-		{
-			world->vsize = atoi(ptr[1]);
-			world->hsize = atoi(ptr[2]);
-		}
-		if (!ft_strncmp(ptr[0], "A", ft_strlen(ptr[0])))
-			world->amb = parse_amb(ptr);
-		if (!ft_strncmp(ptr[0], "C", ft_strlen(ptr[0])))
-			world->camera = parse_camera(ptr, world->hsize, world->vsize);
-		else if (!strncmp(ptr[0], "L", ft_strlen(ptr[0])))
-			world->light = parse_light(ptr);
-		else
-			parse_object(ptr, world);
-		free_split(ptr);
-		i++;
+		world->vsize = atoi(ptr[1]);
+		world->hsize = atoi(ptr[2]);
 	}
-	verify_world(world);
-	return (world);
+	if (!ft_strncmp(ptr[0], "A", ft_strlen(ptr[0])))
+		world->amb = parse_amb(ptr);
+	if (!ft_strncmp(ptr[0], "C", ft_strlen(ptr[0])))
+		world->camera = parse_camera(ptr, world->hsize, world->vsize);
+	else if (!strncmp(ptr[0], "L", ft_strlen(ptr[0])))
+		world->light = parse_light(ptr);
+	else
+		parse_object(ptr, world);
+	free_split(ptr);
+}
+
+bool	is_empty_line(char *line)
+{
+	while (*line)
+	{
+		if (*line != ' ' && *line != '\t')
+			return (false);
+		line++;
+	}
+	return (true);
 }
 
 // read .rt and fill and return the whole world.
 t_world	*read_and_parse(char *filename)
 {
-	t_world	*scene;
-	char	**ptr;
-	char	*str;
-	int		i;
+	t_world	*world;
+	int		fd;
+	char	*line;
 
-	i = 0;
-	str = file_to_str(filename);
-	ptr = ft_split(str, '\n');
-	scene = world_create();
-	scene = parse(ptr, scene);
-	free(str);
-	while (ptr[i])
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error_exit("Can't open the file");
+	world = world_create();
+	line = get_next_line(fd);
+	while (line)
 	{
-		free(ptr[i]);
-		i++;
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		if (!is_empty_line(line))
+			parse_line(line, world);
+		line = get_next_line(fd);
 	}
-	free(ptr);
-	return (scene);
+	close(fd);
+	verify_world(world);
+	return (world);
 }

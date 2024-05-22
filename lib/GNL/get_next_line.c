@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:42:00 by alletond          #+#    #+#             */
-/*   Updated: 2023/11/25 00:02:19 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:38:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	*get_next_line(int fd)
 	char		*res;
 	int			readret;
 	int			pos;
-	write(1, "suuu", 4);
 
 	if (check_error(fd, &stack))
 		return (NULL);
@@ -105,6 +104,5 @@ char	*get_next_line(int fd)
 			stack = stackcut(stack, pos + 1);
 			return (res);
 		}
-		printf("fsfs");
 	}
 }
