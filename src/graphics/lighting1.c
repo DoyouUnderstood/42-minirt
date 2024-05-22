@@ -6,13 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:45:16 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:18:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lighting.h"
 #include "object.h"
-#include "functions.h"
+#include "tuple.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -35,13 +35,13 @@ t_color	calculate_ef_c(const t_lighting *params)
 		else
 		{
 			ef_c = color_multiply(params->material->color,
-					params->light->intensity);
+					params->light->color);
 		}
 	}
 	else
 	{
 		ef_c = color_multiply(params->material->color,
-				params->light->intensity);
+				params->light->color);
 	}
 	return (ef_c);
 }
@@ -64,12 +64,12 @@ t_color	calculate_specular(t_specular_params *params)
 	double	factor;
 	t_color	result;
 
-	reflectv = reflect(vector_negate(params->lightv), params->normalv);
+	reflectv = vector_reflect(vector_negate(params->lightv), params->normalv);
 	reflect_dot_eye = vector_dot(reflectv, params->eyev);
 	if (reflect_dot_eye > 0)
 	{
 		factor = pow(reflect_dot_eye, params->material->shininess);
-		result = color_multiply_scalar(params->light->intensity,
+		result = color_multiply_scalar(params->light->color,
 				params->material->specular * factor);
 	}
 	else

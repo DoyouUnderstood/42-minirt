@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 18:01:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:14:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*parse_camera(t_parser *parser, t_world *world)
 char	*parse_light(t_parser *parser, t_world *world)
 {
 	t_tuple	position;
-	double	diffuse;
+	double	intensity;
 	t_color	color;
 
 	if (!parser_skip_spaces(parser))
@@ -96,16 +96,16 @@ char	*parse_light(t_parser *parser, t_world *world)
 		return ("Light: Invalid position");
 	if (!parser_skip_spaces(parser))
 		return ("Light: Missing space after position");
-	if (!parser_consume_double(parser, &diffuse) || diffuse < 0.0 || diffuse > 1.0)
-		return ("Light: Invalid diffuse parameter");
+	if (!parser_consume_double(parser, &intensity) || intensity < 0.0 || intensity > 1.0)
+		return ("Light: Invalid intensity parameter");
 	if (!parser_skip_spaces(parser))
-		return ("Light: Missing space after diffuse parameter");
+		return ("Light: Missing space after intensity parameter");
 	if (parse_color(parser, &color))
 		return ("Light: Invalid color");
 	parser_skip_spaces(parser);
 	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
 		return ("Light: Invalid data at end of line");
-	world->light = light_create(color, position, diffuse);
+	world->light = light_create(color, position, intensity);
 	if (!world->light)
 		return ("Light: malloc error");
 	return (NULL);

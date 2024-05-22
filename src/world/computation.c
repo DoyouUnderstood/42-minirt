@@ -6,14 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/22 18:22:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:08:34 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computation.h"
 #include "intersection.h"
 #include "world.h"
-#include "functions.h"
+#include "tuple.h"
 
 #include "libft.h"
 #define EPSILON 0.00001
@@ -28,7 +28,7 @@ void	prepare_computations(t_computations *comps,
 	comps->point = t_point_position(ray, intersection->t);
 	comps->eyev = vector_negate(ray->direction);
 	comps->normalv = normal_at_shape(intersection->obj, comps->point);
-	comps->reflectv = reflect(ray->direction, comps->normalv);
+	comps->reflectv = vector_reflect(ray->direction, comps->normalv);
 	if (vector_dot(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;

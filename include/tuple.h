@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:31 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 15:52:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:09:16 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ t_tuple	vector_negate(t_tuple v);
 t_tuple	vector_normalize(t_tuple a);
 double	vector_dot(t_tuple a, t_tuple b);
 t_tuple	vector_cross(t_tuple a, t_tuple b);
+t_tuple	vector_reflect(t_tuple incident, t_tuple normal);
 
 #endif

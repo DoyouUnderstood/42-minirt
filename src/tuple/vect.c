@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:38 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 15:52:44 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:07:15 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,16 @@ t_tuple	vector_cross(t_tuple a, t_tuple b)
 {
 	return ((t_tuple){.x = a.y * b.z - a.z * b.y, .y = a.z * b.x - a.x * b.z,
 		.z = a.x * b.y - a.y * b.x, .w = 0.0});
+}
+
+t_tuple	vector_reflect(t_tuple incident, t_tuple normal)
+{
+	double	scale;
+	t_tuple	scaled_normal;
+	t_tuple	reflection;
+
+	scale = 2 * vector_dot(incident, normal);
+	scaled_normal = tuple_scale(normal, scale, scale, scale);
+	reflection = tuple_subtract(incident, scaled_normal);
+	return (reflection);
 }

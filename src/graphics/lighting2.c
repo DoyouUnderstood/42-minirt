@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:55:24 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:17:07 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_color	calculate_lighting_components(t_lighting *params,
 	if (light_dot_normal > 0)
 	{
 		diffuse = calculate_diffuse(ef_c, light_dot_normal,
-				params->light->diffuse);
+				params->light->intensity);
 		spec_params = prepare_specular_params(params,
 				vector_normalize(tuple_subtract(params->light->pos,
 						*params->position)));

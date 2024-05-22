@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:32 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:30:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:07:23 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,6 @@
 #include "computation.h"
 #include "world.h"
 #include "functions.h"
-
-t_tuple	reflect(t_tuple incident, t_tuple normal)
-{
-	double	scale;
-	t_tuple	scaled_normal;
-	t_tuple	reflection;
-
-	scale = 2 * vector_dot(incident, normal);
-	scaled_normal = tuple_scale(normal, scale, scale, scale);
-	reflection = tuple_subtract(incident, scaled_normal);
-	return (reflection);
-}
 
 t_color	reflected_color(t_world *world, const t_computations *comps,
 		int remaining)

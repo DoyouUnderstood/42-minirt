@@ -36,9 +36,6 @@ t_ray	ray_init(t_mlx *mlx, int x, int y,
 			double projection_plane_z);
 // ============== NORMAL ===============
 
-t_tuple	reflect(t_tuple incident, t_tuple normal);
-
-
 void					mlx_initialisation(t_world *world);
 
 t_color						reflected_color(t_world *world,
