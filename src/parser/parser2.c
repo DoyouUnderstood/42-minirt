@@ -6,12 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 17:12:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:28:17 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
+#include "ft_error.h"
 #include "parser.h"
+#include "tuple.h"
 
 char	*parse_resolution(t_parser *parser, t_world *world)
 {
@@ -45,6 +47,37 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	error = parse_color(parser, &amb_light->color);
 	if (error)
 		return (parser_handle_error(amb_light, error));
+	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
+		return ("Ambient light: Invalid data at end of line");
 	world->amb = amb_light;
+	return (NULL);
+}
+
+char	*parse_camera(t_parser *parser, t_world *world)
+{
+	t_tuple	position;
+	t_tuple	direction;
+	double	fov;
+
+	if (!world->vsize || !world->hsize)
+		return ("Camera: Camera defined before resolution");
+	if (!parser_skip_spaces(parser))
+		return ("Camera: Missing space after C");
+	if (parse_tuple(parser, &position, point_create))
+		return ("Camera: Error parsing position");
+	if (!parser_skip_spaces(parser))
+		return ("Camera: Missing space after position");
+	if (parse_tuple(parser, &direction, vector_create))
+		return ("Camera: Error parsing direction");
+	if (!parser_skip_spaces(parser))
+		return ("Camera: Missing space after direction");
+	if (!parser_consume_double(parser, &fov) || fov < 0.0 || fov > 70.0)
+		return ("Camera: Invalid field of view");
+	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
+		return ("Camera: Invalid data at end of line");
+	world->camera = camera_create(fov, position, direction,
+		world->vsize, world->hsize);
+	if (!world->camera)
+		return ("Camera: malloc error");
 	return (NULL);
 }
