@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:20:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:24:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_world	*parse(char **str, t_world *world)
 }
 
 // read .rt and fill and return the whole world.
-t_world	*read_and_parse(char **argv)
+t_world	*read_and_parse(char *filename)
 {
 	t_world	*scene;
 	char	**ptr;
@@ -110,7 +110,7 @@ t_world	*read_and_parse(char **argv)
 	int		i;
 
 	i = 0;
-	str = file_to_str(argv[1]);
+	str = file_to_str(filename);
 	ptr = ft_split(str, '\n');
 	scene = world_create();
 	scene = parse(ptr, scene);

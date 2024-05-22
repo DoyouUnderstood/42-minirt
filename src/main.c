@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/21 18:29:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:25:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	world = NULL;
 	if (argc != 2)
 		return (0);
-	world = read_and_parse(argv);
+	world = read_and_parse(argv[1]);
 	mlx_initialisation(world);
 	render(world);
 	return (0);
