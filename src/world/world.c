@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 18:27:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:24:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,6 @@
 #include "world.h"
 
 #include <stdlib.h>
-
-#define MAX_OBJECTS 30
-
-// add object into world.
-void	world_add_object(t_world *world, t_object *object)
-{
-	if (object == NULL)
-		return ;
-	if (world->object_count < MAX_OBJECTS)
-	{
-		world->objects[world->object_count++] = object;
-	}
-	else
-	{
-		error_exit("faut enlever des objects l'ami!\n");
-	}
-}
 
 // initialisation of world.
 t_world	*world_create(void)
@@ -71,4 +54,32 @@ void	world_destroy(t_world *world)
 	}
 	free(world->objects);
 	free(world);
+}
+
+char	*world_validate(t_world *world)
+{
+	if (!world->camera)
+		return ("Erreur : Aucune caméra définie dans le fichier.");
+	if (!world->amb)
+		return ("Erreur : Aucune lumière ambiante définie dans le fichier.\n");
+	if (!world->light)
+		return ("Erreur : Aucune lumière principale définie dans le fichier.\n");
+	if (!world->objects)
+		return ("Erreur : Aucune forme géométrique définie dans le fichier.\n");
+	return (NULL);
+}
+
+// add object into world.
+void	world_add_object(t_world *world, t_object *object)
+{
+	if (object == NULL)
+		return ;
+	if (world->object_count < MAX_OBJECTS)
+	{
+		world->objects[world->object_count++] = object;
+	}
+	else
+	{
+		error_exit("faut enlever des objects l'ami!\n");
+	}
 }

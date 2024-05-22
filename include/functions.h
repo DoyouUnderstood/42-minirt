@@ -74,10 +74,8 @@ t_intersection				*hit(t_intersection *intersections, int count);
 
 // ============= world =================
 
-t_world						*world_create(void);
-void						world_add_object(t_world *world, t_object *object);
-t_intersection				*intersect_world(t_world *world, t_ray *ray,
-								int *count);
+t_intersection	*intersect_world(t_world *world, t_ray *ray,
+					int *count);
 
 
 #endif

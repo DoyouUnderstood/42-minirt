@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 18:04:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:12:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-void	verify_world(t_world *world)
-{
-	if (!world->camera)
-		fprintf(stderr, "Erreur : Aucune caméra définie dans le fichier.\n");
-	if (!world->amb)
-		fprintf(stderr,
-			"Erreur : Aucune lumière ambiante définie dans le fichier.\n");
-	if (!world->light)
-		fprintf(stderr,
-			"Erreur : Aucune lumière principale définie dans le fichier.\n");
-	if (!world->objects)
-		fprintf(stderr,
-			"Erreur : Aucune forme géométrique définie dans le fichier.\n");
-	if (!world->camera || !world->amb || !world->light || !world->objects)
-	{
-		fprintf(stderr,
-			"Échec de chargement du monde : des composants sont manquants.\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
 // parse a line from the .rt file
-char	*parse_line(char *line, t_world *world)
+static char	*parse_line(char *line, t_world *world)
 {
 	t_parser	parser;
 	char		**ptr;
@@ -70,7 +49,7 @@ char	*parse_line(char *line, t_world *world)
 	return (NULL);
 }
 
-bool	is_empty_line(char *line)
+static bool	is_empty_line(char *line)
 {
 	while (*line)
 	{
@@ -108,6 +87,8 @@ t_world	*parse_rt_file(char *filename)
 	close(fd);
 	if (error)
 		error_exit(error);
-	verify_world(world);
+	error = world_validate(world);
+	if (error)
+		error_exit(error);
 	return (world);
 }
