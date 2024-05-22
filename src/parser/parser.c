@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 16:45:44 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:04:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*parse_line(char *line, t_world *world)
 	if (parser_match_string(&parser, "A"))
 		return (parse_ambient(&parser, world));
 	if (!ft_strncmp(ptr[0], "C", ft_strlen(ptr[0])))
-		world->camera = parse_camera(ptr, world->hsize, world->vsize);
+		world->camera = parse_cam(ptr, world->hsize, world->vsize);
 	else if (!strncmp(ptr[0], "L", ft_strlen(ptr[0])))
 		world->light = parse_light(ptr);
 	else

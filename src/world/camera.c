@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:27 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 18:26:41 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:12:08 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,36 @@
 #include "functions.h"
 
 #include <math.h>
+#include <stdlib.h>
 
-void	camera_create(float fov_degrees, t_tuple position, t_tuple direction,
-		t_camera **cam)
+t_camera	*camera_create(float fov_degrees, t_tuple pos, t_tuple dir,
+	int vsize, int hsize)
 {
-	float	half_view;
-	float	aspect;
+	t_camera	*camera;
+	float		half_view;
+	float		aspect;
 
-	(*cam)->fov = fov_degrees * M_PI / 180.0;
-	(*cam)->position = position;
-	(*cam)->direction = direction;
-	(*cam)->transform = view_transform(position, direction, vector_create(0, 1,
-				0));
-	half_view = tan((*cam)->fov / 2.0);
-	aspect = (float)(*cam)->hsize / (float)(*cam)->vsize;
+	camera = malloc(sizeof(*camera));
+	if (!camera)
+		return (NULL);
+	camera->vsize = vsize;
+	camera->hsize = hsize;
+	camera->fov = fov_degrees * M_PI / 180.0;
+	camera->position = pos;
+	camera->direction = dir;
+	camera->transform = view_transform(pos, dir, vector_create(0, 1, 0));
+	half_view = tan(camera->fov / 2.0);
+	aspect = (float) camera->hsize / (float) camera->vsize;
 	if (aspect >= 1)
 	{
-		(*cam)->half_width = half_view;
-		(*cam)->half_height = half_view / aspect;
+		camera->half_width = half_view;
+		camera->half_height = half_view / aspect;
 	}
 	else
 	{
-		(*cam)->half_width = half_view * aspect;
-		(*cam)->half_height = half_view;
+		camera->half_width = half_view * aspect;
+		camera->half_height = half_view;
 	}
-	(*cam)->pixel_size = ((*cam)->half_width * 2) / (*cam)->hsize;
+	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
+	return (camera);
 }

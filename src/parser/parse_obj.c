@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:21:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:10:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,20 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 }
 
 // pe inverser pos et direction
-t_camera	*parse_camera(char **parts, int hsize, int vsize)
+t_camera	*parse_cam(char **parts, int hsize, int vsize)
 {
 	double		fov;
 	t_camera	*camera;
 	t_tuple		position;
 	t_tuple		direction;
 
-	camera = malloc(sizeof(t_camera));
 	if (!parse_vec3(parts[1], &position))
 		error_exit("Error with parsing position\n");
 	if (!parse_vec3(parts[2], &direction))
 		error_exit("Error with parsing direction\n");
 	if (!ft_atod(parts[3], &fov) || !in_range(0, 70, fov))
 		error_exit("Error with parsing or FOV out of range\n");
-	camera->vsize = vsize;
-	camera->hsize = hsize;
-	camera_create(fov, position, direction, &camera);
+	camera = camera_create(fov, position, direction, vsize, hsize);
 	if (!camera)
 		error_exit("Failed to create camera\n");
 	return (camera);

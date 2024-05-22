@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 16:46:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:12:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	world->amb = amb_light;
 	return (NULL);
 }
-
