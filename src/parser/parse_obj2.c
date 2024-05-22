@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 18:19:48 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:47:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 #include "cube.h"
 #include "ft_error.h"
 #include "functions.h"
+#include "libft.h"
 
 #include "parser.h"
 
 t_obj_type	get_object_type(char *identifier)
 {
-	if (!strncmp(identifier, "sp", 2))
+	if (!ft_strncmp(identifier, "sp", 2))
 		return (SPHERE);
-	else if (!strncmp(identifier, "pl", 2))
+	else if (!ft_strncmp(identifier, "pl", 2))
 		return (PLANE);
-	else if (!strncmp(identifier, "cy", 2))
+	else if (!ft_strncmp(identifier, "cy", 2))
 		return (CYLINDER);
-	else if (!strncmp(identifier, "cu", 2))
+	else if (!ft_strncmp(identifier, "cu", 2))
 		return (CUBE);
 	return (INVALID_TYPE);
 }

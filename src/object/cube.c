@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:32:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:09:56 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 
 #include <math.h>
 #include <stdlib.h>
+
+static t_cube_data	*cube_create_data(t_tuple center, double edge_len)
+{
+	t_cube_data	*cube_data;
+
+	cube_data = malloc(sizeof(*cube_data));
+	if (!cube_data)
+		return (NULL);
+	cube_data->center = center;
+	cube_data->edge_len = edge_len;
+	return (cube_data);
+}
 
 static void	check_axis(double origin, double direction, double *tmin,
 		double *tmax)
@@ -91,11 +103,12 @@ static t_tuple	cube_normal_at(t_shape *cube, t_tuple point)
 t_object	*cube_create(t_tuple center, double edge_length,
 		t_material_specs specs)
 {
-	t_cube_data	*cube;
+	t_cube_data	*cube_data;
 	t_shape		*shape;
 	t_object	*obj;
 
-	cube = malloc(sizeof(t_cube_data));
+
+	cube_data = cube_create_data(center, edge_length);
 	shape = malloc(sizeof(t_shape));
 	obj = malloc(sizeof(t_object));
 	shape->transformation = matrix_translation(center.x, center.y, center.z);
@@ -109,7 +122,7 @@ t_object	*cube_create(t_tuple center, double edge_length,
 	shape->local_intersect = cube_intersect;
 	shape->local_normal_at = cube_normal_at;
 	obj->type = CUBE;
-	obj->obj = cube;
+	obj->obj = cube_data;
 	obj->shape = shape;
 	return (obj);
 }
