@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 13:52:12 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 13:57:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,6 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-char	*file_to_str(const char *filename)
-{
-	int			fd;
-	struct stat	st;
-	char		*file_content;
-	ssize_t		bytes_read;
-
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		error_exit("error open\n");
-	if (fstat(fd, &st) == -1)
-		error_exit("error fstat\n");
-	file_content = malloc(st.st_size + 1);
-	bytes_read = read(fd, file_content, st.st_size);
-	if (bytes_read == -1)
-	{
-		perror("Error reading file");
-		free(file_content);
-		close(fd);
-		return (NULL);
-	}
-	file_content[bytes_read] = '\0';
-	close(fd);
-	return (file_content);
-}
 
 void	verify_world(t_world *world)
 {
@@ -134,7 +108,7 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	return (NULL);
 }
 
-// parse the whole .rt
+// parse a line from the .rt file
 char	*parse_line(char *line, t_world *world)
 {
 	t_parser	parser;
@@ -189,10 +163,9 @@ t_world	*read_and_parse(char *filename)
 		if (!is_empty_line(line))
 			error = parse_line(line, world);
 		if (error)
-		{
 			close(fd);
+		if (error)
 			error_exit(error);
-		}
 		line = get_next_line(fd);
 	}
 	close(fd);
