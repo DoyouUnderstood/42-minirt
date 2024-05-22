@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 18:01:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:04:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "libft.h"
 # include <stdbool.h>
 
-t_world	*read_and_parse(char *filename);
+t_world	*parse_rt_file(char *filename);
 
 // Utils
 char	*parser_handle_error(void *p, char *msg);

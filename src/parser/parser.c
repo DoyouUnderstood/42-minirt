@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 18:01:24 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:04:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ bool	is_empty_line(char *line)
 }
 
 // read .rt and fill and return the whole world.
-t_world	*read_and_parse(char *filename)
+t_world	*parse_rt_file(char *filename)
 {
 	t_world	*world;
 	int		fd;
