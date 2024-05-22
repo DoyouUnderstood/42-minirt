@@ -1,19 +1,20 @@
 {
     "files.associations": {
-        "mathematique.h": "c",
-        "test_shape.h": "c",
-        "shape.h": "c",
-        "options.h": "c",
-        "random": "c",
-        "optional": "c",
-        "algorithm": "c",
-        "math.h": "c",
-        "mlx.h": "c",
-        "stdlib.h": "c",
-        "init.h": "c",
-        "libft.h": "c",
-        "stdint.h": "c",
-        "main.h": "c",
-        "iterator": "c"
-    }
+		"mathematique.h": "c",
+		"test_shape.h": "c",
+		"shape.h": "c",
+		"options.h": "c",
+		"random": "c",
+		"optional": "c",
+		"algorithm": "c",
+		"math.h": "c",
+		"mlx.h": "c",
+		"stdlib.h": "c",
+		"init.h": "c",
+		"libft.h": "c",
+		"stdint.h": "c",
+		"main.h": "c",
+		"iterator": "c",
+		"ft_parser.h": "c"
+	}
 }
