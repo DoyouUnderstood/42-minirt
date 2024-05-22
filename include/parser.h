@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 17:29:04 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:01:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ char	*parse_tuple(t_parser *parser, t_tuple *tuple,
 char	*parse_resolution(t_parser *parser, t_world *world);
 char	*parse_ambient(t_parser *parser, t_world *world);
 char	*parse_camera(t_parser *parser, t_world *world);
+char	*parse_light(t_parser *parser, t_world *world);
 
 
 bool		in_range(double start, double end, double value);
 char		*advance_to_next_component(char **str);
 int			parse_vec3(char *str, t_tuple *vec);
-t_light		*parse_light(char **parts);
 void		parse_object(char **parts, t_world *world);
 t_object	*parse_plane(char **parts, t_object *obj);
 t_object	*parse_sphere(char **parts, t_object *object);

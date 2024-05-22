@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 18:47:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:45:38 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,23 +102,4 @@ t_object	*parse_sphere(char **parts, t_object *object)
 		specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
 	object = sphere_create(center, diameter, specs);
 	return (object);
-}
-
-t_light	*parse_light(char **parts)
-{
-	t_tuple	pos;
-	t_color	color;
-	t_light	*light;
-	double	diffuse;
-
-	if (!parse_vec3(parts[1], &pos))
-		error_exit("error with parsing\n");
-	if (!ft_atod(parts[2], &diffuse))
-		error_exit("error with parsing\n");
-	if (!valid_bright(diffuse))
-		error_exit("error with parsing\n");
-	rgb(parts[3], &color);
-	color = color_from_rgb(color.r, color.g, color.b);
-	light = light_create(color, pos, diffuse);
-	return (light);
 }

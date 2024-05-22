@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 17:33:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:01:24 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ char	*parse_line(char *line, t_world *world)
 		return (parse_ambient(&parser, world));
 	if (parser_match_string(&parser, "C"))
 		return (parse_camera(&parser, world));
-	if (!strncmp(ptr[0], "L", ft_strlen(ptr[0])))
-		world->light = parse_light(ptr);
+	if (parser_match_string(&parser, "L"))
+		return (parse_light(&parser, world));
 	else
 		parse_object(ptr, world);
 	free_split(ptr);
@@ -96,17 +96,18 @@ t_world	*read_and_parse(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
+		error = NULL;
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (!is_empty_line(line))
 			error = parse_line(line, world);
 		if (error)
-			close(fd);
-		if (error)
-			error_exit(error);
+			break ;
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (error)
+		error_exit(error);
 	verify_world(world);
 	return (world);
 }
