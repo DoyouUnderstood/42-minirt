@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 13:57:57 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:45:44 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,68 +44,6 @@ void	verify_world(t_world *world)
 			"Échec de chargement du monde : des composants sont manquants.\n");
 		exit(EXIT_FAILURE);
 	}
-}
-
-char	*parse_resolution(t_parser *parser, t_world *world)
-{
-	if (!parser_skip_spaces(parser))
-		return ("Resolution: Missing space");
-	if (!parser_consume_int(parser, &world->vsize) || world->vsize < 1)
-		return ("Resolution: Invalid height");
-	parser_skip_spaces(parser);
-	if (!parser_consume_int(parser, &world->hsize) || world->hsize < 1)
-		return ("Resolution: Invalid width");
-	parser_skip_spaces(parser);
-	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
-		return ("Resolution: Invalid data at end of line");
-	return (NULL);
-}
-
-char	*handle_error(void *p1, char *msg)
-{
-	free(p1);
-	return (msg);
-}
-
-char	*parse_color(t_parser *parser, t_color *color)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	if (!parser_consume_int(parser, &r) || r < 0 || r > 255)
-		return ("Ambient light: Invalid red color");
-	if (!parser_match_char(parser, ','))
-		return ("Ambient light: Missing comma after red color");
-	if (!parser_consume_int(parser, &g) || g < 0 || g > 255)
-		return ("Ambient light: Invalid green color");
-	if (!parser_match_char(parser, ','))
-		return ("Ambient light: Missing comma");
-	if (!parser_consume_int(parser, &b) || b < 0 || b > 255)
-		return ("Ambient light: Invalid blue color");
-	*color = color_from_rgb(r, g, b);
-	return (NULL);
-}
-
-char	*parse_ambient(t_parser *parser, t_world *world)
-{
-	t_amb_light	*amb_light;
-	char		*error;
-
-	amb_light = malloc(sizeof(t_amb_light));
-	if (!amb_light)
-		return ("Ambient light: malloc error");
-	if (!parser_skip_spaces(parser))
-		return (handle_error(amb_light, "Ambient light: Missing space after A"));
-	if (!parser_consume_double(parser, &amb_light->ambient))
-		return (handle_error(amb_light, "Ambient light: Invalid intensity"));
-	if (!parser_skip_spaces(parser))
-		return (handle_error(amb_light, "Ambient light: Missing space after intensity"));
-	error = parse_color(parser, &amb_light->color);
-	if (error)
-		return (handle_error(amb_light, error));
-	world->amb = amb_light;
-	return (NULL);
 }
 
 // parse a line from the .rt file
