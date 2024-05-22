@@ -23,7 +23,7 @@ typedef struct s_sphere_data
 	double	diameter;
 }	t_sphere_data;
 
-typedef struct s_sphere_intersect_data
+typedef struct s_sphere_intersect_calc
 {
 	double	a;
 	double	b;
@@ -31,7 +31,7 @@ typedef struct s_sphere_intersect_data
 	double	discriminant;
 	double	discriminant_sqrt;
 	t_tuple	sphere_to_ray;
-}	t_sphere_intersect_data;
+}	t_sphere_intersect_calc;
 
 t_object	*sphere_create(t_tuple center,
 				double diameter, t_material_specs specs);

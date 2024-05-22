@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:32:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:33:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,25 @@ static t_intersection	*sphere_intersect(t_object *obj, t_ray *ray,
 		int *out_count)
 {
 	t_sphere_data			*sphere;
-	t_sphere_intersect_data	data;
+	t_sphere_intersect_calc	calc;
 
 	sphere = (t_sphere_data *) obj->obj;
-	data.sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
-	data.a = vector_dot(ray->direction, ray->direction);
-	data.b = 2 * vector_dot(ray->direction, data.sphere_to_ray);
-	data.c = vector_dot(data.sphere_to_ray, data.sphere_to_ray)
+	calc.sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
+	calc.a = vector_dot(ray->direction, ray->direction);
+	calc.b = 2 * vector_dot(ray->direction, calc.sphere_to_ray);
+	calc.c = vector_dot(calc.sphere_to_ray, calc.sphere_to_ray)
 		- pow(sphere->diameter, 2);
-	data.discriminant = data.b * data.b - 4 * data.a * data.c;
-	if (data.discriminant < -EPSILON)
+	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
+	if (calc.discriminant < -EPSILON)
 	{
 		*out_count = 0;
 		return (NULL);
 	}
-	data.discriminant_sqrt = sqrt(data.discriminant);
+	calc.discriminant_sqrt = sqrt(calc.discriminant);
 	return (create_intersections(obj,
-		(-data.b - data.discriminant_sqrt) / (2 * data.a),
-		(-data.b + data.discriminant_sqrt) / (2 * data.a),
-		data.discriminant,
+		(-calc.b - calc.discriminant_sqrt) / (2 * calc.a),
+		(-calc.b + calc.discriminant_sqrt) / (2 * calc.a),
+		calc.discriminant,
 		out_count));
 }
 
