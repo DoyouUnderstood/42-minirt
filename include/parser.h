@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:32:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:05:40 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "camera.h"
 # include "object.h"
 # include "world.h"
+# include "sphere.h"
 
 # include "get_next_line.h"
 # include "ft_printf.h"
@@ -88,11 +89,10 @@ char	*parse_light(t_parser *parser, t_world *world);
 
 typedef struct s_parser_sphere
 {
-	t_tuple		position;
-	double		diameter;
-	t_color_255	color;
-	double		reflectivity;
-	t_pattern	*pattern;
+	t_sphere_data	sphere;
+	t_color_255		color;
+	double			reflectivity;
+	t_pattern		*pattern;
 }	t_parser_sphere;
 char	*parse_sphere(t_parser *parser, t_world *world);
 

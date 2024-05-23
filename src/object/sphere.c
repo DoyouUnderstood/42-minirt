@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 13:43:12 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:59:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@
 #include <math.h>
 #include <stdlib.h>
 
-static t_sphere_data	*sphere_create_data(t_tuple center, double radius)
+static t_sphere_data	*sphere_create_data(t_sphere_data *data)
 {
 	t_sphere_data	*sphere_data;
 
 	sphere_data = malloc(sizeof(t_sphere_data));
 	if (!sphere_data)
 		return (NULL);
-	sphere_data->center = center;
-	sphere_data->radius = radius;
+	*sphere_data = *data;
 	return (sphere_data);
 }
 
@@ -86,19 +85,19 @@ static t_tuple	sphere_normal_at(t_shape *shape, t_tuple local_point)
 	return (tupl);
 }
 
-t_object	*sphere_create(t_tuple center, double radius, t_color color,
+t_object	*sphere_create(t_sphere_data *data, t_color color,
 		double reflectivity, t_pattern *pattern)
 {
 	t_sphere_data	*sphere_data;
 	t_object		*obj;
 
-	sphere_data = sphere_create_data(center, radius);
+	sphere_data = sphere_create_data(data);
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
 	obj->obj = sphere_data;
 	obj->shape = malloc(sizeof(t_shape));
-	obj->shape->transformation = matrix_mult(matrix_translation(center.x,
-				center.y, center.z), matrix_scaling(radius, radius, radius));
+	obj->shape->transformation = matrix_mult(matrix_translation(data->center.x,
+				data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));
 	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
 	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
 	obj->shape->material = material_create_default(&color,

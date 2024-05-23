@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:22:08 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:05:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,25 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3);
 char	*parse_sphere(t_parser *parser, t_world *world)
 {
 	t_parser_sphere	d;
+	double			diameter;
 	t_object		*sphere;
 
-	d.position = point_create(0, 0, 0);
+	d.sphere.center = point_create(0, 0, 0);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d",
-		&d.position.x, &d.position.y, &d.position.z,
-		&d.diameter, &d.color.r, &d.color.g, &d.color.b))
+		&d.sphere.center.x, &d.sphere.center.y, &d.sphere.center.z,
+		&diameter, &d.color.r, &d.color.g, &d.color.b))
 		return ("Sphere: Invalid format");
-	if (d.diameter < 0.0)
+	if (diameter < 0.0)
 		return ("Sphere: Invalid diameter");
+	d.sphere.radius = diameter / 2.0;
 	if (!color_255_validate(d.color))
 		return ("Sphere: Invalid color");
 	if (parse_reflectivity(parser, &d.reflectivity))
 		return ("Sphere: Invalid reflectivity");
 	if (parse_pattern(parser, &d.pattern))
 		return ("Sphere: Invalid pattern");
-	sphere = sphere_create(d.position, d.diameter / 2.0,
-		color_from_255(d.color), d.reflectivity, d.pattern);
+	sphere = sphere_create(&d.sphere, color_from_255(d.color),
+		d.reflectivity, d.pattern);
 	if (!sphere)
 	{
 		free(d.pattern);
