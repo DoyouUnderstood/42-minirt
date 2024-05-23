@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:16:52 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:23:55 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*parse_pattern(t_parser *parser, t_pattern **pattern);
 char	*parse_resolution(t_parser *parser, t_world *world);
 
 // Ambient light
-
 typedef struct s_parser_ambient
 {
 	double	intensity;
@@ -53,6 +52,12 @@ typedef struct s_parser_ambient
 char	*parse_ambient(t_parser *parser, t_world *world);
 
 // Camera
+typedef struct s_parser_camera
+{
+	t_tuple	position;
+	t_tuple	direction;
+	double	fov;
+}	t_parser_camera;
 char	*parse_camera(t_parser *parser, t_world *world);
 
 // Point light

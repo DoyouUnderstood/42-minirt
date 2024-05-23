@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:20:26 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:33:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 {
 	t_parser_ambient	d;
 
-	if (!parser_match(parser, "%f %d%_,%_%d%_,%_%d%_%$",
+	if (!parser_match(parser, "%f %d,%d,%d%_%$",
 			&d.intensity, &d.r, &d.g, &d.b))
 		return ("Ambient light: Invalid format");
 	if (!parser_valid_intensity(d.intensity))
@@ -47,23 +47,19 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 
 char	*parse_camera(t_parser *parser, t_world *world)
 {
-	t_tuple	position;
-	t_tuple	direction;
-	double	fov;
+	t_parser_camera	d;
 
 	if (!world->vsize || !world->hsize)
 		return ("Camera: Camera defined before resolution");
-	if (parse_tuple(parser, &position, point_create))
-		return ("Camera: Error parsing position");
-	if (!parser_match(parser, " "))
+	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f%_%$",
+		&d.position.x, &d.position.y, &d.position.z,
+		&d.direction.x, &d.direction.y, &d.direction.z, &d.fov))
 		return ("Camera: Invalid format");
-	if (parse_tuple(parser, &direction, vector_create))
-		return ("Camera: Error parsing direction");
-	if (!parser_match(parser, " %f%_%$", &fov))
-		return ("Camera: Invalid format");
-	if (fov < 0.0 || fov > 70.0)
-		return ("Camera: Invalid field of view");
-	world->camera = camera_create(fov, position, direction,
+	if (d.fov < 0.0 || d.fov > 180.0)	
+		return ("Camera: Invalid FOV");
+	d.position = point_create(d.position.x, d.position.y, d.position.z);
+	d.direction = point_create(d.direction.x, d.direction.y, d.direction.z);
+	world->camera = camera_create(d.fov, d.position, d.direction,
 		world->vsize, world->hsize);
 	if (!world->camera)
 		return ("Camera: malloc error");
