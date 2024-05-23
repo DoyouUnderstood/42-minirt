@@ -1,47 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser1.c                                       :+:      :+:    :+:   */
+/*   ft_parser_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 06:24:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 07:43:11 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
+#include "ft_parser_internal.h"
 
 #include <math.h>
 #include <stdbool.h>
 #include <stdlib.h>
-
-void	parser_init(t_parser *parser, char *s)
-{
-	parser->s = s;
-	parser->pos = 0;
-}
-
-char	parser_peek(t_parser *parser)
-{
-	return (parser->s[parser->pos]);
-}
-
-char	parser_peek_at(t_parser *parser, int i)
-{
-	return (parser->s[parser->pos + i]);
-}
-
-void	parser_advance(t_parser *parser)
-{
-	if (parser->s[parser->pos])
-		parser->pos++;
-}
-
-void	parser_advance_by(t_parser *parser, int i)
-{
-	parser->pos += i;
-}
 
 bool	parser_match_char(t_parser *parser, char c)
 {
@@ -49,24 +23,6 @@ bool	parser_match_char(t_parser *parser, char c)
 		return (false);
 	parser_advance(parser);
 	return (true);
-}
-
-bool	parser_match_string(t_parser *parser, char *s)
-{
-	int	i;
-
-	i = 0;
-	while (1)
-	{
-		if (!s[i])
-		{
-			parser_advance_by(parser, i);
-			return (true);
-		}
-		if (parser_peek_at(parser, i) != s[i])
-			return (false);
-		i++;
-	}
 }
 
 bool	parser_consume_int(t_parser *parser, int *i)
