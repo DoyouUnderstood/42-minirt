@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:22:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:31:07 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,25 +104,21 @@ t_object	*cube_create(t_tuple center, double edge_length,
 		t_material_specs specs)
 {
 	t_cube_data	*cube_data;
-	t_shape		*shape;
 	t_object	*obj;
 
-
 	cube_data = cube_create_data(center, edge_length);
-	shape = malloc(sizeof(t_shape));
 	obj = malloc(sizeof(t_object));
-	shape->transformation = matrix_translation(center.x, center.y, center.z);
-	shape->transformation = matrix_mult(shape->transformation,
+	obj->transformation = matrix_translation(center.x, center.y, center.z);
+	obj->transformation = matrix_mult(obj->transformation,
 			matrix_scaling(edge_length / 2.0, edge_length / 2.0, edge_length / 2.0));
-	shape->inv_transformation = matrix_inverse(shape->transformation);
-	shape->tinv_transformation = matrix_transpose(shape->inv_transformation);
-	shape->material = material_create_default(&specs.color, specs.reflectivity,
+	obj->inv_transformation = matrix_inverse(obj->transformation);
+	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
+	obj->material = material_create_default(&specs.color, specs.reflectivity,
 			specs.pattern);
-	shape->material->reflectiv = specs.reflectivity;
-	shape->local_intersect = cube_intersect;
-	shape->local_normal_at = cube_normal_at;
+	obj->material->reflectiv = specs.reflectivity;
+	obj->local_intersect = cube_intersect;
+	obj->local_normal_at = cube_normal_at;
 	obj->type = CUBE;
 	obj->data = cube_data;
-	obj->shape = shape;
 	return (obj);
 }

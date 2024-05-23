@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:23:16 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:29:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,15 @@ t_object	*cylinder_create(t_tuple center, double radius, double height, t_tuple 
 	obj = malloc(sizeof(t_object));
 	obj->type = CYLINDER;
 	obj->data = cylinder;
-	obj->shape = malloc(sizeof(t_shape));
 	default_axis = (t_tuple){0, 1, 0, 0};
 	rotation = align_axis(default_axis, axis);
-	obj->shape->transformation = matrix_mult(matrix_translation(center.x,
+	obj->transformation = matrix_mult(matrix_translation(center.x,
 				center.y, center.z), rotation);
-	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
-	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
-	obj->shape->material = material_create_default(&specs.color,
+	obj->inv_transformation = matrix_inverse(obj->transformation);
+	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
+	obj->material = material_create_default(&specs.color,
 			specs.reflectivity, specs.pattern);
-	obj->shape->local_intersect = cylinder_intersect;
-	obj->shape->local_normal_at = cylinder_local_normal_at;
+	obj->local_intersect = cylinder_intersect;
+	obj->local_normal_at = cylinder_local_normal_at;
 	return (obj);
 }

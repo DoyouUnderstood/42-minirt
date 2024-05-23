@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:52:45 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:26:47 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_color	shade_hit(t_world *world, t_computations *comps, int remaining)
 	t_color		surface;
 	t_color		reflected;
 
-	lighting_params.material = comps->object->shape->material;
+	lighting_params.material = comps->object->material;
 	lighting_params.object = comps->object;
 	lighting_params.light = world->light;
 	lighting_params.position = &comps->over_point;

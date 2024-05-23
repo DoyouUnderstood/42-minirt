@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/22 19:08:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:32:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	prepare_computations(t_computations *comps,
 	comps->object = intersection->obj;
 	comps->point = t_point_position(ray, intersection->t);
 	comps->eyev = vector_negate(ray->direction);
-	comps->normalv = normal_at_shape(intersection->obj, comps->point);
+	comps->normalv = object_normal_at(intersection->obj, comps->point);
 	comps->reflectv = vector_reflect(ray->direction, comps->normalv);
 	if (vector_dot(comps->normalv, comps->eyev) < 0)
 	{
@@ -96,7 +96,7 @@ void	process_object(t_processObjectParams *params)
 	t_intersectionAddParams	add_params;
 
 	local_count = 0;
-	local_inter = intersect_shape(params->world->objects[params->index],
+	local_inter = object_intersect(params->world->objects[params->index],
 			params->ray, &local_count);
 	if (local_count > 0)
 	{

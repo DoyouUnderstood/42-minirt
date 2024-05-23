@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:43:33 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:29:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_color	stripe_at_object(const t_pattern *pattern, const t_object *object,
 {
 	t_tuple	object_point;
 
-	object_point = matrix_mult_tuple(matrix_inverse(object->shape->transformation),
+	object_point = matrix_mult_tuple(matrix_inverse(object->transformation),
 			point);
 	return (pattern->pattern_at(pattern, object_point));
 }

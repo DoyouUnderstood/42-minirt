@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:24:46 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:32:12 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
 #include <stdlib.h>
 
 // fonction intersect generalise
-t_intersection	*intersect_shape(t_object *object, t_ray *ray, int *count)
+t_intersection	*object_intersect(t_object *object, t_ray *ray, int *count)
 {
 	t_ray		local_ray;
 
 	*count = 0;
-	local_ray = ray_transform(object->shape->inv_transformation, *ray);
-	return (object->shape->local_intersect(object, &local_ray, count));
+	local_ray = ray_transform(object->inv_transformation, *ray);
+	return (object->local_intersect(object, &local_ray, count));
 }
 
 // Fonction normal_at généralisée
-t_tuple	normal_at_shape(t_object *obj, t_tuple world_point)
+t_tuple	object_normal_at(t_object *obj, t_tuple world_point)
 {
 	t_tuple		local_point;
 	t_tuple		local_normal;
 	t_tuple		world_normal;
 
-	local_point = matrix_mult_tuple(matrix_inverse(obj->shape->transformation),
+	local_point = matrix_mult_tuple(matrix_inverse(obj->transformation),
 			world_point);
-	local_normal = obj->shape->local_normal_at(obj, local_point);
-	world_normal = matrix_mult_tuple(obj->shape->tinv_transformation, local_normal);
+	local_normal = obj->local_normal_at(obj, local_point);
+	world_normal = matrix_mult_tuple(obj->tinv_transformation, local_normal);
 	world_normal.w = 0;
 	return (vector_normalize(world_normal));
 }
@@ -75,13 +75,13 @@ t_color	calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)
 		lighting_params.normalv = malloc(sizeof(t_tuple));
 		if (lighting_params.normalv)
 		{
-			*lighting_params.normalv = closest_hit->obj->shape->local_normal_at(
+			*lighting_params.normalv = closest_hit->obj->local_normal_at(
 					closest_hit->obj, *lighting_params.position);
 		}
 		lighting_params.eyev = malloc(sizeof(t_tuple));
 		if (lighting_params.eyev)
 			*lighting_params.eyev = vector_negate(ray->direction);
-		lighting_params.material = closest_hit->obj->shape->material;
+		lighting_params.material = closest_hit->obj->material;
 		lighting_params.object = closest_hit->obj;
 		lighting_params.light = light;
 		lighting_params.in_shadow = false;

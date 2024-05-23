@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:22:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:32:33 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,14 @@ t_object	*sphere_create(t_sphere_data *data, t_color color,
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
 	obj->data = sphere_data;
-	obj->shape = malloc(sizeof(t_shape));
-	obj->shape->transformation = matrix_mult(matrix_translation(data->center.x,
+	obj->transformation = matrix_mult(matrix_translation(data->center.x,
 				data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));
-	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
-	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
-	obj->shape->material = material_create_default(&color,
+	obj->inv_transformation = matrix_inverse(obj->transformation);
+	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
+	obj->material = material_create_default(&color,
 			reflectivity, pattern);
-	obj->shape->local_intersect = sphere_intersect;
-	obj->shape->local_normal_at = sphere_normal_at;
+	obj->local_intersect = sphere_intersect;
+	obj->local_normal_at = sphere_normal_at;
 	sphere_data->center = (t_tuple){0, 0, 0, 0};
 	return (obj);
 }

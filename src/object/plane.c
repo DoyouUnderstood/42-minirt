@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:23:51 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:29:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,14 @@ t_object	*plane_create(t_color color, t_tuple center,
 		return (NULL);
 	obj->type = PLANE;
 	obj->data = plane;
-	obj->shape = (t_shape *)malloc(sizeof(t_shape));
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, direction);
 	translation = matrix_translation(center.x, center.y, center.z);
-	obj->shape->transformation = matrix_mult(translation, rotation);
-	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
-	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
-	obj->shape->material = material_create_default(&color, 0.5, pattern);
-	obj->shape->local_normal_at = plane_local_normal_at;
-	obj->shape->local_intersect = plane_local_intersect;
+	obj->transformation = matrix_mult(translation, rotation);
+	obj->inv_transformation = matrix_inverse(obj->transformation);
+	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
+	obj->material = material_create_default(&color, 0.5, pattern);
+	obj->local_normal_at = plane_local_normal_at;
+	obj->local_intersect = plane_local_intersect;
 	return (obj);
 }
