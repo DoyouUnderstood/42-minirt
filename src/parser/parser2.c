@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 06:28:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 06:47:56 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,27 @@ char	*parse_resolution(t_parser *parser, t_world *world)
 
 char	*parse_ambient(t_parser *parser, t_world *world)
 {
-	t_amb_light	*amb_light;
 	char		*error;
 
-	amb_light = malloc(sizeof(t_amb_light));
-	if (!amb_light)
+	world->amb = malloc(sizeof(t_amb_light));
+	if (!world->amb)
 		return ("Ambient light: malloc error");
+	if (!parser_match(parser, "%f ",
+		&world->amb->ambient))
+		error = "Ambient light: Invalid format";
+	if (!error && (world->amb->ambient < 0.0 || world->amb->ambient > 1.0))
+		error = "Ambient light: Invalid intensity value";
+	if (!error)
+		error = parse_color(parser, &world->amb->color);
+	if (!error && !parser_match(parser, "%_%$"))
+		error = "Ambient light: Invalid format";
+	if (error)
+	{
+		free(world->amb);
+		world->amb = NULL;
+	}
+	return (error);
+	/*
 	if (!parser_skip_spaces(parser))
 		return (parser_handle_error(amb_light, "Ambient light: Missing space after A"));
 	if (!parser_consume_double(parser, &amb_light->ambient))
@@ -46,8 +61,7 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	parser_skip_spaces(parser);
 	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
 		return ("Ambient light: Invalid data at end of line");
-	world->amb = amb_light;
-	return (NULL);
+	*/
 }
 
 char	*parse_camera(t_parser *parser, t_world *world)

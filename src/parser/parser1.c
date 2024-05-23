@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 06:28:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 06:30:33 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*parse_line(char *line, t_world *world)
 	
 	if (parser_match(&parser, "%_R "))
 		return (parse_resolution(&parser, world));
-	if (parser_match_string(&parser, "A"))
+	if (parser_match(&parser, "%_A "))
 		return (parse_ambient(&parser, world));
 	if (parser_match_string(&parser, "C"))
 		return (parse_camera(&parser, world));
