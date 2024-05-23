@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape.c                                            :+:      :+:    :+:   */
+/*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:33:42 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:24:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_tuple	normal_at_shape(t_object *obj, t_tuple world_point)
 
 	local_point = matrix_mult_tuple(matrix_inverse(obj->shape->transformation),
 			world_point);
-	local_normal = obj->shape->local_normal_at(obj->shape, local_point);
+	local_normal = obj->shape->local_normal_at(obj, local_point);
 	world_normal = matrix_mult_tuple(obj->shape->tinv_transformation, local_normal);
 	world_normal.w = 0;
 	return (vector_normalize(world_normal));
@@ -76,7 +76,7 @@ t_color	calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)
 		if (lighting_params.normalv)
 		{
 			*lighting_params.normalv = closest_hit->obj->shape->local_normal_at(
-					closest_hit->obj->shape, *lighting_params.position);
+					closest_hit->obj, *lighting_params.position);
 		}
 		lighting_params.eyev = malloc(sizeof(t_tuple));
 		if (lighting_params.eyev)

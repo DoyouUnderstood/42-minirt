@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:15:56 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:21:42 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@
 # define EPSILON 0.00001
 
 struct s_shape;
-struct s_object;
+typedef struct s_object			t_object;
 typedef struct s_intersection	t_intersection;
 
-typedef t_tuple			(*t_local_normal_at)(struct s_shape *shape,
-							t_tuple local_point);
-typedef t_intersection	*(*t_local_intersect)(struct s_object *obj, t_ray *ray,
+typedef t_intersection	*(*t_local_intersect)(t_object *obj, t_ray *ray,
 							int *count);
+typedef t_tuple			(*t_local_normal_at)(t_object *obj, t_tuple local_point);
 
 typedef struct s_shape
 {

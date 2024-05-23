@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:17:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:22:47 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ static t_intersection	*cube_intersect(t_object *obj, t_ray *ray, int *count)
 	return (intersections);
 }
 
-static t_tuple	cube_normal_at(t_shape *cube, t_tuple point)
+static t_tuple	cube_normal_at(t_object *obj, t_tuple point)
 {
 	double	abs_x;
 	double	abs_y;
 	double	abs_z;
 	double	maxc;
 
-	(void)cube;
+	(void) obj;
 	abs_x = fabs(point.x);
 	abs_y = fabs(point.y);
 	abs_z = fabs(point.z);

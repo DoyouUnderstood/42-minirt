@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:16:51 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:22:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ static t_intersection	*sphere_intersect(t_object *obj, t_ray *ray,
 		out_count));
 }
 
-static t_tuple	sphere_normal_at(t_shape *shape, t_tuple local_point)
+static t_tuple	sphere_normal_at(t_object *obj, t_tuple local_point)
 {
 	t_tuple	tupl;
 
-	(void)shape;
+	(void)obj;
 	tupl = tuple_subtract(local_point, point_create(0, 0, 0));
 	return (tupl);
 }

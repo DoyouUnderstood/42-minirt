@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:17:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:23:16 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ t_intersection	*cylinder_intersect(t_object *obj, t_ray *ray, int *count)
 	return (create_intersections(&calc, obj, count));
 }
 
-t_tuple	cylinder_local_normal_at(t_shape *shape, t_tuple local_point)
+t_tuple	cylinder_local_normal_at(t_object *obj, t_tuple local_point)
 {
-	(void)shape;
+	(void) obj;
 	return ((t_tuple){local_point.x, 0, local_point.z, 0});
 }
 

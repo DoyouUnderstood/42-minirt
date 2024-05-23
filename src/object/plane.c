@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:18:06 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:23:51 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ static t_plane_data	*plane_create_data(t_tuple center)
 	return (plane);
 }
 
-t_tuple	plane_local_normal_at(t_shape *shape, t_tuple local_point)
-{
-	(void)local_point;
-	(void)shape;
-	return (vector_create(0, 1, 0));
-}
-
 t_intersection	*plane_local_intersect(t_object *obj, t_ray *ray, int *count)
 {
 	double			t;
@@ -51,6 +44,13 @@ t_intersection	*plane_local_intersect(t_object *obj, t_ray *ray, int *count)
 	if (!intersections)
 		*count = 0;
 	return (intersections);
+}
+
+t_tuple	plane_local_normal_at(t_object *obj, t_tuple local_point)
+{
+	(void)local_point;
+	(void)obj;
+	return (vector_create(0, 1, 0));
 }
 
 // Intégration dans la création de l'objet Plane
