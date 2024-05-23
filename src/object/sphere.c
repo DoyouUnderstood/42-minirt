@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 09:24:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:43:21 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ static t_intersection	*sphere_intersect(t_object *obj, t_ray *ray,
 	calc.sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
 	calc.a = vector_dot(ray->direction, ray->direction);
 	calc.b = 2 * vector_dot(ray->direction, calc.sphere_to_ray);
-	calc.c = vector_dot(calc.sphere_to_ray, calc.sphere_to_ray)
-		- pow(sphere->radius, 2);
+	calc.c = vector_dot(calc.sphere_to_ray, calc.sphere_to_ray) - 1.0;
 	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
 	if (calc.discriminant < -EPSILON)
 	{
@@ -99,7 +98,7 @@ t_object	*sphere_create(t_tuple center, double radius,
 	obj->obj = sphere_data;
 	obj->shape = malloc(sizeof(t_shape));
 	obj->shape->transformation = matrix_mult(matrix_translation(center.x,
-				center.y, center.z), matrix_scaling(1, 1, 1));
+				center.y, center.z), matrix_scaling(radius, radius, radius));
 	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
 	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
 	obj->shape->material = material_create_default(&specs.color,
