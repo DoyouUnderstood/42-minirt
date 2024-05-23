@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/23 09:25:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 10:16:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parse_object(char **parts, t_world *world)
 	object = NULL;
 	type = get_object_type(parts[0]);
 	if (type == SPHERE)
-		object = parse_sphere(parts, object);
+		object = parse_sphere_old(parts, object);
 	if (type == PLANE)
 		object = parse_plane(parts, object);
 	if (type == CYLINDER)
@@ -74,32 +74,5 @@ t_object	*parse_cube(char **parts)
 	if (total_parts > 6 && parts[5] && parts[6] && parts[7])
 		specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
 	object = cube_create(center, edge_length, specs);
-	return (object);
-}
-
-t_object	*parse_sphere(char **parts, t_object *object)
-{
-	t_tuple				center;
-	t_material_specs	specs;
-	double				diameter;
-	int					total_parts;
-
-	specs.pattern = NULL;
-	specs.reflectivity = 0;
-	if (!parse_vec3(require_str(parts[1]), &center))
-		error_exit("Error with parsing center\n");
-	if (!ft_atod(require_str(parts[2]), &diameter))
-		error_exit("Error with parsing diameter\n");
-	rgb(require_str(parts[3]), &specs.color);
-	if (parts[4])
-		specs.reflectivity = validate_reflectivity(atof(parts[4]));
-	specs.color = color_from_rgb(specs.color.r, specs.color.g,
-			specs.color.b);
-	total_parts = 0;
-	while (parts[total_parts])
-		total_parts++;
-	if (total_parts >= 6 && parts[5] && parts[6] && parts[7])
-		specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
-	object = sphere_create(center, diameter / 2.0, specs);
 	return (object);
 }
