@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 19:14:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 06:28:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@
 
 char	*parse_resolution(t_parser *parser, t_world *world)
 {
-	if (!parser_skip_spaces(parser))
-		return ("Resolution: Missing space");
-	if (!parser_consume_int(parser, &world->vsize) || world->vsize < 1)
+	if (!parser_match(parser, "%d %d%_%$", &world->vsize, &world->hsize))
+		return ("Resolution: Invalid format");
+	if (world->vsize < 1)
 		return ("Resolution: Invalid height");
-	parser_skip_spaces(parser);
-	if (!parser_consume_int(parser, &world->hsize) || world->hsize < 1)
+	if (world->hsize < 1)
 		return ("Resolution: Invalid width");
-	parser_skip_spaces(parser);
-	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
-		return ("Resolution: Invalid data at end of line");
 	return (NULL);
 }
 
