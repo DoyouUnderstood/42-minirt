@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 19:32:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:08:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_tuple	cylinder_local_normal_at(t_shape *shape, t_tuple local_point)
 	return ((t_tuple){local_point.x, 0, local_point.z, 0});
 }
 
-t_object	*cylinder_create(t_tuple center, t_tuple axis,
+t_object	*cylinder_create(t_tuple center, double diameter, double height, t_tuple axis,
 		t_material_specs specs)
 {
 	t_cylinder_data	*cylinder;
@@ -113,7 +113,7 @@ t_object	*cylinder_create(t_tuple center, t_tuple axis,
 	t_tuple		default_axis;
 	t_matrix	rotation;
 
-	cylinder = cylinder_create_data(center, specs.diameter, specs.height, axis);
+	cylinder = cylinder_create_data(center, diameter, height, axis);
 	obj = malloc(sizeof(t_object));
 	obj->type = CYLINDER;
 	obj->obj = cylinder;

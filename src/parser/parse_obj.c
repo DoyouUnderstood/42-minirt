@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 17:28:56 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:11:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 t_object	*parse_cylinder(char **parts, t_object *obj)
 {
 	t_material_specs	specs;
-	t_cylinder_data		*cyl;
+	double				diameter;
+	t_cylinder_data		cyl;
 
-	cyl = malloc(sizeof(t_cylinder_data));
-	if (!parse_vec3(require_str(parts[1]), &cyl->center))
+	if (!parse_vec3(require_str(parts[1]), &cyl.center))
 		error_exit("error cylinder parts1\n");
-	if (!parse_vec3(require_str(parts[2]), &cyl->axis))
+	if (!parse_vec3(require_str(parts[2]), &cyl.axis))
 		return (NULL);
-	if (!ft_atod(require_str(parts[3]), &specs.diameter))
+	if (!ft_atod(require_str(parts[3]), &diameter))
 		return (NULL);
-	if (!ft_atod(require_str(parts[4]), &specs.height))
+	if (!ft_atod(require_str(parts[4]), &cyl.height))
 		return (NULL);
 	rgb(require_str(parts[5]), &specs.color);
 	if (parts[6])
@@ -64,8 +64,7 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 	specs.pattern = NULL;
 	if (parts[7] && parts[8] && parts[9])
 		specs.pattern = set_pattern(parts[7], parts[8], parts[9]);
-	obj = cylinder_create(cyl->center, cyl->axis, specs);
-	free(cyl);
+	obj = cylinder_create(cyl.center, diameter, cyl.height, cyl.axis, specs);
 	return (obj);
 }
 
