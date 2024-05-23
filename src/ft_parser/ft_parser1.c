@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_parser1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 12:02:36 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 06:24:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ bool	parser_skip_spaces(t_parser *parser)
 {
 	if (!parser_match_char(parser, ' ') && !parser_match_char(parser, '\t'))
 		return (false);
-	while (parser_match_char(parser, ' ' || parser_match_char(parser, '\t')))
+	while (parser_match_char(parser, ' ') || parser_match_char(parser, '\t'))
 	{}
 	return (true);
 }
