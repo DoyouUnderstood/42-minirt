@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:05:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:01:04 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 {
 	t_parser_sphere	d;
 	double			diameter;
-	t_object		*sphere;
 
-	d.sphere.center = point_create(0, 0, 0);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d",
 		&d.sphere.center.x, &d.sphere.center.y, &d.sphere.center.z,
 		&diameter, &d.color.r, &d.color.g, &d.color.b))
@@ -37,13 +35,37 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 		return ("Sphere: Invalid reflectivity");
 	if (parse_pattern(parser, &d.pattern))
 		return ("Sphere: Invalid pattern");
-	sphere = sphere_create(&d.sphere, color_from_255(d.color),
-		d.reflectivity, d.pattern);
-	if (!sphere)
-	{
-		free(d.pattern);
-		return ("Sphere: malloc error");
-	}
-	world_add_object(world, sphere);
+	d.sphere.center = point_create(d.sphere.center.x, d.sphere.center.y,
+			d.sphere.center.z);
+	world_add_object(world, sphere_create(&d.sphere, color_from_255(d.color),
+			d.reflectivity, d.pattern));
+	return (NULL);
+}
+
+char	*parse_cylinder(t_parser *parser, t_world *world)
+{
+	t_parser_cylinder	d;
+	double			diameter;
+
+	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f %f %d,%d,%d",
+		&d.cylinder.center.x, &d.cylinder.center.y, &d.cylinder.center.z,
+		&d.cylinder.axis.x, &d.cylinder.axis.y, &d.cylinder.axis.z,
+		&diameter, &d.cylinder.height, &d.color.r, &d.color.g, &d.color.b))
+		return ("Cylinder: Invalid format");
+	if (diameter < 0.0)
+		return ("Cylinder: Invalid diameter");
+	d.cylinder.radius = diameter / 2.0;
+	if (!color_255_validate(d.color))
+		return ("Cylinder: Invalid color");
+	if (parse_reflectivity(parser, &d.reflectivity))
+		return ("Cylinder: Invalid reflectivity");
+	if (parse_pattern(parser, &d.pattern))
+		return ("Cylinder: Invalid pattern");
+	d.cylinder.center = point_create(d.cylinder.center.x, d.cylinder.center.y,
+			d.cylinder.center.z);
+	d.cylinder.axis = point_create(d.cylinder.axis.x, d.cylinder.axis.y,
+			d.cylinder.axis.z);
+	world_add_object(world, cylinder_create(&d.cylinder, color_from_255(d.color),
+			d.reflectivity, d.pattern));
 	return (NULL);
 }

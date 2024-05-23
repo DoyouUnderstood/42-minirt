@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:29:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:43:39 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@
 
 #include <math.h>
 #include <stdlib.h>
-
-static t_cylinder_data	*cylinder_create_data(t_tuple center, double radius, double height,
-		t_tuple axis)
-{
-	t_cylinder_data	*cylinder;
-
-	cylinder = malloc(sizeof(t_cylinder_data));
-	if (!cylinder)
-		return (NULL);
-	cylinder->center = center;
-	cylinder->axis = axis;
-	cylinder->radius = radius;
-	cylinder->height = height;
-	return (cylinder);
-}
 
 t_matrix	align_axis(t_tuple default_axis, t_tuple new_axis)
 {
@@ -105,26 +90,24 @@ t_tuple	cylinder_local_normal_at(t_object *obj, t_tuple local_point)
 	return ((t_tuple){local_point.x, 0, local_point.z, 0});
 }
 
-t_object	*cylinder_create(t_tuple center, double radius, double height, t_tuple axis,
-		t_material_specs specs)
+t_object	*cylinder_create(t_cylinder_data *data, t_color color,
+	double reflectivity, t_pattern *pattern)
 {
-	t_cylinder_data	*cylinder;
 	t_object	*obj;
 	t_tuple		default_axis;
 	t_matrix	rotation;
 
-	cylinder = cylinder_create_data(center, radius, height, axis);
 	obj = malloc(sizeof(t_object));
+	obj->data = malloc(sizeof(t_cylinder_data));
+	*((t_cylinder_data *) obj->data) = *data;
 	obj->type = CYLINDER;
-	obj->data = cylinder;
 	default_axis = (t_tuple){0, 1, 0, 0};
-	rotation = align_axis(default_axis, axis);
-	obj->transformation = matrix_mult(matrix_translation(center.x,
-				center.y, center.z), rotation);
+	rotation = align_axis(default_axis, data->axis);
+	obj->transformation = matrix_mult(matrix_translation(data->center.x,
+				data->center.y, data->center.z), rotation);
 	obj->inv_transformation = matrix_inverse(obj->transformation);
 	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
-	obj->material = material_create_default(&specs.color,
-			specs.reflectivity, specs.pattern);
+	obj->material = material_create_default(&color, reflectivity, pattern);
 	obj->local_intersect = cylinder_intersect;
 	obj->local_normal_at = cylinder_local_normal_at;
 	return (obj);

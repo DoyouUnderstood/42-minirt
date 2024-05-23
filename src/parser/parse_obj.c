@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:28:17 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:56:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,6 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 		pattern = stripe_pattern_create(start, end);
 	return (pattern);
 }
-
-t_object	*parse_cylinder_old(char **parts, t_object *obj)
-{
-	t_material_specs	specs;
-	double				diameter;
-	t_cylinder_data		cyl;
-
-	if (!parse_vec3(require_str(parts[1]), &cyl.center))
-		error_exit("error cylinder parts1\n");
-	if (!parse_vec3(require_str(parts[2]), &cyl.axis))
-		return (NULL);
-	if (!ft_atod(require_str(parts[3]), &diameter))
-		return (NULL);
-	cyl.radius = diameter / 2.0;
-	if (!ft_atod(require_str(parts[4]), &cyl.height))
-		return (NULL);
-	rgb(require_str(parts[5]), &specs.color);
-	if (parts[6])
-		specs.reflectivity = validate_reflectivity(atof(parts[6]));
-	specs.color = color_from_255((t_color_255){specs.color.r, specs.color.g,
-			specs.color.b});
-	specs.pattern = NULL;
-	if (parts[7] && parts[8] && parts[9])
-		specs.pattern = set_pattern(parts[7], parts[8], parts[9]);
-	obj = cylinder_create(cyl.center, cyl.radius, cyl.height, cyl.axis, specs);
-	return (obj);
-}
-
 
 int	parse_point(char *str, t_tuple *vec)
 {

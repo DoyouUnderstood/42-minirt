@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 13:47:04 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:56:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static char	*parse_line(char *line, t_world *world)
 		return (parse_light(&parser, world));
 	if (parser_match(&parser, "%_sp "))
 		return (parse_sphere(&parser, world));
+	if (parser_match(&parser, "%_cy "))
+		return (parse_cylinder(&parser, world));
 	else
 		parse_object(ptr, world);
 	free_split(ptr);
