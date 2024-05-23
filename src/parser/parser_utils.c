@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 06:44:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 07:34:53 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,8 @@ char	*parse_tuple(t_parser *parser, t_tuple *tuple,
 	double	y;
 	double	z;
 
-	if (!parser_consume_double(parser, &x))
-		return ("Invalid x coordinate");
-	if (!parser_match_char(parser, ','))
-		return ("Comma missing after x coordinate");
-	if (!parser_consume_double(parser, &y))
-		return ("Invalid y coordinate");
-	if (!parser_match_char(parser, ','))
-		return ("Comma missing after y coordinate");
-	if (!parser_consume_double(parser, &z))
-		return ("Invalid z coordinate");
+	if (!parser_match(parser, "%f%_,%_%f%_,%_%f", &x, &y, &z))
+		return ("Invalid tuple format");
 	*tuple = tuple_creator_f(x, y, z);
 	return (NULL);
 }

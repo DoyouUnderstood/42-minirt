@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 06:47:56 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 07:42:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 		error = "Ambient light: Invalid format";
 	if (!error && (world->amb->ambient < 0.0 || world->amb->ambient > 1.0))
 		error = "Ambient light: Invalid intensity value";
-	if (!error)
-		error = parse_color(parser, &world->amb->color);
+	if (!error && parse_color(parser, &world->amb->color))
+		error = "Ambient light: Invalid color";
 	if (!error && !parser_match(parser, "%_%$"))
 		error = "Ambient light: Invalid format";
 	if (error)
@@ -48,20 +48,6 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 		world->amb = NULL;
 	}
 	return (error);
-	/*
-	if (!parser_skip_spaces(parser))
-		return (parser_handle_error(amb_light, "Ambient light: Missing space after A"));
-	if (!parser_consume_double(parser, &amb_light->ambient))
-		return (parser_handle_error(amb_light, "Ambient light: Invalid intensity"));
-	if (!parser_skip_spaces(parser))
-		return (parser_handle_error(amb_light, "Ambient light: Missing space after intensity"));
-	error = parse_color(parser, &amb_light->color);
-	if (error)
-		return (parser_handle_error(amb_light, error));
-	parser_skip_spaces(parser);
-	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
-		return ("Ambient light: Invalid data at end of line");
-	*/
 }
 
 char	*parse_camera(t_parser *parser, t_world *world)
@@ -72,21 +58,16 @@ char	*parse_camera(t_parser *parser, t_world *world)
 
 	if (!world->vsize || !world->hsize)
 		return ("Camera: Camera defined before resolution");
-	if (!parser_skip_spaces(parser))
-		return ("Camera: Missing space after C");
 	if (parse_tuple(parser, &position, point_create))
 		return ("Camera: Error parsing position");
-	if (!parser_skip_spaces(parser))
-		return ("Camera: Missing space after position");
+	if (!parser_match(parser, " "))
+		return ("Camera: Invalid format");
 	if (parse_tuple(parser, &direction, vector_create))
 		return ("Camera: Error parsing direction");
-	if (!parser_skip_spaces(parser))
-		return ("Camera: Missing space after direction");
-	if (!parser_consume_double(parser, &fov) || fov < 0.0 || fov > 70.0)
+	if (!parser_match(parser, " %f%_%$", &fov))
+		return ("Camera: Invalid format");
+	if (fov < 0.0 || fov > 70.0)
 		return ("Camera: Invalid field of view");
-	parser_skip_spaces(parser);
-	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
-		return ("Camera: Invalid data at end of line");
 	world->camera = camera_create(fov, position, direction,
 		world->vsize, world->hsize);
 	if (!world->camera)
@@ -100,21 +81,16 @@ char	*parse_light(t_parser *parser, t_world *world)
 	double	intensity;
 	t_color	color;
 
-	if (!parser_skip_spaces(parser))
-		return ("Light: Missing space after L");
 	if (parse_tuple(parser, &position, point_create))
 		return ("Light: Invalid position");
-	if (!parser_skip_spaces(parser))
-		return ("Light: Missing space after position");
-	if (!parser_consume_double(parser, &intensity) || intensity < 0.0 || intensity > 1.0)
-		return ("Light: Invalid intensity parameter");
-	if (!parser_skip_spaces(parser))
-		return ("Light: Missing space after intensity parameter");
+	if (!parser_match(parser, " %f ", &intensity))
+		return ("Light: Invalid format");
+	if (intensity < 0.0 || intensity > 1.0)
+		return ("Light: Invalid intensity");
 	if (parse_color(parser, &color))
 		return ("Light: Invalid color");
-	parser_skip_spaces(parser);
-	if (!parser_match_char(parser, '\n') && !parser_at_end(parser))
-		return ("Light: Invalid data at end of line");
+	if (!parser_match(parser, "%_%$"))
+		return ("Light: Invalid format");
 	world->light = light_create(color, position, intensity);
 	if (!world->light)
 		return ("Light: malloc error");
