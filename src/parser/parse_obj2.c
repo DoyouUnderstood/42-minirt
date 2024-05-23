@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/23 13:49:17 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:56:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ t_object	*parse_cube(char **parts)
 	rgb(require_str(parts[3]), &specs.color);
 	if (parts[4])
 		specs.reflectivity = validate_reflectivity(atof(parts[4]));
-	specs.color = color_from_rgb(specs.color.r, specs.color.g,
-			specs.color.b);
+	specs.color = color_from_255((t_color_255){specs.color.r, specs.color.g,
+			specs.color.b});
 	specs.pattern = NULL;
 	total_parts = 0;
 	while (parts[total_parts])

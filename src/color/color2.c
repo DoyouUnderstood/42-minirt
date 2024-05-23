@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:42:33 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:55:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:01:11 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,22 @@ int	color_to_int(t_color color)
 	return ((r << 16) | (g << 8) | b);
 }
 
-t_color	color_from_rgb(int r, int g, int b)
+t_color	color_from_255(t_color_255 color_255)
 {
 	t_color	new_color;
 
-	new_color.r = r / 255.0;
-	new_color.g = g / 255.0;
-	new_color.b = b / 255.0;
+	new_color.r = color_255.r / 255.0;
+	new_color.g = color_255.g / 255.0;
+	new_color.b = color_255.b / 255.0;
 	return (new_color);
+}
+
+bool	color_255_validate(t_color_255 color_255)
+{
+	return (!(color_255.r < 0
+		|| color_255.r > 255
+		|| color_255.g < 0
+		|| color_255.g > 255
+		|| color_255.b < 0
+		|| color_255.b > 255));
 }

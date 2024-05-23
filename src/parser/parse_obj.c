@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 09:15:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:56:35 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 	pattern = NULL;
 	rgb(part2, &start);
 	rgb(part3, &end);
-	start = color_from_rgb(start.r, start.g, start.b);
-	end = color_from_rgb(end.r, end.g, end.b);
+	start = color_from_255((t_color_255){start.r, start.g, start.b});
+	end = color_from_255((t_color_255){end.r, end.g, end.b});
 	if (!strcmp(part1, "gradient"))
 		pattern = gradient_pattern_create(start, end);
 	else if (!strcmp(part1, "checker"))
@@ -60,8 +60,8 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 	rgb(require_str(parts[5]), &specs.color);
 	if (parts[6])
 		specs.reflectivity = validate_reflectivity(atof(parts[6]));
-	specs.color = color_from_rgb(specs.color.r, specs.color.g,
-			specs.color.b);
+	specs.color = color_from_255((t_color_255){specs.color.r, specs.color.g,
+			specs.color.b});
 	specs.pattern = NULL;
 	if (parts[7] && parts[8] && parts[9])
 		specs.pattern = set_pattern(parts[7], parts[8], parts[9]);
@@ -107,7 +107,7 @@ t_object	*parse_plane(char **parts, t_object *obj)
 		rgb(require_str(parts[3]), &color);
 	if (!parse_vec3(require_str(parts[2]), &direction))
 		error_exit("error with parsing\n");
-	color = color_from_rgb(color.r, color.g, color.b);
+	color = color_from_255((t_color_255){color.r, color.g, color.b});
 	total_parts = 0;
 	while (parts[total_parts])
 		total_parts++;

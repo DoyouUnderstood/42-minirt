@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:40:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:03:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	world->amb = malloc(sizeof(t_amb_light));
 	if (!world->amb)
 		return ("Ambient light: malloc error");
-	world->amb->color = color_from_rgb(d.r, d.g, d.b);
+	world->amb->color = color_from_255((t_color_255){d.r, d.g, d.b});
 	world->amb->ambient = d.intensity;
 	return (NULL);
 }
@@ -79,7 +79,7 @@ char	*parse_light(t_parser *parser, t_world *world)
 		return ("Light: Invalid intensity");
 	if (!parser_valid_color(d.r, d.g, d.b))
 		return ("Light: Invalid color");
-	world->light = light_create(color_from_rgb(d.r, d.g, d.b),
+	world->light = light_create(color_from_255((t_color_255){d.r, d.g, d.b}),
 			d.position, d.intensity);
 	if (!world->light)
 		return ("Light: malloc error");

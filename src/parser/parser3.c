@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 13:49:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:03:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 		return ("Sphere: Invalid reflectivity");
 	if (parse_pattern(parser, &d.pattern))
 		return ("Sphere: Invalid pattern");
-	sphere = sphere_create(d.position, d.diameter / 2.0, color_from_rgb(d.r, d.g, d.b),
+	sphere = sphere_create(d.position, d.diameter / 2.0, color_from_255((t_color_255){d.r, d.g, d.b}),
 			d.reflectivity, d.pattern);
 	if (!sphere)
 	{
