@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/23 13:56:57 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:28:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parse_object(char **parts, t_world *world)
 	if (type == PLANE)
 		object = parse_plane(parts, object);
 	if (type == CYLINDER)
-		object = parse_cylinder(parts, object);
+		object = parse_cylinder_old(parts, object);
 	if (type == CUBE)
 		object = parse_cube(parts);
 	world_add_object(world, object);

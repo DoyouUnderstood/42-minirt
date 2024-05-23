@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 13:56:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:28:17 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_pattern	*set_pattern(char *part1, char *part2, char *part3)
 	return (pattern);
 }
 
-t_object	*parse_cylinder(char **parts, t_object *obj)
+t_object	*parse_cylinder_old(char **parts, t_object *obj)
 {
 	t_material_specs	specs;
 	double				diameter;

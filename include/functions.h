@@ -25,7 +25,7 @@ t_color							calculate_diffuse(t_color ef_c,
 t_color							calculate_specular(t_specular_params *params);
 t_specular_params				prepare_specular_params(t_lighting *params,
 									t_tuple lightv);
-t_object						*parse_cylinder(char **parts, t_object *obj);
+t_object						*parse_cylinder_old(char **parts, t_object *obj);
 t_pattern						*set_pattern(char *part1, char *part2,
 									char *part3);
 t_object						*parse_cube(char **parts);
