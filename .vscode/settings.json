@@ -15,6 +15,7 @@
 		"stdint.h": "c",
 		"main.h": "c",
 		"iterator": "c",
-		"ft_parser.h": "c"
+		"ft_parser.h": "c",
+		"ft_printf.h": "c"
 	}
 }

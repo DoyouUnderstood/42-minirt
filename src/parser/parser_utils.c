@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:02:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:17:01 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ char	*parser_handle_error(void *p, char *msg)
 {
 	free(p);
 	return (msg);
+}
+
+bool	parser_valid_intensity(double intensity)
+{
+	if (intensity < 0.0 || intensity > 1.0)
+		return (false);
+	return (true);
+}
+
+bool	parser_valid_color(int r, int g, int b)
+{
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (false);
+	return (true);
 }
 
 char	*parse_color(t_parser *parser, t_color *color)

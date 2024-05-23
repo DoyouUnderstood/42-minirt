@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 07:42:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:20:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,21 @@ char	*parse_resolution(t_parser *parser, t_world *world)
 
 char	*parse_ambient(t_parser *parser, t_world *world)
 {
-	char		*error;
+	t_parser_ambient	d;
 
+	if (!parser_match(parser, "%f %d%_,%_%d%_,%_%d%_%$",
+			&d.intensity, &d.r, &d.g, &d.b))
+		return ("Ambient light: Invalid format");
+	if (!parser_valid_intensity(d.intensity))
+		return ("Ambient light: Invalid intensity");
+	if (!parser_valid_color(d.r, d.g, d.b))
+		return ("Ambient light: Invalid color");
 	world->amb = malloc(sizeof(t_amb_light));
 	if (!world->amb)
 		return ("Ambient light: malloc error");
-	if (!parser_match(parser, "%f ",
-		&world->amb->ambient))
-		error = "Ambient light: Invalid format";
-	if (!error && (world->amb->ambient < 0.0 || world->amb->ambient > 1.0))
-		error = "Ambient light: Invalid intensity value";
-	if (!error && parse_color(parser, &world->amb->color))
-		error = "Ambient light: Invalid color";
-	if (!error && !parser_match(parser, "%_%$"))
-		error = "Ambient light: Invalid format";
-	if (error)
-	{
-		free(world->amb);
-		world->amb = NULL;
-	}
-	return (error);
+	world->amb->color = color_from_rgb(d.r, d.g, d.b);
+	world->amb->ambient = d.intensity;
+	return (NULL);
 }
 
 char	*parse_camera(t_parser *parser, t_world *world)
