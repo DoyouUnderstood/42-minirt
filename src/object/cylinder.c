@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 09:14:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:17:47 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_intersection	*cylinder_intersect(t_object *obj, t_ray *ray, int *count)
 	t_cylinder_data				*cylinder;
 	t_cylinder_intersect_calc	calc;
 
-	cylinder = (t_cylinder_data *) obj->obj;
+	cylinder = (t_cylinder_data *) obj->data;
 	calc.a = pow(ray->direction.x, 2) + pow(ray->direction.z, 2);
 	calc.b = 2 * ray->origin.x * ray->direction.x + 2 * ray->origin.z * ray->direction.z;
 	calc.c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - pow(cylinder->radius, 2);
@@ -116,7 +116,7 @@ t_object	*cylinder_create(t_tuple center, double radius, double height, t_tuple 
 	cylinder = cylinder_create_data(center, radius, height, axis);
 	obj = malloc(sizeof(t_object));
 	obj->type = CYLINDER;
-	obj->obj = cylinder;
+	obj->data = cylinder;
 	obj->shape = malloc(sizeof(t_shape));
 	default_axis = (t_tuple){0, 1, 0, 0};
 	rotation = align_axis(default_axis, axis);

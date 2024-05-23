@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:59:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:16:51 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static t_intersection	*create_intersections(t_object *obj, double t1, double t2,
 static t_intersection	*sphere_intersect(t_object *obj, t_ray *ray,
 		int *out_count)
 {
-	t_sphere_data			*sphere;
+	t_sphere_data			*data;
 	t_sphere_intersect_calc	calc;
 
-	sphere = (t_sphere_data *) obj->obj;
-	calc.sphere_to_ray = tuple_subtract(ray->origin, sphere->center);
+	data = (t_sphere_data *) obj->data;
+	calc.sphere_to_ray = tuple_subtract(ray->origin, data->center);
 	calc.a = vector_dot(ray->direction, ray->direction);
 	calc.b = 2 * vector_dot(ray->direction, calc.sphere_to_ray);
 	calc.c = vector_dot(calc.sphere_to_ray, calc.sphere_to_ray) - 1.0;
@@ -94,7 +94,7 @@ t_object	*sphere_create(t_sphere_data *data, t_color color,
 	sphere_data = sphere_create_data(data);
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
-	obj->obj = sphere_data;
+	obj->data = sphere_data;
 	obj->shape = malloc(sizeof(t_shape));
 	obj->shape->transformation = matrix_mult(matrix_translation(data->center.x,
 				data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));

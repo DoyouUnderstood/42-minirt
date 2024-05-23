@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:58:21 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:15:56 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef enum e_obj_type
 typedef struct s_object
 {
 	t_obj_type	type;
-	void		*obj;
+	void		*data;
 	t_shape		*shape;
 }	t_object;
 

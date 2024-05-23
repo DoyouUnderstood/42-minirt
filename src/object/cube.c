@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 09:44:33 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:17:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_object	*cube_create(t_tuple center, double edge_length,
 	shape->local_intersect = cube_intersect;
 	shape->local_normal_at = cube_normal_at;
 	obj->type = CUBE;
-	obj->obj = cube_data;
+	obj->data = cube_data;
 	obj->shape = shape;
 	return (obj);
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 19:39:54 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:18:06 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_object	*plane_create(t_color color, t_tuple center,
 	if (!obj)
 		return (NULL);
 	obj->type = PLANE;
-	obj->obj = plane;
+	obj->data = plane;
 	obj->shape = (t_shape *)malloc(sizeof(t_shape));
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, direction);
