@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:03:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:14:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	t_parser_ambient	d;
 
 	if (!parser_match(parser, "%f %d,%d,%d%_%$",
-			&d.intensity, &d.r, &d.g, &d.b))
+			&d.intensity, &d.color.r, &d.color.g, &d.color.b))
 		return ("Ambient light: Invalid format");
 	if (!parser_valid_intensity(d.intensity))
 		return ("Ambient light: Invalid intensity");
-	if (!parser_valid_color(d.r, d.g, d.b))
+	if (!color_255_validate(d.color))
 		return ("Ambient light: Invalid color");
 	world->amb = malloc(sizeof(t_amb_light));
 	if (!world->amb)
 		return ("Ambient light: malloc error");
-	world->amb->color = color_from_255((t_color_255){d.r, d.g, d.b});
+	world->amb->color = color_from_255(d.color);
 	world->amb->ambient = d.intensity;
 	return (NULL);
 }

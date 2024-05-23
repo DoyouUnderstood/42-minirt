@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:06:12 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:13:31 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ char	*parse_resolution(t_parser *parser, t_world *world);
 // Ambient light
 typedef struct s_parser_ambient
 {
-	double	intensity;
-	int		r;
-	int		g;
-	int		b;
+	double		intensity;
+	t_color_255	color;
 }	t_parser_ambient;
 
 char	*parse_ambient(t_parser *parser, t_world *world);
