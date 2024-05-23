@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/23 10:16:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:49:17 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 
 t_obj_type	get_object_type(char *identifier)
 {
-	if (!ft_strncmp(identifier, "sp", 2))
-		return (SPHERE);
-	else if (!ft_strncmp(identifier, "pl", 2))
+	if (!ft_strncmp(identifier, "pl", 2))
 		return (PLANE);
 	else if (!ft_strncmp(identifier, "cy", 2))
 		return (CYLINDER);
@@ -40,8 +38,6 @@ void	parse_object(char **parts, t_world *world)
 
 	object = NULL;
 	type = get_object_type(parts[0]);
-	if (type == SPHERE)
-		object = parse_sphere_old(parts, object);
 	if (type == PLANE)
 		object = parse_plane(parts, object);
 	if (type == CYLINDER)

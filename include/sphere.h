@@ -33,7 +33,7 @@ typedef struct s_sphere_intersect_calc
 	t_tuple	sphere_to_ray;
 }	t_sphere_intersect_calc;
 
-t_object	*sphere_create(t_tuple center,
-				double radius, t_material_specs specs);
+t_object	*sphere_create(t_tuple center, double radius, t_color color,
+				double reflectivity, t_pattern *pattern);
 
 #endif

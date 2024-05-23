@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:35:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:47:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@
 # include "libft.h"
 # include <stdbool.h>
 
+typedef struct s_parser_pattern
+{
+	t_pattern	*(*pattern_f)(t_color c1, t_color c2);
+	int			r1;
+	int			g1;
+	int			b1;
+	int			r2;
+	int			g2;
+	int			b2;
+}	t_parser_pattern;
+
 // Main function
 t_world	*parse_rt_file(char *filename);
 
@@ -35,6 +46,7 @@ bool	parser_valid_color(int r, int g, int b);
 char	*parse_color(t_parser *parser, t_color *color);
 char	*parse_tuple(t_parser *parser, t_tuple *tuple,
 			t_tuple (*tuple_creator_f)(double x, double y, double z));
+char	*parse_reflectivity(t_parser *parser, double *reflectivity);
 char	*parse_pattern(t_parser *parser, t_pattern **pattern);
 
 // Resolution
@@ -71,7 +83,20 @@ typedef struct s_parser_light
 }	t_parser_light;
 char	*parse_light(t_parser *parser, t_world *world);
 
+// Sphere
+typedef struct s_parser_sphere
+{
+	t_tuple	position;
+	double	diameter;
+	int			r;
+	int			g;
+	int			b;
+	double		reflectivity;
+	t_pattern	*pattern;
+}	t_parser_sphere;
+char	*parse_sphere(t_parser *parser, t_world *world);
 
+// OLD
 bool		in_range(double start, double end, double value);
 char		*advance_to_next_component(char **str);
 int			parse_vec3(char *str, t_tuple *vec);

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:17:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:45:51 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ bool	parser_valid_color(int r, int g, int b)
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (false);
 	return (true);
+}
+
+char	*parse_reflectivity(t_parser *parser, double *reflectivity)
+{
+	if (!parser_match(parser, " %f", reflectivity))
+		*reflectivity = 0.0;
+	return (NULL);
 }
 
 char	*parse_color(t_parser *parser, t_color *color)
@@ -62,29 +69,28 @@ char	*parse_tuple(t_parser *parser, t_tuple *tuple,
 
 char	*parse_pattern(t_parser *parser, t_pattern **pattern)
 {
-	t_pattern	*(*pattern_f)(t_color c1, t_color c2);
-	t_color		color1;
-	t_color		color2;
+	t_parser_pattern	d;
 
-	pattern_f = NULL;
+	d.pattern_f = NULL;
 	*pattern = NULL;
 	if (parser_match(parser, " gradient "))
-		pattern_f = gradient_pattern_create;
+		d.pattern_f = gradient_pattern_create;
 	else if (parser_match(parser, " checker "))
-		pattern_f = checker_pattern_create;
+		d.pattern_f = checker_pattern_create;
 	else if (parser_match(parser, " stripe "))
-		pattern_f = stripe_pattern_create;
+		d.pattern_f = stripe_pattern_create;
 	else if (parser_match(parser, " ring "))
-		pattern_f = ring_pattern_create;
-	if (!pattern_f)
+		d.pattern_f = ring_pattern_create;
+	if (!d.pattern_f)
 		return (NULL);
-	if (parse_color(parser, &color1))
-		return ("Invalid pattern color");
-	if (!parser_match(parser, " "))
+	if (!parser_match(parser, "%d,%d,%d %d,%d,%d",
+		&d.r1, &d.g2, &d.b1, &d.r2, &d.g2, &d.b2))
 		return ("Invalid pattern format");
-	if (parse_color(parser, &color2))
+	if (!parser_valid_color(d.r1, d.g1, d.b1)
+			|| !parser_valid_color(d.r2, d.g2, d.b2))
 		return ("Invalid pattern color");
-	*pattern = pattern_f(color1, color2);
+	*pattern = d.pattern_f(color_from_rgb(d.r1, d.g1, d.b1),
+			color_from_rgb(d.r2, d.g2, d.b2));
 	if (!*pattern)
 		return ("Pattern: malloc error");
 	return (NULL);
