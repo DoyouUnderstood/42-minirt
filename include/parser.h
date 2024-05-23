@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:13:31 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:22:41 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_world	*parse_rt_file(char *filename);
 // Utils
 char	*parser_handle_error(void *p, char *msg);
 bool	parser_valid_intensity(double intensity);
-bool	parser_valid_color(int r, int g, int b);
 char	*parse_color(t_parser *parser, t_color *color);
 char	*parse_tuple(t_parser *parser, t_tuple *tuple,
 			t_tuple (*tuple_creator_f)(double x, double y, double z));
@@ -71,22 +70,18 @@ char	*parse_camera(t_parser *parser, t_world *world);
 // Point light
 typedef struct s_parser_light
 {
-	t_tuple	position;
-	double	intensity;
-	int		r;
-	int		g;
-	int		b;
+	t_tuple		position;
+	double		intensity;
+	t_color_255	color;
 }	t_parser_light;
 char	*parse_light(t_parser *parser, t_world *world);
 
 // Sphere
 typedef struct s_parser_sphere
 {
-	t_tuple	position;
-	double	diameter;
-	int			r;
-	int			g;
-	int			b;
+	t_tuple		position;
+	double		diameter;
+	t_color_255	color;
 	double		reflectivity;
 	t_pattern	*pattern;
 }	t_parser_sphere;

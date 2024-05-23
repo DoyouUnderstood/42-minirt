@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:14:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:18:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ char	*parse_light(t_parser *parser, t_world *world)
 	d.position = point_create(0, 0, 0);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d%_%$",
 		&d.position.x, &d.position.y, &d.position.z,
-		&d.intensity, &d.r, &d.g, &d.b))
+		&d.intensity, &d.color.r, &d.color.g, &d.color.b))
 		return ("Light: Invalid format");
 	if (!parser_valid_intensity(d.intensity))
 		return ("Light: Invalid intensity");
-	if (!parser_valid_color(d.r, d.g, d.b))
+	if (!color_255_validate(d.color))
 		return ("Light: Invalid color");
-	world->light = light_create(color_from_255((t_color_255){d.r, d.g, d.b}),
-			d.position, d.intensity);
+	world->light = light_create(color_from_255(d.color), d.position,
+		d.intensity);
 	if (!world->light)
 		return ("Light: malloc error");
 	return (NULL);
