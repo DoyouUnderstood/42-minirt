@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 18:12:57 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 05:16:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ static bool	is_empty_line(char *line)
 	return (true);
 }
 
+static char	*get_clean_line(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (line && line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
+	return (line);
+}
+
 // read .rt and fill and return the whole world.
 t_world	*parse_rt_file(char *filename)
 {
@@ -72,17 +82,15 @@ t_world	*parse_rt_file(char *filename)
 	if (fd < 0)
 		error_exit("Can't open the file");
 	world = world_create();
-	line = get_next_line(fd);
+	line = get_clean_line(fd);
 	while (line)
 	{
 		error = NULL;
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
 		if (!is_empty_line(line))
 			error = parse_line(line, world);
 		if (error)
 			break ;
-		line = get_next_line(fd);
+		line = get_clean_line(fd);
 	}
 	close(fd);
 	if (error)
