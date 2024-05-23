@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:23:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:35:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ typedef struct s_parser_camera
 char	*parse_camera(t_parser *parser, t_world *world);
 
 // Point light
+typedef struct s_parser_light
+{
+	t_tuple	position;
+	double	intensity;
+	int		r;
+	int		g;
+	int		b;
+}	t_parser_light;
 char	*parse_light(t_parser *parser, t_world *world);
 
 

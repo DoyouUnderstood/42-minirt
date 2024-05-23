@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 11:33:26 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:40:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*parse_camera(t_parser *parser, t_world *world)
 {
 	t_parser_camera	d;
 
+	d.position = point_create(0, 0, 0);
+	d.direction = point_create(0, 0, 0);
 	if (!world->vsize || !world->hsize)
 		return ("Camera: Camera defined before resolution");
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f%_%$",
@@ -57,8 +59,6 @@ char	*parse_camera(t_parser *parser, t_world *world)
 		return ("Camera: Invalid format");
 	if (d.fov < 0.0 || d.fov > 180.0)	
 		return ("Camera: Invalid FOV");
-	d.position = point_create(d.position.x, d.position.y, d.position.z);
-	d.direction = point_create(d.direction.x, d.direction.y, d.direction.z);
 	world->camera = camera_create(d.fov, d.position, d.direction,
 		world->vsize, world->hsize);
 	if (!world->camera)
@@ -68,21 +68,19 @@ char	*parse_camera(t_parser *parser, t_world *world)
 
 char	*parse_light(t_parser *parser, t_world *world)
 {
-	t_tuple	position;
-	double	intensity;
-	t_color	color;
+	t_parser_light	d;
 
-	if (parse_tuple(parser, &position, point_create))
-		return ("Light: Invalid position");
-	if (!parser_match(parser, " %f ", &intensity))
+	d.position = point_create(0, 0, 0);
+	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d%_%$",
+		&d.position.x, &d.position.y, &d.position.z,
+		&d.intensity, &d.r, &d.g, &d.b))
 		return ("Light: Invalid format");
-	if (intensity < 0.0 || intensity > 1.0)
+	if (!parser_valid_intensity(d.intensity))
 		return ("Light: Invalid intensity");
-	if (parse_color(parser, &color))
+	if (!parser_valid_color(d.r, d.g, d.b))
 		return ("Light: Invalid color");
-	if (!parser_match(parser, "%_%$"))
-		return ("Light: Invalid format");
-	world->light = light_create(color, position, intensity);
+	world->light = light_create(color_from_rgb(d.r, d.g, d.b),
+			d.position, d.intensity);
 	if (!world->light)
 		return ("Light: malloc error");
 	return (NULL);
