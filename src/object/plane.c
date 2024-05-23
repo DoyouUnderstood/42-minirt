@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 18:31:28 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:39:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_object	*plane_create(t_color color, t_tuple center,
 	obj->shape->transformation = matrix_mult(translation, rotation);
 	obj->shape->inv_transformation = matrix_inverse(obj->shape->transformation);
 	obj->shape->tinv_transformation = matrix_transpose(obj->shape->inv_transformation);
-	obj->shape->material = material_create_default_plane(&color, pattern);
+	obj->shape->material = material_create_default(&color, 0.5, pattern);
 	obj->shape->local_normal_at = plane_local_normal_at;
 	obj->shape->local_intersect = plane_local_intersect;
 	return (obj);
