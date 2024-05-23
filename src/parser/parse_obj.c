@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 09:11:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:15:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 		return (NULL);
 	if (!ft_atod(require_str(parts[3]), &diameter))
 		return (NULL);
+	cyl.radius = diameter / 2.0;
 	if (!ft_atod(require_str(parts[4]), &cyl.height))
 		return (NULL);
 	rgb(require_str(parts[5]), &specs.color);
@@ -64,7 +65,7 @@ t_object	*parse_cylinder(char **parts, t_object *obj)
 	specs.pattern = NULL;
 	if (parts[7] && parts[8] && parts[9])
 		specs.pattern = set_pattern(parts[7], parts[8], parts[9]);
-	obj = cylinder_create(cyl.center, diameter, cyl.height, cyl.axis, specs);
+	obj = cylinder_create(cyl.center, cyl.radius, cyl.height, cyl.axis, specs);
 	return (obj);
 }
 

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:38:13 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/22 17:45:38 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:25:19 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ t_object	*parse_sphere(char **parts, t_object *object)
 		total_parts++;
 	if (total_parts >= 6 && parts[5] && parts[6] && parts[7])
 		specs.pattern = set_pattern(parts[5], parts[6], parts[7]);
-	object = sphere_create(center, diameter, specs);
+	object = sphere_create(center, diameter / 2.0, specs);
 	return (object);
 }

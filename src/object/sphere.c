@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 19:33:57 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:24:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-static t_sphere_data	*sphere_create_data(t_tuple center, double diameter)
+static t_sphere_data	*sphere_create_data(t_tuple center, double radius)
 {
 	t_sphere_data	*sphere_data;
 
@@ -25,7 +25,7 @@ static t_sphere_data	*sphere_create_data(t_tuple center, double diameter)
 	if (!sphere_data)
 		return (NULL);
 	sphere_data->center = center;
-	sphere_data->diameter = diameter;
+	sphere_data->radius = radius;
 	return (sphere_data);
 }
 
@@ -63,7 +63,7 @@ static t_intersection	*sphere_intersect(t_object *obj, t_ray *ray,
 	calc.a = vector_dot(ray->direction, ray->direction);
 	calc.b = 2 * vector_dot(ray->direction, calc.sphere_to_ray);
 	calc.c = vector_dot(calc.sphere_to_ray, calc.sphere_to_ray)
-		- pow(sphere->diameter, 2);
+		- pow(sphere->radius, 2);
 	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
 	if (calc.discriminant < -EPSILON)
 	{
@@ -87,13 +87,13 @@ static t_tuple	sphere_normal_at(t_shape *shape, t_tuple local_point)
 	return (tupl);
 }
 
-t_object	*sphere_create(t_tuple center, double diameter,
+t_object	*sphere_create(t_tuple center, double radius,
 		t_material_specs specs)
 {
 	t_sphere_data	*sphere_data;
 	t_object		*obj;
 
-	sphere_data = sphere_create_data(center, diameter);
+	sphere_data = sphere_create_data(center, radius);
 	obj = malloc(sizeof(t_object));
 	obj->type = SPHERE;
 	obj->obj = sphere_data;
