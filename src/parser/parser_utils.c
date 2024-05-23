@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:04:14 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:08:39 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,12 @@ char	*parse_pattern(t_parser *parser, t_pattern **pattern)
 	if (!d.pattern_f)
 		return (NULL);
 	if (!parser_match(parser, "%d,%d,%d %d,%d,%d",
-		&d.r1, &d.g2, &d.b1, &d.r2, &d.g2, &d.b2))
+		&d.color1.r, &d.color1.g, &d.color1.b,
+		&d.color2.r, &d.color2.g, &d.color2.b))
 		return ("Invalid pattern format");
-	if (!parser_valid_color(d.r1, d.g1, d.b1)
-			|| !parser_valid_color(d.r2, d.g2, d.b2))
+	if (!color_255_validate(d.color1) || !color_255_validate(d.color2))
 		return ("Invalid pattern color");
-	*pattern = d.pattern_f(color_from_255((t_color_255){d.r1, d.g1, d.b1}),
-			color_from_255((t_color_255){d.r2, d.g2, d.b2}));
+	*pattern = d.pattern_f(color_from_255(d.color1), color_from_255(d.color2));
 	if (!*pattern)
 		return ("Pattern: malloc error");
 	return (NULL);
