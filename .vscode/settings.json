@@ -17,6 +17,7 @@
 		"iterator": "c",
 		"ft_parser.h": "c",
 		"ft_printf.h": "c",
-		"stddef.h": "c"
+		"stddef.h": "c",
+		"get_next_line.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:03:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:08:59 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,8 @@
 static char	*parse_line(char *line, t_world *world)
 {
 	t_parser	parser;
-	char		**ptr;
 
 	parser_init(&parser, line);
-	ptr = ft_split(line, ' ');
-	
 	if (parser_match(&parser, "%_R "))
 		return (parse_resolution(&parser, world));
 	if (parser_match(&parser, "%_A "))
@@ -50,9 +47,7 @@ static char	*parse_line(char *line, t_world *world)
 		return (parse_cube(&parser, world));
 	if (parser_match(&parser, "%_pl "))
 		return (parse_plane(&parser, world));
-	parse_object(ptr, world);
-	free_split(ptr);
-	return (NULL);
+	return ("Invalid object prefix");
 }
 
 static bool	is_empty_line(char *line)

@@ -69,7 +69,7 @@ OBJ = $(SRCS:.c=.o)
 
 TEST_OBJ = $(TEST_SRCS:.c=.o)
 
-LIBS = $(LIBFT_DIR)/libft.a $(FT_PRINTF_DIR)/libftprintf.a $(GNL_DIR)/libgnl.a
+LIBS = $(FT_PRINTF_DIR)/libftprintf.a $(GNL_DIR)/libgnl.a $(LIBFT_DIR)/libft.a 
 
 all: $(NAME)
 

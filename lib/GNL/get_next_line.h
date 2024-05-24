@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:37:18 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 12:07:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:12:23 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024

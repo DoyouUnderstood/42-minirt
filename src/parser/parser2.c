@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:18:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:27:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 	if (!parser_match(parser, "%f %d,%d,%d%_%$",
 			&d.intensity, &d.color.r, &d.color.g, &d.color.b))
 		return ("Ambient light: Invalid format");
-	if (!parser_valid_intensity(d.intensity))
+	if (d.intensity < 0.0 || d.intensity > 1.0)
 		return ("Ambient light: Invalid intensity");
 	if (!color_255_validate(d.color))
 		return ("Ambient light: Invalid color");
@@ -75,7 +75,7 @@ char	*parse_light(t_parser *parser, t_world *world)
 		&d.position.x, &d.position.y, &d.position.z,
 		&d.intensity, &d.color.r, &d.color.g, &d.color.b))
 		return ("Light: Invalid format");
-	if (!parser_valid_intensity(d.intensity))
+	if (d.intensity < 0.0 || d.intensity > 1.0)
 		return ("Light: Invalid intensity");
 	if (!color_255_validate(d.color))
 		return ("Light: Invalid color");
