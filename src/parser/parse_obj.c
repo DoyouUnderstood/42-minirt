@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:39:58 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:56:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:55:53 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,17 @@ int	parse_point(char *str, t_tuple *vec)
 
 t_object	*parse_plane(char **parts, t_object *obj)
 {
-	t_tuple		center;
+	t_plane_data	d;
 	t_color		color;
-	t_tuple		direction;
 	t_pattern	*pattern;
 	int			total_parts;
 
 	pattern = NULL;
-	if (!parse_vec3(require_str(parts[1]), &center))
+	if (!parse_vec3(require_str(parts[1]), &d.center))
 		error_exit("error with parsing\n");
 	else
 		rgb(require_str(parts[3]), &color);
-	if (!parse_vec3(require_str(parts[2]), &direction))
+	if (!parse_vec3(require_str(parts[2]), &d.direction))
 		error_exit("error with parsing\n");
 	color = color_from_255((t_color_255){color.r, color.g, color.b});
 	total_parts = 0;
@@ -85,6 +84,6 @@ t_object	*parse_plane(char **parts, t_object *obj)
 		total_parts++;
 	if (total_parts >= 6 && parts[4] && parts[5] && parts[6])
 		pattern = set_pattern(parts[4], parts[5], parts[6]);
-	obj = plane_create(color, center, pattern, direction);
+	obj = plane_create(&d, color, 0.5, pattern);
 	return (obj);
 }

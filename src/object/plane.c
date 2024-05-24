@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:29:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:56:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@
 #include "material.h"
 
 #include <stdlib.h>
-
-static t_plane_data	*plane_create_data(t_tuple center)
-{
-	t_plane_data	*plane;
-
-	plane = malloc(sizeof(t_plane_data));
-	plane->center = center;
-	return (plane);
-}
 
 t_intersection	*plane_local_intersect(t_object *obj, t_ray *ray, int *count)
 {
@@ -54,28 +45,25 @@ t_tuple	plane_local_normal_at(t_object *obj, t_tuple local_point)
 }
 
 // Intégration dans la création de l'objet Plane
-t_object	*plane_create(t_color color, t_tuple center,
-		t_pattern *pattern, t_tuple direction)
+t_object	*plane_create(t_plane_data *data, t_color color,
+	double reflectivity, t_pattern *pattern)
 {
-	t_plane_data		*plane;
 	t_object	*obj;
 	t_tuple		default_normal;
 	t_matrix	rotation;
 	t_matrix	translation;
 
-	plane = plane_create_data(center);
 	obj = (t_object *)malloc(sizeof(t_object));
-	if (!obj)
-		return (NULL);
+	obj->data = malloc(sizeof(t_plane_data));
+	*((t_plane_data *) obj->data) = *data;
 	obj->type = PLANE;
-	obj->data = plane;
 	default_normal = (t_tuple){0, 1, 0, 0};
-	rotation = matrix_rotate_from_to(default_normal, direction);
-	translation = matrix_translation(center.x, center.y, center.z);
+	rotation = matrix_rotate_from_to(default_normal, data->direction);
+	translation = matrix_translation(data->center.x, data->center.y, data->center.z);
 	obj->transformation = matrix_mult(translation, rotation);
 	obj->inv_transformation = matrix_inverse(obj->transformation);
 	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
-	obj->material = material_create_default(&color, 0.5, pattern);
+	obj->material = material_create_default(&color, reflectivity, pattern);
 	obj->local_normal_at = plane_local_normal_at;
 	obj->local_intersect = plane_local_intersect;
 	return (obj);
