@@ -5,104 +5,112 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 16:42:00 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/22 11:38:43 by erabbath         ###   ########.fr       */
+/*   Created: 2023/10/11 10:37:07 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/24 12:07:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*stackcut(char *stack, int pos)
+char	*append_from_buffer(char *line, t_line_rdr *rdr, ssize_t len)
 {
-	char	*res;
-	int		len;
-	int		i;
+	size_t	line_len;
+	char	*new_line;
 
-	len = ft_strlen(stack) - pos;
-	res = malloc(len + 1 * sizeof(char));
-	i = 0;
-	while (stack[i + pos])
-	{
-		res[i] = stack[i + pos];
-		i++;
-	}
-	free(stack);
-	res[i] = '\0';
-	return (res);
-}
-
-char	*fill_stack(char *stack, int fd, int *readret)
-{
-	char	buffer[BUFFER_SIZE + 1];
-	int		tmp;
-
-	tmp = read(fd, buffer, BUFFER_SIZE);
-	*readret = tmp;
-	if (tmp == -1)
-		return (stack);
-	buffer[tmp] = '\0';
-	stack = ft_strjesaispas(stack, buffer);
-	return (stack);
-}
-
-char	*readret0(char **stack, int readret)
-{
-	char	*res;
-	int		len;
-
-	len = 0;
-	if (readret == 0 && *stack[0] != '\0')
-	{
-		len = ft_strlen(*stack);
-		res = ft_strndup_custom(*stack, len);
-		free(*stack);
-		*stack = NULL;
-		return (res);
-	}
+	if (!line)
+		line_len = 0;
 	else
+		line_len = ft_strlen(line);
+	new_line = malloc(line_len + len + 1);
+	if (!new_line)
 	{
-		free(*stack);
-		*stack = NULL;
+		free(line);
 		return (NULL);
 	}
+	if (line)
+		ft_strlcpy(new_line, line, line_len + 1);
+	ft_strlcpy(new_line + line_len, rdr->buffer + rdr->current, len + 1);
+	free(line);
+	return (new_line);
 }
 
-int	check_error(int fd, char **stack)
+char	*extend_line(char *line, t_line_rdr *rdr, ssize_t *found_eol)
 {
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (1);
-	if (!*stack)
+	char	*new_line;
+	ssize_t	eol_pos;
+
+	eol_pos = rdr->current;
+	*found_eol = 0;
+	while (eol_pos < rdr->len)
 	{
-		*stack = (char *)malloc(sizeof(char));
-		if (!*stack)
-			return (1);
+		if (rdr->buffer[eol_pos] == '\n')
+		{
+			*found_eol = 1;
+			break ;
+		}
+		eol_pos++;
 	}
-	return (0);
+	if (!*found_eol)
+		new_line = append_from_buffer(line, rdr, rdr->len - rdr->current);
+	else
+		new_line = append_from_buffer(line, rdr, eol_pos - rdr->current + 1);
+	if (new_line)
+		rdr->current = eol_pos + 1;
+	return (new_line);
+}
+
+char	*read_line(t_line_rdr *rdr)
+{
+	ssize_t	status;
+	ssize_t	found_eol;
+	char	*line;
+
+	line = NULL;
+	while (1)
+	{
+		if (is_end_of_buffer(rdr))
+		{
+			status = fill_buffer(rdr);
+			if (status < 0)
+			{
+				free(line);
+				return (NULL);
+			}
+			else if (status == 0)
+				return (line);
+		}
+		line = extend_line(line, rdr, &found_eol);
+		if (!line)
+			return (NULL);
+		if (found_eol)
+			return (line);
+	}
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stack;
-	char		*res;
-	int			readret;
-	int			pos;
+	static t_line_rdr	rdrs[10] = {0};
+	size_t				i;
 
-	if (check_error(fd, &stack))
-		return (NULL);
-	while (1)
+	i = 0;
+	while (i < 10)
 	{
-		pos = check_line(stack);
-		if (pos == -1)
-		{
-			stack = fill_stack(stack, fd, &readret);
-			if (readret <= 0)
-				return (readret0(&stack, readret));
-		}
-		else
-		{
-			res = ft_strndup_custom(stack, pos);
-			stack = stackcut(stack, pos + 1);
-			return (res);
-		}
+		if (rdrs[i].fd == fd && rdrs[i].is_open)
+			return (read_line(&(rdrs[i])));
+		i++;
 	}
+	i = 0;
+	while (i < 10)
+	{
+		if (!rdrs[i].is_open)
+		{
+			rdrs[i].fd = fd;
+			rdrs[i].is_open = 1;
+			rdrs[i].current = 0;
+			rdrs[i].len = 0;
+			return (read_line(&(rdrs[i])));
+		}
+		i++;
+	}
+	return (NULL);
 }

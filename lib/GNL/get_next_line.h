@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 16:46:51 by alletond          #+#    #+#             */
-/*   Updated: 2023/11/09 18:46:11 by alletond         ###   ########.fr       */
+/*   Created: 2023/10/11 10:37:18 by erabbath          #+#    #+#             */
+/*   Updated: 2024/05/24 12:07:01 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
+
 # define GET_NEXT_LINE_H
 
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
+
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1024
 # endif
 
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libft/libft.h"
+typedef struct s_line_rdr
+{
+	int		fd;
+	int		is_open;
+	char	buffer[BUFFER_SIZE];
+	ssize_t	current;
+	ssize_t	len;
+}	t_line_rdr;
 
-int		check_error(int fd, char **stack);
-char	*stackcut(char *stack, int pos);
+int		is_end_of_buffer(t_line_rdr *rdr);
+void	reset_buffer(t_line_rdr *rdr);
+ssize_t	fill_buffer(t_line_rdr *rdr);
 char	*get_next_line(int fd);
-char	*ft_strjesaispas(char *s1, char *s2);
-char	*fill_stack(char *stack, int fd, int *readret);
-int		check_line(char *str);
-char	*ft_strndup_custom(const char *s, size_t pos);
 
 #endif
