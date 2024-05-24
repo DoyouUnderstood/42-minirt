@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 13:29:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:01:55 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "sphere.h"
 # include "cylinder.h"
 # include "cube.h"
+# include "plane.h"
 
 # include "get_next_line.h"
 # include "ft_printf.h"
@@ -123,12 +124,23 @@ typedef struct s_parser_cube
 
 char	*parse_cube(t_parser *parser, t_world *world);
 
+/* ------------------ PLANE --------------------- */
+
+typedef struct s_parser_plane
+{
+	t_plane_data		plane;
+	t_color_255		color;
+	double			reflectivity;
+	t_pattern		*pattern;
+}	t_parser_plane;
+
+char	*parse_plane(t_parser *parser, t_world *world);
+
 // OLD
 bool		in_range(double start, double end, double value);
 char		*advance_to_next_component(char **str);
 int			parse_vec3(char *str, t_tuple *vec);
 void		parse_object(char **parts, t_world *world);
-t_object	*parse_plane(char **parts, t_object *obj);
 bool		valid_bright(double bright);
 void		free_split(char **parts);
 void		rgb(char *str, t_color *color);

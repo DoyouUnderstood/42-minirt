@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 13:42:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:03:35 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char	*parse_line(char *line, t_world *world)
 		return (parse_cylinder(&parser, world));
 	if (parser_match(&parser, "%_cu "))
 		return (parse_cube(&parser, world));
+	if (parser_match(&parser, "%_pl "))
+		return (parse_plane(&parser, world));
 	parse_object(ptr, world);
 	free_split(ptr);
 	return (NULL);

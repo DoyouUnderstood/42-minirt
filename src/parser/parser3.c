@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 13:31:06 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:02:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ft_error.h"
 #include "sphere.h"
 #include "cube.h"
+#include "plane.h"
 
 t_pattern	*set_pattern(char *part1, char *part2, char *part3);
 
@@ -88,6 +89,56 @@ char	*parse_cube(t_parser *parser, t_world *world)
 	d.cube.center = point_create(d.cube.center.x, d.cube.center.y,
 			d.cube.center.z);
 	world_add_object(world, cube_create(&d.cube, color_from_255(d.color),
+			d.reflectivity, d.pattern));
+	return (NULL);
+}
+
+/*
+t_object	*parse_plane(char **parts, t_object *obj)
+{
+	t_plane_data	d;
+	t_color		color;
+	t_pattern	*pattern;
+	int			total_parts;
+
+	pattern = NULL;
+	if (!parse_vec3(require_str(parts[1]), &d.center))
+		error_exit("error with parsing\n");
+	else
+		rgb(require_str(parts[3]), &color);
+	if (!parse_vec3(require_str(parts[2]), &d.direction))
+		error_exit("error with parsing\n");
+	color = color_from_255((t_color_255){color.r, color.g, color.b});
+	total_parts = 0;
+	while (parts[total_parts])
+		total_parts++;
+	if (total_parts >= 6 && parts[4] && parts[5] && parts[6])
+		pattern = set_pattern(parts[4], parts[5], parts[6]);
+	obj = plane_create(&d, color, 0.5, pattern);
+	return (obj);
+}
+*/
+
+char	*parse_plane(t_parser *parser, t_world *world)
+{
+	t_parser_plane	d;
+
+	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %d,%d,%d",
+		&d.plane.center.x, &d.plane.center.y, &d.plane.center.z,
+		&d.plane.direction.x, &d.plane.direction.y, &d.plane.direction.z,
+		&d.color.r, &d.color.g, &d.color.b))
+		return ("Plane: Invalid format");
+	if (!color_255_validate(d.color))
+		return ("Plane: Invalid color");
+	if (parse_reflectivity(parser, &d.reflectivity))
+		return ("Plane: Invalid reflectivity");
+	if (parse_pattern(parser, &d.pattern))
+		return ("Plane: Invalid pattern");
+	d.plane.center = point_create(d.plane.center.x, d.plane.center.y,
+			d.plane.center.z);
+	d.plane.direction = vector_create(d.plane.direction.x, d.plane.direction.y,
+			d.plane.direction.z);
+	world_add_object(world, plane_create(&d.plane, color_from_255(d.color),
 			d.reflectivity, d.pattern));
 	return (NULL);
 }
