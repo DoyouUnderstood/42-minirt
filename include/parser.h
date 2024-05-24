@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:52:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:13:56 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,6 @@ char	*parse_cylinder(t_parser *parser, t_world *world);
 char	*parse_cube(t_parser *parser, t_world *world);
 
 /* ------------------ PLANE --------------------- */
-
-typedef struct s_parser_plane
-{
-	t_plane_data		plane;
-	t_color_255		color;
-	double			reflectivity;
-	t_pattern		*pattern;
-}	t_parser_plane;
 
 char	*parse_plane(t_parser *parser, t_world *world);
 

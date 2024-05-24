@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:55:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:15:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,24 +103,27 @@ char	*parse_cube(t_parser *parser, t_world *world)
 
 char	*parse_plane(t_parser *parser, t_world *world)
 {
-	t_parser_plane	d;
+	t_plane_data	plane;
+	t_material		material;
+	t_color_255		color_255;
 
+	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %d,%d,%d",
-		&d.plane.center.x, &d.plane.center.y, &d.plane.center.z,
-		&d.plane.direction.x, &d.plane.direction.y, &d.plane.direction.z,
-		&d.color.r, &d.color.g, &d.color.b))
+		&plane.center.x, &plane.center.y, &plane.center.z,
+		&plane.direction.x, &plane.direction.y, &plane.direction.z,
+		&color_255.r, &color_255.g, &color_255.b))
 		return ("Plane: Invalid format");
-	if (!color_255_validate(d.color))
+	if (!color_255_validate(color_255))
 		return ("Plane: Invalid color");
-	if (parse_reflectivity(parser, &d.reflectivity))
+	material.color = color_from_255(color_255);
+	if (parse_reflectivity(parser, &material.reflectiv))
 		return ("Plane: Invalid reflectivity");
-	if (parse_pattern(parser, &d.pattern))
+	if (parse_pattern(parser, &material.pattern))
 		return ("Plane: Invalid pattern");
-	d.plane.center = point_create(d.plane.center.x, d.plane.center.y,
-			d.plane.center.z);
-	d.plane.direction = vector_create(d.plane.direction.x, d.plane.direction.y,
-			d.plane.direction.z);
-	world_add_object(world, plane_create(&d.plane, color_from_255(d.color),
-			d.reflectivity, d.pattern));
+	plane.center = point_create(plane.center.x, plane.center.y,
+			plane.center.z);
+	plane.direction = vector_create(plane.direction.x, plane.direction.y,
+			plane.direction.z);
+	world_add_object(world, plane_create(&plane, &material));
 	return (NULL);
 }

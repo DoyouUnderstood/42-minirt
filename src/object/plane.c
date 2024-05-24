@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 15:56:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:13:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ t_tuple	plane_local_normal_at(t_object *obj, t_tuple local_point)
 }
 
 // Intégration dans la création de l'objet Plane
-t_object	*plane_create(t_plane_data *data, t_color color,
-	double reflectivity, t_pattern *pattern)
+t_object	*plane_create(t_plane_data *data, t_material *material)
 {
 	t_object	*obj;
 	t_tuple		default_normal;
@@ -55,15 +54,16 @@ t_object	*plane_create(t_plane_data *data, t_color color,
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	obj->data = malloc(sizeof(t_plane_data));
-	*((t_plane_data *) obj->data) = *data;
+	obj->material = malloc(sizeof(t_material));
 	obj->type = PLANE;
+	*((t_plane_data *) obj->data) = *data;
+	*obj->material = *material;
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, data->direction);
 	translation = matrix_translation(data->center.x, data->center.y, data->center.z);
 	obj->transformation = matrix_mult(translation, rotation);
 	obj->inv_transformation = matrix_inverse(obj->transformation);
 	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
-	obj->material = material_create_default(&color, reflectivity, pattern);
 	obj->local_normal_at = plane_local_normal_at;
 	obj->local_intersect = plane_local_intersect;
 	return (obj);
