@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:42:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:52:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,6 @@ char	*parse_light(t_parser *parser, t_world *world);
 char	*parse_sphere(t_parser *parser, t_world *world);
 
 /* ------------------ CYLINDER --------------------- */
-
-typedef struct s_parser_cylinder
-{
-	t_cylinder_data	cylinder;
-	t_color_255		color;
-	double			reflectivity;
-	t_pattern		*pattern;
-}	t_parser_cylinder;
 
 char	*parse_cylinder(t_parser *parser, t_world *world);
 

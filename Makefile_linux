@@ -49,6 +49,7 @@ fclean: clean
 re: fclean all
 
 debug: CFLAGS += $(DEBUG_FLAGS)
+debug: LDFLAGS += $(DEBUG_FLAGS)
 debug: re
 
 .PHONY: all clean fclean re
