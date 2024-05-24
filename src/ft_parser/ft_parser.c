@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 07:43:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:41:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ bool	parser_match(t_parser *parser, char *fmt, ...)
 {
 	va_list	args;
 	bool	result;
+	int		initial_pos;
 
 	va_start(args, fmt);
+	initial_pos = parser->pos;
 	result = true;
 	while (result && *fmt)
 	{
@@ -37,8 +39,10 @@ bool	parser_match(t_parser *parser, char *fmt, ...)
 		else if (*fmt == ' ')
 			result = parser_match_handle_mandatory_space(parser, &fmt);
 		else if (!parser_match_char(parser, *fmt++))
-			return (false);
+			result = false;
 	}
 	va_end(args);
+	if (!result)
+		parser->pos = initial_pos;
 	return (result);
 }
