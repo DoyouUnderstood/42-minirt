@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:39:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:42:35 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,6 @@ typedef struct s_parser_light
 char	*parse_light(t_parser *parser, t_world *world);
 
 /* ------------------ SPHERE --------------------- */
-
-typedef struct s_parser_sphere
-{
-	t_sphere_data	sphere;
-	t_color_255		color;
-	double			reflectivity;
-	t_pattern		*pattern;
-}	t_parser_sphere;
 
 char	*parse_sphere(t_parser *parser, t_world *world);
 
