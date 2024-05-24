@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:28:11 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/24 16:39:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "world.h"
 # include "sphere.h"
 # include "cylinder.h"
-# include "cube.h"
 # include "plane.h"
 
 # include "get_next_line.h"
@@ -112,14 +111,6 @@ typedef struct s_parser_cylinder
 char	*parse_cylinder(t_parser *parser, t_world *world);
 
 /* ------------------ CUBE --------------------- */
-
-typedef struct s_parser_cube
-{
-	t_cube_data		cube;
-	t_color_255		color;
-	double			reflectivity;
-	t_pattern		*pattern;
-}	t_parser_cube;
 
 char	*parse_cube(t_parser *parser, t_world *world);
 
