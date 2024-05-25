@@ -6,12 +6,11 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:45:06 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:01:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cylinder.h"
-#include "object.h"
+#include "object_internal.h"
 #include "material.h"
 #include "utils.h"
 
@@ -32,7 +31,8 @@ t_matrix	align_axis(t_tuple default_axis, t_tuple new_axis)
 	return (matrix_rotation_axis(axis, angle));
 }
 
-t_intersection	*create_intersections(t_cylinder_intersect_calc *calc, t_object *obj, int *count)
+t_intersection	*create_intersections(t_cylinder_intersect_calc *calc,
+	t_object *obj, int *count)
 {
 	t_intersection	*intersections;
 	bool			t0_intersects;

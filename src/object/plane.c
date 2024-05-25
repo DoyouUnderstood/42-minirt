@@ -6,13 +6,12 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:45:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:04:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "intersection.h"
 #include "matrix.h"
-#include "plane.h"
 #include "object.h"
 #include "utils.h"
 #include "material.h"
