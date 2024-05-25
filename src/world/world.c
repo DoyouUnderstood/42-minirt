@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 05:52:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:55:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,8 @@ void	world_init(t_world *world)
 	world->light = NULL;
 	world->camera = NULL;
 	world->object_count = 0;
-	world->objects = malloc(MAX_OBJECTS * sizeof(t_object *));
-	if (!world->objects)
-		return ;
 	while (i < MAX_OBJECTS)
 		world->objects[i++] = NULL;
-}
-
-// annihilation of world.
-void	world_destroy(t_world *world)
-{
-	int	i;
-
-	i = 0;
-	if (!world)
-		return ;
-	while (i < world->object_count)
-	{
-		free(world->objects[i]);
-		i++;
-	}
-	free(world->objects);
-	free(world);
 }
 
 char	*world_validate(t_world *world)

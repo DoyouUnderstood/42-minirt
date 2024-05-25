@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:33:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:49:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:54:35 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_world
 	t_camera				*camera;
 	t_mlx					*mlx;
 	t_light					*light;
-	t_object				**objects;
+	t_object				*objects[MAX_OBJECTS];
 	int						object_count;
 	t_amb_light				*amb;
 }							t_world;
