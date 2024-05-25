@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:34 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 18:26:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:27:23 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	process_x(t_renderthread *data, int x, int y, int remaining)
 	t_ray	ray;
 	t_color	color;
 
-	if (x < data->world->camera->hsize)
+	if (x < data->world->camera.hsize)
 	{
-		ray = ray_for_pixel(data->world->camera, &data->inverse_transform, x,
+		ray = ray_for_pixel(&data->world->camera, &data->inverse_transform, x,
 				y);
 		color = color_at(data->world, &ray, remaining);
 		draw_pixel(data->mlx, x, y, color);
@@ -62,8 +62,8 @@ void	initialize_and_launch_threads(t_RenderSetup *setup, t_world *world)
 	int					i;
 
 	i = 0;
-	setup->inverse_transform = matrix_inverse(world->camera->transform);
-	setup->segment_height = world->camera->vsize / setup->num_threads;
+	setup->inverse_transform = matrix_inverse(world->camera.transform);
+	setup->segment_height = world->camera.vsize / setup->num_threads;
 	while (i < setup->num_threads)
 	{
 		params = (t_threadSetupParams){.thread_data = &setup->thread_data[i],

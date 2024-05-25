@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser2.c                                          :+:      :+:    :+:   */
+/*   parser_characteristics.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:44:04 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:20:39 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,32 @@
 
 char	*parse_resolution(t_parser *parser, t_world *world)
 {
-	if (!parser_match(parser, "%d %d%_%$", &world->vsize, &world->hsize))
+	int	width;
+	int	height;
+
+	if (!parser_match(parser, "%d %d%_%$", &width, &height))
 		return ("Resolution: Invalid format");
-	if (world->vsize < 1)
-		return ("Resolution: Invalid height");
-	if (world->hsize < 1)
-		return ("Resolution: Invalid width");
-	return (NULL);
+	return (world_init_resolution(world, width, height));
+}
+
+char	*parse_camera(t_parser *parser, t_world *world)
+{
+	t_camera_data	camera;
+
+	if (!world->vsize || !world->hsize)
+		return ("Camera: Camera defined before resolution");
+	camera.hsize = world->hsize;
+	camera.vsize = world->vsize;
+	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f%_%$",
+		&camera.position.x, &camera.position.y, &camera.position.z,
+		&camera.direction.x, &camera.direction.y, &camera.direction.z,
+		&camera.fov))
+		return ("Camera: Invalid format");
+	camera.position = point_create(camera.position.x, camera.position.y,
+			camera.position.z);
+	camera.direction = point_create(camera.direction.x, camera.direction.y,
+			camera.direction.z);
+	return (world_init_camera(world, &camera));
 }
 
 char	*parse_ambient(t_parser *parser, t_world *world)
@@ -45,29 +64,6 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 		return ("Ambient light: malloc error");
 	world->amb->color = color_from_255(color_255);
 	world->amb->ambient = intensity;
-	return (NULL);
-}
-
-char	*parse_camera(t_parser *parser, t_world *world)
-{
-	t_tuple	position;
-	t_tuple	direction;
-	double	fov;
-
-	if (!world->vsize || !world->hsize)
-		return ("Camera: Camera defined before resolution");
-	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f%_%$",
-		&position.x, &position.y, &position.z,
-		&direction.x, &direction.y, &direction.z, &fov))
-		return ("Camera: Invalid format");
-	if (fov < 0.0 || fov > 180.0)	
-		return ("Camera: Invalid FOV");
-	position = point_create(position.x, position.y, position.z);
-	direction = point_create(direction.x, direction.y, direction.z);
-	world->camera = camera_create(fov, position, direction,
-		world->vsize, world->hsize);
-	if (!world->camera)
-		return ("Camera: malloc error");
 	return (NULL);
 }
 
