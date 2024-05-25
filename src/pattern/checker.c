@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:34 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:28:26 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:36:00 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	pattern_init_checker(t_pattern *pattern, t_color color1,
 {
 	pattern->color_a = color1;
 	pattern->color_b = color2;
-	pattern->transform = matrix_identity();
+	pattern->transformations.base = matrix_identity();
+	pattern->transformations.inverse
+		= matrix_inverse(pattern->transformations.base);
 	pattern->pattern_at = checker_at;
 }
