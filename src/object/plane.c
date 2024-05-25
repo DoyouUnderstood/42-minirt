@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:04:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:25:40 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,28 @@ t_tuple	plane_local_normal_at(t_object *obj, t_tuple local_point)
 	return (vector_create(0, 1, 0));
 }
 
-// Intégration dans la création de l'objet Plane
-char	*plane_init(t_object *object, t_plane_data *data, t_material *material)
+static void	plane_set_transformations(t_obj_transf *transformations,
+	t_plane_data *data)
 {
 	t_tuple		default_normal;
 	t_matrix	rotation;
 	t_matrix	translation;
 
-	object->data = malloc(sizeof(t_plane_data));
-	*((t_plane_data *) object->data) = *data;
-	object->material = *material;
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, data->direction);
 	translation = matrix_translation(data->center.x, data->center.y, data->center.z);
-	object->transformation = matrix_mult(translation, rotation);
-	object->inv_transformation = matrix_inverse(object->transformation);
-	object->tinv_transformation = matrix_transpose(object->inv_transformation);
+	transformations->base = matrix_mult(translation, rotation);
+	transformations->inverse = matrix_inverse(transformations->base);
+	transformations->t_inverse = matrix_transpose(transformations->inverse);
+}
+
+// Intégration dans la création de l'objet Plane
+char	*plane_init(t_object *object, t_plane_data *data, t_material *material)
+{
+	object->data = malloc(sizeof(t_plane_data));
+	*((t_plane_data *) object->data) = *data;
+	plane_set_transformations(&object->transformations, data);
+	object->material = *material;
 	object->local_normal_at = plane_local_normal_at;
 	object->local_intersect = plane_local_intersect;
 	return (NULL);

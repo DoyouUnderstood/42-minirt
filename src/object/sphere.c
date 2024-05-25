@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:03:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:23:17 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,16 @@ static t_tuple	sphere_normal_at(t_object *obj, t_tuple local_point)
 	return (tupl);
 }
 
+static void	sphere_set_transformations(t_obj_transf *transformations,
+	t_sphere_data *data)
+{
+	transformations->base = matrix_mult(
+		matrix_translation(data->center.x, data->center.y, data->center.z),
+		matrix_scaling(data->radius, data->radius, data->radius));
+	transformations->inverse = matrix_inverse(transformations->base);
+	transformations->t_inverse = matrix_transpose(transformations->inverse);
+}
+
 char	*sphere_init(t_object *object, t_sphere_data *data,
 	t_material *material)
 {
@@ -80,11 +90,8 @@ char	*sphere_init(t_object *object, t_sphere_data *data,
 		return ("Sphere: Invalid radius");
 	object->data = malloc(sizeof(t_sphere_data));
 	*((t_sphere_data *) object->data) = *data;
+	sphere_set_transformations(&object->transformations, data);
 	object->material = *material;
-	object->transformation = matrix_mult(matrix_translation(data->center.x,
-		data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));
-	object->inv_transformation = matrix_inverse(object->transformation);
-	object->tinv_transformation = matrix_transpose(object->inv_transformation);
 	object->local_intersect = sphere_intersect;
 	object->local_normal_at = sphere_normal_at;
 	return (NULL);

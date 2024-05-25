@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:03:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:13:55 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ typedef t_intersection	*(*t_local_intersect)(t_object *obj, t_ray *ray,
 							int *count);
 typedef t_tuple			(*t_local_normal_at)(t_object *obj, t_tuple local_point);
 
+typedef struct s_obj_transf
+{
+	t_matrix	base;
+	t_matrix	inverse;
+	t_matrix	t_inverse;
+}	t_obj_transf;
+
 typedef struct s_object
 {
 	void				*data;
-	t_matrix			transformation;
-	t_matrix			inv_transformation;
-	t_matrix			tinv_transformation;
+	t_obj_transf		transformations;
 	t_material			material;
 	t_ray				saved_ray;
 	t_local_normal_at	local_normal_at;

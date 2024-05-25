@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:05:03 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:17:35 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,18 @@ static t_tuple	cube_normal_at(t_object *obj, t_tuple point)
 		return ((t_tuple){0, 0, copysign(1.0, point.z), 0});
 }
 
+static void	cube_set_transformations(t_obj_transf *transformations,
+	t_cube_data *data)
+{
+	transformations->base
+		= matrix_translation(data->center.x, data->center.y, data->center.z);
+	transformations->base = matrix_mult(transformations->base,
+			matrix_scaling(data->edge_len/ 2.0, data->edge_len/ 2.0, data->edge_len/ 2.0));
+	transformations->inverse = matrix_inverse(transformations->base);
+	transformations->t_inverse = matrix_transpose(transformations->inverse);
+
+}
+
 char	*cube_init(t_object *object, t_cube_data *data,
 	t_material *material)
 {
@@ -93,12 +105,8 @@ char	*cube_init(t_object *object, t_cube_data *data,
 		return ("Cube: Invalid edge length");
 	object->data = malloc(sizeof(t_cube_data));
 	*((t_cube_data *) object->data) = *data;
+	cube_set_transformations(&object->transformations, data);
 	object->material = *material;
-	object->transformation = matrix_translation(data->center.x, data->center.y, data->center.z);
-	object->transformation = matrix_mult(object->transformation,
-			matrix_scaling(data->edge_len/ 2.0, data->edge_len/ 2.0, data->edge_len/ 2.0));
-	object->inv_transformation = matrix_inverse(object->transformation);
-	object->tinv_transformation = matrix_transpose(object->inv_transformation);
 	object->local_intersect = cube_intersect;
 	object->local_normal_at = cube_normal_at;
 	return (NULL);
