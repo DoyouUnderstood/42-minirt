@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:40 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:42:05 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:53:49 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@
 #include <math.h>
 #include <stdlib.h>
 
-t_color	color_subtract(t_color c1, t_color c2)
+static t_color	gradient_at(const t_pattern *pattern, t_tuple point)
 {
-	return ((t_color){c1.r - c2.r, c1.g - c2.g, c1.b - c2.b});
-}
+	t_tuple	transformed_point;
+	double	fraction;
+	t_color	distance;
 
-t_color		gradient_at(const t_pattern *pattern, t_tuple point);
+	transformed_point = matrix_mult_tuple(matrix_inverse(pattern->transform), point);
+	fraction = transformed_point.x - floor(transformed_point.x);
+	distance = color_subtract(pattern->color_b, pattern->color_a);
+	return (color_add(pattern->color_a, color_multiply_scalar(distance,
+				fraction)));
+}
 
 t_pattern	*gradient_pattern_create(t_color color1, t_color color2)
 {
@@ -34,17 +40,4 @@ t_pattern	*gradient_pattern_create(t_color color1, t_color color2)
 	pattern->transform = matrix_identity();
 	pattern->pattern_at = gradient_at;
 	return (pattern);
-}
-
-t_color	gradient_at(const t_pattern *pattern, t_tuple point)
-{
-	t_tuple	transformed_point;
-	double	fraction;
-	t_color	distance;
-
-	transformed_point = matrix_mult_tuple(matrix_inverse(pattern->transform), point);
-	fraction = transformed_point.x - floor(transformed_point.x);
-	distance = color_subtract(pattern->color_b, pattern->color_a);
-	return (color_add(pattern->color_a, color_multiply_scalar(distance,
-				fraction)));
 }

@@ -6,12 +6,34 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:42:33 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 14:01:11 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:53:21 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "utils.h"
+
+// Fonction pour la multiplication de deux couleurs normalisées
+t_color	color_multiply(t_color c1, t_color c2)
+{
+	t_color	result;
+
+	result.r = c1.r * c2.r;
+	result.g = c1.g * c2.g;
+	result.b = c1.b * c2.b;
+	return (result);
+}
+
+// Fonction pour multiplier une couleur par un scalaire.
+t_color	color_multiply_scalar(t_color c, double scalar)
+{
+	t_color	result;
+
+	result.r = c.r * scalar;
+	result.g = c.g * scalar;
+	result.b = c.b * scalar;
+	return (result);
+}
 
 // Fonction pour multiplier une couleur par un scalaire.
 int	color_to_int(t_color color)

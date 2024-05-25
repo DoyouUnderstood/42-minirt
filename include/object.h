@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:45:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:49:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,5 @@ typedef struct s_object
 t_intersection	*object_intersect(t_object *object, t_ray *ray,
 					int *count);
 t_tuple			object_normal_at(t_object *obj, t_tuple world_point);
-
-t_color			stripe_at_object(const t_pattern *pattern,
-					const t_object *object, t_tuple point);
 
 #endif

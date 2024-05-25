@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:42:33 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:45:53 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:53:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,7 @@ t_color	color_add(t_color c1, t_color c2)
 	return (result);
 }
 
-// Fonction pour la multiplication de deux couleurs normalisées
-t_color	color_multiply(t_color c1, t_color c2)
+t_color	color_subtract(t_color c1, t_color c2)
 {
-	t_color	result;
-
-	result.r = c1.r * c2.r;
-	result.g = c1.g * c2.g;
-	result.b = c1.b * c2.b;
-	return (result);
-}
-
-// Fonction pour multiplier une couleur par un scalaire.
-t_color	color_multiply_scalar(t_color c, double scalar)
-{
-	t_color	result;
-
-	result.r = c.r * scalar;
-	result.g = c.g * scalar;
-	result.b = c.b * scalar;
-	return (result);
+	return ((t_color){c1.r - c2.r, c1.g - c2.g, c1.b - c2.b});
 }
