@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:46:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:55:01 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computation.h"
 #include "lighting.h"
 #include "world.h"
+#include "intersection.h"
 #include "functions.h"
 
 #include <stdlib.h>
@@ -32,7 +33,7 @@ t_color	color_at(t_world *world, t_ray *ray, int remaining)
 		free(intersections);
 		return (color_multiply_scalar(world->amb.color, world->amb.intensity));
 	}
-	hit_inter = hit(intersections, count);
+	hit_inter = intersection_hit(intersections, count);
 	if (!hit_inter)
 	{
 		free(intersections);

@@ -61,10 +61,6 @@ void						prepare_computations(t_computations *comps,
 								const t_ray *ray);
 int							compare_intersections(const void *a, const void *b);
 
-// ============ INTERSECT ==============
-
-t_intersection				*hit(t_intersection *intersections, int count);
-
 // ============= world =================
 
 t_intersection	*intersect_world(t_world *world, t_ray *ray,

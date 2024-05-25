@@ -6,14 +6,13 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:46:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:52:36 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lighting.h"
 #include "object.h"
 
-#include <float.h>
 #include <stdlib.h>
 
 // fonction intersect generalise
@@ -39,28 +38,6 @@ t_tuple	object_normal_at(t_object *obj, t_tuple world_point)
 	world_normal = matrix_mult_tuple(obj->tinv_transformation, local_normal);
 	world_normal.w = 0;
 	return (vector_normalize(world_normal));
-}
-
-// Fonction pour identifier le hit parmi une collection d'intersections
-t_intersection	*hit(t_intersection *intersections, int count)
-{
-	t_intersection	*hit;
-	double			min_t;
-	int				i;
-
-	i = 0;
-	hit = NULL;
-	min_t = DBL_MAX;
-	while (i < count)
-	{
-		if (intersections[i].t > 0 && intersections[i].t < min_t)
-		{
-			hit = &intersections[i];
-			min_t = intersections[i].t;
-		}
-		i++;
-	}
-	return (hit);
 }
 
 t_color	calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)

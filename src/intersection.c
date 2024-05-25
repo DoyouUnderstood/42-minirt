@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:40:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:52:47 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "intersection.h"
 #include "object.h"
 
+#include <float.h>
 #include <stdlib.h>
 
 t_intersection	*intersection_create(t_object *obj, double t)
@@ -54,4 +55,26 @@ bool	intersection_realloc(t_intersection **intersections,
 		return (false);
 	*intersections = temp;
 	return (true);
+}
+
+// Fonction pour identifier le hit parmi une collection d'intersections
+t_intersection	*intersection_hit(t_intersection *intersections, int count)
+{
+	t_intersection	*hit;
+	double			min_t;
+	int				i;
+
+	i = 0;
+	hit = NULL;
+	min_t = DBL_MAX;
+	while (i < count)
+	{
+		if (intersections[i].t > 0 && intersections[i].t < min_t)
+		{
+			hit = &intersections[i];
+			min_t = intersections[i].t;
+		}
+		i++;
+	}
+	return (hit);
 }
