@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/25 04:55:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:48:05 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@
 
 int	main(int argc, char *argv[])
 {
-	t_world	*world;
+	t_world	world;
 
-	(void)argc;
-	(void)argv;
-	world = NULL;
+	world_init(&world);
 	if (argc != 2)
 		return (0);
-	world = parse_rt_file(argv[1]);
-	mlx_initialisation(world);
-	render(world);
+	parse_rt_file(argv[1], &world);
+	mlx_initialisation(&world);
+	render(&world);
 	return (0);
 }

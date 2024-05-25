@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 05:01:00 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:52:07 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,19 @@
 
 #include <stdlib.h>
 
-// initialisation of world.
-t_world	*world_create(void)
+void	world_init(t_world *world)
 {
-	t_world	*w;
 	int		i;
 
 	i = 0;
-	w = malloc(sizeof(t_world));
-	if (!w)
-		return (NULL);
-	w->light = NULL;
-	w->camera = NULL;
-	w->object_count = 0;
-	w->objects = malloc(MAX_OBJECTS * sizeof(t_object *));
-	if (!w->objects)
-	{
-		free(w);
-		return (NULL);
-	}
+	world->light = NULL;
+	world->camera = NULL;
+	world->object_count = 0;
+	world->objects = malloc(MAX_OBJECTS * sizeof(t_object *));
+	if (!world->objects)
+		return ;
 	while (i < MAX_OBJECTS)
-		w->objects[i++] = NULL;
-	return (w);
+		world->objects[i++] = NULL;
 }
 
 // annihilation of world.

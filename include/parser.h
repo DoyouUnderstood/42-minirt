@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:45:54 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:51:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "ft_parser.h"
 # include "world.h"
 
-t_world	*parse_rt_file(char *filename);
+void	parse_rt_file(char *filename, t_world *world);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser1.c                                          :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:43:48 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:51:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ static char	*get_clean_line(int fd)
 }
 
 // read .rt and fill and return the whole world.
-t_world	*parse_rt_file(char *filename)
+void	parse_rt_file(char *filename, t_world *world)
 {
-	t_world	*world;
 	int		fd;
 	char	*line;
 	char	*error;
@@ -75,7 +74,6 @@ t_world	*parse_rt_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_exit("Can't open the file");
-	world = world_create();
 	line = get_clean_line(fd);
 	while (line)
 	{
@@ -92,5 +90,4 @@ t_world	*parse_rt_file(char *filename)
 	error = world_validate(world);
 	if (error)
 		error_exit(error);
-	return (world);
 }
