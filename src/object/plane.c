@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:45:03 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:42:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,23 @@ t_tuple	plane_local_normal_at(t_object *obj, t_tuple local_point)
 }
 
 // Intégration dans la création de l'objet Plane
-t_object	*plane_create(t_plane_data *data, t_material *material)
+char	*plane_init(t_object *object, t_plane_data *data, t_material *material)
 {
-	t_object	*obj;
 	t_tuple		default_normal;
 	t_matrix	rotation;
 	t_matrix	translation;
 
-	obj = (t_object *)malloc(sizeof(t_object));
-	obj->data = malloc(sizeof(t_plane_data));
-	obj->material = malloc(sizeof(t_material));
-	*((t_plane_data *) obj->data) = *data;
-	*obj->material = *material;
+	object->data = malloc(sizeof(t_plane_data));
+	object->material = malloc(sizeof(t_material));
+	*((t_plane_data *) object->data) = *data;
+	*object->material = *material;
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, data->direction);
 	translation = matrix_translation(data->center.x, data->center.y, data->center.z);
-	obj->transformation = matrix_mult(translation, rotation);
-	obj->inv_transformation = matrix_inverse(obj->transformation);
-	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
-	obj->local_normal_at = plane_local_normal_at;
-	obj->local_intersect = plane_local_intersect;
-	return (obj);
+	object->transformation = matrix_mult(translation, rotation);
+	object->inv_transformation = matrix_inverse(object->transformation);
+	object->tinv_transformation = matrix_transpose(object->inv_transformation);
+	object->local_normal_at = plane_local_normal_at;
+	object->local_intersect = plane_local_intersect;
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:28:38 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:40:36 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,16 @@ char	*parse_cube(t_parser *parser, t_world *world)
 
 char	*parse_plane(t_parser *parser, t_world *world)
 {
-	t_plane_data	plane;
+	t_object		plane;
+	t_plane_data	data;
 	t_material		material;
 	t_color_255		color_255;
+	char			*error;
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %d,%d,%d",
-		&plane.center.x, &plane.center.y, &plane.center.z,
-		&plane.direction.x, &plane.direction.y, &plane.direction.z,
+		&data.center.x, &data.center.y, &data.center.z,
+		&data.direction.x, &data.direction.y, &data.direction.z,
 		&color_255.r, &color_255.g, &color_255.b))
 		return ("Plane: Invalid format");
 	if (!color_255_validate(color_255))
@@ -120,9 +122,12 @@ char	*parse_plane(t_parser *parser, t_world *world)
 	material.color = color_from_255(color_255);
 	if (parse_material(parser, &material))
 		return ("Plane: Invalid material");
-	plane.center = point_create(plane.center.x, plane.center.y,
-			plane.center.z);
-	plane.direction = vector_create(plane.direction.x, plane.direction.y,
-			plane.direction.z);
-	return (world_add_object(world, plane_create(&plane, &material)));
+	data.center = point_create(data.center.x, data.center.y,
+			data.center.z);
+	data.direction = vector_create(data.direction.x, data.direction.y,
+			data.direction.z);
+	error = plane_init(&plane, &data, &material);
+	if (!error)
+		error = world_add_object(world, &plane);
+	return (error);
 }
