@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:51:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:56:20 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_lighting
 	t_object					*object;
 	t_light						*light;
 	t_tuple						position;
-	t_tuple						*eyev;
-	t_tuple						*normalv;
+	t_tuple						eyev;
+	t_tuple						normalv;
 	bool						in_shadow;
 }								t_lighting;
 

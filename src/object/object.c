@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:52:36 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:56:51 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,9 @@ t_color	calculate_color(t_intersection *closest_hit, t_ray *ray, t_light *light)
 	if (closest_hit != NULL)
 	{
 		lighting_params.position = t_point_position(ray, closest_hit->t);
-		lighting_params.normalv = malloc(sizeof(t_tuple));
-		if (lighting_params.normalv)
-		{
-			*lighting_params.normalv = closest_hit->obj->local_normal_at(
-					closest_hit->obj, lighting_params.position);
-		}
-		lighting_params.eyev = malloc(sizeof(t_tuple));
-		if (lighting_params.eyev)
-			*lighting_params.eyev = vector_negate(ray->direction);
+		lighting_params.normalv = closest_hit->obj->local_normal_at(
+				closest_hit->obj, lighting_params.position);
+		lighting_params.eyev = vector_negate(ray->direction);
 		lighting_params.material = &closest_hit->obj->material;
 		lighting_params.object = closest_hit->obj;
 		lighting_params.light = light;

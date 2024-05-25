@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:53:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:56:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ t_color	shade_hit(t_world *world, t_computations *comps, int remaining)
 	lighting_params.object = comps->object;
 	lighting_params.light = &world->light;
 	lighting_params.position = comps->over_point;
-	lighting_params.eyev = &comps->eyev;
-	lighting_params.normalv = &comps->normalv;
+	lighting_params.eyev = comps->eyev;
+	lighting_params.normalv = comps->normalv;
 	lighting_params.in_shadow = is_shadowed(world, comps->over_point);
 	surface = lighting(&lighting_params);
 	reflected = reflected_color(world, comps, remaining);

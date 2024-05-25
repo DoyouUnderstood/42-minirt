@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:53:05 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:56:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ t_specular_params	prepare_specular_params(t_lighting *params, t_tuple lightv)
 {
 	t_specular_params	spec_params;
 
-	spec_params.normalv = *params->normalv;
-	spec_params.eyev = *params->eyev;
+	spec_params.normalv = params->normalv;
+	spec_params.eyev = params->eyev;
 	spec_params.material = params->material;
 	spec_params.light = params->light;
 	spec_params.lightv = lightv;
