@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:34 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 06:27:23 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:49:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,7 @@ void	render(t_world *world)
 {
 	t_RenderSetup	setup;
 
-	setup.num_threads = 15;
-	setup.threads = malloc(setup.num_threads * sizeof(pthread_t));
-	setup.thread_data = malloc(setup.num_threads * sizeof(t_renderthread));
-	if (!setup.threads || !setup.thread_data)
-	{
-		free(setup.threads);
-		free(setup.thread_data);
-		return ;
-	}
+	setup.num_threads = THREAD_COUNT;
 	initialize_and_launch_threads(&setup, world);
-	free(setup.threads);
-	free(setup.thread_data);
 	draw_render_to_img(world, world->mlx);
 }

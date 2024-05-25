@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 17:00:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:50:29 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # include <pthread.h>
 
+# define THREAD_COUNT 15
+
 typedef struct s_renderthread
 {
 	t_mlx					*mlx;
@@ -32,8 +34,8 @@ typedef struct s_renderthread
 
 typedef struct s_RenderSetup
 {
-	pthread_t				*threads;
-	t_renderthread			*thread_data;
+	pthread_t				threads[THREAD_COUNT];
+	t_renderthread			thread_data[THREAD_COUNT];
 	t_matrix				inverse_transform;
 	int						segment_height;
 	int						num_threads;
