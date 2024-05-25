@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:51:15 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:12:02 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,10 @@
 # include "cylinder.h"
 # include "plane.h"
 
-/* ------------------ MAIN FUNCTION -------------------- */
 
 t_world	*parse_rt_file(char *filename);
 
-/* ------------------ UTILITIES -------------------- */
-char	*parse_reflectivity(t_parser *parser, double *reflectivity);
-
-/* ------------------ PATTERN -------------------- */
-
-typedef struct s_parser_pattern
-{
-	t_pattern	*(*pattern_f)(t_color c1, t_color c2);
-	t_color_255	color1;
-	t_color_255	color2;
-}	t_parser_pattern;
-
-char	*parse_pattern(t_parser *parser, t_pattern **pattern);
-
-/* ------------------ RESOLUTION -------------------- */
+char	*parse_material(t_parser *parser, t_material *material);
 
 char	*parse_resolution(t_parser *parser, t_world *world);
 
@@ -80,17 +65,8 @@ char	*parse_light(t_parser *parser, t_world *world);
 /* ------------------ SPHERE --------------------- */
 
 char	*parse_sphere(t_parser *parser, t_world *world);
-
-/* ------------------ CYLINDER --------------------- */
-
 char	*parse_cylinder(t_parser *parser, t_world *world);
-
-/* ------------------ CUBE --------------------- */
-
 char	*parse_cube(t_parser *parser, t_world *world);
-
-/* ------------------ PLANE --------------------- */
-
 char	*parse_plane(t_parser *parser, t_world *world);
 
 #endif

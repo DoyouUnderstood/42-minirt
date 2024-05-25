@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:59:56 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:15:39 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 	if (!color_255_validate(color_255))
 		return ("Sphere: Invalid color");
 	material.color = color_from_255(color_255);
-	if (parse_reflectivity(parser, &material.reflectiv))
-		return ("Sphere: Invalid reflectivity");
-	if (parse_pattern(parser, &material.pattern))
-		return ("Sphere: Invalid pattern");
+	if (parse_material(parser, &material))
+		return ("Sphere: Invalid material");
 	sphere.center = point_create(sphere.center.x, sphere.center.y,
 			sphere.center.z);
 	return (world_add_object(world, sphere_create(&sphere, &material)));
@@ -65,10 +63,8 @@ char	*parse_cylinder(t_parser *parser, t_world *world)
 	if (!color_255_validate(color_255))
 		return ("Cylinder: Invalid color");
 	material.color = color_from_255(color_255);
-	if (parse_reflectivity(parser, &material.reflectiv))
-		return ("Cylinder: Invalid reflectivity");
-	if (parse_pattern(parser, &material.pattern))
-		return ("Cylinder: Invalid pattern");
+	if (parse_material(parser, &material))
+		return ("Cylinder: Invalid material");
 	cylinder.center = point_create(cylinder.center.x, cylinder.center.y,
 			cylinder.center.z);
 	cylinder.axis = point_create(cylinder.axis.x, cylinder.axis.y,
@@ -90,10 +86,8 @@ char	*parse_cube(t_parser *parser, t_world *world)
 	if (!color_255_validate(color_255))
 		return ("Cube: Invalid color");
 	material.color = color_from_255(color_255);
-	if (parse_reflectivity(parser, &material.reflectiv))
-		return ("Cube: Invalid reflectivity");
-	if (parse_pattern(parser, &material.pattern))
-		return ("Cube: Invalid pattern");
+	if (parse_material(parser, &material))
+		return ("Cube: Invalid material");
 	cube.center = point_create(cube.center.x, cube.center.y,
 			cube.center.z);
 	return (world_add_object(world, cube_create(&cube, &material)));
@@ -114,10 +108,8 @@ char	*parse_plane(t_parser *parser, t_world *world)
 	if (!color_255_validate(color_255))
 		return ("Plane: Invalid color");
 	material.color = color_from_255(color_255);
-	if (parse_reflectivity(parser, &material.reflectiv))
-		return ("Plane: Invalid reflectivity");
-	if (parse_pattern(parser, &material.pattern))
-		return ("Plane: Invalid pattern");
+	if (parse_material(parser, &material))
+		return ("Plane: Invalid material");
 	plane.center = point_create(plane.center.x, plane.center.y,
 			plane.center.z);
 	plane.direction = vector_create(plane.direction.x, plane.direction.y,
