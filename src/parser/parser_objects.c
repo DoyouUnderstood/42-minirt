@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 08:01:52 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 09:28:38 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,28 @@ char	*parse_cylinder(t_parser *parser, t_world *world)
 
 char	*parse_cube(t_parser *parser, t_world *world)
 {
-	t_cube_data	cube;
+	t_object	cube;
+	t_cube_data	data;
 	t_material	material;
 	t_color_255	color_255;
+	char		*error;
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d",
-		&cube.center.x, &cube.center.y, &cube.center.z,
-		&cube.edge_len, &color_255.r, &color_255.g, &color_255.b))
+		&data.center.x, &data.center.y, &data.center.z,
+		&data.edge_len, &color_255.r, &color_255.g, &color_255.b))
 		return ("Cube: Invalid format");
 	if (!color_255_validate(color_255))
 		return ("Cube: Invalid color");
 	material.color = color_from_255(color_255);
 	if (parse_material(parser, &material))
 		return ("Cube: Invalid material");
-	cube.center = point_create(cube.center.x, cube.center.y,
-			cube.center.z);
-	return (world_add_object(world, cube_create(&cube, &material)));
+	data.center = point_create(data.center.x, data.center.y,
+			data.center.z);
+	error = cube_init(&cube, &data, &material);
+	if (!error)
+		error = world_add_object(world, &cube);
+	return (error);
 }
 
 char	*parse_plane(t_parser *parser, t_world *world)
