@@ -18,6 +18,7 @@
 		"ft_parser.h": "c",
 		"ft_printf.h": "c",
 		"stddef.h": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"intersection.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:34:31 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:45:08 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ t_object	*cube_create(t_cube_data *data, t_material *material)
 	obj = malloc(sizeof(t_object));
 	obj->data = malloc(sizeof(t_cube_data));
 	obj->material = malloc(sizeof(t_material));
-	obj->type = CUBE;
 	*((t_cube_data *) obj->data) = *data;
 	*obj->material = *material;
 	obj->transformation = matrix_translation(data->center.x, data->center.y, data->center.z);

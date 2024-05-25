@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 17:11:05 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:45:06 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ t_object	*cylinder_create(t_cylinder_data *data, t_material *material)
 	obj = malloc(sizeof(t_object));
 	obj->data = malloc(sizeof(t_cylinder_data));
 	obj->material = malloc(sizeof(t_material));
-	obj->type = CYLINDER;
 	*((t_cylinder_data *) obj->data) = *data;
 	*obj->material = *material;
 	default_axis = (t_tuple){0, 1, 0, 0};

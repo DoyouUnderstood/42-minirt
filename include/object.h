@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:31:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:45:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,8 @@ typedef t_intersection	*(*t_local_intersect)(t_object *obj, t_ray *ray,
 							int *count);
 typedef t_tuple			(*t_local_normal_at)(t_object *obj, t_tuple local_point);
 
-typedef enum e_obj_type
-{
-	SPHERE,
-	CYLINDER,
-	PLANE,
-	CUBE,
-	INVALID_TYPE
-}	t_obj_type;
-
 typedef struct s_object
 {
-	t_obj_type			type;
 	void				*data;
 	t_matrix			transformation;
 	t_matrix			inv_transformation;

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 17:13:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:45:03 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_object	*plane_create(t_plane_data *data, t_material *material)
 	obj = (t_object *)malloc(sizeof(t_object));
 	obj->data = malloc(sizeof(t_plane_data));
 	obj->material = malloc(sizeof(t_material));
-	obj->type = PLANE;
 	*((t_plane_data *) obj->data) = *data;
 	*obj->material = *material;
 	default_normal = (t_tuple){0, 1, 0, 0};
