@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:33:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 06:50:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 07:40:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_world
 	t_amb_light				amb;
 	t_light					light;
 	t_mlx					*mlx;
-	t_object				*objects[MAX_OBJECTS];
+	t_object				objects[MAX_OBJECTS];
 	int						object_count;
 }							t_world;
 

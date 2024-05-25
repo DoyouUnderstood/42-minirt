@@ -6,22 +6,19 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 06:56:33 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 07:43:02 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "world.h"
 
 #include <stdlib.h>
 
 void	world_init(t_world *world)
 {
-	int		i;
-
-	i = 0;
 	world->object_count = 0;
-	while (i < MAX_OBJECTS)
-		world->objects[i++] = NULL;
+	ft_memset(&world->objects, 0, sizeof(world->objects));
 }
 
 char	*world_init_resolution(t_world *world, int width, int height)
@@ -85,6 +82,6 @@ char	*world_add_object(t_world *world, t_object *object)
 		return (NULL);
 	if (world->object_count >= MAX_OBJECTS)
 		return ("To many objects in rt file (max 30)\n");
-	world->objects[world->object_count++] = object;
+	world->objects[world->object_count++] = *object;
 	return (NULL);
 }

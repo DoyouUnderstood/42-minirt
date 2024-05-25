@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/23 15:32:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 07:42:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	process_object(t_processObjectParams *params)
 	t_intersectionAddParams	add_params;
 
 	local_count = 0;
-	local_inter = object_intersect(params->world->objects[params->index],
+	local_inter = object_intersect(&params->world->objects[params->index],
 			params->ray, &local_count);
 	if (local_count > 0)
 	{
@@ -110,7 +110,7 @@ void	process_object(t_processObjectParams *params)
 			}
 		}
 		add_params = (t_intersectionAddParams){params->intersections,
-			local_inter, local_count, params->world->objects[params->index],
+			local_inter, local_count, &params->world->objects[params->index],
 			params->count};
 		add_local_inter(&add_params);
 	}
