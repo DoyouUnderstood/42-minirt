@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:28:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:45:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,8 @@ char	*cube_init(t_object *object, t_cube_data *data,
 	if (data->edge_len <= 0.0)
 		return ("Cube: Invalid edge length");
 	object->data = malloc(sizeof(t_cube_data));
-	object->material = malloc(sizeof(t_material));
 	*((t_cube_data *) object->data) = *data;
-	*object->material = *material;
+	object->material = *material;
 	object->transformation = matrix_translation(data->center.x, data->center.y, data->center.z);
 	object->transformation = matrix_mult(object->transformation,
 			matrix_scaling(data->edge_len/ 2.0, data->edge_len/ 2.0, data->edge_len/ 2.0));

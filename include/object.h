@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:49:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:44:28 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_object
 	t_matrix			transformation;
 	t_matrix			inv_transformation;
 	t_matrix			tinv_transformation;
-	t_material			*material;
+	t_material			material;
 	t_ray				saved_ray;
 	t_local_normal_at	local_normal_at;
 	t_local_intersect	local_intersect;

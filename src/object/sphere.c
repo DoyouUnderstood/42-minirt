@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 07:55:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:44:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ char	*sphere_init(t_object *object, t_sphere_data *data,
 	if (data->radius <= 0.0)
 		return ("Sphere: Invalid radius");
 	object->data = malloc(sizeof(t_sphere_data));
-	object->material = malloc(sizeof(t_material));
 	*((t_sphere_data *) object->data) = *data;
-	*object->material = *material;
+	object->material = *material;
 	object->transformation = matrix_mult(matrix_translation(data->center.x,
 		data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));
 	object->inv_transformation = matrix_inverse(object->transformation);

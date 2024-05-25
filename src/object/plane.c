@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:42:54 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:45:25 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ char	*plane_init(t_object *object, t_plane_data *data, t_material *material)
 	t_matrix	translation;
 
 	object->data = malloc(sizeof(t_plane_data));
-	object->material = malloc(sizeof(t_material));
 	*((t_plane_data *) object->data) = *data;
-	*object->material = *material;
+	object->material = *material;
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, data->direction);
 	translation = matrix_translation(data->center.x, data->center.y, data->center.z);
