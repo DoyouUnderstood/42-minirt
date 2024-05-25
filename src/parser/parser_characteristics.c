@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 06:20:39 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:47:42 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,16 @@ char	*parse_camera(t_parser *parser, t_world *world)
 
 char	*parse_ambient(t_parser *parser, t_world *world)
 {
-	double		intensity;
+	t_amb_light	amb_light;
 	t_color_255	color_255;
 
 	if (!parser_match(parser, "%f %d,%d,%d%_%$",
-			&intensity, &color_255.r, &color_255.g, &color_255.b))
+			&amb_light.intensity, &color_255.r, &color_255.g, &color_255.b))
 		return ("Ambient light: Invalid format");
-	if (intensity < 0.0 || intensity > 1.0)
-		return ("Ambient light: Invalid intensity");
 	if (!color_255_validate(color_255))
 		return ("Ambient light: Invalid color");
-	world->amb = malloc(sizeof(t_amb_light));
-	if (!world->amb)
-		return ("Ambient light: malloc error");
-	world->amb->color = color_from_255(color_255);
-	world->amb->ambient = intensity;
-	return (NULL);
+	amb_light.color = color_from_255(color_255);
+	return (world_init_ambient(world, &amb_light));
 }
 
 char	*parse_light(t_parser *parser, t_world *world)

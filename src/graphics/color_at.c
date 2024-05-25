@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:26:47 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:46:59 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ t_color	color_at(t_world *world, t_ray *ray, int remaining)
 	if (!intersections || count == 0)
 	{
 		free(intersections);
-		return (color_multiply_scalar(world->amb->color, world->amb->ambient));
+		return (color_multiply_scalar(world->amb.color, world->amb.intensity));
 	}
 	hit_inter = hit(intersections, count);
 	if (!hit_inter)
 	{
 		free(intersections);
-		return (color_multiply_scalar(world->amb->color, world->amb->ambient));
+		return (color_multiply_scalar(world->amb.color, world->amb.intensity));
 	}
 	prepare_computations(&comput, hit_inter, ray);
 	color = shade_hit(world, &comput, remaining);

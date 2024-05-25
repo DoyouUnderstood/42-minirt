@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 19:17:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:47:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_color	calculate_lighting_components(t_lighting *params,
 	t_color				diffuse;
 	t_color				specular;
 
-	ambient = calculate_ambient(ef_c, params->material->amb.ambient);
+	ambient = calculate_ambient(ef_c, params->material->amb.intensity);
 	if (params->in_shadow)
 	{
 		return (ambient);

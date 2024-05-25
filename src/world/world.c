@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 06:22:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:47:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,18 @@ char	*world_init_camera(t_world *world, t_camera_data *data)
 	return (camera_init(&world->camera, data));
 }
 
+char	*world_init_ambient(t_world *world, t_amb_light *data)
+{
+	if (data->intensity < 0.0 || data->intensity > 1.0)
+		return ("Ambient light: Invalid intensity");
+	world->amb = *data;
+	return (NULL);
+}
+
 char	*world_validate(t_world *world)
 {
 	// Validate existence of a camera
-	if (!world->amb)
-		return ("Erreur : Aucune lumière ambiante définie dans le fichier.\n");
+	// Validate existence of a ambient light
 	if (!world->light)
 		return ("Erreur : Aucune lumière principale définie dans le fichier.\n");
 	if (!world->objects)
