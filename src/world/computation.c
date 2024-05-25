@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:31 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 07:42:48 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:38:28 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,27 @@ int	compare_intersections(const void *a, const void *b)
 
 typedef struct s_intersectionAddParams
 {
-	t_intersection	**intersections;
-	t_intersection	*local_intersections;
-	int				local_count;
-	t_object		*object;
-	int				*count;
-}					t_intersectionAddParams;
+	t_intersection		**intersections;
+	t_intersection_pair	*intersection_pair;
+	t_object			*object;
+	int					*count;
+}	t_intersectionAddParams;
 
 void	add_local_inter(t_intersectionAddParams *params)
 {
 	int	j;
 
 	j = 0;
-	while (j < params->local_count)
+	while (j < params->intersection_pair->count)
 	{
 		(*(params->intersections))[*(params->count)
-			+ j] = params->local_intersections[j];
+			+ j].obj = params->intersection_pair->obj;
+		(*(params->intersections))[*(params->count)
+			+ j].t = params->intersection_pair->t[j];
 		(*(params->intersections))[*(params->count) + j].obj = params->object;
 		j++;
 	}
-	*(params->count) += params->local_count;
+	*(params->count) += params->intersection_pair->count;
 }
 
 typedef struct s_processObjectParams
@@ -91,30 +92,23 @@ typedef struct s_processObjectParams
 
 void	process_object(t_processObjectParams *params)
 {
-	int						local_count;
-	t_intersection			*local_inter;
+	t_intersection_pair		local_inter;
 	t_intersectionAddParams	add_params;
 
-	local_count = 0;
-	local_inter = object_intersect(&params->world->objects[params->index],
-			params->ray, &local_count);
-	if (local_count > 0)
+	object_intersect(&params->world->objects[params->index], params->ray, &local_inter);
+	if (local_inter.count > 0)
 	{
-		if (*(params->count) + local_count > *(params->capacity))
+		if (*(params->count) + local_inter.count > *(params->capacity))
 		{
 			if (!intersection_realloc(params->intersections, *(params->count)
-					+ local_count, params->capacity))
-			{
-				free(local_inter);
+					+ local_inter.count, params->capacity))
 				return ;
-			}
 		}
 		add_params = (t_intersectionAddParams){params->intersections,
-			local_inter, local_count, &params->world->objects[params->index],
+			&local_inter, &params->world->objects[params->index],
 			params->count};
 		add_local_inter(&add_params);
 	}
-	free(local_inter);
 }
 
 t_intersection	*intersect_world(t_world *world, t_ray *ray, int *count)
