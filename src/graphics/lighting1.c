@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:26:36 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:53:05 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_color	calculate_ef_c(const t_lighting *params)
 		if (params->material->pattern.pattern_at)
 		{
 			point_in_object_space = matrix_mult_tuple(
-					params->object->transformations.inverse, *params->position);
+					params->object->transformations.inverse, params->position);
 			ef_c = params->material->pattern.pattern_at(
 					&params->material->pattern, point_in_object_space);
 		}

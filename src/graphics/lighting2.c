@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:55:10 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 06:47:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:53:50 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_color	calculate_lighting_components(t_lighting *params,
 				params->light->intensity);
 		spec_params = prepare_specular_params(params,
 				vector_normalize(tuple_subtract(params->light->pos,
-						*params->position)));
+						params->position)));
 		specular = calculate_specular(&spec_params);
 	}
 	else
@@ -55,7 +55,7 @@ t_color	lighting(t_lighting *params)
 
 	ef_c = calculate_ef_c(params);
 	lightv = vector_normalize(tuple_subtract(params->light->pos,
-				*params->position));
+				params->position));
 	light_dot_normal = vector_dot(lightv, *params->normalv);
 	return (calculate_lighting_components(params, light_dot_normal, ef_c));
 }
