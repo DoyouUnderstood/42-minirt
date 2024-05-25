@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:13 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:13:11 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:30:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ typedef struct s_pattern
 	t_pattern_at	pattern_at;
 }	t_pattern;
 
-char		*pattern_init_default(t_pattern *pattern);
-t_pattern	*checker_pattern_create(t_color color1,
-				t_color color2);
-t_pattern	*ring_pattern_create(t_color color1,
-				t_color color2);
-t_pattern	*gradient_pattern_create(t_color color1,
-				t_color color2);
-t_pattern	*stripe_pattern_create(t_color color1,
-				t_color color2);
+void	pattern_init_default(t_pattern *pattern);
+void	pattern_init_checker(t_pattern *pattern, t_color color1,
+			t_color color2);
+void	pattern_init_ring(t_pattern *pattern, t_color color1, t_color color2);
+void	pattern_init_gradient(t_pattern *pattern, t_color color1,
+			t_color color2);
+void	pattern_init_stripe(t_pattern *pattern, t_color color1,
+			t_color color2);
 
 #endif

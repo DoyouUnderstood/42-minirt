@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:54:42 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:33:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,10 @@ static t_color	ring_at(const t_pattern *pattern, t_tuple point)
 		return (pattern->color_b);
 }
 
-t_pattern	*ring_pattern_create(t_color color1, t_color color2)
+void	pattern_init_ring(t_pattern *pattern, t_color color1, t_color color2)
 {
-	t_pattern	*pattern;
-
-	pattern = malloc(sizeof(t_pattern));
 	pattern->color_a = color1;
 	pattern->color_b = color2;
-	pattern->pattern_at = ring_at;
 	pattern->transform = matrix_identity();
-	return (pattern);
+	pattern->pattern_at = ring_at;
 }

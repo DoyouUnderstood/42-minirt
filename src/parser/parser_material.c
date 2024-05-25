@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:22:28 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:32:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ static char	*parse_reflectivity(t_parser *parser, double *reflectivity)
 
 static char	*parse_pattern(t_parser *parser, t_pattern *pattern)
 {
-	t_pattern	*(*pattern_f)(t_color c1, t_color c2);
+	void	(*pattern_f)(t_pattern *pattern, t_color c1, t_color c2);
 	t_color_255	color_255_1;
 	t_color_255	color_255_2;
 
-	pattern_f = NULL;
 	pattern_init_default(pattern);
+	pattern_f = NULL;
 	if (parser_match(parser, " gradient "))
-		pattern_f = gradient_pattern_create;
+		pattern_f = pattern_init_gradient;
 	else if (parser_match(parser, " checker "))
-		pattern_f = checker_pattern_create;
+		pattern_f = pattern_init_checker;
 	else if (parser_match(parser, " stripe "))
-		pattern_f = stripe_pattern_create;
+		pattern_f = pattern_init_stripe;
 	else if (parser_match(parser, " ring "))
-		pattern_f = ring_pattern_create;
+		pattern_f = pattern_init_ring;
 	if (!pattern_f)
 		return (NULL);
 	if (!parser_match(parser, "%d,%d,%d %d,%d,%d",
@@ -48,8 +48,8 @@ static char	*parse_pattern(t_parser *parser, t_pattern *pattern)
 		return ("Invalid pattern format");
 	if (!color_255_validate(color_255_1) || !color_255_validate(color_255_2))
 		return ("Invalid pattern color");
-	*pattern = *(pattern_f(color_from_255(color_255_1),
-			color_from_255(color_255_2)));
+	pattern_f(pattern, color_from_255(color_255_1),
+			color_from_255(color_255_2));
 	return (NULL);
 }
 

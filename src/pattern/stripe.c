@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:50:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:31:13 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,11 @@ static t_color	stripe_at(const t_pattern *pattern, t_tuple point)
 	}
 }
 
-t_pattern	*stripe_pattern_create(t_color color1, t_color color2)
+void	pattern_init_stripe(t_pattern *pattern, t_color color1,
+	t_color color2)
 {
-	t_pattern	*pattern;
-
-	pattern = malloc(sizeof(t_pattern));
 	pattern->color_a = color1;
 	pattern->color_b = color2;
 	pattern->transform = matrix_identity();
 	pattern->pattern_at = stripe_at;
-	return (pattern);
 }

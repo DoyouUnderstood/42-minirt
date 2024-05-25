@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:40 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:53:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:30:26 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,11 @@ static t_color	gradient_at(const t_pattern *pattern, t_tuple point)
 				fraction)));
 }
 
-t_pattern	*gradient_pattern_create(t_color color1, t_color color2)
+void	pattern_init_gradient(t_pattern *pattern, t_color color1,
+	t_color color2)
 {
-	t_pattern	*pattern;
-
-	pattern = malloc(sizeof(t_pattern));
 	pattern->color_a = color1;
 	pattern->color_b = color2;
 	pattern->transform = matrix_identity();
 	pattern->pattern_at = gradient_at;
-	return (pattern);
 }
