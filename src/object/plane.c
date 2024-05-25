@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:25:40 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:21:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,18 @@
 
 #include <stdlib.h>
 
-t_intersection	*plane_local_intersect(t_object *obj, t_ray *ray, int *count)
+static void	plane_local_intersect(t_object *obj, t_ray *ray,
+	t_intersection_pair *intersections)
 {
 	double			t;
-	t_intersection	*intersections;
 
+	intersections->obj = obj;
+	intersections->count = 0;
 	if (double_eq(ray->direction.y, 0.0))
-	{
-		*count = 0;
-		return (NULL);
-	}
+		return ;
 	t = -ray->origin.y / ray->direction.y;
-	*count = 1;
-	intersections = intersection_create(obj, t);
-	if (!intersections)
-		*count = 0;
-	return (intersections);
+	intersections->count = 1;
+	intersections->t[0] = t;
 }
 
 t_tuple	plane_local_normal_at(t_object *obj, t_tuple local_point)

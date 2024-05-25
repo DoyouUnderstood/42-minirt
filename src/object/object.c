@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:28:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:19:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,23 @@
 t_intersection	*object_intersect(t_object *object, t_ray *ray, int *count)
 {
 	t_ray		local_ray;
+	t_intersection_pair	intersections;
 
 	*count = 0;
 	local_ray = ray_transform(object->transformations.inverse, *ray);
-	return (object->local_intersect(object, &local_ray, count));
+	object->local_intersect(object, &local_ray, &intersections);
+	if (intersections.count == 0)
+	{
+		*count = 0;
+		return (NULL);
+	}
+	if (intersections.count == 1)
+	{
+		*count = 1;
+		return (intersection_create(object, intersections.t[0]));
+	}
+	*count = 2;
+	return (intersection_create_pair(object, intersections.t[0], intersections.t[1]));
 }
 
 // Fonction normal_at généralisée

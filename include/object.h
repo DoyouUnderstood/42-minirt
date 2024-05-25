@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:13:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:21:17 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 # define MAX_OBJECTS 30
 # define EPSILON 0.00001
 
-typedef struct s_object			t_object;
-typedef struct s_intersection	t_intersection;
+typedef struct s_object				t_object;
+typedef struct s_intersection		t_intersection;
+typedef struct s_intersection_pair	t_intersection_pair;
 
-typedef t_intersection	*(*t_local_intersect)(t_object *obj, t_ray *ray,
-							int *count);
-typedef t_tuple			(*t_local_normal_at)(t_object *obj, t_tuple local_point);
+typedef void	(*t_local_intersect)(t_object *obj, t_ray *ray,
+					t_intersection_pair *intersections);
+typedef t_tuple	(*t_local_normal_at)(t_object *obj, t_tuple local_point);
 
 typedef struct s_obj_transf
 {

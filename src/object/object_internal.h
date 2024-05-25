@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:59:07 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:01:59 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:51:34 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_sphere_intersect_calc
 	double	c;
 	double	discriminant;
 	double	discriminant_sqrt;
+	double	t0;
+	double	t1;
 	t_tuple	sphere_to_ray;
 }	t_sphere_intersect_calc;
 

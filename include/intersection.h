@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 11:53:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:37:03 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ typedef struct s_object t_object;
 
 typedef struct s_intersection
 {
-	double					t;
-	t_object				*obj;
-}							t_intersection;
+	double		t;
+	t_object	*obj;
+}	t_intersection;
+
+typedef struct s_intersection_pair
+{
+	int			count;
+	double		t[2];
+	t_object	*obj;
+}	t_intersection_pair;
 
 t_intersection	*intersection_create(t_object *obj, double t);
 t_intersection	*intersection_create_pair(t_object *obj, double t0, double t1);
