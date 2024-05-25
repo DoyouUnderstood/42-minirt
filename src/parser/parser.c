@@ -6,24 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:56:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:43:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser_internal.h"
 #include "ft_parser.h"
-#include "parser.h"
 #include "get_next_line.h"
-#include "ft_printf.h"
-#include "libft.h"
-#include "world.h"
-#include "functions.h"
 #include "utils.h"
+#include "world.h"
 
 #include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 // parse a line from the .rt file
 static char	*parse_line(char *line, t_world *world)

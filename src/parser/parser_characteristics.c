@@ -6,13 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:31:03 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:44:04 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "ft_parser.h"
-#include "parser.h"
 #include "tuple.h"
+#include "world.h"
 
 #include <stdlib.h>
 

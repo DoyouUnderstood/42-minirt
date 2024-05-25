@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:32:26 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:45:54 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,8 @@
 # define PARSER_H
 
 # include "ft_parser.h"
-# include "light.h"
-# include "tuple.h"
-# include "camera.h"
-# include "object.h"
 # include "world.h"
-# include "sphere.h"
-# include "cylinder.h"
-# include "plane.h"
-
 
 t_world	*parse_rt_file(char *filename);
-
-/* ------------------ WORLD CHARACTERISTICS --------------------- */
-
-char	*parse_resolution(t_parser *parser, t_world *world);
-char	*parse_ambient(t_parser *parser, t_world *world);
-char	*parse_camera(t_parser *parser, t_world *world);
-char	*parse_light(t_parser *parser, t_world *world);
-
-/* ------------------ OBJECTS --------------------- */
-
-char	*parse_sphere(t_parser *parser, t_world *world);
-char	*parse_cylinder(t_parser *parser, t_world *world);
-char	*parse_cube(t_parser *parser, t_world *world);
-char	*parse_plane(t_parser *parser, t_world *world);
-char	*parse_material(t_parser *parser, t_material *material);
 
 #endif

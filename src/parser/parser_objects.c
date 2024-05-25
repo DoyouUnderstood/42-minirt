@@ -6,16 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:15:39 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:44:31 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_parser.h"
-#include "parser.h"
-#include "sphere.h"
+#include "parser_internal.h"
 #include "cube.h"
-#include "plane.h"
 #include "cylinder.h"
+#include "ft_parser.h"
+#include "plane.h"
+#include "sphere.h"
+#include "world.h"
 
 #include <stdlib.h>
 
