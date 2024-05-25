@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:56:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:31:03 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,41 @@ char	*parse_resolution(t_parser *parser, t_world *world)
 
 char	*parse_ambient(t_parser *parser, t_world *world)
 {
-	t_parser_ambient	d;
+	double		intensity;
+	t_color_255	color_255;
 
 	if (!parser_match(parser, "%f %d,%d,%d%_%$",
-			&d.intensity, &d.color.r, &d.color.g, &d.color.b))
+			&intensity, &color_255.r, &color_255.g, &color_255.b))
 		return ("Ambient light: Invalid format");
-	if (d.intensity < 0.0 || d.intensity > 1.0)
+	if (intensity < 0.0 || intensity > 1.0)
 		return ("Ambient light: Invalid intensity");
-	if (!color_255_validate(d.color))
+	if (!color_255_validate(color_255))
 		return ("Ambient light: Invalid color");
 	world->amb = malloc(sizeof(t_amb_light));
 	if (!world->amb)
 		return ("Ambient light: malloc error");
-	world->amb->color = color_from_255(d.color);
-	world->amb->ambient = d.intensity;
+	world->amb->color = color_from_255(color_255);
+	world->amb->ambient = intensity;
 	return (NULL);
 }
 
 char	*parse_camera(t_parser *parser, t_world *world)
 {
-	t_parser_camera	d;
+	t_tuple	position;
+	t_tuple	direction;
+	double	fov;
 
-	d.position = point_create(0, 0, 0);
-	d.direction = point_create(0, 0, 0);
 	if (!world->vsize || !world->hsize)
 		return ("Camera: Camera defined before resolution");
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f%_%$",
-		&d.position.x, &d.position.y, &d.position.z,
-		&d.direction.x, &d.direction.y, &d.direction.z, &d.fov))
+		&position.x, &position.y, &position.z,
+		&direction.x, &direction.y, &direction.z, &fov))
 		return ("Camera: Invalid format");
-	if (d.fov < 0.0 || d.fov > 180.0)	
+	if (fov < 0.0 || fov > 180.0)	
 		return ("Camera: Invalid FOV");
-	world->camera = camera_create(d.fov, d.position, d.direction,
+	position = point_create(position.x, position.y, position.z);
+	direction = point_create(direction.x, direction.y, direction.z);
+	world->camera = camera_create(fov, position, direction,
 		world->vsize, world->hsize);
 	if (!world->camera)
 		return ("Camera: malloc error");
@@ -69,19 +72,21 @@ char	*parse_camera(t_parser *parser, t_world *world)
 
 char	*parse_light(t_parser *parser, t_world *world)
 {
-	t_parser_light	d;
+	t_tuple		position;
+	double		intensity;
+	t_color_255	color_255;
 
-	d.position = point_create(0, 0, 0);
+	position = point_create(0, 0, 0);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d%_%$",
-		&d.position.x, &d.position.y, &d.position.z,
-		&d.intensity, &d.color.r, &d.color.g, &d.color.b))
+		&position.x, &position.y, &position.z,
+		&intensity, &color_255.r, &color_255.g, &color_255.b))
 		return ("Light: Invalid format");
-	if (d.intensity < 0.0 || d.intensity > 1.0)
+	if (intensity < 0.0 || intensity > 1.0)
 		return ("Light: Invalid intensity");
-	if (!color_255_validate(d.color))
+	if (!color_255_validate(color_255))
 		return ("Light: Invalid color");
-	world->light = light_create(color_from_255(d.color), d.position,
-		d.intensity);
+	world->light = light_create(color_from_255(color_255), position,
+		intensity);
 	if (!world->light)
 		return ("Light: malloc error");
 	return (NULL);
