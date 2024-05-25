@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:30:14 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 07:59:33 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_cylinder_intersect_calc
 	double	half_height;
 }	t_cylinder_intersect_calc;
 
-t_object	*cylinder_create(t_cylinder_data *data, t_material *material);
+char	*cylinder_init(t_object *object, t_cylinder_data *data,
+			t_material *material);
 
 #endif

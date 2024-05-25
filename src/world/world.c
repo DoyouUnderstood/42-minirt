@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 07:43:02 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 08:02:22 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,8 @@ char	*world_validate(t_world *world)
 // add object into world.
 char	*world_add_object(t_world *world, t_object *object)
 {
-	if (object == NULL)
-		return (NULL);
 	if (world->object_count >= MAX_OBJECTS)
-		return ("To many objects in rt file (max 30)\n");
+		return ("Too many objects in rt file (max 30)\n");
 	world->objects[world->object_count++] = *object;
 	return (NULL);
 }

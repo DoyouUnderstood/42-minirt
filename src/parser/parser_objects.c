@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 07:54:45 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 08:01:52 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,32 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 
 char	*parse_cylinder(t_parser *parser, t_world *world)
 {
-	t_cylinder_data	cylinder;
+	t_object		cylinder;
+	t_cylinder_data	data;
 	t_material		material;
 	t_color_255		color_255;
-	double			diameter;
+	char			*error;
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f %f %d,%d,%d",
-		&cylinder.center.x, &cylinder.center.y, &cylinder.center.z,
-		&cylinder.axis.x, &cylinder.axis.y, &cylinder.axis.z,
-		&diameter, &cylinder.height, &color_255.r, &color_255.g, &color_255.b))
+		&data.center.x, &data.center.y, &data.center.z,
+		&data.axis.x, &data.axis.y, &data.axis.z,
+		&data.radius, &data.height, &color_255.r, &color_255.g, &color_255.b))
 		return ("Cylinder: Invalid format");
-	if (diameter < 0.0)
-		return ("Cylinder: Invalid diameter");
-	cylinder.radius = diameter / 2.0;
+	data.radius = data.radius * 0.5;
 	if (!color_255_validate(color_255))
 		return ("Cylinder: Invalid color");
 	material.color = color_from_255(color_255);
 	if (parse_material(parser, &material))
 		return ("Cylinder: Invalid material");
-	cylinder.center = point_create(cylinder.center.x, cylinder.center.y,
-			cylinder.center.z);
-	cylinder.axis = point_create(cylinder.axis.x, cylinder.axis.y,
-			cylinder.axis.z);
-	return (world_add_object(world, cylinder_create(&cylinder, &material)));
+	data.center = point_create(data.center.x, data.center.y,
+			data.center.z);
+	data.axis = point_create(data.axis.x, data.axis.y,
+			data.axis.z);
+	error = cylinder_init(&cylinder, &data, &material);
+	if (!error)
+		error = world_add_object(world, &cylinder);
+	return (error);
 }
 
 char	*parse_cube(t_parser *parser, t_world *world)

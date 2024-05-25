@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:45:06 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 08:02:40 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,24 +91,26 @@ t_tuple	cylinder_local_normal_at(t_object *obj, t_tuple local_point)
 	return ((t_tuple){local_point.x, 0, local_point.z, 0});
 }
 
-t_object	*cylinder_create(t_cylinder_data *data, t_material *material)
+char	*cylinder_init(t_object *object, t_cylinder_data *data, t_material *material)
 {
-	t_object	*obj;
 	t_tuple		default_axis;
 	t_matrix	rotation;
 
-	obj = malloc(sizeof(t_object));
-	obj->data = malloc(sizeof(t_cylinder_data));
-	obj->material = malloc(sizeof(t_material));
-	*((t_cylinder_data *) obj->data) = *data;
-	*obj->material = *material;
+	if (data->height <= 0.0)
+		return ("Cylinder: Invalid height");
+	if (data->radius <= 0.0)
+		return ("Cylinder: Invalid radius");
+	object->data = malloc(sizeof(t_cylinder_data));
+	object->material = malloc(sizeof(t_material));
+	*((t_cylinder_data *) object->data) = *data;
+	*object->material = *material;
 	default_axis = (t_tuple){0, 1, 0, 0};
 	rotation = align_axis(default_axis, data->axis);
-	obj->transformation = matrix_mult(matrix_translation(data->center.x,
+	object->transformation = matrix_mult(matrix_translation(data->center.x,
 				data->center.y, data->center.z), rotation);
-	obj->inv_transformation = matrix_inverse(obj->transformation);
-	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
-	obj->local_intersect = cylinder_intersect;
-	obj->local_normal_at = cylinder_local_normal_at;
-	return (obj);
+	object->inv_transformation = matrix_inverse(object->transformation);
+	object->tinv_transformation = matrix_transpose(object->inv_transformation);
+	object->local_intersect = cylinder_intersect;
+	object->local_normal_at = cylinder_local_normal_at;
+	return (NULL);
 }
