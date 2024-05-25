@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 15:32:12 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:36:00 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_tuple	object_normal_at(t_object *obj, t_tuple world_point)
 	t_tuple		local_normal;
 	t_tuple		world_normal;
 
-	local_point = matrix_mult_tuple(matrix_inverse(obj->transformation),
+	local_point = matrix_mult_tuple(obj->inv_transformation,
 			world_point);
 	local_normal = obj->local_normal_at(obj, local_point);
 	world_normal = matrix_mult_tuple(obj->tinv_transformation, local_normal);

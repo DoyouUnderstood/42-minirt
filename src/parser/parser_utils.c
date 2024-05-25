@@ -6,49 +6,17 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:27:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:43:01 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "parser.h"
 
-char	*parser_handle_error(void *p, char *msg)
-{
-	free(p);
-	return (msg);
-}
-
 char	*parse_reflectivity(t_parser *parser, double *reflectivity)
 {
 	if (!parser_match(parser, " %f", reflectivity))
 		*reflectivity = 0.0;
-	return (NULL);
-}
-
-char	*parse_color(t_parser *parser, t_color *color)
-{
-	t_color_255	color_255;
-
-	if (!parser_match(parser, "%d%_,%_%d%_,%_%d",
-			&color_255.r, &color_255.g, &color_255.b))
-		return ("Invalid color format");
-	if (!color_255_validate(color_255))
-		return ("Invalid color values");
-	*color = color_from_255(color_255);
-	return (NULL);
-}
-
-char	*parse_tuple(t_parser *parser, t_tuple *tuple,
-	t_tuple (*tuple_creator_f)(double x, double y, double z))
-{
-	double	x;
-	double	y;
-	double	z;
-
-	if (!parser_match(parser, "%f%_,%_%f%_,%_%f", &x, &y, &z))
-		return ("Invalid tuple format");
-	*tuple = tuple_creator_f(x, y, z);
 	return (NULL);
 }
 

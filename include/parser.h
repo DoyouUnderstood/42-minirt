@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 17:13:56 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:43:07 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@
 t_world	*parse_rt_file(char *filename);
 
 /* ------------------ UTILITIES -------------------- */
-char	*parser_handle_error(void *p, char *msg);
-char	*parse_color(t_parser *parser, t_color *color);
-char	*parse_tuple(t_parser *parser, t_tuple *tuple,
-			t_tuple (*tuple_creator_f)(double x, double y, double z));
 char	*parse_reflectivity(t_parser *parser, double *reflectivity);
 
 /* ------------------ PATTERN -------------------- */

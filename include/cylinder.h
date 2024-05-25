@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:50:44 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:30:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "material.h"
 
 typedef struct s_object t_object;
-typedef struct s_material_specs t_material_specs;
 
 typedef struct s_cylinder_data
 {
