@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser3.c                                          :+:      :+:    :+:   */
+/*   parser_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:44:31 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 07:54:45 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,29 @@
 
 char	*parse_sphere(t_parser *parser, t_world *world)
 {
-	t_sphere_data	sphere;
+	t_object		sphere;
+	t_sphere_data	data;
 	t_material		material;
 	t_color_255		color_255;
-	double			diameter;
+	char			*error;
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d",
-		&sphere.center.x, &sphere.center.y, &sphere.center.z,
-		&diameter, &color_255.r, &color_255.g, &color_255.b))
+		&data.center.x, &data.center.y, &data.center.z,
+		&data.radius, &color_255.r, &color_255.g, &color_255.b))
 		return ("Sphere: Invalid format");
-	if (diameter < 0.0)
-		return ("Sphere: Invalid diameter");
-	sphere.radius = diameter / 2.0;
+	data.radius = data.radius * 0.5;
 	if (!color_255_validate(color_255))
 		return ("Sphere: Invalid color");
 	material.color = color_from_255(color_255);
 	if (parse_material(parser, &material))
 		return ("Sphere: Invalid material");
-	sphere.center = point_create(sphere.center.x, sphere.center.y,
-			sphere.center.z);
-	return (world_add_object(world, sphere_create(&sphere, &material)));
+	data.center = point_create(data.center.x, data.center.y,
+			data.center.z);
+	error = sphere_init(&sphere, &data, &material);
+	if (!error)
+		error = world_add_object(world, &sphere);
+	return (error);
 }
 
 char	*parse_cylinder(t_parser *parser, t_world *world)

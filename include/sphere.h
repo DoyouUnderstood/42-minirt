@@ -34,6 +34,7 @@ typedef struct s_sphere_intersect_calc
 	t_tuple	sphere_to_ray;
 }	t_sphere_intersect_calc;
 
-t_object	*sphere_create(t_sphere_data *data, t_material *material);
+char	*sphere_init(t_object *object, t_sphere_data *data,
+			t_material *material);
 
 #endif

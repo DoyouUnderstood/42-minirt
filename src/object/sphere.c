@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:45:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 07:55:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,20 @@ static t_tuple	sphere_normal_at(t_object *obj, t_tuple local_point)
 	return (tupl);
 }
 
-t_object	*sphere_create(t_sphere_data *data, t_material *material)
+char	*sphere_init(t_object *object, t_sphere_data *data,
+	t_material *material)
 {
-	t_object		*obj;
-
-	obj = malloc(sizeof(t_object));
-	obj->data = malloc(sizeof(t_sphere_data));
-	obj->material = malloc(sizeof(t_material));
-	*((t_sphere_data *) obj->data) = *data;
-	*obj->material = *material;
-	obj->transformation = matrix_mult(matrix_translation(data->center.x,
-				data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));
-	obj->inv_transformation = matrix_inverse(obj->transformation);
-	obj->tinv_transformation = matrix_transpose(obj->inv_transformation);
-	obj->local_intersect = sphere_intersect;
-	obj->local_normal_at = sphere_normal_at;
-	return (obj);
+	if (data->radius <= 0.0)
+		return ("Sphere: Invalid radius");
+	object->data = malloc(sizeof(t_sphere_data));
+	object->material = malloc(sizeof(t_material));
+	*((t_sphere_data *) object->data) = *data;
+	*object->material = *material;
+	object->transformation = matrix_mult(matrix_translation(data->center.x,
+		data->center.y, data->center.z), matrix_scaling(data->radius, data->radius, data->radius));
+	object->inv_transformation = matrix_inverse(object->transformation);
+	object->tinv_transformation = matrix_transpose(object->inv_transformation);
+	object->local_intersect = sphere_intersect;
+	object->local_normal_at = sphere_normal_at;
+	return (NULL);
 }
