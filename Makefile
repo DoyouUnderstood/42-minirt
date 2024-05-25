@@ -13,58 +13,7 @@ MLX_FLAGS = -L$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx -lm
 INC_FLAGS = -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx -lm
 TEST_SRCS =  unit_test/cube.c
 
-SRCS = main.c \
-      graphics/color1.c \
-      graphics/color2.c \
-      maths/determinant_cofacteur1.c \
-      maths/determinant_cofacteur2.c \
-      maths/matrix_operation1.c \
-      maths/matrix_operation2.c \
-      maths/matrix_transforms1.c \
-      maths/matrix_transforms2.c \
-      maths/point1.c \
-      maths/point2.c \
-      maths/vect1.c \
-      maths/vect2.c \
-	  maths/ray.c \
-      mlx/event.c \
-      mlx/mlx1.c \
-      mlx/mlx2.c \
-	  graphics/material.c \
-	  graphics/lighting1.c \
-	  graphics/lighting2.c \
-	  maths/tuple.c \
-	  world/world.c \
-	  world/camera.c \
-	  world/view.c \
-	  world/render.c \
-	  graphics/color_at.c \
-	  world/computation.c \
-	  world/shadow.c \
-	  object/shape.c \
-	  object/plane1.c \
-	  object/plane2.c \
-	  graphics/pattern/stripe.c \
-	  graphics/pattern/gradient.c \
-	  graphics/pattern/ring.c \
-	  graphics/pattern/checker.c \
-	  maths/reflect.c \
-	  object/cube.c \
-	  object/cylinder1.c \
-	  object/cylinder2.c \
-	  object/sphere1.c \
-	  object/sphere2.c \
-	  parser/parser.c \
-	  parser/parse_obj.c \
-	  parser/utils.c \
-	  parser/utils2.c \
-	  world/computation1.c \
-	  parser/utils1.c \
-	  world/render1.c \
-	  parser/parse_obj2.c
-
-
-
+SRCS = $(shell find src -name "*.c")
 OBJ = $(SRCS:.c=.o)
 
 TEST_OBJ = $(TEST_SRCS:.c=.o)
