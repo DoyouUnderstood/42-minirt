@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:18 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/22 19:18:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:59:46 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ bool	is_shadowed(t_world *world, const t_tuple point)
 	t_shadow	shadow;
 	bool		in_shadow;
 
-	if (world->light->color.r == 0 && world->light->color.g == 0
-		&& world->light->color.b == 0)
+	if (world->light.color.r == 0 && world->light.color.g == 0
+		&& world->light.color.b == 0)
 		return (false);
-	shadow.direction = tuple_subtract(world->light->pos, point);
+	shadow.direction = tuple_subtract(world->light.pos, point);
 	shadow.distance = tuple_magnitude(&shadow.direction);
 	shadow.direction = vector_normalize(shadow.direction);
 	shadow.shadow_ray = ray_create(point, shadow.direction);

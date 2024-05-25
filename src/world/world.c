@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 06:47:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:56:33 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	world_init(t_world *world)
 	int		i;
 
 	i = 0;
-	world->light = NULL;
 	world->object_count = 0;
 	while (i < MAX_OBJECTS)
 		world->objects[i++] = NULL;
@@ -49,20 +48,31 @@ char	*world_init_camera(t_world *world, t_camera_data *data)
 	return (camera_init(&world->camera, data));
 }
 
+char	*world_init_light(t_world *world, t_light *data)
+{
+	char	*error;
+
+	error = light_validate(data);
+	if (!error)
+		world->light = *data;
+	return (error);
+}
+
 char	*world_init_ambient(t_world *world, t_amb_light *data)
 {
-	if (data->intensity < 0.0 || data->intensity > 1.0)
-		return ("Ambient light: Invalid intensity");
-	world->amb = *data;
-	return (NULL);
+	char	*error;
+
+	error = amb_light_validate(data);
+	if (!error)
+		world->amb = *data;
+	return (error);
 }
 
 char	*world_validate(t_world *world)
 {
 	// Validate existence of a camera
 	// Validate existence of a ambient light
-	if (!world->light)
-		return ("Erreur : Aucune lumière principale définie dans le fichier.\n");
+	// Validate existence of a light
 	if (!world->objects)
 		return ("Erreur : Aucune forme géométrique définie dans le fichier.\n");
 	return (NULL);

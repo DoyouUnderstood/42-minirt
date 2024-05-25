@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 06:47:42 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:58:41 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,16 @@ char	*parse_ambient(t_parser *parser, t_world *world)
 
 char	*parse_light(t_parser *parser, t_world *world)
 {
-	t_tuple		position;
-	double		intensity;
+	t_light		light;
 	t_color_255	color_255;
 
-	position = point_create(0, 0, 0);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d%_%$",
-		&position.x, &position.y, &position.z,
-		&intensity, &color_255.r, &color_255.g, &color_255.b))
+		&light.pos.x, &light.pos.y, &light.pos.z,
+		&light.intensity, &color_255.r, &color_255.g, &color_255.b))
 		return ("Light: Invalid format");
-	if (intensity < 0.0 || intensity > 1.0)
-		return ("Light: Invalid intensity");
 	if (!color_255_validate(color_255))
 		return ("Light: Invalid color");
-	world->light = light_create(color_from_255(color_255), position,
-		intensity);
-	if (!world->light)
-		return ("Light: malloc error");
-	return (NULL);
+	light.color = color_from_255(color_255);
+	light.pos= point_create(light.pos.x, light.pos.y, light.pos.z);
+	return (world_init_light(world, &light));
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:36 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 06:46:44 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:59:20 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_amb_light
 	double	intensity;
 }			t_amb_light;
 
-t_light	*light_create(t_color color, t_tuple position,
-			double intensity);
+char	*light_validate(t_light *light);
+char	*amb_light_validate(t_amb_light *amb_light);
 
 #endif

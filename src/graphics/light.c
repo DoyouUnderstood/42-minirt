@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:32:20 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/22 19:17:36 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 06:59:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 
 #include <stdlib.h>
 
-t_light	*light_create(t_color color, t_tuple position, double intensity)
+char	*amb_light_validate(t_amb_light *amb_light)
 {
-	t_light	*light;
+	if (amb_light->intensity < 0.0 || amb_light->intensity > 1.0)
+		return ("Ambient light: Invalid intensity");
+	return (NULL);
+}
 
-	light = malloc(sizeof(t_light));
-	light->intensity = intensity;
-	light->color = color;
-	light->pos = position;
-	return (light);
+char	*light_validate(t_light *light)
+{
+	if (light->intensity < 0.0 || light->intensity > 1.0)
+		return ("Light: Invalid intensity");
+	return (NULL);
 }
