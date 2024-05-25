@@ -6,17 +6,18 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 17:15:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:59:56 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "parser.h"
-#include "ft_error.h"
 #include "sphere.h"
 #include "cube.h"
 #include "plane.h"
 #include "cylinder.h"
+
+#include <stdlib.h>
 
 char	*parse_sphere(t_parser *parser, t_world *world)
 {
@@ -42,8 +43,7 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 		return ("Sphere: Invalid pattern");
 	sphere.center = point_create(sphere.center.x, sphere.center.y,
 			sphere.center.z);
-	world_add_object(world, sphere_create(&sphere, &material));
-	return (NULL);
+	return (world_add_object(world, sphere_create(&sphere, &material)));
 }
 
 char	*parse_cylinder(t_parser *parser, t_world *world)
@@ -73,8 +73,7 @@ char	*parse_cylinder(t_parser *parser, t_world *world)
 			cylinder.center.z);
 	cylinder.axis = point_create(cylinder.axis.x, cylinder.axis.y,
 			cylinder.axis.z);
-	world_add_object(world, cylinder_create(&cylinder, &material));
-	return (NULL);
+	return (world_add_object(world, cylinder_create(&cylinder, &material)));
 }
 
 char	*parse_cube(t_parser *parser, t_world *world)
@@ -97,8 +96,7 @@ char	*parse_cube(t_parser *parser, t_world *world)
 		return ("Cube: Invalid pattern");
 	cube.center = point_create(cube.center.x, cube.center.y,
 			cube.center.z);
-	world_add_object(world, cube_create(&cube, &material));
-	return (NULL);
+	return (world_add_object(world, cube_create(&cube, &material)));
 }
 
 char	*parse_plane(t_parser *parser, t_world *world)
@@ -124,6 +122,5 @@ char	*parse_plane(t_parser *parser, t_world *world)
 			plane.center.z);
 	plane.direction = vector_create(plane.direction.x, plane.direction.y,
 			plane.direction.z);
-	world_add_object(world, plane_create(&plane, &material));
-	return (NULL);
+	return (world_add_object(world, plane_create(&plane, &material)));
 }

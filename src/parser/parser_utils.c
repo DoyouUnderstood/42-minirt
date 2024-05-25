@@ -6,12 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:41:43 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:43:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:52:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "parser.h"
+
+#include <stdlib.h>
 
 char	*parse_reflectivity(t_parser *parser, double *reflectivity)
 {

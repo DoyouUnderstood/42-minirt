@@ -6,18 +6,18 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:08:59 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:56:07 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
-#include "ft_error.h"
 #include "parser.h"
 #include "get_next_line.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include "world.h"
 #include "functions.h"
+#include "utils.h"
 
 #include <fcntl.h>
 #include <stdio.h>

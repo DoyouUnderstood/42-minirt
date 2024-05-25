@@ -6,14 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/24 16:27:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:56:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
-#include "ft_error.h"
 #include "parser.h"
 #include "tuple.h"
+
+#include <stdlib.h>
 
 char	*parse_resolution(t_parser *parser, t_world *world)
 {

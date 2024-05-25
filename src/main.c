@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 20:08:51 by alletond          #+#    #+#             */
-/*   Updated: 2024/05/22 18:04:36 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:55:13 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 #include "functions.h"
 
 #include <math.h>
-
-void	error_exit(char *error_msg)
-{
-	printf("%s\n", error_msg);
-	exit(1);
-}
+#include <stdlib.h>
 
 int	main(int argc, char *argv[])
 {

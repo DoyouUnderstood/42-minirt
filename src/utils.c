@@ -6,13 +6,15 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:33:27 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:35:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:54:57 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 bool	double_eq(double x, double y)
 {
@@ -28,4 +30,10 @@ double	dclamp(double x, double min, double max)
 	if (x > max)
 		return (max);
 	return (x);
+}
+
+void	error_exit(char *error_msg)
+{
+	printf("%s\n", error_msg);
+	exit(1);
 }

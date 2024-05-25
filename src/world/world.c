@@ -6,11 +6,10 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/22 18:24:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 05:01:00 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_error.h"
 #include "world.h"
 
 #include <stdlib.h>
@@ -70,16 +69,12 @@ char	*world_validate(t_world *world)
 }
 
 // add object into world.
-void	world_add_object(t_world *world, t_object *object)
+char	*world_add_object(t_world *world, t_object *object)
 {
 	if (object == NULL)
-		return ;
-	if (world->object_count < MAX_OBJECTS)
-	{
-		world->objects[world->object_count++] = object;
-	}
-	else
-	{
-		error_exit("faut enlever des objects l'ami!\n");
-	}
+		return (NULL);
+	if (world->object_count >= MAX_OBJECTS)
+		return ("To many objects in rt file (max 30)\n");
+	world->objects[world->object_count++] = object;
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:05 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 04:43:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/25 04:51:15 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@
 # include "sphere.h"
 # include "cylinder.h"
 # include "plane.h"
-
-# include "get_next_line.h"
-# include "ft_printf.h"
-# include "libft.h"
-# include <stdbool.h>
 
 /* ------------------ MAIN FUNCTION -------------------- */
 
