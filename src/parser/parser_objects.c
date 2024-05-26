@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:04:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 21:16:15 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include <stdlib.h>
 
-char	*parse_sphere(t_parser *parser, t_world *world)
+char	*parse_sphere(t_parser *parser, t_world_builder *builder)
 {
 	t_object		sphere;
 	t_sphere_data	data;
@@ -40,11 +40,11 @@ char	*parse_sphere(t_parser *parser, t_world *world)
 			data.center.z);
 	error = sphere_init(&sphere, &data, &material);
 	if (!error)
-		error = world_add_object(world, &sphere);
+		error = world_builder_add_object(builder, &sphere);
 	return (error);
 }
 
-char	*parse_cylinder(t_parser *parser, t_world *world)
+char	*parse_cylinder(t_parser *parser, t_world_builder *builder)
 {
 	t_object		cylinder;
 	t_cylinder_data	data;
@@ -70,11 +70,11 @@ char	*parse_cylinder(t_parser *parser, t_world *world)
 			data.axis.z);
 	error = cylinder_init(&cylinder, &data, &material);
 	if (!error)
-		error = world_add_object(world, &cylinder);
+		error = world_builder_add_object(builder, &cylinder);
 	return (error);
 }
 
-char	*parse_cube(t_parser *parser, t_world *world)
+char	*parse_cube(t_parser *parser, t_world_builder *builder)
 {
 	t_object	cube;
 	t_cube_data	data;
@@ -96,11 +96,11 @@ char	*parse_cube(t_parser *parser, t_world *world)
 			data.center.z);
 	error = cube_init(&cube, &data, &material);
 	if (!error)
-		error = world_add_object(world, &cube);
+		error = world_builder_add_object(builder, &cube);
 	return (error);
 }
 
-char	*parse_plane(t_parser *parser, t_world *world)
+char	*parse_plane(t_parser *parser, t_world_builder *builder)
 {
 	t_object		plane;
 	t_plane_data	data;
@@ -125,6 +125,6 @@ char	*parse_plane(t_parser *parser, t_world *world)
 			data.direction.z);
 	error = plane_init(&plane, &data, &material);
 	if (!error)
-		error = world_add_object(world, &plane);
+		error = world_builder_add_object(builder, &plane);
 	return (error);
 }

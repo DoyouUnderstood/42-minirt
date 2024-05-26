@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 16:53:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 21:12:53 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,27 @@
 #include <fcntl.h>
 
 // parse a line from the .rt file
-static char	*parse_line(char *line, t_world *world)
+static char	*parse_line(char *line, t_world_builder *builder)
 {
 	t_parser	parser;
 
 	parser_init(&parser, line);
 	if (parser_match(&parser, "%_R "))
-		return (parse_resolution(&parser, world));
+		return (parse_resolution(&parser, builder));
 	if (parser_match(&parser, "%_A "))
-		return (parse_ambient(&parser, world));
+		return (parse_ambient(&parser, builder));
 	if (parser_match(&parser, "%_C "))
-		return (parse_camera(&parser, world));
+		return (parse_camera(&parser, builder));
 	if (parser_match(&parser, "%_L "))
-		return (parse_light(&parser, world));
+		return (parse_light(&parser, builder));
 	if (parser_match(&parser, "%_sp "))
-		return (parse_sphere(&parser, world));
+		return (parse_sphere(&parser, builder));
 	if (parser_match(&parser, "%_cy "))
-		return (parse_cylinder(&parser, world));
+		return (parse_cylinder(&parser, builder));
 	if (parser_match(&parser, "%_cu "))
-		return (parse_cube(&parser, world));
+		return (parse_cube(&parser, builder));
 	if (parser_match(&parser, "%_pl "))
-		return (parse_plane(&parser, world));
+		return (parse_plane(&parser, builder));
 	return ("Invalid object prefix");
 }
 
@@ -67,19 +67,21 @@ static char	*get_clean_line(int fd)
 // read .rt and fill and return the whole world.
 void	parse_rt_file(char *filename, t_world *world)
 {
-	int		fd;
-	char	*line;
-	char	*error;
+	int				fd;
+	char			*line;
+	char			*error;
+	t_world_builder	builder;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_exit("Can't open the file");
+	world_builder_init(&builder, world);
 	line = get_clean_line(fd);
 	while (line)
 	{
 		error = NULL;
 		if (!is_empty_line(line))
-			error = parse_line(line, world);
+			error = parse_line(line, &builder);
 		free(line);
 		if (error)
 			break ;
@@ -88,7 +90,7 @@ void	parse_rt_file(char *filename, t_world *world)
 	close(fd);
 	if (error)
 		error_exit(error);
-	error = world_validate(world);
+	error = world_builder_build(&builder);
 	if (error)
 		error_exit(error);
 }
