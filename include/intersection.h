@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:48:50 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:29:09 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ typedef struct s_intersection
 	t_object	*obj;
 }	t_intersection;
 
+typedef struct s_intersection_arr
+{
+	int				capacity;
+	int				count;
+	t_intersection	*intersections;
+}	t_intersection_arr;
+
 typedef struct s_intersection_pair
 {
 	int			count;
@@ -33,5 +40,10 @@ typedef struct s_intersection_pair
 bool			intersection_realloc(t_intersection **intersections,
 					int required_capacity, int *capacity);
 t_intersection	*intersection_hit(t_intersection *intersections, int count);
+
+char	*intersection_arr_init(t_intersection_arr *arr, int init_capacity);
+void	intersection_arr_clean(t_intersection_arr *arr);
+char	*intersection_arr_add(t_intersection_arr *arr, t_object *obj, double t);
+void	intersection_arr_sort(t_intersection_arr *arr);
 
 #endif
