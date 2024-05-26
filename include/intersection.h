@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 15:29:09 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:20:31 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_intersection_pair
 
 bool			intersection_realloc(t_intersection **intersections,
 					int required_capacity, int *capacity);
-t_intersection	*intersection_hit(t_intersection *intersections, int count);
+t_intersection	*intersection_hit(t_intersection_arr *intersections);
 
 char	*intersection_arr_init(t_intersection_arr *arr, int init_capacity);
 void	intersection_arr_clean(t_intersection_arr *arr);

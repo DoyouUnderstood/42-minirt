@@ -6,50 +6,36 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:06:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:40:28 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object_internal.h"
+#include "utils.h"
 
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
 
-static void	set_intersections(t_sphere_intersect_calc *calc,
-	t_intersection_pair *intersections)
-{
-	if (calc->discriminant < -EPSILON)
-	{
-		intersections->count = 0;
-		return ;
-	}
-	calc->discriminant_sqrt = sqrt(calc->discriminant);
-	calc->t0 = (-calc->b - calc->discriminant_sqrt) / (2 * calc->a),
-	calc->t1 = (-calc->b + calc->discriminant_sqrt) / (2 * calc->a),
-	intersections->t[0] = calc->t0;
-	if (calc->discriminant == 0.0)
-		intersections->count = 1;
-	else
-	{
-		intersections->count = 2;
-		intersections->t[1] = calc->t1;
-	}
-}
-
 static void	sphere_intersect(t_object *obj, t_ray *ray,
-	t_intersection_pair *intersections)
+	t_intersection_arr *intersections)
 {
 	t_sphere_intersect_calc	calc;
 	static t_tuple			world_origin = {0, 0, 0, 0};
 
-	intersections->obj = obj;
 	calc.sphere_to_ray = tuple_subtract(ray->origin, world_origin);
 	calc.a = vector_dot(ray->direction, ray->direction);
 	calc.b = 2 * vector_dot(ray->direction, calc.sphere_to_ray);
 	calc.c = vector_dot(calc.sphere_to_ray, calc.sphere_to_ray) - 1.0;
 	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
-	set_intersections(&calc, intersections);
+	if (calc.discriminant < -EPSILON)
+		return ;
+	calc.discriminant_sqrt = sqrt(calc.discriminant);
+	calc.t0 = (-calc.b - calc.discriminant_sqrt) / (2 * calc.a),
+	calc.t1 = (-calc.b + calc.discriminant_sqrt) / (2 * calc.a),
+	intersection_arr_add(intersections, obj, calc.t0);
+	if (!double_eq(calc.discriminant, 0.0))
+		intersection_arr_add(intersections, obj, calc.t1);
 }
 
 static t_tuple	sphere_normal_at(t_object *obj, t_tuple local_point)

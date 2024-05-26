@@ -56,15 +56,10 @@ t_ray						ray_for_pixel(const t_camera *camera,
 t_color						color_at(t_world *world, t_ray *ray, int remaining);
 t_color						shade_hit(t_world *world, t_computations *comps,
 								int remaining);
-void						prepare_computations(t_computations *comps,
-								const t_intersection *intersection,
-								const t_ray *ray);
-int							compare_intersections(const void *a, const void *b);
 
 // ============= world =================
 
-t_intersection	*intersect_world(t_world *world, t_ray *ray,
-					int *count);
+void	intersect_world(t_world *world, t_ray *ray, t_intersection_arr *intersections);
 
 
 #endif

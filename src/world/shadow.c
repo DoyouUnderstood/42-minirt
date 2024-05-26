@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:18 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 06:59:46 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:27:07 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,18 @@ typedef struct s_shadow
 	t_tuple			direction;
 	double			distance;
 	t_ray			shadow_ray;
-	int				count;
-	t_intersection	*intersections;
 }					t_shadow;
 
-bool	check_for_shadows(t_shadow *shadow)
+static bool	check_for_shadows(t_shadow *shadow, t_intersection_arr *intersections)
 {
 	int	i;
 
 	i = 0;
-	while (i < shadow->count)
+	while (i < intersections->count)
 	{
-		if (shadow->intersections[i].t > 0
-			&& shadow->intersections[i].t < shadow->distance)
-		{
+		if (intersections->intersections[i].t > 0
+			&& intersections->intersections[i].t < shadow->distance)
 			return (true);
-		}
 		i++;
 	}
 	return (false);
@@ -44,20 +40,20 @@ bool	check_for_shadows(t_shadow *shadow)
 
 bool	is_shadowed(t_world *world, const t_tuple point)
 {
-	t_shadow	shadow;
-	bool		in_shadow;
+	t_shadow			shadow;
+	t_intersection_arr	intersections;
+	bool				in_shadow;
 
 	if (world->light.color.r == 0 && world->light.color.g == 0
 		&& world->light.color.b == 0)
 		return (false);
+	intersection_arr_init(&intersections, 60);
 	shadow.direction = tuple_subtract(world->light.pos, point);
 	shadow.distance = tuple_magnitude(&shadow.direction);
 	shadow.direction = vector_normalize(shadow.direction);
 	shadow.shadow_ray = ray_create(point, shadow.direction);
-	shadow.count = 0;
-	shadow.intersections = intersect_world(world, &shadow.shadow_ray,
-			&shadow.count);
-	in_shadow = check_for_shadows(&shadow);
-	free(shadow.intersections);
+	intersect_world(world, &shadow.shadow_ray, &intersections);
+	in_shadow = check_for_shadows(&shadow, &intersections);
+	intersection_arr_clean(&intersections);
 	return (in_shadow);
 }

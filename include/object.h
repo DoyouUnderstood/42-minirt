@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:24:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:32:18 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@
 # define EPSILON 0.00001
 
 typedef struct s_object				t_object;
-typedef struct s_intersection		t_intersection;
-typedef struct s_intersection_pair	t_intersection_pair;
+typedef struct s_intersection_arr	t_intersection_arr;
 
 typedef void	(*t_local_intersect)(t_object *obj, t_ray *ray,
-					t_intersection_pair *intersections);
+					t_intersection_arr *intersections);
 typedef t_tuple	(*t_local_normal_at)(t_object *obj, t_tuple local_point);
 
 typedef struct s_obj_transf
@@ -83,7 +82,7 @@ char		*plane_init(t_object *object, t_plane_data *data,
 				t_material *material);
 
 void		object_intersect(t_object *object, t_ray *ray,
-				t_intersection_pair *intersections);
+				t_intersection_arr *intersections);
 t_tuple		object_normal_at(t_object *obj, t_tuple world_point);
 
 #endif

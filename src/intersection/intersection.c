@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:48:40 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:20:11 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,16 @@ bool	intersection_realloc(t_intersection **intersections,
 }
 
 // Fonction pour identifier le hit parmi une collection d'intersections
-t_intersection	*intersection_hit(t_intersection *intersections, int count)
+t_intersection	*intersection_hit(t_intersection_arr *intersections)
 {
-	t_intersection	*hit;
-	double			min_t;
 	int				i;
 
 	i = 0;
-	hit = NULL;
-	min_t = DBL_MAX;
-	while (i < count)
+	while (i < intersections->count)
 	{
-		if (intersections[i].t > 0 && intersections[i].t < min_t)
-		{
-			hit = &intersections[i];
-			min_t = intersections[i].t;
-		}
+		if (intersections->intersections[i].t > 0.0)
+			return (&intersections->intersections[i]);
 		i++;
 	}
-	return (hit);
+	return (NULL);
 }

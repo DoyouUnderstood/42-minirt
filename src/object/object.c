@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:56:51 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:31:31 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 // fonction intersect generalise
 void	object_intersect(t_object *object, t_ray *ray,
-	t_intersection_pair *intersections)
+	t_intersection_arr *intersections)
 {
 	t_ray		local_ray;
 

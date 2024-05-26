@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:21:55 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:33:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ static void	check_axis(double origin, double direction, double *tmin,
 }
 
 static void	cube_intersect(t_object *obj, t_ray *ray,
-	t_intersection_pair *intersections)
+	t_intersection_arr *intersections)
 {
 	double			tmin;
 	double			tmax;
 	double			bounds[6];
 
-	intersections->obj = obj;
-	intersections->count = 0;
 	check_axis(ray->origin.x, ray->direction.x, &bounds[0], &bounds[1]);
 	check_axis(ray->origin.y, ray->direction.y, &bounds[2], &bounds[3]);
 	check_axis(ray->origin.z, ray->direction.z, &bounds[4], &bounds[5]);
@@ -58,9 +56,8 @@ static void	cube_intersect(t_object *obj, t_ray *ray,
 	tmax = fmin(fmin(bounds[1], bounds[3]), bounds[5]);
 	if (tmin > tmax)
 		return ;
-	intersections->count = 2;
-	intersections->t[0] = tmin;
-	intersections->t[1] = tmax;
+	intersection_arr_add(intersections, obj, tmin);
+	intersection_arr_add(intersections, obj, tmax);
 }
 
 static t_tuple	cube_normal_at(t_object *obj, t_tuple point)

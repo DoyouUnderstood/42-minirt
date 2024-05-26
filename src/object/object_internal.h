@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:59:07 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 20:51:34 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:34:43 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef struct s_cylinder_intersect_calc
 	double	y1;
 	double	t0;
 	double	t1;
-	double	half_height;
+	double	half_h;
+	bool	t0_intersects;
+	bool	t1_intersects;
 }	t_cylinder_intersect_calc;
 
 typedef struct s_sphere_intersect_calc

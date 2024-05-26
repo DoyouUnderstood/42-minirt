@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 21:56:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:29:08 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,51 @@
 
 #include <stdlib.h>
 
+static void	prepare_computations(t_computations *comps,
+		const t_intersection *intersection, const t_ray *ray)
+{
+	if (comps == NULL)
+		return ;
+	comps->t = intersection->t;
+	comps->object = intersection->obj;
+	comps->point = t_point_position(ray, intersection->t);
+	comps->eyev = vector_negate(ray->direction);
+	comps->normalv = object_normal_at(intersection->obj, comps->point);
+	comps->reflectv = vector_reflect(ray->direction, comps->normalv);
+	if (vector_dot(comps->normalv, comps->eyev) < 0)
+	{
+		comps->inside = true;
+		comps->normalv = vector_negate(comps->normalv);
+	}
+	else
+		comps->inside = false;
+	comps->over_point = tuple_add(comps->point,
+			tuple_scale(comps->normalv, EPSILON, EPSILON, EPSILON));
+}
+
 t_color	color_at(t_world *world, t_ray *ray, int remaining)
 {
-	int				count;
-	t_intersection	*intersections;
-	t_intersection	*hit_inter;
-	t_computations	comput;
-	t_color			color;
+	t_intersection_arr	intersections;
+	t_intersection		*hit_inter;
+	t_computations		comput;
+	t_color				color;
 
-	count = 0;
-	intersections = intersect_world(world, ray, &count);
-	if (!intersections || count == 0)
+	intersection_arr_init(&intersections, 60);
+	intersect_world(world, ray, &intersections);
+	if (intersections.count == 0)
 	{
-		free(intersections);
+		intersection_arr_clean(&intersections);
 		return (color_multiply_scalar(world->amb.color, world->amb.intensity));
 	}
-	hit_inter = intersection_hit(intersections, count);
+	hit_inter = intersection_hit(&intersections);
 	if (!hit_inter)
 	{
-		free(intersections);
+		intersection_arr_clean(&intersections);
 		return (color_multiply_scalar(world->amb.color, world->amb.intensity));
 	}
 	prepare_computations(&comput, hit_inter, ray);
 	color = shade_hit(world, &comput, remaining);
-	free(intersections);
+	intersection_arr_clean(&intersections);
 	return (color);
 }
 
