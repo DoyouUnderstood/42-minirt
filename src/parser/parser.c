@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 05:51:46 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 16:53:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	parse_rt_file(char *filename, t_world *world)
 		error = NULL;
 		if (!is_empty_line(line))
 			error = parse_line(line, world);
+		free(line);
 		if (error)
 			break ;
 		line = get_clean_line(fd);
