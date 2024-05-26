@@ -6,12 +6,14 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:48 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 08:02:22 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:05:27 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "world.h"
+#include "intersection.h"
+#include "libft.h"
+#include "ray.h"
 
 #include <stdlib.h>
 
@@ -82,4 +84,17 @@ char	*world_add_object(t_world *world, t_object *object)
 		return ("Too many objects in rt file (max 30)\n");
 	world->objects[world->object_count++] = *object;
 	return (NULL);
+}
+
+void	world_intersect(t_world *world, t_ray *ray, t_intersection_arr *intersections)
+{
+	int	i;
+
+	i = 0;
+	while (i < world->object_count)
+	{
+		object_intersect(&world->objects[i], ray, intersections);
+		i++;
+	}
+	intersection_arr_sort(intersections);
 }

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:18 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/26 18:27:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:04:01 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	is_shadowed(t_world *world, const t_tuple point)
 	shadow.distance = tuple_magnitude(&shadow.direction);
 	shadow.direction = vector_normalize(shadow.direction);
 	shadow.shadow_ray = ray_create(point, shadow.direction);
-	intersect_world(world, &shadow.shadow_ray, &intersections);
+	world_intersect(world, &shadow.shadow_ray, &intersections);
 	in_shadow = check_for_shadows(&shadow, &intersections);
 	intersection_arr_clean(&intersections);
 	return (in_shadow);

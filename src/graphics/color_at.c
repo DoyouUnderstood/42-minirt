@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:29:08 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:03:44 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_color	color_at(t_world *world, t_ray *ray, int remaining)
 	t_color				color;
 
 	intersection_arr_init(&intersections, 60);
-	intersect_world(world, ray, &intersections);
+	world_intersect(world, ray, &intersections);
 	if (intersections.count == 0)
 	{
 		intersection_arr_clean(&intersections);

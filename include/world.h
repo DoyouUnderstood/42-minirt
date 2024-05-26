@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:33:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 07:40:46 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/26 19:04:30 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*world_init_ambient(t_world *world, t_amb_light *data);
 char	*world_init_light(t_world *world, t_light *data);
 char	*world_validate(t_world *world);
 char	*world_add_object(t_world *world, t_object *object);
+void	world_intersect(t_world *world, t_ray *ray,
+			t_intersection_arr *intersections);
 void	draw_render_to_img(t_world *world, t_mlx *mlx);
 int		refresh_display(t_world *world);
 

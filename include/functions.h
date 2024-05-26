@@ -59,7 +59,6 @@ t_color						shade_hit(t_world *world, t_computations *comps,
 
 // ============= world =================
 
-void	intersect_world(t_world *world, t_ray *ray, t_intersection_arr *intersections);
 
 
 #endif
