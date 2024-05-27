@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 21:16:15 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:54:23 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,37 @@ char	*parse_sphere(t_parser *parser, t_world_builder *builder)
 		error = world_builder_add_object(builder, &sphere);
 	return (error);
 }
+
+char	*parse_cone(t_parser *parser, t_world_builder *builder)
+{
+	t_object	cone;
+	t_cone_data	data;
+	t_material	material;
+	t_color_255	color_255;
+	char		*error;
+
+	material_init_default(&material);
+	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f %d,%d,%d",
+		&data.center.x, &data.center.y, &data.center.z,
+		&data.axis.x, &data.axis.y, &data.axis.z,
+		&data.radius, &color_255.r, &color_255.g, &color_255.b))
+		return ("Cylinder: Invalid format");
+	data.radius = data.radius / 2.0;
+	if (!color_255_validate(color_255))
+		return ("Cylinder: Invalid color");
+	material.color = color_from_255(color_255);
+	if (parse_material(parser, &material))
+		return ("Cylinder: Invalid material");
+	data.center = point_create(data.center.x, data.center.y,
+			data.center.z);
+	data.axis = point_create(data.axis.x, data.axis.y,
+			data.axis.z);
+	error = cone_init(&cone, &data, &material);
+	if (!error)
+		error = world_builder_add_object(builder, &cone);
+	return (error);
+}
+
 
 char	*parse_cylinder(t_parser *parser, t_world_builder *builder)
 {

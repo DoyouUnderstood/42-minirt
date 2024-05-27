@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:32:18 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:44:37 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ typedef struct s_cylinder_data
 	double	height;
 }	t_cylinder_data;
 
+typedef struct s_cone_data
+{
+	t_tuple	center;
+	t_tuple	axis;
+	double	radius;
+}	t_cone_data;
+
 typedef struct s_cube_data
 {
 	t_tuple	center;
@@ -75,6 +82,8 @@ typedef struct s_plane_data
 char		*sphere_init(t_object *object, t_sphere_data *data,
 				t_material *material);
 char		*cylinder_init(t_object *object, t_cylinder_data *data,
+				t_material *material);
+char		*cone_init(t_object *object, t_cone_data *data,
 				t_material *material);
 char		*cube_init(t_object *object, t_cube_data *data,
 				t_material *material);

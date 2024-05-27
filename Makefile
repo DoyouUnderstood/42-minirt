@@ -5,7 +5,7 @@ FT_PRINTF_DIR = lib/ft_printf
 GNL_DIR = lib/GNL
 MLX_DIR = lib/mlx
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR) -I$(MLX_DIR)
 DEBUG_FLAGS = -g -fsanitize=address
 # / pour compiler sous Mac, rajouter ceci a mlx_flags ==> -framework OpenGL -framework AppKit
 MLX_FLAGS = -L$(MLX_DIR) -framework OpenGL -framework AppKit -lmlx -lm

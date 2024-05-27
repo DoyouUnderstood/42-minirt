@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 05:42:23 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 21:10:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:43:52 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*parse_light(t_parser *parser, t_world_builder *builder);
 
 char	*parse_sphere(t_parser *parser, t_world_builder *builder);
 char	*parse_cylinder(t_parser *parser, t_world_builder *builder);
+char	*parse_cone(t_parser *parser, t_world_builder *builder);
 char	*parse_cube(t_parser *parser, t_world_builder *builder);
 char	*parse_plane(t_parser *parser, t_world_builder *builder);
 char	*parse_material(t_parser *parser, t_material *material);
