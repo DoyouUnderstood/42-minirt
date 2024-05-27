@@ -13,9 +13,6 @@
 
 t_color							color_at(t_world *world, t_ray *ray,
 									int remaining);
-t_color							calculate_color(t_intersection *closest_hit,
-									t_ray *ray, t_light *light);
-
 
 t_color							calculate_ef_c(const t_lighting *params);
 t_color							calculate_ambient(t_color ef_c,
