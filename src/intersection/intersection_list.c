@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:23:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 16:52:30 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:37:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void	intersection_arr_sort(t_intersection_arr *arr)
 	int				j;
 	t_intersection	intersection_i;
 
-	i = 0;
+	i = 1;
 	while (i < arr->count)
 	{
 		intersection_i = arr->intersections[i];
 		j = i - 1;
 		while (j >= 0 && arr->intersections[j].t > intersection_i.t)
 		{
-			arr->intersections[j + i] = arr->intersections[j];
+			arr->intersections[j + 1] = arr->intersections[j];
 			j--;
 		}
 		arr->intersections[j + 1] = intersection_i;
