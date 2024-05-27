@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:37:35 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:51:48 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_matrix	align_axis(t_tuple default_axis, t_tuple new_axis)
+static t_matrix	align_axis(t_tuple default_axis, t_tuple new_axis)
 {
 	t_tuple	axis;
 	double	dot_product;
@@ -41,15 +41,14 @@ static void	cylinder_intersect(t_object *obj, t_ray *ray,
 	calc.a = pow(ray->direction.x, 2) + pow(ray->direction.z, 2);
 	calc.b = 2 * ray->origin.x * ray->direction.x
 		+ 2 * ray->origin.z * ray->direction.z;
-	calc.c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2)
-		- pow(cylinder->radius, 2);
+	calc.c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - 1.0;
 	calc.discriminant = pow(calc.b, 2) - 4 * calc.a * calc.c;
 	if (fabs(calc.a) < EPSILON || calc.discriminant < -EPSILON)
 		return ;
 	calc.discriminant_sqrt = sqrt(calc.discriminant);
 	calc.t0 = (-calc.b - calc.discriminant_sqrt) / (2 * calc.a);
 	calc.t1 = (-calc.b + calc.discriminant_sqrt) / (2 * calc.a);
-	calc.half_h= cylinder->height / 2.0;
+	calc.half_h = cylinder->height / 2.0;
 	calc.y0 = ray->origin.y + calc.t0 * ray->direction.y;
 	calc.y1 = ray->origin.y + calc.t1 * ray->direction.y;
 	calc.t0_intersects = calc.y0 >= -calc.half_h && calc.y0 <= calc.half_h;
@@ -74,8 +73,12 @@ static void	cylinder_set_transformations(t_obj_transf *transformations,
 
 	default_axis = (t_tuple){0, 1, 0, 0};
 	rotation = align_axis(default_axis, data->axis);
-	transformations->base = matrix_mult(matrix_translation(data->center.x,
-			data->center.y, data->center.z), rotation);
+	transformations->base = matrix_mult(
+			rotation,
+			matrix_scaling(data->radius, 1.0, data->radius));
+	transformations->base = matrix_mult(
+		matrix_translation(data->center.x, data->center.y, data->center.z),
+		transformations->base);
 	transformations->inverse = matrix_inverse(transformations->base);
 	transformations->t_inverse = matrix_transpose(transformations->inverse);
 }
