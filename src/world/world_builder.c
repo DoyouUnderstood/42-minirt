@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world_builder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:19:30 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 21:08:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:46:13 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,4 @@ char	*world_builder_set_light(t_world_builder *builder,
 	if (!error)
 		builder->world->light = *data;
 	return (error);
-}
-
-char	*world_builder_add_object(t_world_builder *builder, t_object *object)
-{
-	if (builder->world->object_count >= MAX_OBJECTS)
-		return ("Too many objects in rt file (max 30)\n");
-	builder->world->objects[builder->world->object_count++] = *object;
-	return (NULL);
-}
-
-char	*world_builder_build(t_world_builder *builder)
-{
-	if (!builder->resolution_set)
-		return ("No resolution was set");
-	if (!builder->camera_set)
-		return ("No camera was set");
-	if (!builder->ambient_light_set)
-		return ("No ambient light was set");
-	if (!builder->light_set)
-		return ("No light set");
-	if (builder->world->object_count == 0)
-		return ("No object was set");
-	builder->camera_data.hsize = builder->world->hsize;
-	builder->camera_data.vsize = builder->world->vsize;
-	return (camera_init(&builder->world->camera, &builder->camera_data));
 }

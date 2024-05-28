@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:00:40 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:37:15 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:58:56 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static t_color	gradient_at(const t_pattern *pattern, t_tuple point)
 	double	fraction;
 	t_color	distance;
 
-	transformed_point = matrix_mult_tuple(pattern->transformations.inverse, point);
+	transformed_point = matrix_mult_tuple(pattern->transformations.inverse,
+			point);
 	fraction = transformed_point.x - floor(transformed_point.x);
 	distance = color_subtract(pattern->color_b, pattern->color_a);
 	return (color_add(pattern->color_a, color_multiply_scalar(distance,

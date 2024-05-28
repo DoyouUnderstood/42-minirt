@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:01:31 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 15:42:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:57:57 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 bool	tuple_eq(t_tuple a, t_tuple b)
 {
 	return (double_eq(a.x, b.x) && double_eq(a.y, b.y)
-			&& double_eq(a.z, b.z) && double_eq(a.w, b.w));
+		&& double_eq(a.z, b.z) && double_eq(a.w, b.w));
 }
 
 t_tuple	tuple_add(t_tuple a, t_tuple b)

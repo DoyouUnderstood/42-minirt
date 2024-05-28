@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:43 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/21 18:28:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:54:36 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 #include "tuple.h"
 
-// Fonction view_transform
+// Fonction v_t
 t_matrix	compute_orientation(t_tuple forward, t_tuple upn, t_tuple from)
 {
 	t_tuple		left;
@@ -30,7 +30,7 @@ t_matrix	compute_orientation(t_tuple forward, t_tuple upn, t_tuple from)
 	return (matrix_mult(orientation, trans));
 }
 
-t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
+t_matrix	v_t(t_tuple from, t_tuple to, t_tuple up)
 {
 	t_tuple	forward;
 	t_tuple	upn;

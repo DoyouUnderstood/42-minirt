@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:18 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/26 19:04:01 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:49:30 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ typedef struct s_shadow
 	t_ray			shadow_ray;
 }					t_shadow;
 
-static bool	check_for_shadows(t_shadow *shadow, t_intersection_arr *intersections)
+static bool	check_for_shadows(t_shadow *shadow, t_intersection_arr *inter)
 {
 	int	i;
 
 	i = 0;
-	while (i < intersections->count)
+	while (i < inter->count)
 	{
-		if (intersections->intersections[i].t > 0
-			&& intersections->intersections[i].t < shadow->distance)
+		if (inter->intersections[i].t > 0
+			&& inter->intersections[i].t < shadow->distance)
 			return (true);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:17:27 by ltd               #+#    #+#             */
-/*   Updated: 2024/05/25 06:19:52 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:55:49 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,19 @@
 #include <math.h>
 #include <stdlib.h>
 
-char	*camera_init(t_camera *camera, t_camera_data *data)
+char	*camera_init(t_camera *camera, t_camera_data *d)
 {
 	float		half_view;
 	float		aspect;
 
-	if (data->hsize < 1 || data->vsize < 1)
-		return ("Camera width and height must be positive numbers");
-	if (data->fov < 1.0 || data->fov > 180.0)
-		return ("Invalid camera FOV");
-	camera->hsize = data->hsize;
-	camera->vsize = data->vsize;
-	camera->fov = data->fov * M_PI / 180.0;
-	camera->position = data->position;
-	camera->direction = data->direction;
-	camera->transform = view_transform(data->position, data->direction, vector_create(0, 1, 0));
+	if (d->hsize < 1 || d->vsize < 1 || d->fov < 1.0 || d->fov > 180.0)
+		return ("Camera width and height positive , or Invalid camera FOV");
+	camera->hsize = d->hsize;
+	camera->vsize = d->vsize;
+	camera->fov = d->fov * M_PI / 180.0;
+	camera->position = d->position;
+	camera->direction = d->direction;
+	camera->transform = v_t(d->position, d->direction, vector_create(0, 1, 0));
 	half_view = tan(camera->fov / 2.0);
 	aspect = (float) camera->hsize / (float) camera->vsize;
 	if (aspect >= 1)
