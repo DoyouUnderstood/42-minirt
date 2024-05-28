@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 07:43:11 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:32:58 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ bool	parser_consume_double(t_parser *parser, double *d)
 	*d = *d * sign;
 	return (true);
 }
-
 bool	parser_skip_spaces(t_parser *parser)
 {
 	if (!parser_match_char(parser, ' ') && !parser_match_char(parser, '\t'))
 		return (false);
 	while (parser_match_char(parser, ' ') || parser_match_char(parser, '\t'))
-	{}
+	{
+	}
 	return (true);
 }
 

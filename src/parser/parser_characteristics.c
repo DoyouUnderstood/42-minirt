@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_characteristics.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:40:35 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 21:14:57 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:58:38 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ char	*parse_camera(t_parser *parser, t_world_builder *builder)
 	t_camera_data	camera;
 
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f%_%$",
-		&camera.position.x, &camera.position.y, &camera.position.z,
-		&camera.direction.x, &camera.direction.y, &camera.direction.z,
-		&camera.fov))
+			&camera.position.x, &camera.position.y, &camera.position.z,
+			&camera.direction.x, &camera.direction.y, &camera.direction.z,
+			&camera.fov))
 		return ("Camera: Invalid format");
 	camera.position = point_create(camera.position.x, camera.position.y,
 			camera.position.z);
@@ -63,12 +63,12 @@ char	*parse_light(t_parser *parser, t_world_builder *builder)
 	t_color_255	color_255;
 
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d%_%$",
-		&light.pos.x, &light.pos.y, &light.pos.z,
-		&light.intensity, &color_255.r, &color_255.g, &color_255.b))
+			&light.pos.x, &light.pos.y, &light.pos.z,
+			&light.intensity, &color_255.r, &color_255.g, &color_255.b))
 		return ("Light: Invalid format");
 	if (!color_255_validate(color_255))
 		return ("Light: Invalid color");
 	light.color = color_from_255(color_255);
-	light.pos= point_create(light.pos.x, light.pos.y, light.pos.z);
+	light.pos = point_create(light.pos.x, light.pos.y, light.pos.z);
 	return (world_builder_set_light(builder, &light));
 }

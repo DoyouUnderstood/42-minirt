@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 15:55:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:42:49 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,14 @@ static void	cone_set_transformations(t_obj_transf *transformations,
 			rotation,
 			matrix_scaling(data->radius, 1.0, data->radius));
 	transformations->base = matrix_mult(
-		matrix_translation(data->center.x, data->center.y, data->center.z),
-		transformations->base);
+			matrix_translation(data->center.x, data->center.y, data->center.z),
+			transformations->base);
 	transformations->inverse = matrix_inverse(transformations->base);
 	transformations->t_inverse = matrix_transpose(transformations->inverse);
 }
 
 char	*cone_init(t_object *object, t_cone_data *data, t_material *material)
 {
-
 	if (data->radius <= 0.0)
 		return ("Cylinder: Invalid radius");
 	object->data = malloc(sizeof(t_cone_data));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:12 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 12:51:48 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:40:50 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ static void	cylinder_intersect(t_object *obj, t_ray *ray,
 	calc.half_h = cylinder->height / 2.0;
 	calc.y0 = ray->origin.y + calc.t0 * ray->direction.y;
 	calc.y1 = ray->origin.y + calc.t1 * ray->direction.y;
-	calc.t0_intersects = calc.y0 >= -calc.half_h && calc.y0 <= calc.half_h;
-	calc.t1_intersects = calc.y1 >= -calc.half_h && calc.y1 <= calc.half_h;
+	calc.t0_intersects = ((calc.y0 >= -calc.half_h)
+			&& (calc.y0 <= calc.half_h));
+	calc.t1_intersects = ((calc.y1 >= -calc.half_h)
+			&& (calc.y1 <= calc.half_h));
 	if (calc.t0_intersects)
 		intersection_arr_add(intersections, obj, calc.t0);
 	if (calc.t1_intersects)
@@ -77,15 +79,14 @@ static void	cylinder_set_transformations(t_obj_transf *transformations,
 			rotation,
 			matrix_scaling(data->radius, 1.0, data->radius));
 	transformations->base = matrix_mult(
-		matrix_translation(data->center.x, data->center.y, data->center.z),
-		transformations->base);
+			matrix_translation(data->center.x, data->center.y, data->center.z),
+			transformations->base);
 	transformations->inverse = matrix_inverse(transformations->base);
 	transformations->t_inverse = matrix_transpose(transformations->inverse);
 }
 
-char	*cylinder_init(t_object *object, t_cylinder_data *data, t_material *material)
+char	*cyl_init(t_object *object, t_cylinder_data *data, t_material *material)
 {
-
 	if (data->height <= 0.0)
 		return ("Cylinder: Invalid height");
 	if (data->radius <= 0.0)

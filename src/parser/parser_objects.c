@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:30:49 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 12:54:23 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:01:56 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*parse_sphere(t_parser *parser, t_world_builder *builder)
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d",
-		&data.center.x, &data.center.y, &data.center.z,
-		&data.radius, &color_255.r, &color_255.g, &color_255.b))
+			&data.center.x, &data.center.y, &data.center.z,
+			&data.radius, &color_255.r, &color_255.g, &color_255.b))
 		return ("Sphere: Invalid format");
 	data.radius = data.radius * 0.5;
 	if (!color_255_validate(color_255))
@@ -54,9 +54,9 @@ char	*parse_cone(t_parser *parser, t_world_builder *builder)
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f %d,%d,%d",
-		&data.center.x, &data.center.y, &data.center.z,
-		&data.axis.x, &data.axis.y, &data.axis.z,
-		&data.radius, &color_255.r, &color_255.g, &color_255.b))
+			&data.center.x, &data.center.y, &data.center.z,
+			&data.axis.x, &data.axis.y, &data.axis.z,
+			&data.radius, &color_255.r, &color_255.g, &color_255.b))
 		return ("Cylinder: Invalid format");
 	data.radius = data.radius / 2.0;
 	if (!color_255_validate(color_255))
@@ -74,7 +74,6 @@ char	*parse_cone(t_parser *parser, t_world_builder *builder)
 	return (error);
 }
 
-
 char	*parse_cylinder(t_parser *parser, t_world_builder *builder)
 {
 	t_object		cylinder;
@@ -85,9 +84,9 @@ char	*parse_cylinder(t_parser *parser, t_world_builder *builder)
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %f %f %d,%d,%d",
-		&data.center.x, &data.center.y, &data.center.z,
-		&data.axis.x, &data.axis.y, &data.axis.z,
-		&data.radius, &data.height, &color_255.r, &color_255.g, &color_255.b))
+			&data.center.x, &data.center.y, &data.center.z,
+			&data.axis.x, &data.axis.y, &data.axis.z,
+			&data.radius, &data.height, &color_255.r, &color_255.g, &color_255.b))
 		return ("Cylinder: Invalid format");
 	data.radius = data.radius * 0.5;
 	if (!color_255_validate(color_255))
@@ -99,7 +98,7 @@ char	*parse_cylinder(t_parser *parser, t_world_builder *builder)
 			data.center.z);
 	data.axis = point_create(data.axis.x, data.axis.y,
 			data.axis.z);
-	error = cylinder_init(&cylinder, &data, &material);
+	error = cyl_init(&cylinder, &data, &material);
 	if (!error)
 		error = world_builder_add_object(builder, &cylinder);
 	return (error);
@@ -115,8 +114,8 @@ char	*parse_cube(t_parser *parser, t_world_builder *builder)
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f %d,%d,%d",
-		&data.center.x, &data.center.y, &data.center.z,
-		&data.edge_len, &color_255.r, &color_255.g, &color_255.b))
+			&data.center.x, &data.center.y, &data.center.z,
+			&data.edge_len, &color_255.r, &color_255.g, &color_255.b))
 		return ("Cube: Invalid format");
 	if (!color_255_validate(color_255))
 		return ("Cube: Invalid color");
@@ -141,9 +140,9 @@ char	*parse_plane(t_parser *parser, t_world_builder *builder)
 
 	material_init_default(&material);
 	if (!parser_match(parser, "%f,%f,%f %f,%f,%f %d,%d,%d",
-		&data.center.x, &data.center.y, &data.center.z,
-		&data.direction.x, &data.direction.y, &data.direction.z,
-		&color_255.r, &color_255.g, &color_255.b))
+			&data.center.x, &data.center.y, &data.center.z,
+			&data.direction.x, &data.direction.y, &data.direction.z,
+			&color_255.r, &color_255.g, &color_255.b))
 		return ("Plane: Invalid format");
 	if (!color_255_validate(color_255))
 		return ("Plane: Invalid color");

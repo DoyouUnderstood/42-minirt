@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:23:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 16:37:14 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:38:43 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*intersection_arr_resize(t_intersection_arr *arr)
 	if (!new_intersections)
 		return ("Intersection array: malloc error");
 	ft_memcpy(new_intersections, arr->intersections,
-			sizeof(t_intersection) * arr->count);
+		sizeof(t_intersection) * arr->count);
 	free(arr->intersections);
 	arr->intersections = new_intersections;
 	return (NULL);

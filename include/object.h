@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 12:44:37 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:46:38 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_plane_data
 
 char		*sphere_init(t_object *object, t_sphere_data *data,
 				t_material *material);
-char		*cylinder_init(t_object *object, t_cylinder_data *data,
+char		*cyl_init(t_object *object, t_cylinder_data *data,
 				t_material *material);
 char		*cone_init(t_object *object, t_cone_data *data,
 				t_material *material);

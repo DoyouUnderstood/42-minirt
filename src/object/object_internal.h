@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   object_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:59:07 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:34:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:48:31 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_INTERNAL_H
 # define OBJECT_INTERNAL_H
 
-#include "object.h"
+# include "object.h"
 
 typedef struct s_cylinder_intersect_calc
 {

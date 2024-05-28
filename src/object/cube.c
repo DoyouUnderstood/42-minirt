@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:52:47 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:33:58 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:44:00 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ static void	cube_set_transformations(t_obj_transf *transformations,
 	transformations->base
 		= matrix_translation(data->center.x, data->center.y, data->center.z);
 	transformations->base = matrix_mult(transformations->base,
-			matrix_scaling(data->edge_len/ 2.0, data->edge_len/ 2.0, data->edge_len/ 2.0));
+			matrix_scaling(data->edge_len / 2.0,
+				data->edge_len / 2.0, data->edge_len / 2.0));
 	transformations->inverse = matrix_inverse(transformations->base);
 	transformations->t_inverse = matrix_transpose(transformations->inverse);
-
 }
 
 char	*cube_init(t_object *object, t_cube_data *data,

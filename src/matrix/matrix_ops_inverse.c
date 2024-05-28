@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_inverse.c                                   :+:      :+:    :+:   */
+/*   matrix_ops_inverse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:17:51 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:19:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:41:35 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 
-static void	fill_minor_matrix(double minor[3][3], t_matrix mat, int row, int col)
+static void	fill_matrix(double minor[3][3], t_matrix mat, int row, int col)
 {
 	int	i;
 	int	j;
@@ -45,7 +45,7 @@ static double	calculate_minor(t_matrix mat, int row, int col)
 {
 	double	minor[3][3];
 
-	fill_minor_matrix(minor, mat, row, col);
+	fill_matrix(minor, mat, row, col);
 	return (determinant3x3(minor));
 }
 

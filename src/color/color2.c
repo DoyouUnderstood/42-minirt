@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:42:33 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:53:21 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:34:46 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ t_color	color_from_255(t_color_255 color_255)
 bool	color_255_validate(t_color_255 color_255)
 {
 	return (!(color_255.r < 0
-		|| color_255.r > 255
-		|| color_255.g < 0
-		|| color_255.g > 255
-		|| color_255.b < 0
-		|| color_255.b > 255));
+			|| color_255.r > 255
+			|| color_255.g < 0
+			|| color_255.g > 255
+			|| color_255.b < 0
+			|| color_255.b > 255));
 }

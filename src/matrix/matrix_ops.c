@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_operation.c                                 :+:      :+:    :+:   */
+/*   matrix_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:25:17 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:22:53 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:40:18 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_matrix	matrix_transpose(t_matrix mat)
 	}
 	return (transposed);
 }
-
 
 // fonction pour multiplier la matrices par un point ou vecteur.
 t_tuple	matrix_mult_tuple(t_matrix mat, t_tuple tup)

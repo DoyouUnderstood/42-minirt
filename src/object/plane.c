@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:16 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:33:10 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:48:47 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	plane_set_transformations(t_obj_transf *transformations,
 
 	default_normal = (t_tuple){0, 1, 0, 0};
 	rotation = matrix_rotate_from_to(default_normal, data->direction);
-	translation = matrix_translation(data->center.x, data->center.y, data->center.z);
+	translation = matrix_translation(data->center.x,
+			data->center.y, data->center.z);
 	transformations->base = matrix_mult(translation, rotation);
 	transformations->inverse = matrix_inverse(transformations->base);
 	transformations->t_inverse = matrix_transpose(transformations->inverse);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser_internal.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:57:23 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 07:09:43 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:37:06 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,5 @@ bool	parser_match_handle_end(t_parser *parser, char **fmt_ptr);
 bool	parser_match_handle_special(t_parser *parser, char **fmt_ptr,
 			va_list args);
 bool	parser_match_handle_mandatory_space(t_parser *parser, char **fmt_ptr);
-
-
 
 #endif

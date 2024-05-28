@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 18:40:28 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:37:08 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	sphere_intersect(t_object *obj, t_ray *ray,
 		return ;
 	calc.discriminant_sqrt = sqrt(calc.discriminant);
 	calc.t0 = (-calc.b - calc.discriminant_sqrt) / (2 * calc.a),
-	calc.t1 = (-calc.b + calc.discriminant_sqrt) / (2 * calc.a),
-	intersection_arr_add(intersections, obj, calc.t0);
+		calc.t1 = (-calc.b + calc.discriminant_sqrt) / (2 * calc.a),
+			intersection_arr_add(intersections, obj, calc.t0);
 	if (!double_eq(calc.discriminant, 0.0))
 		intersection_arr_add(intersections, obj, calc.t1);
 }
@@ -51,8 +51,8 @@ static void	sphere_set_transformations(t_obj_transf *transformations,
 	t_sphere_data *data)
 {
 	transformations->base = matrix_mult(
-		matrix_translation(data->center.x, data->center.y, data->center.z),
-		matrix_scaling(data->radius, data->radius, data->radius));
+			matrix_translation(data->center.x, data->center.y, data->center.z),
+			matrix_scaling(data->radius, data->radius, data->radius));
 	transformations->inverse = matrix_inverse(transformations->base);
 	transformations->t_inverse = matrix_transpose(transformations->inverse);
 }

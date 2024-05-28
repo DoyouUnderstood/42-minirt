@@ -19,6 +19,7 @@
 		"ft_printf.h": "c",
 		"stddef.h": "c",
 		"get_next_line.h": "c",
-		"intersection.h": "c"
+		"intersection.h": "c",
+		"object.h": "c"
 	}
 }

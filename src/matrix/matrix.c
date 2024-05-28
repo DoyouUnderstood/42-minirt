@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:00:28 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/16 16:13:07 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:40:01 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ t_matrix	matrix_create(float values[4][4])
 t_matrix	matrix_identity(void)
 {
 	static t_matrix	identity
-		= {.m = {{1.0, 0.0, 0.0, 0.0}, {0.0, 1.0, 0.0, 0.0}, {0.0, 0.0, 1.0, 0.0}, {0.0, 0.0, 0.0, 1.0}}};
-	
+		= {.m = {{1.0, 0.0, 0.0, 0.0}, {0.0, 1.0, 0.0, 0.0},
+	{0.0, 0.0, 1.0, 0.0}, {0.0, 0.0, 0.0, 1.0}}};
+
 	return (identity);
 }
 

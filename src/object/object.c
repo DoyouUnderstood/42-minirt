@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 17:45:49 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:48:12 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_tuple	object_normal_at(t_object *obj, t_tuple world_point)
 	local_point = matrix_mult_tuple(obj->transformations.inverse,
 			world_point);
 	local_normal = obj->local_normal_at(obj, local_point);
-	world_normal = matrix_mult_tuple(obj->transformations.t_inverse, local_normal);
+	world_normal = matrix_mult_tuple(obj->transformations.t_inverse,
+			local_normal);
 	world_normal.w = 0;
 	return (vector_normalize(world_normal));
 }

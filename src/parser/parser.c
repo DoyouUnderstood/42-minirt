@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:40:02 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/27 12:55:39 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:57:33 by alletond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,4 @@ void	parse_rt_file(char *filename, t_world *world)
 	if (error)
 		error_exit(error);
 	error = world_builder_build(&builder);
-	if (error)
-		error_exit(error);
 }
