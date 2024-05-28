@@ -42,7 +42,7 @@ void						render(t_world *world);
 
 void						draw_pixel(t_mlx *mlx, int x, int y, t_color color);
 // view.c
-t_matrix					view_transform(t_tuple from, t_tuple to,
+t_matrix					v_t(t_tuple from, t_tuple to,
 								t_tuple up);
 
 // camera.c
