@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:22 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/28 11:37:08 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:53:41 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void	sphere_intersect(t_object *obj, t_ray *ray,
 	if (calc.discriminant < -EPSILON)
 		return ;
 	calc.discriminant_sqrt = sqrt(calc.discriminant);
-	calc.t0 = (-calc.b - calc.discriminant_sqrt) / (2 * calc.a),
-		calc.t1 = (-calc.b + calc.discriminant_sqrt) / (2 * calc.a),
-			intersection_arr_add(intersections, obj, calc.t0);
+	calc.t0 = (-calc.b - calc.discriminant_sqrt) / (2 * calc.a);
+	calc.t1 = (-calc.b + calc.discriminant_sqrt) / (2 * calc.a);
+	intersection_arr_add(intersections, obj, calc.t0);
 	if (!double_eq(calc.discriminant, 0.0))
 		intersection_arr_add(intersections, obj, calc.t1);
 }

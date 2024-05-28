@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:07:46 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/28 10:46:38 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:05:16 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 typedef struct s_object				t_object;
 typedef struct s_intersection_arr	t_intersection_arr;
 
-typedef void	(*t_local_intersect)(t_object *obj, t_ray *ray,
-					t_intersection_arr *intersections);
-typedef t_tuple	(*t_local_normal_at)(t_object *obj, t_tuple local_point);
+typedef void						(*t_local_intersect)(t_object *obj,
+										t_ray *ray, t_intersection_arr
+										*intersections);
+typedef t_tuple						(*t_local_normal_at)(t_object *obj,
+										t_tuple local_point);
 
 typedef struct s_obj_transf
 {

@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/26 19:03:02 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:03:28 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "object.h"
 
-typedef struct s_object t_object;
+typedef struct s_object	t_object;
 
 typedef struct s_intersection
 {

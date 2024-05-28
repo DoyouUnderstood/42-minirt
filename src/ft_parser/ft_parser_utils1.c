@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/23 07:10:13 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:53:06 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,9 @@ void	parser_advance(t_parser *parser)
 void	parser_advance_by(t_parser *parser, int i)
 {
 	parser->pos += i;
+}
+
+bool	parser_at_end(t_parser *parser)
+{
+	return (parser_peek(parser) == '\0');
 }

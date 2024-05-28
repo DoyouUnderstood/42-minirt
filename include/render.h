@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:50:29 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:06:13 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,5 @@ typedef struct s_threadSetupParams
 	int						num_threads;
 	int						segment_height;
 }							t_threadSetupParams;
-
-
 
 #endif

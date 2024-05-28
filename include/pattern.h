@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:13 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 12:35:19 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:05:58 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "matrix.h"
 # include "tuple.h"
 
-struct s_pattern;
+struct			s_pattern;
 
 typedef t_color	(*t_pattern_at)(const struct s_pattern *pattern, t_tuple point);
 

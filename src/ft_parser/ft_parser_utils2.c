@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:22:19 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/28 11:32:58 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:06:38 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	parser_consume_int(t_parser *parser, int *i)
 	if (parser_match_char(parser, '-'))
 		sign = -1;
 	else if (parser_match_char(parser, '+'))
-	{}
+		;
 	c = parser_peek(parser);
 	if (c < '0' || c > '9')
 		return (false);
@@ -49,27 +49,11 @@ bool	parser_consume_int(t_parser *parser, int *i)
 	return (true);
 }
 
-bool	parser_consume_double(t_parser *parser, double *d)
+bool	parser_consume_double_helper(t_parser *parser, double *d, double sign)
 {
-	double	sign;
 	char	c;
 	double	power;
 
-	*d = 0.0;
-	sign = 1.0;
-	if (parser_match_char(parser, '-'))
-		sign = -1.0;
-	else if (parser_match_char(parser, '+'))
-	{}
-	c = parser_peek(parser);
-	if (c < '0' || c > '9')
-		return (false);
-	while (c >= '0' && c <= '9')
-	{
-		*d = *d * 10 + (c - '0');
-		parser_advance(parser);
-		c = parser_peek(parser);
-	}
 	if (!parser_match_char(parser, '.'))
 	{
 		*d = *d * sign;
@@ -86,6 +70,30 @@ bool	parser_consume_double(t_parser *parser, double *d)
 	*d = *d * sign;
 	return (true);
 }
+
+bool	parser_consume_double(t_parser *parser, double *d)
+{
+	double	sign;
+	char	c;
+
+	*d = 0.0;
+	sign = 1.0;
+	if (parser_match_char(parser, '-'))
+		sign = -1.0;
+	else if (parser_match_char(parser, '+'))
+		;
+	c = parser_peek(parser);
+	if (c < '0' || c > '9')
+		return (false);
+	while (c >= '0' && c <= '9')
+	{
+		*d = *d * 10 + (c - '0');
+		parser_advance(parser);
+		c = parser_peek(parser);
+	}
+	return (parser_consume_double_helper(parser, d, sign));
+}
+
 bool	parser_skip_spaces(t_parser *parser)
 {
 	if (!parser_match_char(parser, ' ') && !parser_match_char(parser, '\t'))
@@ -94,9 +102,4 @@ bool	parser_skip_spaces(t_parser *parser)
 	{
 	}
 	return (true);
-}
-
-bool	parser_at_end(t_parser *parser)
-{
-	return (parser_peek(parser) == '\0');
 }

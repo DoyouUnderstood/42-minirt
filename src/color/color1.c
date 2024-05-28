@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:42:33 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/25 09:53:25 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:52:47 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ t_color	color_create(double r, double g, double b)
 // Fonction pour comparer deux couleurs avec une certaine tolérance
 bool	color_eq(t_color c1, t_color c2)
 {
-	return (double_eq(c1.r, c2.r) && double_eq(c1.g, c2.g) && double_eq(c1.b, c2.b));
+	return (double_eq(c1.r, c2.r)
+		&& double_eq(c1.g, c2.g)
+		&& double_eq(c1.b, c2.b));
 }
 
 // fonction pour ajouter des couleurs.

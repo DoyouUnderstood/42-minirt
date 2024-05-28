@@ -6,7 +6,7 @@
 /*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:26:50 by erabbath          #+#    #+#             */
-/*   Updated: 2024/05/21 11:27:27 by erabbath         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:03:14 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ typedef struct s_computations
 	t_color					*color;
 	bool					inside;
 }							t_computations;
-
 
 #endif
