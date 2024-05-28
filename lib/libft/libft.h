@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alletond <alletond@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erabbath <erabbath@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:50:15 by alletond          #+#    #+#             */
-/*   Updated: 2024/02/07 21:19:57 by alletond         ###   ########.fr       */
+/*   Updated: 2024/05/28 12:12:18 by erabbath         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <string.h>
 # include <strings.h>
 # include <unistd.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
 int					ft_isalnum(char c);
 int					ft_isspace(int c);
@@ -60,11 +60,6 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strtrim(char const *s1, char const *set);
 void				*ft_calloc(size_t nmemb, size_t size);
-
-/* RAJOUT */
-
-double	ft_strtod(char *s);
-int ft_atod(const char *str, double *nbr);
 
 typedef struct s_list
 {
