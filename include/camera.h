@@ -40,4 +40,6 @@ typedef struct s_camera_data
 
 char		*camera_init(t_camera *camera, t_camera_data *data);
 
+
+
 #endif
